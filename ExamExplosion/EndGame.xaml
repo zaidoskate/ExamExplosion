@@ -1,0 +1,43 @@
+﻿<Page x:Class="ExamExplosion.EndGame"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ExamExplosion"
+        xmlns:p ="clr-namespace:ExamExplosion.Properties"
+        mc:Ignorable="d"
+        Height="450" Width="800"
+        Background="#FFF2CC">
+    <Grid>
+        <Image Source="pack://application:,,,/Images/Exam.png" Width="200" HorizontalAlignment="Left" RenderTransformOrigin="1.118,1.155" Margin="50,0,0,0"></Image>
+        <Image Source="pack://application:,,,/Images/BackCard.png" Width="150" HorizontalAlignment="Right" RenderTransformOrigin="1.118,1.155" Margin="0,-25,112,175"/>
+        <Image Source="/Images/BackCard.png" Width="150" HorizontalAlignment="Right" RenderTransformOrigin="1.118,1.155" Margin="0,22,57,128"/>
+        <Image Source="/Images/BackCard.png" Width="150" HorizontalAlignment="Right" RenderTransformOrigin="1.118,1.155" Margin="0,78,0,72"/>
+
+        <Grid>
+            <Label x:Name="Winnerlbl" Content="{x:Static p:Resources.Winner}" HorizontalAlignment="Left" Margin="317,0,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="60" FontFamily="pack://application:,,,/Fonts/#VT323"/>
+            <Label x:Name="WinnerGamertaglbl" Content="Player" HorizontalAlignment="Left" Margin="270,70,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="40" FontFamily="pack://application:,,,/Fonts/#VT323"/>
+            <Image Source="/Images/AddFriendImage.png" Width="50" HorizontalAlignment="Left" Margin="406,69,0,312"/>
+            <Image Source="/Images/ReportImage.png" Width="50" HorizontalAlignment="Left" Margin="469,69,0,312"/>
+            <Label x:Name="Playerslbl" Content="{x:Static p:Resources.Players}" HorizontalAlignment="Left" Margin="293,114,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="60" FontFamily="pack://application:,,,/Fonts/#VT323"/>
+            <Label x:Name="Player1lbl" Content="Player" HorizontalAlignment="Left" Margin="270,184,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="40" FontFamily="pack://application:,,,/Fonts/#VT323"/>
+            <Label x:Name="Player2lbl" Content="Player" HorizontalAlignment="Left" Margin="270,239,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="40" FontFamily="pack://application:,,,/Fonts/#VT323"/>
+            <Label x:Name="Player3lbl" Content="Player" HorizontalAlignment="Left" Margin="270,294,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="40" FontFamily="pack://application:,,,/Fonts/#VT323"/>
+            <Label x:Name="Player4lbl" Content="Player" HorizontalAlignment="Left" Margin="270,349,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="40" FontFamily="pack://application:,,,/Fonts/#VT323"/>
+            <Image Source="/Images/AddFriendImage.png" Width="50" HorizontalAlignment="Left" Margin="406,182,0,199"/>
+            <Image Source="/Images/AddFriendImage.png" Width="50" HorizontalAlignment="Left" Margin="406,237,0,144"/>
+            <Image Source="/Images/AddFriendImage.png" Width="50" HorizontalAlignment="Left" Margin="406,292,0,89"/>
+            <Image Source="/Images/AddFriendImage.png" Width="50" HorizontalAlignment="Left" Margin="406,347,0,34"/>
+            <Image Source="/Images/ReportImage.png" Width="50" HorizontalAlignment="Left" Margin="469,181,0,200" RenderTransformOrigin="0.808,2.52"/>
+            <Image Source="/Images/ReportImage.png" Width="50" HorizontalAlignment="Left" Margin="469,238,0,143"/>
+            <Image Source="/Images/ReportImage.png" Width="50" HorizontalAlignment="Left" Margin="469,293,0,88"/>
+            <Image Source="/Images/ReportImage.png" Width="50" HorizontalAlignment="Left" Margin="469,349,0,32"/>
+        </Grid>
+        <Button Width="150" Height="100" Background="Transparent" BorderBrush="Transparent" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,320,20,0" Cursor="Hand">
+            <Grid>
+                <Image Source="pack://application:,,,/Images/ButtonOrange.png" Width="150" ></Image>
+                <Label x:Name="Exitlbl" Content="{x:Static p:Resources.Exit}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="30" FontFamily="pack://application:,,,/Fonts/#VT323" Foreground="White"/>
+            </Grid>
+        </Button>
+    </Grid>
+</Page>
