@@ -1,40 +1,7 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\zaido\\Desktop\\UV\\5TO\\Tecno\\ExamExplosion\\ExamExplosion\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{D0056B63-E469-4B39-9850-7C25C16E15E9}|ExamExplosion.csproj|C:\\Users\\zaido\\Desktop\\UV\\5TO\\Tecno\\ExamExplosion\\ExamExplosion\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D0056B63-E469-4B39-9850-7C25C16E15E9}|ExamExplosion.csproj|solutionrelative:mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D0056B63-E469-4B39-9850-7C25C16E15E9}|ExamExplosion.csproj|C:\\Users\\zaido\\Desktop\\UV\\5TO\\Tecno\\ExamExplosion\\ExamExplosion\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{D0056B63-E469-4B39-9850-7C25C16E15E9}|ExamExplosion.csproj|solutionrelative:mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D0056B63-E469-4B39-9850-7C25C16E15E9}|ExamExplosion.csproj|c:\\users\\zaido\\desktop\\uv\\5to\\tecno\\examexplosion\\examexplosion\\startpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{D0056B63-E469-4B39-9850-7C25C16E15E9}|ExamExplosion.csproj|solutionrelative:startpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D0056B63-E469-4B39-9850-7C25C16E15E9}|ExamExplosion.csproj|C:\\Users\\zaido\\Desktop\\UV\\5TO\\Tecno\\ExamExplosion\\ExamExplosion\\emailverification.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{D0056B63-E469-4B39-9850-7C25C16E15E9}|ExamExplosion.csproj|solutionrelative:emailverification.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D0056B63-E469-4B39-9850-7C25C16E15E9}|ExamExplosion.csproj|C:\\Users\\zaido\\Desktop\\UV\\5TO\\Tecno\\ExamExplosion\\ExamExplosion\\endgame.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{D0056B63-E469-4B39-9850-7C25C16E15E9}|ExamExplosion.csproj|solutionrelative:endgame.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D0056B63-E469-4B39-9850-7C25C16E15E9}|ExamExplosion.csproj|C:\\Users\\zaido\\Desktop\\UV\\5TO\\Tecno\\ExamExplosion\\ExamExplosion\\leaderboard.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{D0056B63-E469-4B39-9850-7C25C16E15E9}|ExamExplosion.csproj|solutionrelative:leaderboard.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D0056B63-E469-4B39-9850-7C25C16E15E9}|ExamExplosion.csproj|C:\\Users\\zaido\\Desktop\\UV\\5TO\\Tecno\\ExamExplosion\\ExamExplosion\\gamecode.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{D0056B63-E469-4B39-9850-7C25C16E15E9}|ExamExplosion.csproj|solutionrelative:gamecode.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D0056B63-E469-4B39-9850-7C25C16E15E9}|ExamExplosion.csproj|C:\\Users\\zaido\\Desktop\\UV\\5TO\\Tecno\\ExamExplosion\\ExamExplosion\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D0056B63-E469-4B39-9850-7C25C16E15E9}|ExamExplosion.csproj|solutionrelative:app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -42,100 +9,15 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": -1,
           "Children": [
             {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "StartPage.xaml",
-              "DocumentMoniker": "C:\\Users\\zaido\\Desktop\\UV\\5TO\\Tecno\\ExamExplosion\\ExamExplosion\\StartPage.xaml",
-              "RelativeDocumentMoniker": "StartPage.xaml",
-              "ToolTip": "C:\\Users\\zaido\\Desktop\\UV\\5TO\\Tecno\\ExamExplosion\\ExamExplosion\\StartPage.xaml",
-              "RelativeToolTip": "StartPage.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-10-04T00:16:35.96Z",
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
             },
             {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "MainWindow.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\zaido\\Desktop\\UV\\5TO\\Tecno\\ExamExplosion\\ExamExplosion\\MainWindow.xaml.cs",
-              "RelativeDocumentMoniker": "MainWindow.xaml.cs",
-              "ToolTip": "C:\\Users\\zaido\\Desktop\\UV\\5TO\\Tecno\\ExamExplosion\\ExamExplosion\\MainWindow.xaml.cs",
-              "RelativeToolTip": "MainWindow.xaml.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAuwBkAAAAwAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-30T21:14:41.609Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "EndGame.xaml",
-              "DocumentMoniker": "C:\\Users\\zaido\\Desktop\\UV\\5TO\\Tecno\\ExamExplosion\\ExamExplosion\\EndGame.xaml",
-              "RelativeDocumentMoniker": "EndGame.xaml",
-              "ToolTip": "C:\\Users\\zaido\\Desktop\\UV\\5TO\\Tecno\\ExamExplosion\\ExamExplosion\\EndGame.xaml",
-              "RelativeToolTip": "EndGame.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-09-30T05:10:20.277Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Leaderboard.xaml",
-              "DocumentMoniker": "C:\\Users\\zaido\\Desktop\\UV\\5TO\\Tecno\\ExamExplosion\\ExamExplosion\\Leaderboard.xaml",
-              "RelativeDocumentMoniker": "Leaderboard.xaml",
-              "ToolTip": "C:\\Users\\zaido\\Desktop\\UV\\5TO\\Tecno\\ExamExplosion\\ExamExplosion\\Leaderboard.xaml",
-              "RelativeToolTip": "Leaderboard.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-09-30T04:29:30Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "MainWindow.xaml",
-              "DocumentMoniker": "C:\\Users\\zaido\\Desktop\\UV\\5TO\\Tecno\\ExamExplosion\\ExamExplosion\\MainWindow.xaml",
-              "RelativeDocumentMoniker": "MainWindow.xaml",
-              "ToolTip": "C:\\Users\\zaido\\Desktop\\UV\\5TO\\Tecno\\ExamExplosion\\ExamExplosion\\MainWindow.xaml",
-              "RelativeToolTip": "MainWindow.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-09-30T04:14:04.99Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "EmailVerification.xaml",
-              "DocumentMoniker": "C:\\Users\\zaido\\Desktop\\UV\\5TO\\Tecno\\ExamExplosion\\ExamExplosion\\EmailVerification.xaml",
-              "RelativeDocumentMoniker": "EmailVerification.xaml",
-              "ToolTip": "C:\\Users\\zaido\\Desktop\\UV\\5TO\\Tecno\\ExamExplosion\\ExamExplosion\\EmailVerification.xaml",
-              "RelativeToolTip": "EmailVerification.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-09-30T04:11:14.434Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "GameCode.xaml",
-              "DocumentMoniker": "C:\\Users\\zaido\\Desktop\\UV\\5TO\\Tecno\\ExamExplosion\\ExamExplosion\\GameCode.xaml",
-              "RelativeDocumentMoniker": "GameCode.xaml",
-              "ToolTip": "C:\\Users\\zaido\\Desktop\\UV\\5TO\\Tecno\\ExamExplosion\\ExamExplosion\\GameCode.xaml",
-              "RelativeToolTip": "GameCode.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-09-30T04:08:45.065Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "App.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\zaido\\Desktop\\UV\\5TO\\Tecno\\ExamExplosion\\ExamExplosion\\App.xaml.cs",
-              "RelativeDocumentMoniker": "App.xaml.cs",
-              "ToolTip": "C:\\Users\\zaido\\Desktop\\UV\\5TO\\Tecno\\ExamExplosion\\ExamExplosion\\App.xaml.cs",
-              "RelativeToolTip": "App.xaml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAOAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-10T20:15:47.252Z"
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
             }
           ]
         }
