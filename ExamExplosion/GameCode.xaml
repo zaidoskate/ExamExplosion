@@ -23,21 +23,21 @@
     </Page.Resources>
     
     <Grid>
-        <Label x:Name="GameCodelbl" Content="{x:Static p:Resources.GameCode}" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="40" FontFamily="pack://application:,,,/Fonts/#VT323" Margin="0,30,0,0"></Label>
+        <Label x:Name="GameCodelbl" Content="{x:Static p:Resources.globalLblCode}" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="40" FontFamily="pack://application:,,,/Fonts/#VT323" Margin="0,30,0,0"></Label>
 
-        <Label x:Name="EmailCodelbl" Content="{x:Static p:Resources.JoinCode}" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" FontSize="20" FontFamily="pack://application:,,,/Fonts/#VT323" Margin="0,0,0,50" ></Label>
+        <Label x:Name="EmailCodelbl" Content="{x:Static p:Resources.globalLblCode}" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" FontSize="20" FontFamily="pack://application:,,,/Fonts/#VT323" Margin="0,0,0,50" ></Label>
         <TextBox Width="270" Height="50" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Margin="0,50,0,0" FontSize="40" FontFamily="pack://application:,,,/Fonts/#VT323"/>
 
         <Button Width="150" Height="75" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="20,0,0,20" Background="Transparent" BorderBrush="Transparent">
             <Grid>
                 <Image Source="pack://application:,,,/Images/ButtonGreen.png" Width="150"></Image>
-                <Label x:Name="Createlbl" Content="{x:Static p:Resources.Join}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="40" FontFamily="pack://application:,,,/Fonts/#VT323" Foreground="White"/>
+                <Label x:Name="Createlbl" Content="{x:Static p:Resources.globalBtnJoin}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="40" FontFamily="pack://application:,,,/Fonts/#VT323" Foreground="White"/>
             </Grid>
         </Button>
         <Button Width="150" Height="75" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,20,20" Background="Transparent" BorderBrush="Transparent">
             <Grid>
                 <Image Source="pack://application:,,,/Images/ButtonOrange.png" Width="150"></Image>
-                <Label x:Name="Cancellbl" Content="{x:Static p:Resources.Cancel}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="40" FontFamily="pack://application:,,,/Fonts/#VT323" Foreground="White"/>
+                <Label x:Name="Cancellbl" Content="{x:Static p:Resources.globalBtnLeave}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="40" FontFamily="pack://application:,,,/Fonts/#VT323" Foreground="White"/>
             </Grid>
         </Button>
     </Grid>

@@ -20,18 +20,18 @@
         <Button Width="245" Height="100" Background="Transparent" BorderBrush="Transparent" VerticalAlignment="Top" Margin="0,150,0,0" Cursor="Hand">
             <Grid>
                 <Image Source="pack://application:,,,/Images/ButtonOrange.png" Width="245" Stretch="UniformToFill" Margin="-2,-9,-2,-11" StretchDirection="DownOnly"></Image>
-                <Label x:Name="labelPlay" Content="{x:Static p:Resources.Play}" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" FontSize="40" FontFamily="pack://application:,,,/Fonts/#VT323" Foreground="White"/>
+                <Label x:Name="labelPlay" Content="{x:Static p:Resources.globalBtnPlay}" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" FontSize="40" FontFamily="pack://application:,,,/Fonts/#VT323" Foreground="White"/>
             </Grid>
         </Button>
 
         <Button Width="245" Height="100" Background="Transparent" BorderBrush="Transparent" VerticalAlignment="Center" Margin="0,175,0,0" Cursor="Hand">
             <Grid>
                 <Image Source="pack://application:,,,/Images/ButtonGreen.png" Width="245" Stretch="UniformToFill" Margin="-2,-9,-2,-11" StretchDirection="DownOnly"></Image>
-                <Label x:Name="LabelGuest" Content="{x:Static p:Resources.Guest}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="40" FontFamily="pack://application:,,,/Fonts/#VT323" Foreground="White"/>
+                <Label x:Name="LabelGuest" Content="{x:Static p:Resources.startBtnGuest}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="40" FontFamily="pack://application:,,,/Fonts/#VT323" Foreground="White"/>
             </Grid>
         </Button>
         <Button Width="400" Height="50" Background="Transparent" BorderBrush="Transparent" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,20" Cursor="Hand" >
-            <Label x:Name="LabelCreate" Content="{x:Static p:Resources.CreateAccount}" 
+            <Label x:Name="LabelCreate" Content="{x:Static p:Resources.startBtnCreateAccount}" 
                HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
                FontSize="40" FontFamily="pack://application:,,,/Fonts/#VT323" Foreground="Black"/>
         </Button>
