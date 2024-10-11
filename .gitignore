@@ -192,4 +192,3 @@ StyleCop.Cache
 bin
 obj
 *.resx
-*.csproj
