@@ -192,3 +192,4 @@ StyleCop.Cache
 bin
 obj
 *.resx
+/Connected Services/
