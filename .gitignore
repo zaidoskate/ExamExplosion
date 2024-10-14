@@ -191,5 +191,7 @@ git_stats/*
 StyleCop.Cache
 bin
 obj
-*.resx
+Properties/Resources.en.resx
+Properties/Resources.resx
+Properties/Resources.es-MX.resx
 /Connected Services/
