@@ -196,11 +196,38 @@ namespace ExamExplosion.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Start.
+        /// </summary>
+        public static string lobbyBtnStart {
+            get {
+                return ResourceManager.GetString("lobbyBtnStart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chat.
+        /// </summary>
+        public static string lobbyLblChat {
+            get {
+                return ResourceManager.GetString("lobbyLblChat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Game code.
         /// </summary>
         public static string lobbyLblGameTitle {
             get {
                 return ResourceManager.GetString("lobbyLblGameTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Players.
+        /// </summary>
+        public static string lobbyLblPlayers {
+            get {
+                return ResourceManager.GetString("lobbyLblPlayers", resourceCulture);
             }
         }
         

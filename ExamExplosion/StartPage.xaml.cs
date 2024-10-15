@@ -24,5 +24,11 @@ namespace ExamExplosion
         {
             InitializeComponent();
         }
+
+        private void Lobby(object sender, RoutedEventArgs e)
+        {
+            var mainWindow = (MainWindow)Application.Current.MainWindow;
+            mainWindow.MainFrame.Navigate(new Lobby(gamertagTxt.Text));
+        }
     }
 }

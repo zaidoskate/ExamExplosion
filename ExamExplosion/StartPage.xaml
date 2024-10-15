@@ -17,7 +17,7 @@
         <Image Source="pack://application:,,,/Images/Bomb.png" Width="75" HorizontalAlignment="Right" Margin="0,56,302,289"></Image>
         <Image Source="pack://application:,,,/Images/Exam.png" Width="200" HorizontalAlignment="Left" Margin="0,137,0,39" RenderTransformOrigin="1.118,1.155"></Image>
 
-        <Button Width="245" Height="100" Background="Transparent" BorderBrush="Transparent" VerticalAlignment="Top" Margin="0,150,0,0" Cursor="Hand">
+        <Button Width="245" Height="100" Background="Transparent" BorderBrush="Transparent" VerticalAlignment="Top" Margin="0,150,0,0" Cursor="Hand" Click="Lobby">
             <Grid>
                 <Image Source="pack://application:,,,/Images/ButtonOrange.png" Width="245" Stretch="UniformToFill" Margin="-2,-9,-2,-11" StretchDirection="DownOnly"></Image>
                 <Label x:Name="labelPlay" Content="{x:Static p:Resources.globalBtnPlay}" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" FontSize="40" FontFamily="pack://application:,,,/Fonts/#VT323" Foreground="White"/>
@@ -35,5 +35,6 @@
                HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
                FontSize="40" FontFamily="pack://application:,,,/Fonts/#VT323" Foreground="Black"/>
         </Button>
+        <TextBox x:Name="gamertagTxt" HorizontalAlignment="Left" Margin="224,240,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
     </Grid>
 </Page>
