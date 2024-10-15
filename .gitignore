@@ -191,4 +191,4 @@ git_stats/*
 StyleCop.Cache
 bin
 obj
-Properties/*.resx
+*.resx
