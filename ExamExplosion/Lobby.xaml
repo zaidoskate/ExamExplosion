@@ -25,7 +25,7 @@
 
     <Grid>
         <Grid>
-            <Label Content="{x:Static p:Resources.lobbyLblPlayers}" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="50" FontFamily="pack://application:,,,/Fonts/#VT323" Foreground="Black" Margin="50,30,0,0"/>
+            <Label Content="Players" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="50" FontFamily="pack://application:,,,/Fonts/#VT323" Foreground="Black" Margin="50,30,0,0"/>
             <Label x:Name="player1Lbl" Content="Player1"  HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="40" FontFamily="pack://application:,,,/Fonts/#VT323" Foreground="Black" Margin="49,90,0,0"/>
             <Image Source="pack://application:,,,/Images/ReadyImage.png" Stretch="UniformToFill" StretchDirection="DownOnly" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="246,92,0,0" Height="52" Width="51" />
             <Label x:Name="player1Lbl_Copy" Content="Player1"  HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="40" FontFamily="pack://application:,,,/Fonts/#VT323" Foreground="Black" Margin="50,148,0,0"/>
@@ -39,20 +39,20 @@
             <Button Width="100" Height="55" Background="Transparent" BorderBrush="Transparent" VerticalAlignment="Bottom" Cursor="Hand" HorizontalAlignment="Left" Margin="200,0,0,20" Click="PreviousMenu">
                 <Grid>
                     <Image Source="pack://application:,,,/Images/ButtonOrange.png" Width="100" StretchDirection="DownOnly"></Image>
-                    <Label Content="{x:Static p:Resources.globalBtnLeave}" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" FontSize="25" FontFamily="pack://application:,,,/Fonts/#VT323" Foreground="White"/>
+                    <Label Content="Leave" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" FontSize="25" FontFamily="pack://application:,,,/Fonts/#VT323" Foreground="White"/>
                 </Grid>
             </Button>
             <Button Width="100" Height="50" Background="Transparent" BorderBrush="Transparent" VerticalAlignment="Bottom" Cursor="Hand" HorizontalAlignment="Left" Margin="50,0,0,20">
                 <Grid>
                     <Image Source="pack://application:,,,/Images/ButtonGreen.png" Width="100" StretchDirection="DownOnly"></Image>
-                    <Label Content="{x:Static p:Resources.lobbyBtnStart}" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" FontSize="25" FontFamily="pack://application:,,,/Fonts/#VT323" Foreground="White"/>
+                    <Label Content="Start" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" FontSize="25" FontFamily="pack://application:,,,/Fonts/#VT323" Foreground="White"/>
                 </Grid>
             </Button>
         </Grid>
-        <Label Content="{x:Static p:Resources.lobbyLblGameTitle}" HorizontalAlignment="Right" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="50" FontFamily="pack://application:,,,/Fonts/#VT323" Foreground="Black" Margin="0,30,150,0"/>
+        <Label Content="Lobby" HorizontalAlignment="Right" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="50" FontFamily="pack://application:,,,/Fonts/#VT323" Foreground="Black" Margin="0,30,150,0"/>
         <Label  HorizontalAlignment="Right" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="50" FontFamily="pack://application:,,,/Fonts/#VT323" Foreground="Black" Margin="0,50,50,0"/>
         <Image Source="pack://application:,,,/Images/Bomb.png" Width="86" HorizontalAlignment="Left" Margin="343,168,0,168"/>
-        <Label Content="{x:Static p:Resources.lobbyLblChat}" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="40" FontFamily="pack://application:,,,/Fonts/#VT323" Margin="0,100,270,0" Foreground="Gray"/>
+        <Label Content="Chat" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="40" FontFamily="pack://application:,,,/Fonts/#VT323" Margin="0,100,270,0" Foreground="Gray"/>
         <Grid>
             <Border BorderBrush="Black" BorderThickness="5" Width="320" Height="200" CornerRadius="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,76,20,0" >
                 <ScrollViewer VerticalScrollBarVisibility="Auto" Background="Black">

@@ -65,7 +65,7 @@ namespace ExamExplosion
 
         void ILobbyManagerCallback.ReceiveMessage(string gamertag, string message)
         {
-            Application.Current.Dispatcher.Invoke(() =>
+            Application.Current.Dispatcher.Invoke(() => 
             {
                 var messageBlock = new TextBlock
                 {

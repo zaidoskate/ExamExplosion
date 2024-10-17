@@ -15,9 +15,6 @@ using System.Windows.Shapes;
 
 namespace ExamExplosion
 {
-    /// <summary>
-    /// Lógica de interacción para StartPage.xaml
-    /// </summary>
     public partial class StartPage : Page
     {
         public StartPage()
@@ -25,10 +22,27 @@ namespace ExamExplosion
             InitializeComponent();
         }
 
-        private void Lobby(object sender, RoutedEventArgs e)
+        private void DisplayLogin(object sender, RoutedEventArgs e)
         {
-            var mainWindow = (MainWindow)Application.Current.MainWindow;
-            mainWindow.MainFrame.Navigate(new Lobby(gamertagTxt.Text));
+            if (this.NavigationService != null)
+            {
+                this.NavigationService.Navigate(new Login());
+            }
+        }
+        private void DisplayJoinLobby(object sender, RoutedEventArgs e)
+        {
+            if (this.NavigationService != null)
+            {
+                this.NavigationService.Navigate(new GameCode());
+            }
+
+        }
+        private void DisplayCreateAccount(object sender, RoutedEventArgs e)
+        {
+            if (this.NavigationService != null)
+            {
+                this.NavigationService.Navigate(new AccountCreation());
+            }
         }
     }
 }

@@ -1,0 +1,47 @@
+﻿<Page x:Class="ExamExplosion.Login"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ExamExplosion"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="LoginPage">
+
+    <Grid Background="#FFFFF2CC">
+        <Label Content="Log In" Margin="658,10,0,306" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="48" HorizontalAlignment="Left"/>
+        <Label Content="Gamertag:" Margin="269,98,0,286" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="20" HorizontalAlignment="Left"/>
+        <TextBox x:Name="GamertagTextBox" HorizontalAlignment="Center" FontSize="30" FontFamily="pack://application:,,,/Fonts/#VT323" Margin="0,132,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="262" Height="32">
+            <TextBox.Effect>
+                <DropShadowEffect/>
+            </TextBox.Effect>
+        </TextBox>
+        <PasswordBox x:Name="PasswordBox" HorizontalAlignment="Center" FontSize="30" FontFamily="pack://application:,,,/Fonts/#VT323" Margin="0,249,0,0" VerticalAlignment="Top" Width="262" Height="32">
+            <PasswordBox.Effect>
+                <DropShadowEffect/>
+            </PasswordBox.Effect>
+        </PasswordBox>
+        <TextBox Visibility="Collapsed" x:Name="PasswordText" HorizontalAlignment="Center" FontSize="30" FontFamily="pack://application:,,,/Fonts/#VT323" Margin="0,249,0,0" VerticalAlignment="Top" Width="262" Height="32">
+            <TextBox.Effect>
+                <DropShadowEffect/>
+            </TextBox.Effect>
+        </TextBox>
+
+        <Button HorizontalAlignment="Left" Margin="161,312,0,0" VerticalAlignment="Top" Height="100" Width="160" Background="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand" Click="ValidateLogIn">
+            <Grid>
+                <Image HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" Source="pack://application:,,,/Images/ButtonGreen.png" Stretch="Fill" Height="70"/>
+                <Label Content="Log in" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="30"/>
+            </Grid>
+        </Button>
+        <Button HorizontalAlignment="Left" Margin="494,325,0,0" Height="75" Width="160" VerticalAlignment="Top" Background="{x:Null}" Foreground="{x:Null}" BorderBrush="#FFFFF2CC" Click="CancelLogIn">
+            <Grid>
+                <Image  HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="150" Source="pack://application:,,,/Images/ButtonOrange.png" Height="70" Stretch="Fill" Cursor="Hand"/>
+                <Label Content="Cancel" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="30"/>
+            </Grid>
+        </Button>
+        <Label Content="Password:" Margin="269,212,0,169" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="20" HorizontalAlignment="Left"/>
+        <Button HorizontalAlignment="Left" Margin="566,250,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="{x:Null}" BorderBrush="#FFFFF2CC" Click="ChangePasswordVisibility">
+            <Image Source="pack://application:,,,/Images/Eye.png" Height="30" Width="40" Stretch="Fill" Cursor="Hand"/>
+        </Button>
+    </Grid>
+</Page>

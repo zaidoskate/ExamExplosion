@@ -1,0 +1,60 @@
+﻿<Page x:Class="ExamExplosion.HomePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ExamExplosion"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="HomePage">
+
+    <Grid Background="#FFFFF2CC">
+        <Label Content="Exam Explotion" Margin="0,22,0,320" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="60" HorizontalAlignment="Center"/>
+
+        <Button HorizontalAlignment="Left" Margin="207,165,0,0" VerticalAlignment="Top" Height="75" Width="153" Background="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand" Click="CreateLobby">
+            <Grid>
+                <Image HorizontalAlignment="Left" VerticalAlignment="Center" Width="140" Source="pack://application:,,,/Images/ButtonGreen.png" Stretch="Fill" Height="80"/>
+                <Label Content="Create" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="24"/>
+            </Grid>
+        </Button>
+        <Button HorizontalAlignment="Left" Margin="460,165,0,0" VerticalAlignment="Top" Height="75" Width="147" Background="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand" Click="JoinLobby">
+            <Grid>
+                <Image VerticalAlignment="Center" Source="pack://application:,,,/Images/ButtonGreen.png" Stretch="Fill" Height="80"/>
+                <Label Content="Join" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="24"/>
+            </Grid>
+        </Button>
+        <Button HorizontalAlignment="Left" Margin="208,296,0,0" VerticalAlignment="Top" Height="75" Width="152" Background="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand" Click="GoKomalli">
+            <Grid>
+                <Image HorizontalAlignment="Left" VerticalAlignment="Center" Width="140" Source="pack://application:,,,/Images/ButtonGreen.png" Stretch="Fill" Height="80"/>
+                <Label Content="Komalli" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="24"/>
+            </Grid>
+        </Button>
+        <Button HorizontalAlignment="Left" Margin="460,296,0,0" VerticalAlignment="Top" Height="75" Width="147" Background="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand" Click="GoLeaderboard">
+            <Grid>
+                <Image HorizontalAlignment="Left" VerticalAlignment="Center" Width="140" Source="pack://application:,,,/Images/ButtonGreen.png" Stretch="Fill" Height="80"/>
+                <Label Content="Leaderboard" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="24"/>
+            </Grid>
+        </Button>
+        <Button HorizontalAlignment="Left" Margin="684,24,0,0" VerticalAlignment="Top" Background="Transparent" BorderBrush="{x:Null}" Cursor="Hand" Click="GoSettings">
+            <Grid Height="104">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="19*"/>
+                    <RowDefinition Height="20*"/>
+                    <RowDefinition Height="13*"/>
+                </Grid.RowDefinitions>
+                <Image HorizontalAlignment="Center" VerticalAlignment="Top" Width="80" Source="pack://application:,,,/Images/Settings.png" Stretch="Fill" Height="80" Grid.RowSpan="3"/>
+                <Label Content="Settings" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="24" Margin="0,32,0,0" Height="62" Grid.Row="1" Grid.RowSpan="2"/>
+            </Grid>
+        </Button>
+        <Button HorizontalAlignment="Left" Margin="691,235,0,0" VerticalAlignment="Top" Background="Transparent" BorderBrush="{x:Null}" Cursor="Hand" Click="LogOut">
+            <Grid>
+                <Image HorizontalAlignment="Center" VerticalAlignment="Top" Width="80" Source="pack://application:,,,/Images/LogOut.png" Stretch="Fill" Height="80"/>
+                <Label Content="Log Out" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="24" Margin="0,70,0,0"/>
+            </Grid>
+        </Button>
+        <Image HorizontalAlignment="Left" Height="80" Margin="44,10,0,0" VerticalAlignment="Top" Width="76" Source="pack://application:,,,/Images/User.png"/>
+        <Label x:Name="lblGamertag" Content="Gamertag" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="24" Margin="23,95,0,0" Width="118" Height="65"/>
+        <Image HorizontalAlignment="Left" Height="250" Margin="0,165,0,0" VerticalAlignment="Top" Width="180" Source="pack://application:,,,/Images/3cardsImage.png"/>
+
+    </Grid>
+</Page>
