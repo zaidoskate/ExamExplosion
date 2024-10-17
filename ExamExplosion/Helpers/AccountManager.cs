@@ -1,4 +1,5 @@
 ﻿using ExamExplosion.ExamExplotionService;
+using ExamExplosion.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,10 +30,22 @@ namespace ExamExplosion.Helpers
 
         private static void LoadActualSession(AccountM account)
         {
-            int userId = proxy.GetUserIdFromCurrentSession();
-            SessionManager.CurrentSession.accountId = userId;
-            SessionManager.CurrentSession.userId = userId;  
+            int accountId = proxy.GetAccountIdFromCurrentSession();
+            SessionManager.CurrentSession.accountId = accountId;
+            SessionManager.CurrentSession.userId = accountId;  
             SessionManager.CurrentSession.gamertag = account.Gamertag;
+        }
+
+        public static bool AddAccount(Account _account)
+        {
+            AccountM account = new AccountM();
+            account.Name = _account.name;
+            account.Password = _account.password;
+            account.Email = _account.email;
+            account.Lastname = _account.lastname;
+            account.Gamertag = _account.gamertag;
+
+            return proxy.AddAccount(account);
         }
     }
 }
