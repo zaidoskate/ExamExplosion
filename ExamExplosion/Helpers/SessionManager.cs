@@ -8,8 +8,20 @@ namespace ExamExplosion.Helpers
 {
     public static class SessionManager
     {
-        public static SessionInfo CurrentSession { get; set; }
+        public static SessionInfo CurrentSession
+        {
+            get
+            {
+                if (_currentSession == null)
+                {
+                    _currentSession = new SessionInfo();
+                }
+                return _currentSession;
+            }
+        }
+        private static SessionInfo _currentSession;
     }
+
 
     public class SessionInfo
     {

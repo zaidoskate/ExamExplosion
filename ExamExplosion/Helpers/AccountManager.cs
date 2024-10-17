@@ -17,7 +17,6 @@ namespace ExamExplosion.Helpers
             ExamExplotionService.AccountM account = new ExamExplotionService.AccountM();
             account.Gamertag = gamertag;
             account.Password = password;
-
             bool result = proxy.Login(account);
 
             if (result)

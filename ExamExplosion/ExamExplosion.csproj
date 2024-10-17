@@ -286,6 +286,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\ExamExplotionService\" />
   </ItemGroup>
@@ -304,9 +305,4 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
   </ItemGroup>
-<<<<<<< HEAD
-=======
-  <ItemGroup />
->>>>>>> 07a53a1e0d05280e706a43db49e87cbf9a0346bb
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

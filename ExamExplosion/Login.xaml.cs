@@ -47,7 +47,7 @@ namespace ExamExplosion
                 password = PasswordText.Text;
             }
 
-            if(AccountManager.validateCredentials(password, gamertag))
+            if(AccountManager.validateCredentials(gamertag, password))
             {
                 if (this.NavigationService != null)
                 {

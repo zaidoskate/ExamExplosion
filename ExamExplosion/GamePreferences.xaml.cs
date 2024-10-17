@@ -54,5 +54,13 @@ namespace ExamExplosion
                 MaxHPValue.Text = ((int)e.NewValue).ToString();
             }
         }
+
+        private void GoHome(object sender, RoutedEventArgs e)
+        {
+            if (this.NavigationService != null)
+            {
+                this.NavigationService.Navigate(new HomePage());
+            }
+        }
     }
 }
