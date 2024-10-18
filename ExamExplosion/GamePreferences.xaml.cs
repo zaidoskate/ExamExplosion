@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ExamExplosion.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -60,6 +61,31 @@ namespace ExamExplosion
             if (this.NavigationService != null)
             {
                 this.NavigationService.Navigate(new HomePage());
+                var window = Window.GetWindow(this);
+                if (window != null)
+                {
+                    window.Height = 450;
+                    window.Width = 800;
+                    window.SizeToContent = SizeToContent.Manual;
+                }
+            }
+        }
+
+        private void CreateLobby(object sender, RoutedEventArgs e)
+        {
+            int maxPlayers = (int)MaxPlayersSlider.Value;
+            int timePerTurn = (int)TimePerTurnSlider.Value;
+            int maxHP = (int)MaxHPSlider.Value;
+
+            Lobby lobby = new Lobby(maxPlayers, timePerTurn, maxHP, SessionManager.CurrentSession.gamertag);
+
+            NavigationService.Navigate(lobby);
+            var window = Window.GetWindow(this);
+            if (window != null)
+            {
+                window.Height = 450;
+                window.Width = 800;
+                window.SizeToContent = SizeToContent.Manual;
             }
         }
     }

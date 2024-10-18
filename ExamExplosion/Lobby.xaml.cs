@@ -1,4 +1,5 @@
 ﻿using ExamExplosion.ExamExplotionService;
+using ExamExplosion.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,16 +23,59 @@ namespace ExamExplosion
     /// </summary>
     public partial class Lobby : Page, ExamExplotionService.ILobbyManagerCallback
     {
-        private string _gamertag;
         private ILobbyManager _lobbyManager;
-        public Lobby(string gamer)
+        private int MaxPlayers {  get; set; }
+        private int TimePerTurn { get; set; }
+        private int MaxHP { get; set; }
+
+        private string owner;
+        private string lobbyCode;
+        public Lobby(int maxPlayers, int timePerTurn, int maxHP, string owner)
         {
             InitializeComponent();
-            _gamertag = gamer;
+            MaxPlayers = maxPlayers;
+            TimePerTurn = timePerTurn;
+            MaxHP = maxHP;
+            this.owner = owner;
+            var parentWindow = (MainWindow)Application.Current.MainWindow;
+            if (parentWindow != null)
+            {
+                parentWindow.Closing += OnClosing;
+            }
             InitializeLobbyManager();
+            Initialize_LobbyResources();
             this.KeyDown += Lobby_KeyDown;
             this.Focusable = true;
             this.Focus();
+        }
+
+        public Lobby(string lobbyCode)
+        {
+            InitializeComponent();
+            var parentWindow = (MainWindow)Application.Current.MainWindow;
+            if (parentWindow != null)
+            {
+                parentWindow.Closing += OnClosing;
+            }
+            this.lobbyCode = lobbyCode;
+            InitializeLobbyManager();
+            Initialize_LobbyResources();
+            this.KeyDown += Lobby_KeyDown;
+            this.Focusable = true;
+            this.Focus();
+        }
+
+        private void Initialize_LobbyResources()
+        {
+            player1Lbl.Content = owner;
+            player2Lbl.Visibility = Visibility.Hidden;
+            player3Lbl.Visibility = Visibility.Hidden;
+            player4Lbl.Visibility = Visibility.Hidden;
+            player1Img.Source = new BitmapImage(new Uri("pack://application:,,,/Images/NoReadyImage.png"));
+            player2Img.Visibility = Visibility.Hidden;
+            player3Img.Visibility = Visibility.Hidden;
+            player4Img.Visibility = Visibility.Hidden;
+
         }
 
         private void Lobby_KeyDown(object sender, KeyEventArgs e)
@@ -56,12 +100,39 @@ namespace ExamExplosion
 
             _lobbyManager = proxy.ChannelFactory.CreateChannel();
 
-            bool connected = _lobbyManager.Connect(_gamertag);
+            bool connected = _lobbyManager.Connect(SessionManager.CurrentSession.gamertag);
             if (connected)
             {
-                Console.WriteLine("Conectado");
+                string owner = SessionManager.CurrentSession.gamertag;
+                lobbyCode = _lobbyManager.CreateLobby(owner);
+                lobbyCodelbl.Content = $"Lobby: {lobbyCode}";
             }
         }
+
+        private void Reconnect()
+        {
+            var context = new InstanceContext(this);
+            var proxy = new LobbyManagerClient(context);
+
+            _lobbyManager = proxy.ChannelFactory.CreateChannel();
+
+            bool connected = false;
+            connected = _lobbyManager.Connect(SessionManager.CurrentSession.gamertag);
+            if (connected)
+            {
+                Console.WriteLine("Reconectado al lobby.");
+            }
+        }
+
+        private void OnClosing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (_lobbyManager != null)
+            {
+                _lobbyManager.Disconnect(SessionManager.CurrentSession.gamertag);
+            }
+        }
+
+
 
         void ILobbyManagerCallback.ReceiveMessage(string gamertag, string message)
         {
@@ -85,16 +156,40 @@ namespace ExamExplosion
             });
         }
 
+        private void UpdatePlayerLabel(string gamertag)
+        {
+            if (player1Lbl.Visibility == Visibility.Hidden)
+            {
+                player1Lbl.Content = gamertag;
+                player1Lbl.Visibility = Visibility.Visible;
+            }
+            else if (player2Lbl.Visibility == Visibility.Hidden)
+            {
+                player2Lbl.Content = gamertag;
+                player2Lbl.Visibility = Visibility.Visible;
+            }
+            else if (player3Lbl.Visibility == Visibility.Hidden)
+            {
+                player3Lbl.Content = gamertag;
+                player3Lbl.Visibility = Visibility.Visible;
+            }
+            else if (player4Lbl.Visibility == Visibility.Hidden)
+            {
+                player4Lbl.Content = gamertag;
+                player4Lbl.Visibility = Visibility.Visible;
+            }
+        }
 
         private void SendMessageButton_Click(object sender, RoutedEventArgs e)
         {
             string message = GetTextBoxMessage();
-            if(!string.IsNullOrEmpty(message))
+            if (!string.IsNullOrEmpty(message))
             {
-                _lobbyManager.SendMessage(_gamertag, message);
+                _lobbyManager.SendMessage(lobbyCode, SessionManager.CurrentSession.gamertag, message);
                 ClearTextBox();
             }
         }
+
 
         private void ClearTextBox()
         {
@@ -109,7 +204,7 @@ namespace ExamExplosion
         private void PreviousMenu(object sender, RoutedEventArgs e)
         {
             var mainWindow = (MainWindow)Application.Current.MainWindow;
-            mainWindow.MainFrame.Navigate(new StartPage());
+            mainWindow.MainFrame.Navigate(new HomePage());
         }
     }
 }

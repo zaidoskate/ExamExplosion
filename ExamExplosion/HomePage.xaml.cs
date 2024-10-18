@@ -33,6 +33,13 @@ namespace ExamExplosion
             if (this.NavigationService != null)
             {
                 this.NavigationService.Navigate(new GamePreferences());
+                var window = Window.GetWindow(this);
+                if (window != null)
+                {
+                    window.Height = 420;
+                    window.Width = 420;
+                    window.SizeToContent = SizeToContent.Manual;
+                }
             }
         }
 
@@ -56,6 +63,13 @@ namespace ExamExplosion
             if (this.NavigationService != null)
             {
                 this.NavigationService.Navigate(new GameCode());
+                var window = Window.GetWindow(this);
+                if (window != null)
+                {
+                    window.Height = 420;
+                    window.Width = 420;
+                    window.SizeToContent = SizeToContent.Manual;
+                }
             }
         }
         private void LogOut(object sender, RoutedEventArgs e)

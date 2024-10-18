@@ -27,13 +27,13 @@
         <Grid>
             <Label Content="Players" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="50" FontFamily="pack://application:,,,/Fonts/#VT323" Foreground="Black" Margin="50,30,0,0"/>
             <Label x:Name="player1Lbl" Content="Player1"  HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="40" FontFamily="pack://application:,,,/Fonts/#VT323" Foreground="Black" Margin="49,90,0,0"/>
-            <Image Source="pack://application:,,,/Images/ReadyImage.png" Stretch="UniformToFill" StretchDirection="DownOnly" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="246,92,0,0" Height="52" Width="51" />
-            <Label x:Name="player1Lbl_Copy" Content="Player1"  HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="40" FontFamily="pack://application:,,,/Fonts/#VT323" Foreground="Black" Margin="50,148,0,0"/>
-            <Image Source="/Images/ReadyImage.png" Stretch="UniformToFill" StretchDirection="DownOnly" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="246,150,0,0" Height="52" Width="51" />
-            <Label x:Name="player1Lbl_Copy1" Content="Player1"  HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="40" FontFamily="pack://application:,,,/Fonts/#VT323" Foreground="Black" Margin="50,209,0,0"/>
-            <Image Source="/Images/ReadyImage.png" Stretch="UniformToFill" StretchDirection="DownOnly" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="246,207,0,0" Height="52" Width="51" />
-            <Label x:Name="player1Lbl_Copy2" Content="Player1"  HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="40" FontFamily="pack://application:,,,/Fonts/#VT323" Foreground="Black" Margin="50,266,0,0"/>
-            <Image Source="/Images/ReadyImage.png" Stretch="UniformToFill" StretchDirection="DownOnly" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="246,264,0,0" Height="52" Width="51" />
+            <Image x:Name="player1Img" Source="pack://application:,,,/Images/ReadyImage.png" Stretch="UniformToFill" StretchDirection="DownOnly" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="246,92,0,0" Height="52" Width="51" />
+            <Label x:Name="player2Lbl" Content="Player1"  HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="40" FontFamily="pack://application:,,,/Fonts/#VT323" Foreground="Black" Margin="50,148,0,0"/>
+            <Image x:Name="player2Img" Source="/Images/ReadyImage.png" Stretch="UniformToFill" StretchDirection="DownOnly" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="246,150,0,0" Height="52" Width="51" />
+            <Label x:Name="player3Lbl" Content="Player1"  HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="40" FontFamily="pack://application:,,,/Fonts/#VT323" Foreground="Black" Margin="50,209,0,0"/>
+            <Image x:Name="player3Img" Source="/Images/ReadyImage.png" Stretch="UniformToFill" StretchDirection="DownOnly" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="246,207,0,0" Height="52" Width="51" />
+            <Label x:Name="player4Lbl" Content="Player1"  HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="40" FontFamily="pack://application:,,,/Fonts/#VT323" Foreground="Black" Margin="50,266,0,0"/>
+            <Image x:Name="player4Img" Source="/Images/ReadyImage.png" Stretch="UniformToFill" StretchDirection="DownOnly" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="246,264,0,0" Height="52" Width="51" />
         </Grid>
         <Grid>
             <Button Width="100" Height="55" Background="Transparent" BorderBrush="Transparent" VerticalAlignment="Bottom" Cursor="Hand" HorizontalAlignment="Left" Margin="200,0,0,20" Click="PreviousMenu">
@@ -49,7 +49,7 @@
                 </Grid>
             </Button>
         </Grid>
-        <Label Content="Lobby" HorizontalAlignment="Right" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="50" FontFamily="pack://application:,,,/Fonts/#VT323" Foreground="Black" Margin="0,30,150,0"/>
+        <Label x:Name="lobbyCodelbl" Content="Lobby" HorizontalAlignment="Right" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="50" FontFamily="pack://application:,,,/Fonts/#VT323" Foreground="Black" Margin="0,30,150,0"/>
         <Label  HorizontalAlignment="Right" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="50" FontFamily="pack://application:,,,/Fonts/#VT323" Foreground="Black" Margin="0,50,50,0"/>
         <Image Source="pack://application:,,,/Images/Bomb.png" Width="86" HorizontalAlignment="Left" Margin="343,168,0,168"/>
         <Label Content="Chat" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="40" FontFamily="pack://application:,,,/Fonts/#VT323" Margin="0,100,270,0" Foreground="Gray"/>
