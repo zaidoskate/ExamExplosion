@@ -75,12 +75,19 @@
     <Compile Include="AccountCreation.xaml.cs">
       <DependentUpon>AccountCreation.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AlertModal.xaml.cs">
+      <DependentUpon>AlertModal.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\ExamExplotionService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="DataValidations\DataValidationException.cs" />
+    <Compile Include="DataValidations\ExistingDataValidator.cs" />
+    <Compile Include="DataValidations\TextValidator.cs" />
     <Compile Include="Helpers\AccountManager.cs" />
+    <Compile Include="Helpers\EmailVerificationCode.cs" />
     <Compile Include="Helpers\SessionManager.cs" />
     <Compile Include="HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
@@ -91,6 +98,7 @@
     <Compile Include="Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\Account.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -103,6 +111,10 @@
       <DependentUpon>StartPage.xaml</DependentUpon>
     </Compile>
     <Page Include="AccountCreation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AlertModal.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

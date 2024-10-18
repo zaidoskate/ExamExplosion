@@ -17,11 +17,33 @@ namespace ExamExplosion
     /// <summary>
     /// Lógica de interacción para EmailVerification.xaml
     /// </summary>
-    public partial class EmailVerification : Page
+    public partial class EmailVerification : Window
     {
-        public EmailVerification()
+        private string code;
+        public bool EmailVerified {  get; set; }
+        public EmailVerification(string code)
         {
+            this.code = code;
+            this.EmailVerified = false;
             InitializeComponent();
+        }
+
+        private void GoOut(object sender, RoutedEventArgs e)
+        {
+            this.DialogResult = true;
+        }
+
+        private void ValidateCode(object sender, RoutedEventArgs e)
+        {
+            string codeEntered = txtBoxCode.Text;
+            if(codeEntered != this.code)
+            {
+                new AlertModal("Codigo incorrecto","El codigo ingresado no coincide con el codigo enviado.").ShowDialog();
+            }
+            else
+            {
+                EmailVerified = true;
+            }
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿<Page x:Class="ExamExplosion.EmailVerification"
+﻿<Window x:Class="ExamExplosion.EmailVerification"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Height="400" Width="400"
         Background="#FFF2CC">
-    <Page.Resources>
+    <Window.Resources>
         <Style TargetType="TextBox">
             <Setter Property="Template">
                 <Setter.Value>
@@ -20,25 +20,25 @@
                 </Setter.Value>
             </Setter>
         </Style>
-    </Page.Resources>
+    </Window.Resources>
 
     <Grid>
-        <Label x:Name="EmailVerificationlbl" Content="{x:Static p:Resources.createAccountLblEmailVer}" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="40" FontFamily="pack://application:,,,/Fonts/#VT323" Margin="0,30,0,0"></Label>
+        <Label x:Name="EmailVerificationlbl" Content="EmailVerification" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="40" FontFamily="pack://application:,,,/Fonts/#VT323" Margin="0,30,0,0"></Label>
 
-        <Label x:Name="EmailCodelbl" Content="{x:Static p:Resources.signUpLblCodeSent}" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" FontSize="20" FontFamily="pack://application:,,,/Fonts/#VT323" Margin="0,0,0,50" ></Label>
-        <TextBox Width="270" Height="50" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Margin="0,50,0,0" FontSize="40" FontFamily="pack://application:,,,/Fonts/#VT323"/>
+        <Label x:Name="EmailCodelbl" Content="Ingresa el codigo enviado a tu correo:" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" FontSize="20" FontFamily="pack://application:,,,/Fonts/#VT323" Margin="0,0,0,50" ></Label>
+        <TextBox x:Name="txtBoxCode" Width="270" Height="50" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Margin="0,50,0,0" FontSize="40" FontFamily="pack://application:,,,/Fonts/#VT323"/>
 
-        <Button Width="150" Height="75" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="20,0,0,20" Background="Transparent" BorderBrush="Transparent">
+        <Button Width="150" Height="75" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="20,0,0,20" Background="Transparent" BorderBrush="Transparent" Click="ValidateCode">
             <Grid>
                 <Image Source="pack://application:,,,/Images/ButtonGreen.png" Width="150"></Image>
-                <Label x:Name="Createlbl" Content="{x:Static p:Resources.globalBtnCreate}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="40" FontFamily="pack://application:,,,/Fonts/#VT323" Foreground="White"/>
+                <Label x:Name="Createlbl" Content="Crear" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="40" FontFamily="pack://application:,,,/Fonts/#VT323" Foreground="White"/>
             </Grid>
         </Button>
-        <Button Width="150" Height="75" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,20,20" Background="Transparent" BorderBrush="Transparent">
+        <Button Width="150" Height="75" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,20,20" Background="Transparent" BorderBrush="Transparent" Click="GoOut">
             <Grid>
                 <Image Source="pack://application:,,,/Images/ButtonOrange.png" Width="150"></Image>
-                <Label x:Name="Cancellbl" Content="{x:Static p:Resources.globalBtnLeave}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="40" FontFamily="pack://application:,,,/Fonts/#VT323" Foreground="White"/>
+                <Label x:Name="Cancellbl" Content="Salir" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="40" FontFamily="pack://application:,,,/Fonts/#VT323" Foreground="White"/>
             </Grid>
         </Button>
     </Grid>
-</Page>
+</Window>

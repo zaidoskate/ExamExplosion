@@ -16,9 +16,6 @@ using System.Windows.Shapes;
 
 namespace ExamExplosion
 {
-    /// <summary>
-    /// Lógica de interacción para Login.xaml
-    /// </summary>
     public partial class Login : Page
     {
         public Login()
@@ -53,6 +50,10 @@ namespace ExamExplosion
                 {
                     this.NavigationService.Navigate(new HomePage());
                 }
+            }
+            else
+            {
+                new AlertModal("Datos incorrectos", "Gamertag y/o contraseña incorrectos").ShowDialog();
             }
         }
 
