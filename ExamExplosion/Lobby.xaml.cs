@@ -1,5 +1,6 @@
 ﻿using ExamExplosion.ExamExplotionService;
 using ExamExplosion.Helpers;
+using ExamExplosion.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,27 +22,28 @@ namespace ExamExplosion
     /// <summary>
     /// Interaction logic for Lobby.xaml
     /// </summary>
-    public partial class Lobby : Page, ExamExplotionService.ILobbyManagerCallback
+    public partial class Lobby : Page
     {
-        private ILobbyManager _lobbyManager;
-        private int MaxPlayers {  get; set; }
-        private int TimePerTurn { get; set; }
-        private int MaxHP { get; set; }
-
-        private string owner;
+        private LobbyManager lobbyManager = null;
         private string lobbyCode;
         public Lobby(int maxPlayers, int timePerTurn, int maxHP, string owner)
         {
+            lobbyManager = new LobbyManager(this);
+            Game game = new Game();
+            game.NumberPlayers = maxPlayers;
+            game.HostPlayerId = SessionManager.CurrentSession.userId;
+            game.TimePerTurn = timePerTurn;
+            game.Lives = maxHP;
+
+            lobbyCode = lobbyManager.CreateLobby(game);
+
             InitializeComponent();
-            MaxPlayers = maxPlayers;
-            TimePerTurn = timePerTurn;
-            MaxHP = maxHP;
-            this.owner = owner;
             var parentWindow = (MainWindow)Application.Current.MainWindow;
             if (parentWindow != null)
             {
                 parentWindow.Closing += OnClosing;
             }
+            player1Lbl.Content = owner;
             InitializeLobbyManager();
             Initialize_LobbyResources();
             this.KeyDown += Lobby_KeyDown;
@@ -51,6 +53,7 @@ namespace ExamExplosion
 
         public Lobby(string lobbyCode)
         {
+            lobbyManager = new LobbyManager(this);
             InitializeComponent();
             var parentWindow = (MainWindow)Application.Current.MainWindow;
             if (parentWindow != null)
@@ -67,7 +70,7 @@ namespace ExamExplosion
 
         private void Initialize_LobbyResources()
         {
-            player1Lbl.Content = owner;
+
             player2Lbl.Visibility = Visibility.Hidden;
             player3Lbl.Visibility = Visibility.Hidden;
             player4Lbl.Visibility = Visibility.Hidden;
@@ -95,23 +98,16 @@ namespace ExamExplosion
 
         private void InitializeLobbyManager()
         {
-            var context = new InstanceContext(this);
-            var proxy = new LobbyManagerClient(context);
-
-            _lobbyManager = proxy.ChannelFactory.CreateChannel();
-
-            bool connected = _lobbyManager.Connect(SessionManager.CurrentSession.gamertag);
-            if (connected)
+            bool connected = lobbyManager.ConnectLobby(this.lobbyCode, SessionManager.CurrentSession.gamertag);
+            if (!connected)
             {
-                string owner = SessionManager.CurrentSession.gamertag;
-                lobbyCode = _lobbyManager.CreateLobby(owner);
-                lobbyCodelbl.Content = $"Lobby: {lobbyCode}";
+                
             }
         }
 
         private void Reconnect()
         {
-            var context = new InstanceContext(this);
+            /*var context = new InstanceContext(this);
             var proxy = new LobbyManagerClient(context);
 
             _lobbyManager = proxy.ChannelFactory.CreateChannel();
@@ -121,20 +117,20 @@ namespace ExamExplosion
             if (connected)
             {
                 Console.WriteLine("Reconectado al lobby.");
-            }
+            }*/
         }
 
         private void OnClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (_lobbyManager != null)
+            /*if (_lobbyManager != null)
             {
                 _lobbyManager.Disconnect(SessionManager.CurrentSession.gamertag);
-            }
+            }*/
         }
 
 
 
-        void ILobbyManagerCallback.ReceiveMessage(string gamertag, string message)
+        public void PrintNewMessage(string gamertag, string message)
         {
             Application.Current.Dispatcher.Invoke(() => 
             {
@@ -183,11 +179,9 @@ namespace ExamExplosion
         private void SendMessageButton_Click(object sender, RoutedEventArgs e)
         {
             string message = GetTextBoxMessage();
-            if (!string.IsNullOrEmpty(message))
-            {
-                _lobbyManager.SendMessage(lobbyCode, SessionManager.CurrentSession.gamertag, message);
-                ClearTextBox();
-            }
+            lobbyManager.SendMessage(lobbyCode, message, SessionManager.CurrentSession.gamertag);
+            ClearTextBox();
+            
         }
 
 

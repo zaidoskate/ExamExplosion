@@ -20,20 +20,17 @@ namespace ExamExplosion
     /// <summary>
     /// Lógica de interacción para GameCode.xaml
     /// </summary>
-    public partial class GameCode : Page, ExamExplotionService.ILobbyConnectionManager
+    public partial class GameCode : Page
     {
-        private ILobbyConnectionManager LobbyConnectionManager;
+        private LobbyManager lobbyManager = null;
+        
+
         public GameCode()
         {
             InitializeComponent();
-            InitializeLobbyConnectionManager();
+            lobbyManager = new LobbyManager();
         }
 
-        private void InitializeLobbyConnectionManager()
-        {
-            var proxy = new LobbyConnectionManagerClient();
-            LobbyConnectionManager = proxy.ChannelFactory.CreateChannel();
-        }
 
         private void GoHome(object sender, RoutedEventArgs e)
         {
@@ -70,7 +67,7 @@ namespace ExamExplosion
             if (code.Length == 4)
             {
                 string player = SessionManager.CurrentSession.gamertag;
-                bool joined = LobbyConnectionManager.JoinLobby(code, player);
+                bool joined = lobbyManager.JoinLobby(code, player);
 
                 if (joined)
                 {

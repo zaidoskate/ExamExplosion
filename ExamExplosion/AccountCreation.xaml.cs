@@ -132,19 +132,19 @@ namespace ExamExplosion
             {
                 TextValidator.ValidateNotBlanks(name);
                 TextValidator.ValidateLenght(name, 50);
-                TextValidator.ValidateNameFormat(name);
+                //TextValidator.ValidateNameFormat(name);
 
                 TextValidator.ValidateNotBlanks(lastname);
                 TextValidator.ValidateLenght(lastname, 50);
-                TextValidator.ValidateNameFormat(lastname);
+                //TextValidator.ValidateNameFormat(lastname);
 
                 TextValidator.ValidateNotBlanks(gamertag);
                 TextValidator.ValidateLenght(gamertag, 50);
-                TextValidator.ValidateGamertagFormat(gamertag);
+                //TextValidator.ValidateGamertagFormat(gamertag);
 
                 TextValidator.ValidateNotBlanks(email);
                 TextValidator.ValidateLenght(email, 50);
-                TextValidator.ValidateEmailFormat(email);
+                //TextValidator.ValidateEmailFormat(email);
 
                 TextValidator.ValidateNotBlanks(password);
                 TextValidator.ValidateLenght(password, 50);
