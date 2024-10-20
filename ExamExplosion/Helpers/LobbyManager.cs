@@ -6,6 +6,7 @@ using System.Linq;
 using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace ExamExplosion.Helpers
 {
@@ -45,9 +46,10 @@ namespace ExamExplosion.Helpers
             return proxy.JoinLobby(code, gamertag);
         }
 
-        public bool ConnectLobby(string code, string gamertag)
+        public void ConnectLobby(string gamertag, string code)
         {
-            return proxy.Connect(gamertag, code);
+            List<string> players = proxy.Connect(gamertag, code).ToList();
+            lobbyPage.PrintLobbyPlayers(players);
         }
 
         public void SendMessage(string code, string message, string gamertag)
@@ -57,6 +59,27 @@ namespace ExamExplosion.Helpers
         public void ReceiveMessage(string gamertag, string message)
         {
             lobbyPage.PrintNewMessage(gamertag, message);
+        }
+
+        public void OnPlayerJoined(string gamertag)
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                lobbyPage.UpdatePlayerLabel(gamertag);
+            });
+        }
+
+        public void DisconnectLobby(string lobbyCode, string gamertag)
+        {
+            proxy.Disconnect(lobbyCode, gamertag);
+        }
+
+        public void OnPlayerLeft(string gamertag)
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                lobbyPage.RemovePlayerLabel(gamertag);
+            });
         }
     }
 }
