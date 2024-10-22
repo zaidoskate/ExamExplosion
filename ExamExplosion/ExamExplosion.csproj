@@ -234,6 +234,9 @@
     <None Include="Connected Services\ExamExplotionService\item4.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\ExamExplotionService\item41.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\ExamExplotionService\ServiceImplementation.wsdl" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

@@ -12,42 +12,42 @@
     <Grid>
         <Label Content="Account" HorizontalAlignment="Left" Margin="658,22,0,0" VerticalAlignment="Top" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="28"/>
         <Image HorizontalAlignment="Center" Height="107" Margin="0,10,0,0" VerticalAlignment="Top" Width="127" Source="pack://application:,,,/Images/User.png"/>
-        <TextBox x:Name="txtBoxName" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="22" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="98,93,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="190" Height="32">
+        <TextBox x:Name="txtBoxName" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="22" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="98,79,0,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="190" Height="32" TextChanged="ValidateName">
             <TextBox.Effect>
                 <DropShadowEffect/>
             </TextBox.Effect>
         </TextBox>
-        <TextBox x:Name="txtBoxLastname" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="22" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="98,171,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="190" Height="32">
+        <TextBox x:Name="txtBoxLastname" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="22" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="98,171,0,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="190" Height="32" TextChanged="ValidateLastname">
             <TextBox.Effect>
                 <DropShadowEffect/>
             </TextBox.Effect>
         </TextBox>
-        <TextBox x:Name="txtBoxEmail" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="22" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="98,247,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="190" Height="32">
+        <TextBox x:Name="txtBoxEmail" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="22" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="98,261,0,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="190" Height="32" TextChanged="ValidateEmail">
             <TextBox.Effect>
                 <DropShadowEffect/>
             </TextBox.Effect>
         </TextBox>
-        <TextBox x:Name="txtBoxGamertag" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="22" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="503,93,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="205" Height="32">
+        <TextBox x:Name="txtBoxGamertag" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="22" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="503,79,0,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="205" Height="32" TextChanged="ValidateGamertag">
             <TextBox.Effect>
                 <DropShadowEffect/>
             </TextBox.Effect>
         </TextBox>
-        <PasswordBox x:Name="pswdBoxPassword" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="22" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="505,171,0,0"  VerticalAlignment="Top" Width="205" Height="32">
+        <PasswordBox x:Name="pswdBoxPassword" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="22" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="505,170,0,0"  VerticalAlignment="Top" Width="205" Height="32" PasswordChanged="ValidatePasswordBox">
             <PasswordBox.Effect>
                 <DropShadowEffect/>
             </PasswordBox.Effect>
         </PasswordBox>
-        <TextBox x:Name="txtBoxPassword" Visibility="Collapsed" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="22" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="505,171,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="205" Height="32">
+        <TextBox x:Name="txtBoxPassword" Visibility="Collapsed" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="22" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="505,170,0,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="205" Height="32" TextChanged="ValidatePassword">
             <TextBox.Effect>
                 <DropShadowEffect/>
             </TextBox.Effect>
         </TextBox>
-        <PasswordBox x:Name="pswdBoxRepeatPassword" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="22" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="503,247,0,0" VerticalAlignment="Top" Width="205" Height="32">
+        <PasswordBox x:Name="pswdBoxRepeatPassword" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="22" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="503,261,0,0" VerticalAlignment="Top" Width="205" Height="32" PasswordChanged="ValidateRepeatPasswordBox">
             <PasswordBox.Effect>
                 <DropShadowEffect/>
             </PasswordBox.Effect>
         </PasswordBox>
-        <TextBox x:Name="txtBoxRepeatPassword" Visibility="Collapsed" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="22" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="503,247,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="205" Height="32">
+        <TextBox x:Name="txtBoxRepeatPassword" Visibility="Collapsed" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="22" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="503,261,0,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="205" Height="32" TextChanged="ValidateRepeatPassword">
             <TextBox.Effect>
                 <DropShadowEffect/>
             </TextBox.Effect>
@@ -55,24 +55,31 @@
         <Button HorizontalAlignment="Left" Margin="719,0,0,0" VerticalAlignment="Center" Background="{x:Null}" Foreground="{x:Null}" BorderBrush="#FFFFF2CC" Click="ChangePasswordVisibility">
             <Image Source="pack://application:,,,/Images/Eye.png" Height="30" Width="40" Stretch="Fill" Cursor="Hand"/>
         </Button>
-        <Button HorizontalAlignment="Left" Margin="154,310,0,0" VerticalAlignment="Top" Height="76" Width="150" Background="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand" Click="ValidateData" >
+        <Button HorizontalAlignment="Left" Margin="154,320,0,0" VerticalAlignment="Top" Height="76" Width="150" Background="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand" Click="VerifyData" >
             <Grid>
                 <Image HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" Source="pack://application:,,,/Images/ButtonGreen.png" Stretch="Fill" Height="70"/>
                 <Label Content="Create" HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="30" Width="103"/>
             </Grid>
         </Button>
-        <Button HorizontalAlignment="Left" Margin="489,310,0,0" Height="75" Width="150" VerticalAlignment="Top" Background="{x:Null}" Foreground="{x:Null}" BorderBrush="#FFFFF2CC" Click="CancelAccountCreation">
+        <Button HorizontalAlignment="Left" Margin="489,325,0,0" Height="75" Width="150" VerticalAlignment="Top" Background="{x:Null}" Foreground="{x:Null}" BorderBrush="#FFFFF2CC" Click="CancelAccountCreation">
             <Grid>
                 <Image  HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" Source="pack://application:,,,/Images/ButtonOrange.png" Height="70" Stretch="Fill" Cursor="Hand"/>
                 <Label Content="Cancel" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="30"/>
             </Grid>
         </Button>
-        <Label Content="Name" HorizontalAlignment="Left" Margin="98,67,0,0" VerticalAlignment="Top" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="18"  />
-        <Label Content="Repeat password" HorizontalAlignment="Left" Margin="505,221,0,0" VerticalAlignment="Top" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="18"/>
-        <Label Content="Password" HorizontalAlignment="Left" Margin="505,139,0,0" VerticalAlignment="Top" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="18"/>
-        <Label Content="Email" HorizontalAlignment="Left" Margin="98,221,0,0" VerticalAlignment="Top" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="18"/>
+        <Label Content="Name" HorizontalAlignment="Left" Margin="98,53,0,0" VerticalAlignment="Top" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="18"  />
+        <Label Content="Repeat password" HorizontalAlignment="Left" Margin="505,235,0,0" VerticalAlignment="Top" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="18"/>
+        <Label Content="Password" HorizontalAlignment="Left" Margin="505,145,0,0" VerticalAlignment="Top" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="18"/>
+        <Label Content="Email" HorizontalAlignment="Left" Margin="98,235,0,0" VerticalAlignment="Top" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="18"/>
         <Label Content="Lastname" HorizontalAlignment="Left" Margin="98,145,0,0" VerticalAlignment="Top" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="18"/>
-        <Label Content="Gamertag" HorizontalAlignment="Left" Margin="505,67,0,0" VerticalAlignment="Top" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="18" RenderTransformOrigin="0.53,-1.114"/>
+        <Label Content="Gamertag" HorizontalAlignment="Left" Margin="505,53,0,0" VerticalAlignment="Top" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="18" RenderTransformOrigin="0.53,-1.114"/>
+
+        <Label x:Name="lblNameErrorMessage" Content="" HorizontalAlignment="Left" Margin="98,111,0,0" VerticalAlignment="Top" Width="190" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="14" Foreground="Red"/>
+        <Label x:Name="lblLastnameErrorMessage" Content="" HorizontalAlignment="Left" Margin="98,203,0,0" VerticalAlignment="Top" Width="190" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="14" Foreground="Red"/>
+        <Label x:Name="lblEmailErrorMessage" Content="" HorizontalAlignment="Left" Margin="98,293,0,0" VerticalAlignment="Top" Width="190" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="14" Foreground="Red"/>
+        <Label x:Name="lblGamertagErrorMessage" Content="" HorizontalAlignment="Left" Margin="505,111,0,0" VerticalAlignment="Top" Width="190" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="14" Foreground="Red"/>
+        <TextBlock x:Name="lblPasswordErrorMessage" Text=""  TextWrapping="Wrap" HorizontalAlignment="Left" Margin="505,0,0,0" VerticalAlignment="Center" Width="190" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="14" Foreground="Red" Height="46"/>
+        <Label x:Name="lblRepeatPasswordErrorMessage" Content="" HorizontalAlignment="Left" Margin="505,293,0,0" VerticalAlignment="Top" Width="190" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="14" Foreground="Red"/>
 
 
 

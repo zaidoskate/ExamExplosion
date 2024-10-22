@@ -23,7 +23,7 @@ namespace ExamExplosion
         {
             InitializeComponent();
             lblTitle.Content = title;
-            lblErrorMessage.Content = message; 
+            lblErrorMessage.Text = message; 
         }
 
         private void AcceptMessage(object sender, RoutedEventArgs e)

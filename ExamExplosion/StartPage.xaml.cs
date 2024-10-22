@@ -20,6 +20,7 @@ namespace ExamExplosion
         public StartPage()
         {
             InitializeComponent();
+            buttonPlay.Focus();
         }
 
         private void DisplayLogin(object sender, RoutedEventArgs e)

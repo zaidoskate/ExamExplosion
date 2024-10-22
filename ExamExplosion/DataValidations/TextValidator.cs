@@ -9,38 +9,40 @@ namespace ExamExplosion.DataValidations
 {
     public class TextValidator
     {
-        public static void ValidateLenght(string text, int maxLenght)
-        {
-            if(text.Length > maxLenght)
-            {
-                throw new DataValidationException($"El texto ingresado para el campo excede el tamaño límite. ({maxLenght} caracteres)");
-            }
-        }
         public static void ValidateEmailFormat(string text)
         {
-            string pattern = @"^[a-z-0-9._%+-]+@[a-z-0-9.-]+\\.[a-zA-Z]{2,}$";
-            bool result = Regex.IsMatch(pattern, text);
+            string pattern = @"^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-zA-Z]{2,}$";
+            bool result = Regex.IsMatch(text, pattern);
             if(result == false)
             {
-                throw new DataValidationException("El correo no tiene el formato esperado (correo@ejemplo.com)");
+                throw new DataValidationException("Correo invalido");
             }
         }
         public static void ValidateNameFormat(string text)
         {
-            string pattern = @"^[A-ZÀ-ÿ][a-zA-ZÀ-ÿ.,' ]+$";
-            bool result = Regex.IsMatch(pattern, text);
+            string pattern = @"^[A-ZÀ-ÿ][a-zA-ZÀ-ÿ'., ]*$";
+            bool result = Regex.IsMatch(text, pattern);
             if (result == false)
             {
-                throw new DataValidationException("Formato de nombre incorrecto. El nombre debe comenzar con mayuscula y sin caracteres especiales");
+                throw new DataValidationException("Formato de nombre incorrecto.");
             }
         }
         public static void ValidateGamertagFormat(string text)
         {
-            string pattern = @"^[a-zA-Z1-9-]+$";
-            bool result = Regex.IsMatch(pattern, text);
+            string pattern = @"^[a-zA-Z0-9-]+$";
+            bool result = Regex.IsMatch(text, pattern);
             if (result == false)
             {
-                throw new DataValidationException("El gamertag no tiene el formato adecuado. No debe tener espacios ni caracteres especiales.");
+                throw new DataValidationException("Solo letras y numeros.");
+            }
+        }
+        public static void ValidateGamertagFirstLetter(string text)
+        {
+            string pattern = @"^\d";
+            bool result = Regex.IsMatch(text, pattern);
+            if (result == true)
+            {
+                throw new DataValidationException("Debe empezar con letra.");
             }
         }
         public static void ValidateNotBlanks(string text)
@@ -48,7 +50,33 @@ namespace ExamExplosion.DataValidations
             bool result = String.IsNullOrEmpty(text);
             if (result == true)
             {
-                throw new DataValidationException("El texto ingresado esta vacio.");
+                throw new DataValidationException("Este es un campo obligatorio.");
+            }
+        }
+        public static void ValidatePassword(string text)
+        {
+            string pattern = @"^[a-zA-Z0-9#$%&!]*$";
+            bool result = Regex.IsMatch(text, pattern);
+            if (!result)
+            {
+                throw new DataValidationException("Caracteres especiales permitidos: #,$,%,&,!");
+            }
+        }
+        public static void ValidatePasswordLength(string text)
+        {
+            string pattern = @"^.{8,20}$";
+            bool result = Regex.IsMatch(text, pattern);
+            if (!result)
+            {
+                throw new DataValidationException("De 8 a 20 caracteres");
+            }
+        }
+
+        public static void ValidateRepeatResponse(string repeatPassword, string password)
+        {
+            if(repeatPassword != password)
+            {
+                throw new DataValidationException("No coinciden.");
             }
         }
     }

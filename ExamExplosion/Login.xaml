@@ -11,7 +11,7 @@
     <Grid Background="#FFFFF2CC">
         <Label Content="Log In" Margin="658,10,0,306" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="48" HorizontalAlignment="Left"/>
         <Label Content="Gamertag:" Margin="269,98,0,286" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="20" HorizontalAlignment="Left"/>
-        <TextBox x:Name="GamertagTextBox" HorizontalAlignment="Center" FontSize="30" FontFamily="pack://application:,,,/Fonts/#VT323" Margin="0,132,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="262" Height="32">
+        <TextBox x:Name="txtBoxGamertag" HorizontalAlignment="Center" FontSize="30" FontFamily="pack://application:,,,/Fonts/#VT323" Margin="0,132,0,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="262" Height="32">
             <TextBox.Effect>
                 <DropShadowEffect/>
             </TextBox.Effect>

@@ -21,6 +21,7 @@ namespace ExamExplosion
         public Login()
         {
             InitializeComponent();
+            txtBoxGamertag.Focus();
         }
         private void CancelLogIn(object sender, RoutedEventArgs e)
         {
@@ -33,7 +34,7 @@ namespace ExamExplosion
         private void ValidateLogIn(object sender, RoutedEventArgs e)
         {
             string password;
-            string gamertag = GamertagTextBox.Text;
+            string gamertag = txtBoxGamertag.Text;
 
             if (PasswordBox.Visibility == Visibility.Visible)
             {

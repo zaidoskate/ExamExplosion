@@ -29,7 +29,7 @@ namespace ExamExplosion.Helpers
             {
                 SmtpClient client = new SmtpClient("smtp.gmail.com", 587)
                 {
-                    Credentials = new NetworkCredential("coillogs4@gmail.com", "fwspilsgfxmeoyna"),
+                    Credentials = new NetworkCredential("explosionexam@gmail.com", "lrntedutudwrnzwo"),
                     EnableSsl = true
                 };
 
@@ -37,7 +37,7 @@ namespace ExamExplosion.Helpers
                 {
                     From = new MailAddress(email),
                     Subject = "Código de verificación",
-                    Body = $"Tu código de verificación es: {code}",
+                    Body = $"El código de verificación para tu cuenta de Exam Explosion es: {code}",
                     IsBodyHtml = false
                 };
 

@@ -7,40 +7,60 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Settings">
-    
-        <Grid Background="#FFFFF2CC">
-            <Label Content="Settings" Margin="342,10,0,332" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="60" HorizontalAlignment="Left" Width="348"/>
-            <Image HorizontalAlignment="Left" VerticalAlignment="Top" Width="98" Source="pack://application:,,,/Images/Settings.png" Stretch="Fill" Height="94" Margin="244,10,0,0"/>
 
-            <Button HorizontalAlignment="Left" Margin="198,362,0,0" VerticalAlignment="Top" Height="75" Width="152" Background="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand" >
-                <Grid>
-                    <Image HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" Source="pack://application:,,,/Images/ButtonGreen.png" Stretch="Fill" Height="80"/>
-                    <Label Content="Save" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="27"/>
-                </Grid>
-            </Button>
-            <Button HorizontalAlignment="Left" Margin="497,369,0,0" VerticalAlignment="Top" Height="75" Width="152" Background="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand" >
-                <Grid>
-                    <Image HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" Source="pack://application:,,,/Images/ButtonOrange.png" Stretch="Fill" Height="80"/>
-                    <Label Content="Cancel" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="27"/>
-                </Grid>
-            </Button>
-            <Button HorizontalAlignment="Left" Margin="402,292,0,0" VerticalAlignment="Top" Height="40" Width="46" Background="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand">
-                <Image HorizontalAlignment="Left" VerticalAlignment="Top" Width="42" Source="pack://application:,,,/Images/Eye.png" Stretch="Fill" Height="31"/>
-            </Button>
-            <ComboBox HorizontalAlignment="Left" Margin="88,182,0,0" VerticalAlignment="Top" Width="242" Height="33">
-                <ComboBox.Effect>
-                    <DropShadowEffect/>
-                </ComboBox.Effect>
-            </ComboBox>
-            <TextBox HorizontalAlignment="Left" Margin="88,292,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="262" Height="32">
-                <TextBox.Effect>
-                    <DropShadowEffect/>
-                </TextBox.Effect>
-            </TextBox>
-            <TextBox HorizontalAlignment="Left" Margin="497,292,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="262" Height="32">
-                <TextBox.Effect>
-                    <DropShadowEffect/>
-                </TextBox.Effect>
-            </TextBox>
-        </Grid>
-    </Page>
+    <Grid Background="#FFFFF2CC">
+        <Label Content="Settings" Margin="342,10,0,332" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="60" HorizontalAlignment="Left" Width="348"/>
+        <Image HorizontalAlignment="Left" VerticalAlignment="Top" Width="98" Source="pack://application:,,,/Images/Settings.png" Stretch="Fill" Height="94" Margin="244,10,0,0"/>
+
+        <Button HorizontalAlignment="Left" Margin="141,253,0,0" VerticalAlignment="Top" Height="56" Width="94" Background="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand" Click="LoadLanguage">
+            <Grid>
+                <Image HorizontalAlignment="Left" VerticalAlignment="Center" Width="90" Source="pack://application:,,,/Images/ButtonGreen.png" Stretch="Fill" Height="50"/>
+                <Label Content="Save" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="20"/>
+            </Grid>
+        </Button>
+        <Button HorizontalAlignment="Center" Margin="0,334,0,0" VerticalAlignment="Top" Height="74" Width="152" Background="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand" Click="GoHmePage" >
+            <Grid>
+                <Image HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" Source="pack://application:,,,/Images/ButtonOrange.png" Stretch="Fill" Height="80"/>
+                <Label Content="Back" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="27"/>
+            </Grid>
+        </Button>
+        <Button HorizontalAlignment="Left" Margin="721,156,0,0" VerticalAlignment="Top" Height="40" Width="46" Background="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand" Click="ChangePasswordVisibility">
+            <Image HorizontalAlignment="Left" VerticalAlignment="Top" Width="42" Source="pack://application:,,,/Images/Eye.png" Stretch="Fill" Height="31"/>
+        </Button>
+        <ComboBox HorizontalAlignment="Left" Margin="93,163,0,0" VerticalAlignment="Top" Width="242" Height="33">
+            <ComboBox.Effect>
+                <DropShadowEffect/>
+            </ComboBox.Effect>
+        </ComboBox>
+        <TextBox x:Name="txtBoxCurrentPsswd" Visibility="Collapsed" HorizontalAlignment="Left" FontSize="30" FontFamily="pack://application:,,,/Fonts/#VT323" Margin="446,127,0,0" VerticalAlignment="Top" Width="262" Height="32">
+            <TextBox.Effect>
+                <DropShadowEffect/>
+            </TextBox.Effect>
+        </TextBox>
+        <PasswordBox x:Name="pswdBoxCurrentPsswd" HorizontalAlignment="Left" FontSize="30" FontFamily="pack://application:,,,/Fonts/#VT323" Margin="446,127,0,0" VerticalAlignment="Top" Width="262" Height="32">
+            <PasswordBox.Effect>
+                <DropShadowEffect/>
+            </PasswordBox.Effect>
+        </PasswordBox>
+        <TextBox x:Name="txtBoxNewPsswd" Visibility="Collapsed" HorizontalAlignment="Left" FontSize="30" FontFamily="pack://application:,,,/Fonts/#VT323" Margin="446,193,0,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="262" Height="32" RenderTransformOrigin="0.375,-0.05" TextChanged="ValidateNewPassword">
+            <TextBox.Effect>
+                <DropShadowEffect/>
+            </TextBox.Effect>
+        </TextBox>
+        <PasswordBox x:Name="pswdBoxNewPsswd" HorizontalAlignment="Left" Margin="446,193,0,0" FontSize="30" FontFamily="pack://application:,,,/Fonts/#VT323" VerticalAlignment="Top" Width="262" Height="32" RenderTransformOrigin="0.375,-0.05" PasswordChanged="ValidateNewPasswordBox">
+            <PasswordBox.Effect>
+                <DropShadowEffect/>
+            </PasswordBox.Effect>
+        </PasswordBox>
+        <Button HorizontalAlignment="Left" Margin="560,259,0,0" VerticalAlignment="Top" Height="56" Width="94" Background="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand" Click="ValdatePasswords">
+            <Grid>
+                <Image HorizontalAlignment="Left" VerticalAlignment="Center" Width="90" Source="/Images/ButtonGreen.png" Stretch="Fill" Height="50"/>
+                <Label Content="Save" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="20"/>
+            </Grid>
+        </Button>
+        <Label Content="Language" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="20" HorizontalAlignment="Left" Margin="93,138,0,0" VerticalAlignment="Top" Width="194" Height="42"/>
+        <Label Content="Current password" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="20" HorizontalAlignment="Left" Margin="446,97,0,0" VerticalAlignment="Top" Width="194" Height="42"/>
+        <Label Content="New password" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="20" HorizontalAlignment="Left" Margin="446,167,0,0" VerticalAlignment="Top" Width="194" Height="42"/>
+        <TextBlock x:Name="txtBlockNewPasswordMessage" HorizontalAlignment="Left" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="14" Margin="446,230,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="33" Width="262" Foreground="#FFE00000"/>
+    </Grid>
+</Page>
