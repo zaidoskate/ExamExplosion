@@ -2,8 +2,10 @@
 using ExamExplosion.Helpers;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -27,6 +29,19 @@ namespace ExamExplosion
         public Settings()
         {
             InitializeComponent();
+            InitializeLanguages();
+        }
+
+        private void InitializeLanguages()
+        {
+            if (Thread.CurrentThread.CurrentUICulture.Name == "es-MX")
+            {
+                CmbBoxLanguages.SelectedItem = SpanishOption;
+            }
+            else
+            {
+                CmbBoxLanguages.SelectedItem = EnglishOption;
+            }
         }
 
         private void GoHmePage(object sender, RoutedEventArgs e)
@@ -107,7 +122,21 @@ namespace ExamExplosion
 
         private void LoadLanguage(object sender, RoutedEventArgs e)
         {
+            if (CmbBoxLanguages.SelectedItem == EnglishOption)
+            {
+                ChangeLanguage("en");
+            }
+            else if (CmbBoxLanguages.SelectedItem == SpanishOption)
+            {
+                ChangeLanguage("es-MX");
+            }
+        }
+        private void ChangeLanguage(string cultureCode)
+        {
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(cultureCode);
 
+            var mainWindow = (MainWindow)Application.Current.MainWindow;
+            mainWindow.MainFrame.Navigate(new Settings());
         }
 
         private void ValdatePasswords(object sender, RoutedEventArgs e)

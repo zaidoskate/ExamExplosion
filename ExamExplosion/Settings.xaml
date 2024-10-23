@@ -4,12 +4,13 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ExamExplosion"
+      xmlns:p="clr-namespace:ExamExplosion.Properties"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Settings">
 
     <Grid Background="#FFFFF2CC">
-        <Label Content="Settings" Margin="342,10,0,332" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="60" HorizontalAlignment="Left" Width="348"/>
+        <Label Content="{x:Static p:Resources.globalLblSettings}" Margin="342,10,0,332" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="60" HorizontalAlignment="Left" Width="348"/>
         <Image HorizontalAlignment="Left" VerticalAlignment="Top" Width="98" Source="pack://application:,,,/Images/Settings.png" Stretch="Fill" Height="94" Margin="244,10,0,0"/>
 
         <Button HorizontalAlignment="Left" Margin="141,253,0,0" VerticalAlignment="Top" Height="56" Width="94" Background="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand" Click="LoadLanguage">
@@ -27,10 +28,12 @@
         <Button HorizontalAlignment="Left" Margin="721,156,0,0" VerticalAlignment="Top" Height="40" Width="46" Background="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand" Click="ChangePasswordVisibility">
             <Image HorizontalAlignment="Left" VerticalAlignment="Top" Width="42" Source="pack://application:,,,/Images/Eye.png" Stretch="Fill" Height="31"/>
         </Button>
-        <ComboBox HorizontalAlignment="Left" Margin="93,163,0,0" VerticalAlignment="Top" Width="242" Height="33">
+        <ComboBox x:Name="CmbBoxLanguages" FontSize="30" FontFamily="pack://application:,,,/Fonts/#VT323" HorizontalAlignment="Left" Margin="93,163,0,0" VerticalAlignment="Top" Width="242" Height="33" BorderBrush="White">
             <ComboBox.Effect>
                 <DropShadowEffect/>
             </ComboBox.Effect>
+            <ComboBoxItem x:Name="EnglishOption" Content="English"/>
+            <ComboBoxItem x:Name="SpanishOption" Content="Español"/>
         </ComboBox>
         <TextBox x:Name="txtBoxCurrentPsswd" Visibility="Collapsed" HorizontalAlignment="Left" FontSize="30" FontFamily="pack://application:,,,/Fonts/#VT323" Margin="446,127,0,0" VerticalAlignment="Top" Width="262" Height="32">
             <TextBox.Effect>
