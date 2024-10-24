@@ -47,5 +47,23 @@ namespace ExamExplosion.Helpers
 
             return proxy.AddAccount(account);
         }
+
+        public static bool VerifyExistingEmail(string email)
+        {
+            return proxy.VerifyExistingEmail(email);
+        }
+
+        public static bool VerifyExistingGamertag(string gamertag)
+        {
+            return proxy.VerifyExistingGamertag(gamertag);
+        }
+
+        internal static bool UpdatePassword(string gamertag, string newPassword)
+        {
+            AccountM account = new AccountM();
+            account.Password = newPassword;
+            account.Gamertag = gamertag;
+            return proxy.UpdatePassword(account);
+        }
     }
 }

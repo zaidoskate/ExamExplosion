@@ -15,11 +15,11 @@
         <Image Source="/Images/BackCard.png" Width="150" HorizontalAlignment="Right" RenderTransformOrigin="1.118,1.155" Margin="0,78,0,72"/>
 
         <Grid>
-            <Label x:Name="Winnerlbl" Content="{x:Static p:Resources.gameLblWinner}" HorizontalAlignment="Left" Margin="317,0,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="60" FontFamily="pack://application:,,,/Fonts/#VT323"/>
+            <Label x:Name="Winnerlbl" Content="Winner" HorizontalAlignment="Left" Margin="317,0,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="60" FontFamily="pack://application:,,,/Fonts/#VT323"/>
             <Label x:Name="WinnerGamertaglbl" Content="Player" HorizontalAlignment="Left" Margin="270,70,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="40" FontFamily="pack://application:,,,/Fonts/#VT323"/>
             <Image Source="/Images/AddFriendImage.png" Width="50" HorizontalAlignment="Left" Margin="406,69,0,312"/>
             <Image Source="/Images/ReportImage.png" Width="50" HorizontalAlignment="Left" Margin="469,69,0,312"/>
-            <Label x:Name="Playerslbl" Content="{x:Static p:Resources.globalLblPlayers}" HorizontalAlignment="Left" Margin="293,114,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="60" FontFamily="pack://application:,,,/Fonts/#VT323"/>
+            <Label x:Name="Playerslbl" Content="Players" HorizontalAlignment="Left" Margin="293,114,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="60" FontFamily="pack://application:,,,/Fonts/#VT323"/>
             <Label x:Name="Player1lbl" Content="Player" HorizontalAlignment="Left" Margin="270,184,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="40" FontFamily="pack://application:,,,/Fonts/#VT323"/>
             <Label x:Name="Player2lbl" Content="Player" HorizontalAlignment="Left" Margin="270,239,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="40" FontFamily="pack://application:,,,/Fonts/#VT323"/>
             <Label x:Name="Player3lbl" Content="Player" HorizontalAlignment="Left" Margin="270,294,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="40" FontFamily="pack://application:,,,/Fonts/#VT323"/>
@@ -36,7 +36,7 @@
         <Button Width="150" Height="100" Background="Transparent" BorderBrush="Transparent" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,320,20,0" Cursor="Hand">
             <Grid>
                 <Image Source="pack://application:,,,/Images/ButtonOrange.png" Width="150" ></Image>
-                <Label x:Name="Exitlbl" Content="{x:Static p:Resources.globalBtnLeave}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="30" FontFamily="pack://application:,,,/Fonts/#VT323" Foreground="White"/>
+                <Label x:Name="Exitlbl" Content="Leave" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="30" FontFamily="pack://application:,,,/Fonts/#VT323" Foreground="White"/>
             </Grid>
         </Button>
     </Grid>

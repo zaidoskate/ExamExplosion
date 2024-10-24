@@ -26,6 +26,7 @@ namespace ExamExplosion
             this.code = code;
             this.EmailVerified = false;
             InitializeComponent();
+            txtBoxCode.Focus();
         }
 
         private void GoOut(object sender, RoutedEventArgs e)
@@ -43,6 +44,7 @@ namespace ExamExplosion
             else
             {
                 EmailVerified = true;
+                this.DialogResult = true;
             }
         }
     }
