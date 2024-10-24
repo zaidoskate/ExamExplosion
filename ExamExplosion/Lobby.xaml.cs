@@ -26,6 +26,9 @@ namespace ExamExplosion
     {
         private LobbyManager lobbyManager = null;
         private string lobbyCode;
+        private Dictionary<string, bool> playerReadyStatus = new Dictionary<string, bool>();
+        private List<Label> labelsGamertags = new List<Label>();
+        private List<Image> imagePlayers = new List<Image>();
         public Lobby(int maxPlayers, int timePerTurn, int maxHP, string owner)
         {
             lobbyManager = new LobbyManager(this);
@@ -42,9 +45,8 @@ namespace ExamExplosion
             {
                 parentWindow.Closing += OnClosing;
             }
-            player1Lbl.Content = owner;
-            InitializeLobbyManager();
-            Initialize_LobbyResources();
+            InitializeLobbyManager(); 
+            lobbyCodelbl.Content = lobbyCode;
             this.KeyDown += Lobby_KeyDown;
             this.Focusable = true;
             this.Focus();
@@ -60,45 +62,12 @@ namespace ExamExplosion
                 parentWindow.Closing += OnClosing;
             }
             this.lobbyCode = lobbyCode;
+            this.lobbyCodelbl.Content = lobbyCode;
             InitializeLobbyManager();
-            InitializeLobbyJoined();
             this.KeyDown += Lobby_KeyDown;
             this.Focusable = true;
             this.Focus();
         }
-
-        private void Initialize_LobbyResources()
-        {
-
-            player2Lbl.Visibility = Visibility.Hidden;
-            player3Lbl.Visibility = Visibility.Hidden;
-            player4Lbl.Visibility = Visibility.Hidden;
-            player2Img.Visibility = Visibility.Hidden;
-            player3Img.Visibility = Visibility.Hidden;
-            player4Img.Visibility = Visibility.Hidden;
-            lobbyCodelbl.Content = lobbyCode;
-        }
-
-        private void InitializeLobbyJoined()
-        {
-            if (player2Lbl.Content == null)
-            {
-                player2Lbl.Visibility = Visibility.Hidden;
-                player2Img.Visibility = Visibility.Hidden;
-            }
-            else if (player3Lbl.Content == null)
-            {
-                player3Lbl.Visibility = Visibility.Hidden;
-                player3Img.Visibility = Visibility.Hidden;
-            }
-            else if (player4Lbl.Content == null)
-            {
-                player4Lbl.Visibility = Visibility.Hidden;
-                player4Img.Visibility= Visibility.Hidden;
-            }
-            lobbyCodelbl.Content = lobbyCode;
-        }
-
         private void Lobby_KeyDown(object sender, KeyEventArgs e)
         {
             if(e.Key == Key.Enter)
@@ -116,7 +85,14 @@ namespace ExamExplosion
 
         private void InitializeLobbyManager()
         {
-            Console.WriteLine(lobbyCode);
+            labelsGamertags.Add(player1Lbl);
+            labelsGamertags.Add(player2Lbl);
+            labelsGamertags.Add(player3Lbl);
+            labelsGamertags.Add(player4Lbl);
+            imagePlayers.Add(player1Img);
+            imagePlayers.Add(player2Img);
+            imagePlayers.Add(player3Img);
+            imagePlayers.Add(player4Img);
             lobbyManager.ConnectLobby(SessionManager.CurrentSession.gamertag, this.lobbyCode);
         }
 
@@ -146,123 +122,35 @@ namespace ExamExplosion
 
             });
         }
-        public void UpdatePlayersUI(List<string> players)
+
+        public void PrintLobbyPlayers(string gamertag, bool isReady, int index)
         {
-            foreach (var player in players)
+            labelsGamertags[index].Content = gamertag;
+            BitmapImage readyImage = new BitmapImage();
+            readyImage.BeginInit();
+            if (isReady)
             {
-                UpdatePlayerLabel(player);
+                readyImage.UriSource = new Uri("pack://application:,,,/Images/ReadyImage.png", UriKind.Absolute);
             }
+            else
+            {
+                readyImage.UriSource = new Uri("pack://application:,,,/Images/NoReadyImage.png", UriKind.Absolute);
+            }
+            readyImage.EndInit();
+            imagePlayers[index].Source = readyImage;
+
         }
-
-        public void PrintLobbyPlayers(List<string> players)
-        {
-            if(players.Count == 2)
-            {
-                player1Lbl.Content = players[0];
-                player2Lbl.Content = players[1];
-                player3Lbl.Visibility = Visibility.Hidden;
-                player3Img.Visibility = Visibility.Hidden;
-                player4Img.Visibility = Visibility.Hidden;
-                player4Lbl.Visibility = Visibility.Hidden;
-            }
-            else if(players.Count == 3)
-            {
-                player1Lbl.Content = players[0];
-                player2Lbl.Content= players[1];
-                player3Lbl.Content = players[2];
-                player4Lbl.Visibility = Visibility.Hidden;
-                player4Img.Visibility = Visibility.Hidden;
-            }
-            else if(players.Count == 4)
-            {
-                player1Lbl.Content= players[0];
-                player2Lbl.Content = players[1];
-                player3Lbl.Content= players[2];
-                player4Lbl.Content = players[3];
-            }
-        }
-
-        public void UpdatePlayerLabel(string gamertag)
-        {
-            if (player1Lbl.Visibility == Visibility.Hidden)
-            {
-                player1Lbl.Content = gamertag;
-                player1Lbl.Visibility = Visibility.Visible;
-            }
-            else if (player2Lbl.Visibility == Visibility.Hidden)
-            {
-                player2Lbl.Content = gamertag;
-                player2Lbl.Visibility = Visibility.Visible;
-                player2Img.Visibility = Visibility.Visible;
-            }
-            else if (player3Lbl.Visibility == Visibility.Hidden)
-            {
-                player3Lbl.Content = gamertag;
-                player3Lbl.Visibility = Visibility.Visible;
-                player3Img.Visibility = Visibility.Visible;
-            }
-            else if (player4Lbl.Visibility == Visibility.Hidden)
-            {
-                player4Lbl.Content = gamertag;
-                player4Lbl.Visibility = Visibility.Visible;
-                player4Img.Visibility = Visibility.Visible;
-            }
-        }
-
-        public void RemovePlayerLabel(string gamertag)
-        {
-            if (player1Lbl.Content?.ToString() == gamertag)
-            {
-                player1Lbl.Content = string.Empty;
-                player1Lbl.Visibility = Visibility.Hidden;
-            }
-            else if (player2Lbl.Content?.ToString() == gamertag)
-            {
-                player2Lbl.Content = string.Empty;
-                player2Lbl.Visibility = Visibility.Hidden;
-            }
-            else if (player3Lbl.Content?.ToString() == gamertag)
-            {
-                player3Lbl.Content = string.Empty;
-                player3Lbl.Visibility = Visibility.Hidden;
-            }
-            else if (player4Lbl.Content?.ToString() == gamertag)
-            {
-                player4Lbl.Content = string.Empty;
-                player4Lbl.Visibility = Visibility.Hidden;
-            }
-
-            ReorganizePlayerLabels();
-        }
-
-        private void ReorganizePlayerLabels()
-        {
-            var labels = new[] { player1Lbl, player2Lbl, player3Lbl, player4Lbl };
-            var visibleLabels = labels.Where(l => l.Visibility == Visibility.Visible).ToList();
-
-            foreach (var label in labels)
-            {
-                label.Visibility = Visibility.Hidden;
-                label.Content = string.Empty;
-            }
-
-            for (int i = 0; i < visibleLabels.Count; i++)
-            {
-                labels[i].Content = visibleLabels[i].Content;
-                labels[i].Visibility = Visibility.Visible;
-            }
-        }
-
-
-
         private void SendMessageButton_Click(object sender, RoutedEventArgs e)
         {
             string message = GetTextBoxMessage();
             lobbyManager.SendMessage(lobbyCode, message, SessionManager.CurrentSession.gamertag);
             ClearTextBox();
-            
         }
-
+        private void StartButton_Click(object sender, RoutedEventArgs e)
+        {
+            string gamertag = SessionManager.CurrentSession.gamertag;
+            lobbyManager.ChangeStatus(lobbyCode, gamertag, true);
+        }
         private void ClearTextBox()
         {
             messageTxtBox.Clear();
@@ -275,8 +163,22 @@ namespace ExamExplosion
 
         private void PreviousMenu(object sender, RoutedEventArgs e)
         {
+            lobbyManager.DisconnectLobby(lobbyCode, SessionManager.CurrentSession.gamertag);
             var mainWindow = (MainWindow)Application.Current.MainWindow;
             mainWindow.MainFrame.Navigate(new HomePage());
+        }
+
+        public void ClearPlayers()
+        {
+            foreach (var labelGamertag in labelsGamertags)
+            {
+                labelGamertag.Content = "";
+            }
+
+            player1Img.Source = null;
+            player2Img.Source = null;
+            player3Img.Source = null;
+            player4Img.Source = null;
         }
     }
 }

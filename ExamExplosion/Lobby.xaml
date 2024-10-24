@@ -42,7 +42,7 @@
                     <Label Content="Leave" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" FontSize="25" FontFamily="pack://application:,,,/Fonts/#VT323" Foreground="White"/>
                 </Grid>
             </Button>
-            <Button Width="100" Height="50" Background="Transparent" BorderBrush="Transparent" VerticalAlignment="Bottom" Cursor="Hand" HorizontalAlignment="Left" Margin="50,0,0,20">
+            <Button Width="100" Height="50" Background="Transparent" BorderBrush="Transparent" VerticalAlignment="Bottom" Cursor="Hand" HorizontalAlignment="Left" Margin="50,0,0,20" Click="StartButton_Click">
                 <Grid>
                     <Image Source="pack://application:,,,/Images/ButtonGreen.png" Width="100" StretchDirection="DownOnly"></Image>
                     <Label Content="Start" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" FontSize="25" FontFamily="pack://application:,,,/Fonts/#VT323" Foreground="White"/>

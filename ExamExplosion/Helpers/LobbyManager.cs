@@ -48,8 +48,7 @@ namespace ExamExplosion.Helpers
 
         public void ConnectLobby(string gamertag, string code)
         {
-            List<string> players = proxy.Connect(gamertag, code).ToList();
-            lobbyPage.PrintLobbyPlayers(players);
+            proxy.Connect(gamertag, code);
         }
 
         public void SendMessage(string code, string message, string gamertag)
@@ -61,25 +60,28 @@ namespace ExamExplosion.Helpers
             lobbyPage.PrintNewMessage(gamertag, message);
         }
 
-        public void OnPlayerJoined(string gamertag)
-        {
-            Application.Current.Dispatcher.Invoke(() =>
-            {
-                lobbyPage.UpdatePlayerLabel(gamertag);
-            });
-        }
-
         public void DisconnectLobby(string lobbyCode, string gamertag)
         {
             proxy.Disconnect(lobbyCode, gamertag);
         }
 
-        public void OnPlayerLeft(string gamertag)
+        public void Repaint(Dictionary<string, bool> playerStatus)
         {
             Application.Current.Dispatcher.Invoke(() =>
             {
-                lobbyPage.RemovePlayerLabel(gamertag);
+                lobbyPage.ClearPlayers();
+                int index = 0;
+                foreach (var player in playerStatus)
+                {
+                    lobbyPage.PrintLobbyPlayers(player.Key, player.Value, index);
+                    index++;
+                }
             });
+        }
+
+        public void ChangeStatus(string lobbyCode, string gamertag, bool isReady)
+        {
+            proxy.UpdatePlayerStatus(lobbyCode, gamertag, isReady);
         }
     }
 }
