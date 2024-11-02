@@ -8,7 +8,7 @@ namespace XUnitTest
     {
         private static ExamExplotionService.AuthenticationManagerClient proxy = new ExamExplotionService.AuthenticationManagerClient();
         [Fact]
-        public async void AddAccountSuccessTest()
+        public async void TestAddAccountSuccess()
         {
             ExamExplotionService.AccountM account = new ExamExplotionService.AccountM();
             account.Name = "Dana";
@@ -22,7 +22,7 @@ namespace XUnitTest
         }
 
         [Fact]
-        public async void AddAccountFailTest()
+        public async void TestAddAccountFail()
         {
             ExamExplotionService.AccountM account = new ExamExplotionService.AccountM();
             account.Name = "Dana";
@@ -35,7 +35,7 @@ namespace XUnitTest
         }
 
         [Fact]
-        public async void UpdatePasswordSuccessTest()
+        public async void TestUpdatePasswordSuccess()
         {
             ExamExplotionService.AccountM account = new ExamExplotionService.AccountM();
             account.Name = "ZaidVazquez";
@@ -48,7 +48,7 @@ namespace XUnitTest
         }
 
         [Fact]
-        public async void UpdatePasswordFailTest()
+        public async void TestUpdatePasswordFail()
         {
             ExamExplotionService.AccountM account = new ExamExplotionService.AccountM();
 
@@ -57,7 +57,7 @@ namespace XUnitTest
         }
 
         [Fact]
-        public async void VerifyExistingEmailSuccessTest()
+        public async void TestVerifyExistingEmailSuccess()
         {
             string emailExisting = "zaidoskate@hotmail.com";
             bool result = await proxy.VerifyExistingEmailAsync(emailExisting);
@@ -66,7 +66,7 @@ namespace XUnitTest
         }
 
         [Fact]
-        public async void VerifyExistingEmailFailTest()
+        public async void TestVerifyExistingEmailFail()
         {
             string emailExisting = "notAnEmail";
             bool result = await proxy.VerifyExistingEmailAsync(emailExisting);
@@ -75,7 +75,7 @@ namespace XUnitTest
         }
 
         [Fact]
-        public async void VerifyExistingGamertagSuccessTest()
+        public async void TestVerifyExistingGamertagSuccess()
         {
             string gamertagExisting = "zaidoskate";
             bool result = await proxy.VerifyExistingEmailAsync(gamertagExisting);
@@ -84,7 +84,7 @@ namespace XUnitTest
         }
 
         [Fact]
-        public async void VerifyExistingGamertagFailTest()
+        public async void TestVerifyExistingGamertagFail()
         {
             string gamertagExisting = "gamertagNotExistent";
             bool result = await proxy.VerifyExistingEmailAsync(gamertagExisting);

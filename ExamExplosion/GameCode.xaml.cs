@@ -73,6 +73,10 @@ namespace ExamExplosion
                 {
                     NavigateToLobbyPage(code);
                 }
+                else
+                {
+                    new AlertModal("No existe tal lobby", "El código introducido no pertenece a ninguna lobby disponible").ShowDialog();
+                }
                 return joined;
             }
             return false;

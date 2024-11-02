@@ -29,7 +29,7 @@ namespace ExamExplosion.Helpers
         }
         public string CreateLobby(Game game)
         {
-            GameM gameM = new GameM();
+            GameManagement gameM = new GameManagement();
             gameM.NumberPlayers = game.NumberPlayers;
             gameM.TimePerTurn = game.TimePerTurn;
             gameM.HostPlayerId = game.HostPlayerId;
