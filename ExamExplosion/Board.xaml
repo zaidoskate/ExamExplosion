@@ -1,0 +1,41 @@
+﻿<Page x:Class="ExamExplosion.Board"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ExamExplosion"
+      mc:Ignorable="d"
+      xmlns:p ="clr-namespace:ExamExplosion.Properties"
+      d:DesignHeight="720" d:DesignWidth="1200"
+      Title="ExamExplosion"
+      Background="#FFF2CC">
+
+    <Grid>
+        <Grid Width="750" VerticalAlignment="Top">
+            <Image Source="pack://application:,,,/Images/Header.png"/>
+            <Label Content="{x:Static p:Resources.gameTurn}" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="50" Foreground="White" Margin="50,0,0,0"/>
+            <Label Content="Player" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="50" Foreground="White" Margin="320,0,0,0"/>
+            <Label Content="XS" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="50" Foreground="White" Margin="0,0,50,0"/>
+        </Grid>
+
+        <Image x:Name="player1Image" Source="pack://application:,,,/Images/Player.png" Width="150" Height="150" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <Label x:Name="player1Lbl" Content="Pl" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="50" Margin="0,175,0,0"/>
+        <Image x:Name="player2Image" Source="pack://application:,,,/Images/Player.png" Width="150" Height="150" VerticalAlignment="Top" HorizontalAlignment="Right"/>
+        <Label x:Name="player2Lbl" Content="Pl" HorizontalAlignment="Right" VerticalAlignment="Top" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="50" Margin="0,175,0,0"/>
+        <Image x:Name="player4Image" Source="pack://application:,,,/Images/Player.png" Width="150" Height="150" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+        <Label Content="Pl" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="50" Margin="0,0,0,175"/>
+        <Image x:Name="player3Image" Source="pack://application:,,,/Images/Player.png" Width="150" Height="150" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
+        <Label Content="Pl" HorizontalAlignment="Right" VerticalAlignment="Bottom" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="50" Margin="0,0,0,175"/>
+
+        <Image x:Name="heart2Image" Source="pack://application:,,,/Images/Heart.png" Width="100" Height="100" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,150,0,0"/>
+        <Image x:Name="heart1Image" Source="pack://application:,,,/Images/Heart.png" Width="100" Height="100" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,150,400,0"/>
+        <Image x:Name="heart3Image" Source="pack://application:,,,/Images/Heart.png" Width="100" Height="100" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="400,150,0,0"/>
+
+        <Image x:Name="currentCardImage" Width="200" Height="200" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <Button Width="200" Height="250" Background="Transparent" BorderBrush="Transparent" VerticalAlignment="Center" Cursor="Hand" HorizontalAlignment="Right" Margin="0,0,150,0">
+            <Grid>
+                <Image Source="pack://application:,,,/Images/Stack.png"/>
+            </Grid>
+        </Button>
+    </Grid>
+</Page>

@@ -83,5 +83,21 @@ namespace ExamExplosion.Helpers
         {
             proxy.UpdatePlayerStatus(lobbyCode, gamertag, isReady);
         }
+
+        public void StartGame(Dictionary<string, bool> lobbyPlayers)
+        {
+            Application.Current?.Dispatcher.Invoke(() =>
+            {
+                foreach (var player in lobbyPlayers)
+                {
+                    lobbyPage.NavigateToBoard();
+                }
+            });
+        }
+
+        public void PlayGame(string lobbyCode)
+        {
+            proxy.PlayGame(lobbyCode);
+        }
     }
 }
