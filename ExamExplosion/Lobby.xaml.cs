@@ -26,6 +26,8 @@ namespace ExamExplosion
     {
         private LobbyManager lobbyManager = null;
         private string lobbyCode;
+        private int maxPlayers;
+        private string hostGamertag;
         private Dictionary<string, bool> playerReadyStatus = new Dictionary<string, bool>();
         private List<Label> labelsGamertags = new List<Label>();
         private List<Image> imagePlayers = new List<Image>();
@@ -38,6 +40,8 @@ namespace ExamExplosion
             game.TimePerTurn = timePerTurn;
             game.Lives = maxHP;
 
+            this.maxPlayers = maxPlayers;
+            this.hostGamertag = owner;
             lobbyCode = lobbyManager.CreateLobby(game);
             InitializeComponent();
             var parentWindow = (MainWindow)Application.Current.MainWindow;
@@ -149,8 +153,52 @@ namespace ExamExplosion
         private void StartButton_Click(object sender, RoutedEventArgs e)
         {
             string gamertag = SessionManager.CurrentSession.gamertag;
-            lobbyManager.ChangeStatus(lobbyCode, gamertag, true);
+            int playerIndex = labelsGamertags.FindIndex(lbl => lbl.Content.ToString() == gamertag);
+
+            if (playerIndex >= 0)
+            {
+                Image playerImage = imagePlayers[playerIndex];
+                bool ready = playerImage.Source != null && playerImage.Source.ToString() == "pack://application:,,,/Images/ReadyImage.png";
+
+                if (ready && this.hostGamertag == SessionManager.CurrentSession.gamertag)
+                {
+                    SynchronizeClients();
+                }
+                else
+                {
+                    lobbyManager.ChangeStatus(lobbyCode, gamertag, true);
+                }
+            }
         }
+
+        private void SynchronizeClients()
+        {
+            lobbyManager.PlayGame(lobbyCode);
+        }
+
+        public void NavigateToBoard()
+        {
+            bool allPlayersReady = imagePlayers
+                            .Take(this.maxPlayers)
+                            .Where(img => img.Visibility == Visibility.Visible)
+                            .All(img => img.Source != null && img.Source.ToString() != "pack://application:,,,/Images/NoReadyImage.png");
+
+            if (allPlayersReady)
+            {
+                if (this.NavigationService != null)
+                {
+                    this.NavigationService.Navigate(new Board());
+                    var window = Window.GetWindow(this);
+                    if (window != null)
+                    {
+                        window.Height = 720;
+                        window.Width = 1200;
+                        window.SizeToContent = SizeToContent.Manual;
+                    }
+                }
+            }
+        }
+
         private void ClearTextBox()
         {
             messageTxtBox.Clear();

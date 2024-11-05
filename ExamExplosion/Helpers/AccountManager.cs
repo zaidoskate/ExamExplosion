@@ -15,7 +15,7 @@ namespace ExamExplosion.Helpers
 
         public static bool validateCredentials(string gamertag, string password)
         {
-            ExamExplotionService.AccountM account = new ExamExplotionService.AccountM();
+            ExamExplotionService.AccountManagement account = new ExamExplotionService.AccountManagement();
             account.Gamertag = gamertag;
             account.Password = password;
             bool result = proxy.Login(account);
@@ -28,7 +28,7 @@ namespace ExamExplosion.Helpers
             return result;
         }
 
-        private static void LoadActualSession(AccountM account)
+        private static void LoadActualSession(AccountManagement account)
         {
             int accountId = proxy.GetAccountIdFromCurrentSession();
             SessionManager.CurrentSession.accountId = accountId;
@@ -38,7 +38,7 @@ namespace ExamExplosion.Helpers
 
         public static bool AddAccount(Account _account)
         {
-            AccountM account = new AccountM();
+            AccountManagement account = new AccountManagement();
             account.Name = _account.name;
             account.Password = _account.password;
             account.Email = _account.email;
@@ -60,7 +60,7 @@ namespace ExamExplosion.Helpers
 
         internal static bool UpdatePassword(string gamertag, string newPassword)
         {
-            AccountM account = new AccountM();
+            AccountManagement account = new AccountManagement();
             account.Password = newPassword;
             account.Gamertag = gamertag;
             return proxy.UpdatePassword(account);

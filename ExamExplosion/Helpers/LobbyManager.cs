@@ -29,7 +29,7 @@ namespace ExamExplosion.Helpers
         }
         public string CreateLobby(Game game)
         {
-            GameM gameM = new GameM();
+            GameManagement gameM = new GameManagement();
             gameM.NumberPlayers = game.NumberPlayers;
             gameM.TimePerTurn = game.TimePerTurn;
             gameM.HostPlayerId = game.HostPlayerId;
@@ -82,6 +82,22 @@ namespace ExamExplosion.Helpers
         public void ChangeStatus(string lobbyCode, string gamertag, bool isReady)
         {
             proxy.UpdatePlayerStatus(lobbyCode, gamertag, isReady);
+        }
+
+        public void StartGame(Dictionary<string, bool> lobbyPlayers)
+        {
+            Application.Current?.Dispatcher.Invoke(() =>
+            {
+                foreach (var player in lobbyPlayers)
+                {
+                    lobbyPage.NavigateToBoard();
+                }
+            });
+        }
+
+        public void PlayGame(string lobbyCode)
+        {
+            proxy.PlayGame(lobbyCode);
         }
     }
 }
