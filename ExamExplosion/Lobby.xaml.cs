@@ -27,6 +27,8 @@ namespace ExamExplosion
         private LobbyManager lobbyManager = null;
         private string lobbyCode;
         private int maxPlayers;
+        private int timePerTurn;
+        private int maxHP;
         private string hostGamertag;
         private Dictionary<string, bool> playerReadyStatus = new Dictionary<string, bool>();
         private List<Label> labelsGamertags = new List<Label>();
@@ -41,6 +43,8 @@ namespace ExamExplosion
             game.Lives = maxHP;
 
             this.maxPlayers = maxPlayers;
+            this.maxHP = maxHP;
+            this.timePerTurn = timePerTurn;
             this.hostGamertag = owner;
             lobbyCode = lobbyManager.CreateLobby(game);
             InitializeComponent();
@@ -187,7 +191,8 @@ namespace ExamExplosion
             {
                 if (this.NavigationService != null)
                 {
-                    this.NavigationService.Navigate(new Board());
+                    List<Label> players = labelsGamertags.Where(label => !label.Content.Equals("")).ToList();
+                    this.NavigationService.Navigate(new Board(players));
                     var window = Window.GetWindow(this);
                     if (window != null)
                     {
