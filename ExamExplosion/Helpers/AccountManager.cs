@@ -15,25 +15,61 @@ namespace ExamExplosion.Helpers
 
         public static bool validateCredentials(string gamertag, string password)
         {
-            ExamExplotionService.AccountManagement account = new ExamExplotionService.AccountManagement();
-            account.Gamertag = gamertag;
-            account.Password = password;
-            bool result = proxy.Login(account);
-
-            if (result)
+            try
             {
-                LoadActualSession(account);
-            }
+                ExamExplotionService.AccountManagement account = new ExamExplotionService.AccountManagement();
+                account.Gamertag = gamertag;
+                account.Password = password;
+                bool result = proxy.Login(account);
 
-            return result;
+                if (result)
+                {
+                    LoadActualSession(account);
+                }
+
+                return result;
+            }
+            catch (FaultException faultException)
+            {
+                //Implementar log
+                throw faultException;
+            }
+            catch(CommunicationException communicationException)
+            {
+                //Implementar log
+                throw communicationException;
+            }
+            catch (TimeoutException timeoutException)
+            {
+                //Implementar log
+                throw timeoutException;
+            }
         }
 
         private static void LoadActualSession(AccountManagement account)
         {
-            int accountId = proxy.GetAccountIdFromCurrentSession();
-            SessionManager.CurrentSession.accountId = accountId;
-            SessionManager.CurrentSession.userId = accountId;  
-            SessionManager.CurrentSession.gamertag = account.Gamertag;
+            try
+            {
+                int accountId = proxy.GetAccountIdFromCurrentSession();
+                SessionManager.CurrentSession.accountId = accountId;
+                SessionManager.CurrentSession.userId = accountId;  
+                SessionManager.CurrentSession.gamertag = account.Gamertag;
+            }
+            catch (FaultException faultException)
+            {
+                //Implementar log
+                throw faultException;
+            }
+            catch (CommunicationException communicationException)
+            {
+                //Implementar log
+                throw communicationException;
+            }
+            catch (TimeoutException timeoutException)
+            {
+                //Implementar log
+                throw timeoutException;
+            }
         }
 
         public static bool AddAccount(Account _account)
@@ -44,26 +80,97 @@ namespace ExamExplosion.Helpers
             account.Email = _account.email;
             account.Lastname = _account.lastname;
             account.Gamertag = _account.gamertag;
-
-            return proxy.AddAccount(account);
+            try
+            {
+                return proxy.AddAccount(account);
+            }
+            catch (FaultException faultException)
+            {
+                //Implementar log
+                throw faultException;
+            }
+            catch (CommunicationException communicationException)
+            {
+                //Implementar log
+                throw communicationException;
+            }
+            catch (TimeoutException timeoutException)
+            {
+                //Implementar log
+                throw timeoutException;
+            }
         }
 
         public static bool VerifyExistingEmail(string email)
         {
-            return proxy.VerifyExistingEmail(email);
+            try
+            {
+                return proxy.VerifyExistingEmail(email);
+            }
+            catch (FaultException faultException)
+            {
+                //Implementar log
+                throw faultException;
+            }
+            catch (CommunicationException communicationException)
+            {
+                //Implementar log
+                throw communicationException;
+            }
+            catch (TimeoutException timeoutException)
+            {
+                //Implementar log
+                throw timeoutException;
+            }
         }
 
         public static bool VerifyExistingGamertag(string gamertag)
         {
-            return proxy.VerifyExistingGamertag(gamertag);
+            try
+            {
+                return proxy.VerifyExistingGamertag(gamertag);
+            }
+            catch (FaultException faultException)
+            {
+                //Implementar log
+                throw faultException;
+            }
+            catch (CommunicationException communicationException)
+            {
+                //Implementar log
+                throw communicationException;
+            }
+            catch (TimeoutException timeoutException)
+            {
+                //Implementar log
+                throw timeoutException;
+            }
         }
 
         internal static bool UpdatePassword(string gamertag, string newPassword)
         {
-            AccountManagement account = new AccountManagement();
-            account.Password = newPassword;
-            account.Gamertag = gamertag;
-            return proxy.UpdatePassword(account);
+            try
+            {
+                AccountManagement account = new AccountManagement();
+                account.Password = newPassword;
+                account.Gamertag = gamertag;
+                return proxy.UpdatePassword(account);
+            }
+            catch (FaultException faultException)
+            {
+                //Implementar log
+                throw faultException;
+            }
+            catch (CommunicationException communicationException)
+            {
+                //Implementar log
+                throw communicationException;
+            }
+            catch (TimeoutException timeoutException)
+            {
+                //Implementar log
+                throw timeoutException;
+            }
         }
     }
 }

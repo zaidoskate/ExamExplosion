@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -175,14 +176,32 @@ namespace ExamExplosion
             {
                 newPassword = pswdBoxNewPsswd.Password;
             }
-            bool passwordUpdated = AccountManager.UpdatePassword(gamertag, newPassword);
-            if(passwordUpdated)
+            try
             {
-                new AlertModal("Contrasenia actualizada", "Se ha actualzado la contrasenia de tu cuenta con exito.").ShowDialog();
+                bool passwordUpdated = AccountManager.UpdatePassword(gamertag, newPassword);
+                if(passwordUpdated)
+                {
+                    new AlertModal("Contrasenia actualizada", "Se ha actualzado la contrasenia de tu cuenta con exito.").ShowDialog();
+                }
+                else
+                {
+                    new AlertModal("Error", "No se ha actualzado la contrasenia. Intentalo mas tarde.").ShowDialog();
+                }
             }
-            else
+            catch (FaultException faultException)
             {
-                new AlertModal("Error", "No se ha actualzado la contrasenia. Intentalo mas tarde.").ShowDialog();
+                new AlertModal("Error", "Se produjo un error en el servidor").ShowDialog();
+                throw faultException;
+            }
+            catch (CommunicationException communicationException)
+            {
+                new AlertModal("Error de comunicación", "No se pudo conectar con el servidor.").ShowDialog();
+                throw communicationException;
+            }
+            catch (TimeoutException timeoutException)
+            {
+                new AlertModal("Tiempo de espera", "La conexión con el servidor ha expirado.").ShowDialog();
+                throw timeoutException;
             }
         }
     }

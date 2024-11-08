@@ -66,18 +66,35 @@ namespace ExamExplosion
         {
             if (code.Length == 4)
             {
-                string player = SessionManager.CurrentSession.gamertag;
-                bool joined = lobbyManager.JoinLobby(code, player);
-
-                if (joined)
+                try
                 {
-                    NavigateToLobbyPage(code);
+                    string player = SessionManager.CurrentSession.gamertag;
+                    bool joined = lobbyManager.JoinLobby(code, player);
+                    if (joined)
+                    {
+                        NavigateToLobbyPage(code);
+                    }
+                    else
+                    {
+                        new AlertModal("No existe tal lobby", "El código introducido no pertenece a ninguna lobby disponible").ShowDialog();
+                    }
+                    return joined;
                 }
-                else
+                catch (FaultException faultException)
                 {
-                    new AlertModal("No existe tal lobby", "El código introducido no pertenece a ninguna lobby disponible").ShowDialog();
+                    new AlertModal("Error", "Se produjo un error en el servidor").ShowDialog();
+                    throw faultException;
                 }
-                return joined;
+                catch (CommunicationException communicationException)
+                {
+                    new AlertModal("Error de comunicación", "No se pudo conectar con el servidor.").ShowDialog();
+                    throw communicationException;
+                }
+                catch (TimeoutException timeoutException)
+                {
+                    new AlertModal("Tiempo de espera", "La conexión con el servidor ha expirado.").ShowDialog();
+                    throw timeoutException;
+                }
             }
             return false;
         }

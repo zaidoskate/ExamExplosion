@@ -14,8 +14,8 @@ namespace ExamExplotionService
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="GameM", Namespace="http://schemas.datacontract.org/2004/07/ServerServices")]
-    public partial class GameM : object
+    [System.Runtime.Serialization.DataContractAttribute(Name="GameManagement", Namespace="http://schemas.datacontract.org/2004/07/ServerService")]
+    public partial class GameManagement : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private int GameIdField;
@@ -43,7 +43,11 @@ namespace ExamExplotionService
             }
             set
             {
-                this.GameIdField = value;
+                if ((this.GameIdField.Equals(value) != true))
+                {
+                    this.GameIdField = value;
+                    this.RaisePropertyChanged("GameId");
+                }
             }
         }
         
@@ -56,7 +60,11 @@ namespace ExamExplotionService
             }
             set
             {
-                this.GameStatusField = value;
+                if ((object.ReferenceEquals(this.GameStatusField, value) != true))
+                {
+                    this.GameStatusField = value;
+                    this.RaisePropertyChanged("GameStatus");
+                }
             }
         }
         
@@ -69,7 +77,11 @@ namespace ExamExplotionService
             }
             set
             {
-                this.HostPlayerIdField = value;
+                if ((this.HostPlayerIdField.Equals(value) != true))
+                {
+                    this.HostPlayerIdField = value;
+                    this.RaisePropertyChanged("HostPlayerId");
+                }
             }
         }
         
@@ -82,7 +94,11 @@ namespace ExamExplotionService
             }
             set
             {
-                this.InvitationCodeField = value;
+                if ((object.ReferenceEquals(this.InvitationCodeField, value) != true))
+                {
+                    this.InvitationCodeField = value;
+                    this.RaisePropertyChanged("InvitationCode");
+                }
             }
         }
         
@@ -95,7 +111,11 @@ namespace ExamExplotionService
             }
             set
             {
-                this.LivesField = value;
+                if ((this.LivesField.Equals(value) != true))
+                {
+                    this.LivesField = value;
+                    this.RaisePropertyChanged("Lives");
+                }
             }
         }
         
@@ -108,7 +128,11 @@ namespace ExamExplotionService
             }
             set
             {
-                this.NumberPlayersField = value;
+                if ((this.NumberPlayersField.Equals(value) != true))
+                {
+                    this.NumberPlayersField = value;
+                    this.RaisePropertyChanged("NumberPlayers");
+                }
             }
         }
         
@@ -121,7 +145,11 @@ namespace ExamExplotionService
             }
             set
             {
-                this.TimePerTurnField = value;
+                if ((this.TimePerTurnField.Equals(value) != true))
+                {
+                    this.TimePerTurnField = value;
+                    this.RaisePropertyChanged("TimePerTurn");
+                }
             }
         }
         
@@ -134,15 +162,30 @@ namespace ExamExplotionService
             }
             set
             {
-                this.WinnerPlayerIdField = value;
+                if ((this.WinnerPlayerIdField.Equals(value) != true))
+                {
+                    this.WinnerPlayerIdField = value;
+                    this.RaisePropertyChanged("WinnerPlayerId");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="AccountM", Namespace="http://schemas.datacontract.org/2004/07/ServerService")]
-    public partial class AccountM : object
+    [System.Runtime.Serialization.DataContractAttribute(Name="AccountManagement", Namespace="http://schemas.datacontract.org/2004/07/ServerService")]
+    public partial class AccountManagement : object, System.ComponentModel.INotifyPropertyChanged
     {
         
         private string EmailField;
@@ -164,7 +207,11 @@ namespace ExamExplotionService
             }
             set
             {
-                this.EmailField = value;
+                if ((object.ReferenceEquals(this.EmailField, value) != true))
+                {
+                    this.EmailField = value;
+                    this.RaisePropertyChanged("Email");
+                }
             }
         }
         
@@ -177,7 +224,11 @@ namespace ExamExplotionService
             }
             set
             {
-                this.GamertagField = value;
+                if ((object.ReferenceEquals(this.GamertagField, value) != true))
+                {
+                    this.GamertagField = value;
+                    this.RaisePropertyChanged("Gamertag");
+                }
             }
         }
         
@@ -190,7 +241,11 @@ namespace ExamExplotionService
             }
             set
             {
-                this.LastnameField = value;
+                if ((object.ReferenceEquals(this.LastnameField, value) != true))
+                {
+                    this.LastnameField = value;
+                    this.RaisePropertyChanged("Lastname");
+                }
             }
         }
         
@@ -203,7 +258,11 @@ namespace ExamExplotionService
             }
             set
             {
-                this.NameField = value;
+                if ((object.ReferenceEquals(this.NameField, value) != true))
+                {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
             }
         }
         
@@ -216,7 +275,116 @@ namespace ExamExplotionService
             }
             set
             {
-                this.PasswordField = value;
+                if ((object.ReferenceEquals(this.PasswordField, value) != true))
+                {
+                    this.PasswordField = value;
+                    this.RaisePropertyChanged("Password");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="PlayerManagement", Namespace="http://schemas.datacontract.org/2004/07/ServerService")]
+    public partial class PlayerManagement : object, System.ComponentModel.INotifyPropertyChanged
+    {
+        
+        private int AccountIdField;
+        
+        private int ScoreField;
+        
+        private int UserIdField;
+        
+        private int WinsField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int AccountId
+        {
+            get
+            {
+                return this.AccountIdField;
+            }
+            set
+            {
+                if ((this.AccountIdField.Equals(value) != true))
+                {
+                    this.AccountIdField = value;
+                    this.RaisePropertyChanged("AccountId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Score
+        {
+            get
+            {
+                return this.ScoreField;
+            }
+            set
+            {
+                if ((this.ScoreField.Equals(value) != true))
+                {
+                    this.ScoreField = value;
+                    this.RaisePropertyChanged("Score");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int UserId
+        {
+            get
+            {
+                return this.UserIdField;
+            }
+            set
+            {
+                if ((this.UserIdField.Equals(value) != true))
+                {
+                    this.UserIdField = value;
+                    this.RaisePropertyChanged("UserId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Wins
+        {
+            get
+            {
+                return this.WinsField;
+            }
+            set
+            {
+                if ((this.WinsField.Equals(value) != true))
+                {
+                    this.WinsField = value;
+                    this.RaisePropertyChanged("Wins");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null))
+            {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -227,25 +395,52 @@ namespace ExamExplotionService
     {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobbyManager/SendMessage")]
+        void SendMessage(string gameCode, string gamertag, string message);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobbyManager/SendMessage")]
         System.Threading.Tasks.Task SendMessageAsync(string gameCode, string gamertag, string message);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobbyManager/Connect")]
+        void Connect(string user, string lobbyCode);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobbyManager/Connect")]
         System.Threading.Tasks.Task ConnectAsync(string user, string lobbyCode);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/Disconnect", ReplyAction="http://tempuri.org/ILobbyManager/DisconnectResponse")]
+        void Disconnect(string lobbyCode, string gamertag);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/Disconnect", ReplyAction="http://tempuri.org/ILobbyManager/DisconnectResponse")]
         System.Threading.Tasks.Task DisconnectAsync(string lobbyCode, string gamertag);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/CreateLobby", ReplyAction="http://tempuri.org/ILobbyManager/CreateLobbyResponse")]
-        System.Threading.Tasks.Task<string> CreateLobbyAsync(ExamExplotionService.GameM gameReceived);
+        string CreateLobby(ExamExplotionService.GameManagement gameReceived);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/CreateLobby", ReplyAction="http://tempuri.org/ILobbyManager/CreateLobbyResponse")]
+        System.Threading.Tasks.Task<string> CreateLobbyAsync(ExamExplotionService.GameManagement gameReceived);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/JoinLobby", ReplyAction="http://tempuri.org/ILobbyManager/JoinLobbyResponse")]
+        bool JoinLobby(string code, string gamertag);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/JoinLobby", ReplyAction="http://tempuri.org/ILobbyManager/JoinLobbyResponse")]
         System.Threading.Tasks.Task<bool> JoinLobbyAsync(string code, string gamertag);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobbyManager/UpdatePlayerStatus")]
+        void UpdatePlayerStatus(string code, string gamertag, bool isReady);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobbyManager/UpdatePlayerStatus")]
         System.Threading.Tasks.Task UpdatePlayerStatusAsync(string code, string gamertag, bool isReady);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/LeaveLobby", ReplyAction="http://tempuri.org/ILobbyManager/LeaveLobbyResponse")]
+        void LeaveLobby(string code, string gamertag);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/LeaveLobby", ReplyAction="http://tempuri.org/ILobbyManager/LeaveLobbyResponse")]
         System.Threading.Tasks.Task LeaveLobbyAsync(string code, string gamertag);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobbyManager/PlayGame")]
+        void PlayGame(string lobbyCode);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobbyManager/PlayGame")]
+        System.Threading.Tasks.Task PlayGameAsync(string lobbyCode);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
@@ -257,6 +452,9 @@ namespace ExamExplotionService
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobbyManager/Repaint")]
         void Repaint(System.Collections.Generic.Dictionary<string, bool> playerStatus);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobbyManager/StartGame")]
+        void StartGame(System.Collections.Generic.Dictionary<string, bool> lobbyPlayers);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
@@ -309,9 +507,19 @@ namespace ExamExplotionService
         {
         }
         
+        public void SendMessage(string gameCode, string gamertag, string message)
+        {
+            base.Channel.SendMessage(gameCode, gamertag, message);
+        }
+        
         public System.Threading.Tasks.Task SendMessageAsync(string gameCode, string gamertag, string message)
         {
             return base.Channel.SendMessageAsync(gameCode, gamertag, message);
+        }
+        
+        public void Connect(string user, string lobbyCode)
+        {
+            base.Channel.Connect(user, lobbyCode);
         }
         
         public System.Threading.Tasks.Task ConnectAsync(string user, string lobbyCode)
@@ -319,14 +527,29 @@ namespace ExamExplotionService
             return base.Channel.ConnectAsync(user, lobbyCode);
         }
         
+        public void Disconnect(string lobbyCode, string gamertag)
+        {
+            base.Channel.Disconnect(lobbyCode, gamertag);
+        }
+        
         public System.Threading.Tasks.Task DisconnectAsync(string lobbyCode, string gamertag)
         {
             return base.Channel.DisconnectAsync(lobbyCode, gamertag);
         }
         
-        public System.Threading.Tasks.Task<string> CreateLobbyAsync(ExamExplotionService.GameM gameReceived)
+        public string CreateLobby(ExamExplotionService.GameManagement gameReceived)
+        {
+            return base.Channel.CreateLobby(gameReceived);
+        }
+        
+        public System.Threading.Tasks.Task<string> CreateLobbyAsync(ExamExplotionService.GameManagement gameReceived)
         {
             return base.Channel.CreateLobbyAsync(gameReceived);
+        }
+        
+        public bool JoinLobby(string code, string gamertag)
+        {
+            return base.Channel.JoinLobby(code, gamertag);
         }
         
         public System.Threading.Tasks.Task<bool> JoinLobbyAsync(string code, string gamertag)
@@ -334,14 +557,34 @@ namespace ExamExplotionService
             return base.Channel.JoinLobbyAsync(code, gamertag);
         }
         
+        public void UpdatePlayerStatus(string code, string gamertag, bool isReady)
+        {
+            base.Channel.UpdatePlayerStatus(code, gamertag, isReady);
+        }
+        
         public System.Threading.Tasks.Task UpdatePlayerStatusAsync(string code, string gamertag, bool isReady)
         {
             return base.Channel.UpdatePlayerStatusAsync(code, gamertag, isReady);
         }
         
+        public void LeaveLobby(string code, string gamertag)
+        {
+            base.Channel.LeaveLobby(code, gamertag);
+        }
+        
         public System.Threading.Tasks.Task LeaveLobbyAsync(string code, string gamertag)
         {
             return base.Channel.LeaveLobbyAsync(code, gamertag);
+        }
+        
+        public void PlayGame(string lobbyCode)
+        {
+            base.Channel.PlayGame(lobbyCode);
+        }
+        
+        public System.Threading.Tasks.Task PlayGameAsync(string lobbyCode)
+        {
+            return base.Channel.PlayGameAsync(lobbyCode);
         }
         
         public virtual System.Threading.Tasks.Task OpenAsync()
@@ -396,22 +639,40 @@ namespace ExamExplotionService
     {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthenticationManager/Login", ReplyAction="http://tempuri.org/IAuthenticationManager/LoginResponse")]
-        System.Threading.Tasks.Task<bool> LoginAsync(ExamExplotionService.AccountM account);
+        bool Login(ExamExplotionService.AccountManagement account);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthenticationManager/Login", ReplyAction="http://tempuri.org/IAuthenticationManager/LoginResponse")]
+        System.Threading.Tasks.Task<bool> LoginAsync(ExamExplotionService.AccountManagement account);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthenticationManager/GetAccountIdFromCurrentSession", ReplyAction="http://tempuri.org/IAuthenticationManager/GetAccountIdFromCurrentSessionResponse")]
+        int GetAccountIdFromCurrentSession();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthenticationManager/GetAccountIdFromCurrentSession", ReplyAction="http://tempuri.org/IAuthenticationManager/GetAccountIdFromCurrentSessionResponse")]
         System.Threading.Tasks.Task<int> GetAccountIdFromCurrentSessionAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthenticationManager/AddAccount", ReplyAction="http://tempuri.org/IAuthenticationManager/AddAccountResponse")]
-        System.Threading.Tasks.Task<bool> AddAccountAsync(ExamExplotionService.AccountM account);
+        bool AddAccount(ExamExplotionService.AccountManagement account);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthenticationManager/AddAccount", ReplyAction="http://tempuri.org/IAuthenticationManager/AddAccountResponse")]
+        System.Threading.Tasks.Task<bool> AddAccountAsync(ExamExplotionService.AccountManagement account);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthenticationManager/VerifyExistingGamertag", ReplyAction="http://tempuri.org/IAuthenticationManager/VerifyExistingGamertagResponse")]
+        bool VerifyExistingGamertag(string gamertag);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthenticationManager/VerifyExistingGamertag", ReplyAction="http://tempuri.org/IAuthenticationManager/VerifyExistingGamertagResponse")]
         System.Threading.Tasks.Task<bool> VerifyExistingGamertagAsync(string gamertag);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthenticationManager/VerifyExistingEmail", ReplyAction="http://tempuri.org/IAuthenticationManager/VerifyExistingEmailResponse")]
+        bool VerifyExistingEmail(string email);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthenticationManager/VerifyExistingEmail", ReplyAction="http://tempuri.org/IAuthenticationManager/VerifyExistingEmailResponse")]
         System.Threading.Tasks.Task<bool> VerifyExistingEmailAsync(string email);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthenticationManager/UpdatePassword", ReplyAction="http://tempuri.org/IAuthenticationManager/UpdatePasswordResponse")]
-        System.Threading.Tasks.Task<bool> UpdatePasswordAsync(ExamExplotionService.AccountM account);
+        bool UpdatePassword(ExamExplotionService.AccountManagement account);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthenticationManager/UpdatePassword", ReplyAction="http://tempuri.org/IAuthenticationManager/UpdatePasswordResponse")]
+        System.Threading.Tasks.Task<bool> UpdatePasswordAsync(ExamExplotionService.AccountManagement account);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
@@ -464,9 +725,19 @@ namespace ExamExplotionService
         {
         }
         
-        public System.Threading.Tasks.Task<bool> LoginAsync(ExamExplotionService.AccountM account)
+        public bool Login(ExamExplotionService.AccountManagement account)
+        {
+            return base.Channel.Login(account);
+        }
+        
+        public System.Threading.Tasks.Task<bool> LoginAsync(ExamExplotionService.AccountManagement account)
         {
             return base.Channel.LoginAsync(account);
+        }
+        
+        public int GetAccountIdFromCurrentSession()
+        {
+            return base.Channel.GetAccountIdFromCurrentSession();
         }
         
         public System.Threading.Tasks.Task<int> GetAccountIdFromCurrentSessionAsync()
@@ -474,9 +745,19 @@ namespace ExamExplotionService
             return base.Channel.GetAccountIdFromCurrentSessionAsync();
         }
         
-        public System.Threading.Tasks.Task<bool> AddAccountAsync(ExamExplotionService.AccountM account)
+        public bool AddAccount(ExamExplotionService.AccountManagement account)
+        {
+            return base.Channel.AddAccount(account);
+        }
+        
+        public System.Threading.Tasks.Task<bool> AddAccountAsync(ExamExplotionService.AccountManagement account)
         {
             return base.Channel.AddAccountAsync(account);
+        }
+        
+        public bool VerifyExistingGamertag(string gamertag)
+        {
+            return base.Channel.VerifyExistingGamertag(gamertag);
         }
         
         public System.Threading.Tasks.Task<bool> VerifyExistingGamertagAsync(string gamertag)
@@ -484,12 +765,22 @@ namespace ExamExplotionService
             return base.Channel.VerifyExistingGamertagAsync(gamertag);
         }
         
+        public bool VerifyExistingEmail(string email)
+        {
+            return base.Channel.VerifyExistingEmail(email);
+        }
+        
         public System.Threading.Tasks.Task<bool> VerifyExistingEmailAsync(string email)
         {
             return base.Channel.VerifyExistingEmailAsync(email);
         }
         
-        public System.Threading.Tasks.Task<bool> UpdatePasswordAsync(ExamExplotionService.AccountM account)
+        public bool UpdatePassword(ExamExplotionService.AccountManagement account)
+        {
+            return base.Channel.UpdatePassword(account);
+        }
+        
+        public System.Threading.Tasks.Task<bool> UpdatePasswordAsync(ExamExplotionService.AccountManagement account)
         {
             return base.Channel.UpdatePasswordAsync(account);
         }
@@ -537,6 +828,563 @@ namespace ExamExplotionService
         {
             
             NetTcpBinding_IAuthenticationManager,
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ExamExplotionService.IGameManager", CallbackContract=typeof(ExamExplotionService.IGameManagerCallback))]
+    public interface IGameManager
+    {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameManager/ConnectGame", ReplyAction="http://tempuri.org/IGameManager/ConnectGameResponse")]
+        bool ConnectGame(string gameCode, string gamertag);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameManager/ConnectGame", ReplyAction="http://tempuri.org/IGameManager/ConnectGameResponse")]
+        System.Threading.Tasks.Task<bool> ConnectGameAsync(string gameCode, string gamertag);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameManager/EndGame", ReplyAction="http://tempuri.org/IGameManager/EndGameResponse")]
+        bool EndGame(string gameCode, int winnerPlayerId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameManager/EndGame", ReplyAction="http://tempuri.org/IGameManager/EndGameResponse")]
+        System.Threading.Tasks.Task<bool> EndGameAsync(string gameCode, int winnerPlayerId);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameManager/NotifyEndTurn")]
+        void NotifyEndTurn(string gameCode, string currentGamertag);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameManager/NotifyEndTurn")]
+        System.Threading.Tasks.Task NotifyEndTurnAsync(string gameCode, string currentGamertag);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameManager/GetPlayersInGame", ReplyAction="http://tempuri.org/IGameManager/GetPlayersInGameResponse")]
+        ExamExplotionService.PlayerManagement[] GetPlayersInGame(string gameCode);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameManager/GetPlayersInGame", ReplyAction="http://tempuri.org/IGameManager/GetPlayersInGameResponse")]
+        System.Threading.Tasks.Task<ExamExplotionService.PlayerManagement[]> GetPlayersInGameAsync(string gameCode);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameManager/GetGameStatus", ReplyAction="http://tempuri.org/IGameManager/GetGameStatusResponse")]
+        string GetGameStatus(string gameCode);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameManager/GetGameStatus", ReplyAction="http://tempuri.org/IGameManager/GetGameStatusResponse")]
+        System.Threading.Tasks.Task<string> GetGameStatusAsync(string gameCode);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameManager/GetCurrentTurn", ReplyAction="http://tempuri.org/IGameManager/GetCurrentTurnResponse")]
+        string GetCurrentTurn(string gameCode);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameManager/GetCurrentTurn", ReplyAction="http://tempuri.org/IGameManager/GetCurrentTurnResponse")]
+        System.Threading.Tasks.Task<string> GetCurrentTurnAsync(string gameCode);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameManager/GetGame", ReplyAction="http://tempuri.org/IGameManager/GetGameResponse")]
+        ExamExplotionService.GameManagement GetGame(string gameCode);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameManager/GetGame", ReplyAction="http://tempuri.org/IGameManager/GetGameResponse")]
+        System.Threading.Tasks.Task<ExamExplotionService.GameManagement> GetGameAsync(string gameCode);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameManager/InitializeGameTurns")]
+        void InitializeGameTurns(string gameCode, string[] gamertags);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameManager/InitializeGameTurns")]
+        System.Threading.Tasks.Task InitializeGameTurnsAsync(string gameCode, string[] gamertags);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameManager/NotifyClientOfTurn")]
+        void NotifyClientOfTurn(string gameCode, string nextGametag);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameManager/NotifyClientOfTurn")]
+        System.Threading.Tasks.Task NotifyClientOfTurnAsync(string gameCode, string nextGametag);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    public interface IGameManagerCallback
+    {
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameManager/UpdateCurrentTurn")]
+        void UpdateCurrentTurn(string gamertag);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameManager/SyncTimer")]
+        void SyncTimer();
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    public interface IGameManagerChannel : ExamExplotionService.IGameManager, System.ServiceModel.IClientChannel
+    {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    public partial class GameManagerClientBase : System.ServiceModel.DuplexClientBase<ExamExplotionService.IGameManager>, ExamExplotionService.IGameManager
+    {
+        
+        /// <summary>
+        /// Implement this partial method to configure the service endpoint.
+        /// </summary>
+        /// <param name="serviceEndpoint">The endpoint to configure</param>
+        /// <param name="clientCredentials">The client credentials</param>
+        static partial void ConfigureEndpoint(System.ServiceModel.Description.ServiceEndpoint serviceEndpoint, System.ServiceModel.Description.ClientCredentials clientCredentials);
+        
+        public GameManagerClientBase(System.ServiceModel.InstanceContext callbackInstance) : 
+                base(callbackInstance, GameManagerClientBase.GetDefaultBinding(), GameManagerClientBase.GetDefaultEndpointAddress())
+        {
+            this.Endpoint.Name = EndpointConfiguration.NetTcpBinding_IGameManager.ToString();
+            ConfigureEndpoint(this.Endpoint, this.ClientCredentials);
+        }
+        
+        public GameManagerClientBase(System.ServiceModel.InstanceContext callbackInstance, EndpointConfiguration endpointConfiguration) : 
+                base(callbackInstance, GameManagerClientBase.GetBindingForEndpoint(endpointConfiguration), GameManagerClientBase.GetEndpointAddress(endpointConfiguration))
+        {
+            this.Endpoint.Name = endpointConfiguration.ToString();
+            ConfigureEndpoint(this.Endpoint, this.ClientCredentials);
+        }
+        
+        public GameManagerClientBase(System.ServiceModel.InstanceContext callbackInstance, EndpointConfiguration endpointConfiguration, string remoteAddress) : 
+                base(callbackInstance, GameManagerClientBase.GetBindingForEndpoint(endpointConfiguration), new System.ServiceModel.EndpointAddress(remoteAddress))
+        {
+            this.Endpoint.Name = endpointConfiguration.ToString();
+            ConfigureEndpoint(this.Endpoint, this.ClientCredentials);
+        }
+        
+        public GameManagerClientBase(System.ServiceModel.InstanceContext callbackInstance, EndpointConfiguration endpointConfiguration, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, GameManagerClientBase.GetBindingForEndpoint(endpointConfiguration), remoteAddress)
+        {
+            this.Endpoint.Name = endpointConfiguration.ToString();
+            ConfigureEndpoint(this.Endpoint, this.ClientCredentials);
+        }
+        
+        public GameManagerClientBase(System.ServiceModel.InstanceContext callbackInstance, System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, binding, remoteAddress)
+        {
+        }
+        
+        public bool ConnectGame(string gameCode, string gamertag)
+        {
+            return base.Channel.ConnectGame(gameCode, gamertag);
+        }
+        
+        public System.Threading.Tasks.Task<bool> ConnectGameAsync(string gameCode, string gamertag)
+        {
+            return base.Channel.ConnectGameAsync(gameCode, gamertag);
+        }
+        
+        public bool EndGame(string gameCode, int winnerPlayerId)
+        {
+            return base.Channel.EndGame(gameCode, winnerPlayerId);
+        }
+        
+        public System.Threading.Tasks.Task<bool> EndGameAsync(string gameCode, int winnerPlayerId)
+        {
+            return base.Channel.EndGameAsync(gameCode, winnerPlayerId);
+        }
+        
+        public void NotifyEndTurn(string gameCode, string currentGamertag)
+        {
+            base.Channel.NotifyEndTurn(gameCode, currentGamertag);
+        }
+        
+        public System.Threading.Tasks.Task NotifyEndTurnAsync(string gameCode, string currentGamertag)
+        {
+            return base.Channel.NotifyEndTurnAsync(gameCode, currentGamertag);
+        }
+        
+        public ExamExplotionService.PlayerManagement[] GetPlayersInGame(string gameCode)
+        {
+            return base.Channel.GetPlayersInGame(gameCode);
+        }
+        
+        public System.Threading.Tasks.Task<ExamExplotionService.PlayerManagement[]> GetPlayersInGameAsync(string gameCode)
+        {
+            return base.Channel.GetPlayersInGameAsync(gameCode);
+        }
+        
+        public string GetGameStatus(string gameCode)
+        {
+            return base.Channel.GetGameStatus(gameCode);
+        }
+        
+        public System.Threading.Tasks.Task<string> GetGameStatusAsync(string gameCode)
+        {
+            return base.Channel.GetGameStatusAsync(gameCode);
+        }
+        
+        public string GetCurrentTurn(string gameCode)
+        {
+            return base.Channel.GetCurrentTurn(gameCode);
+        }
+        
+        public System.Threading.Tasks.Task<string> GetCurrentTurnAsync(string gameCode)
+        {
+            return base.Channel.GetCurrentTurnAsync(gameCode);
+        }
+        
+        public ExamExplotionService.GameManagement GetGame(string gameCode)
+        {
+            return base.Channel.GetGame(gameCode);
+        }
+        
+        public System.Threading.Tasks.Task<ExamExplotionService.GameManagement> GetGameAsync(string gameCode)
+        {
+            return base.Channel.GetGameAsync(gameCode);
+        }
+        
+        public void InitializeGameTurns(string gameCode, string[] gamertags)
+        {
+            base.Channel.InitializeGameTurns(gameCode, gamertags);
+        }
+        
+        public System.Threading.Tasks.Task InitializeGameTurnsAsync(string gameCode, string[] gamertags)
+        {
+            return base.Channel.InitializeGameTurnsAsync(gameCode, gamertags);
+        }
+        
+        public void NotifyClientOfTurn(string gameCode, string nextGametag)
+        {
+            base.Channel.NotifyClientOfTurn(gameCode, nextGametag);
+        }
+        
+        public System.Threading.Tasks.Task NotifyClientOfTurnAsync(string gameCode, string nextGametag)
+        {
+            return base.Channel.NotifyClientOfTurnAsync(gameCode, nextGametag);
+        }
+        
+        public virtual System.Threading.Tasks.Task OpenAsync()
+        {
+            return System.Threading.Tasks.Task.Factory.FromAsync(((System.ServiceModel.ICommunicationObject)(this)).BeginOpen(null, null), new System.Action<System.IAsyncResult>(((System.ServiceModel.ICommunicationObject)(this)).EndOpen));
+        }
+        
+        private static System.ServiceModel.Channels.Binding GetBindingForEndpoint(EndpointConfiguration endpointConfiguration)
+        {
+            if ((endpointConfiguration == EndpointConfiguration.NetTcpBinding_IGameManager))
+            {
+                System.ServiceModel.NetTcpBinding result = new System.ServiceModel.NetTcpBinding();
+                result.MaxBufferSize = int.MaxValue;
+                result.ReaderQuotas = System.Xml.XmlDictionaryReaderQuotas.Max;
+                result.MaxReceivedMessageSize = int.MaxValue;
+                result.Security.Mode = System.ServiceModel.SecurityMode.None;
+                result.ReliableSession.Enabled = true;
+                return result;
+            }
+            throw new System.InvalidOperationException(string.Format("Could not find endpoint with name \'{0}\'.", endpointConfiguration));
+        }
+        
+        private static System.ServiceModel.EndpointAddress GetEndpointAddress(EndpointConfiguration endpointConfiguration)
+        {
+            if ((endpointConfiguration == EndpointConfiguration.NetTcpBinding_IGameManager))
+            {
+                return new System.ServiceModel.EndpointAddress("net.tcp://localhost:8081/GameManager");
+            }
+            throw new System.InvalidOperationException(string.Format("Could not find endpoint with name \'{0}\'.", endpointConfiguration));
+        }
+        
+        private static System.ServiceModel.Channels.Binding GetDefaultBinding()
+        {
+            return GameManagerClientBase.GetBindingForEndpoint(EndpointConfiguration.NetTcpBinding_IGameManager);
+        }
+        
+        private static System.ServiceModel.EndpointAddress GetDefaultEndpointAddress()
+        {
+            return GameManagerClientBase.GetEndpointAddress(EndpointConfiguration.NetTcpBinding_IGameManager);
+        }
+        
+        public enum EndpointConfiguration
+        {
+            
+            NetTcpBinding_IGameManager,
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ExamExplotionService.IPlayerManager")]
+    public interface IPlayerManager
+    {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerManager/RegisterPlayer", ReplyAction="http://tempuri.org/IPlayerManager/RegisterPlayerResponse")]
+        bool RegisterPlayer(ExamExplotionService.PlayerManagement player);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerManager/RegisterPlayer", ReplyAction="http://tempuri.org/IPlayerManager/RegisterPlayerResponse")]
+        System.Threading.Tasks.Task<bool> RegisterPlayerAsync(ExamExplotionService.PlayerManagement player);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerManager/UpdateScore", ReplyAction="http://tempuri.org/IPlayerManager/UpdateScoreResponse")]
+        bool UpdateScore(int userId, int newScore);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerManager/UpdateScore", ReplyAction="http://tempuri.org/IPlayerManager/UpdateScoreResponse")]
+        System.Threading.Tasks.Task<bool> UpdateScoreAsync(int userId, int newScore);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerManager/GetWins", ReplyAction="http://tempuri.org/IPlayerManager/GetWinsResponse")]
+        int GetWins(int playerId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerManager/GetWins", ReplyAction="http://tempuri.org/IPlayerManager/GetWinsResponse")]
+        System.Threading.Tasks.Task<int> GetWinsAsync(int playerId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerManager/AddFriend", ReplyAction="http://tempuri.org/IPlayerManager/AddFriendResponse")]
+        bool AddFriend(int playerId, int friendId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerManager/AddFriend", ReplyAction="http://tempuri.org/IPlayerManager/AddFriendResponse")]
+        System.Threading.Tasks.Task<bool> AddFriendAsync(int playerId, int friendId);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    public interface IPlayerManagerChannel : ExamExplotionService.IPlayerManager, System.ServiceModel.IClientChannel
+    {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    public partial class PlayerManagerClient : System.ServiceModel.ClientBase<ExamExplotionService.IPlayerManager>, ExamExplotionService.IPlayerManager
+    {
+        
+        /// <summary>
+        /// Implement this partial method to configure the service endpoint.
+        /// </summary>
+        /// <param name="serviceEndpoint">The endpoint to configure</param>
+        /// <param name="clientCredentials">The client credentials</param>
+        static partial void ConfigureEndpoint(System.ServiceModel.Description.ServiceEndpoint serviceEndpoint, System.ServiceModel.Description.ClientCredentials clientCredentials);
+        
+        public PlayerManagerClient() : 
+                base(PlayerManagerClient.GetDefaultBinding(), PlayerManagerClient.GetDefaultEndpointAddress())
+        {
+            this.Endpoint.Name = EndpointConfiguration.NetTcpBinding_IPlayerManager.ToString();
+            ConfigureEndpoint(this.Endpoint, this.ClientCredentials);
+        }
+        
+        public PlayerManagerClient(EndpointConfiguration endpointConfiguration) : 
+                base(PlayerManagerClient.GetBindingForEndpoint(endpointConfiguration), PlayerManagerClient.GetEndpointAddress(endpointConfiguration))
+        {
+            this.Endpoint.Name = endpointConfiguration.ToString();
+            ConfigureEndpoint(this.Endpoint, this.ClientCredentials);
+        }
+        
+        public PlayerManagerClient(EndpointConfiguration endpointConfiguration, string remoteAddress) : 
+                base(PlayerManagerClient.GetBindingForEndpoint(endpointConfiguration), new System.ServiceModel.EndpointAddress(remoteAddress))
+        {
+            this.Endpoint.Name = endpointConfiguration.ToString();
+            ConfigureEndpoint(this.Endpoint, this.ClientCredentials);
+        }
+        
+        public PlayerManagerClient(EndpointConfiguration endpointConfiguration, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(PlayerManagerClient.GetBindingForEndpoint(endpointConfiguration), remoteAddress)
+        {
+            this.Endpoint.Name = endpointConfiguration.ToString();
+            ConfigureEndpoint(this.Endpoint, this.ClientCredentials);
+        }
+        
+        public PlayerManagerClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(binding, remoteAddress)
+        {
+        }
+        
+        public bool RegisterPlayer(ExamExplotionService.PlayerManagement player)
+        {
+            return base.Channel.RegisterPlayer(player);
+        }
+        
+        public System.Threading.Tasks.Task<bool> RegisterPlayerAsync(ExamExplotionService.PlayerManagement player)
+        {
+            return base.Channel.RegisterPlayerAsync(player);
+        }
+        
+        public bool UpdateScore(int userId, int newScore)
+        {
+            return base.Channel.UpdateScore(userId, newScore);
+        }
+        
+        public System.Threading.Tasks.Task<bool> UpdateScoreAsync(int userId, int newScore)
+        {
+            return base.Channel.UpdateScoreAsync(userId, newScore);
+        }
+        
+        public int GetWins(int playerId)
+        {
+            return base.Channel.GetWins(playerId);
+        }
+        
+        public System.Threading.Tasks.Task<int> GetWinsAsync(int playerId)
+        {
+            return base.Channel.GetWinsAsync(playerId);
+        }
+        
+        public bool AddFriend(int playerId, int friendId)
+        {
+            return base.Channel.AddFriend(playerId, friendId);
+        }
+        
+        public System.Threading.Tasks.Task<bool> AddFriendAsync(int playerId, int friendId)
+        {
+            return base.Channel.AddFriendAsync(playerId, friendId);
+        }
+        
+        public virtual System.Threading.Tasks.Task OpenAsync()
+        {
+            return System.Threading.Tasks.Task.Factory.FromAsync(((System.ServiceModel.ICommunicationObject)(this)).BeginOpen(null, null), new System.Action<System.IAsyncResult>(((System.ServiceModel.ICommunicationObject)(this)).EndOpen));
+        }
+        
+        private static System.ServiceModel.Channels.Binding GetBindingForEndpoint(EndpointConfiguration endpointConfiguration)
+        {
+            if ((endpointConfiguration == EndpointConfiguration.NetTcpBinding_IPlayerManager))
+            {
+                System.ServiceModel.NetTcpBinding result = new System.ServiceModel.NetTcpBinding();
+                result.MaxBufferSize = int.MaxValue;
+                result.ReaderQuotas = System.Xml.XmlDictionaryReaderQuotas.Max;
+                result.MaxReceivedMessageSize = int.MaxValue;
+                result.Security.Mode = System.ServiceModel.SecurityMode.None;
+                result.ReliableSession.Enabled = true;
+                return result;
+            }
+            throw new System.InvalidOperationException(string.Format("Could not find endpoint with name \'{0}\'.", endpointConfiguration));
+        }
+        
+        private static System.ServiceModel.EndpointAddress GetEndpointAddress(EndpointConfiguration endpointConfiguration)
+        {
+            if ((endpointConfiguration == EndpointConfiguration.NetTcpBinding_IPlayerManager))
+            {
+                return new System.ServiceModel.EndpointAddress("net.tcp://localhost:8081/PlayerManager");
+            }
+            throw new System.InvalidOperationException(string.Format("Could not find endpoint with name \'{0}\'.", endpointConfiguration));
+        }
+        
+        private static System.ServiceModel.Channels.Binding GetDefaultBinding()
+        {
+            return PlayerManagerClient.GetBindingForEndpoint(EndpointConfiguration.NetTcpBinding_IPlayerManager);
+        }
+        
+        private static System.ServiceModel.EndpointAddress GetDefaultEndpointAddress()
+        {
+            return PlayerManagerClient.GetEndpointAddress(EndpointConfiguration.NetTcpBinding_IPlayerManager);
+        }
+        
+        public enum EndpointConfiguration
+        {
+            
+            NetTcpBinding_IPlayerManager,
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ExamExplotionService.IReportManager")]
+    public interface IReportManager
+    {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReportManager/ReportPlayer", ReplyAction="http://tempuri.org/IReportManager/ReportPlayerResponse")]
+        bool ReportPlayer(int reportedPlayerId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReportManager/ReportPlayer", ReplyAction="http://tempuri.org/IReportManager/ReportPlayerResponse")]
+        System.Threading.Tasks.Task<bool> ReportPlayerAsync(int reportedPlayerId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReportManager/GetReportCount", ReplyAction="http://tempuri.org/IReportManager/GetReportCountResponse")]
+        int GetReportCount(int playerId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReportManager/GetReportCount", ReplyAction="http://tempuri.org/IReportManager/GetReportCountResponse")]
+        System.Threading.Tasks.Task<int> GetReportCountAsync(int playerId);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    public interface IReportManagerChannel : ExamExplotionService.IReportManager, System.ServiceModel.IClientChannel
+    {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    public partial class ReportManagerClient : System.ServiceModel.ClientBase<ExamExplotionService.IReportManager>, ExamExplotionService.IReportManager
+    {
+        
+        /// <summary>
+        /// Implement this partial method to configure the service endpoint.
+        /// </summary>
+        /// <param name="serviceEndpoint">The endpoint to configure</param>
+        /// <param name="clientCredentials">The client credentials</param>
+        static partial void ConfigureEndpoint(System.ServiceModel.Description.ServiceEndpoint serviceEndpoint, System.ServiceModel.Description.ClientCredentials clientCredentials);
+        
+        public ReportManagerClient() : 
+                base(ReportManagerClient.GetDefaultBinding(), ReportManagerClient.GetDefaultEndpointAddress())
+        {
+            this.Endpoint.Name = EndpointConfiguration.NetTcpBinding_IReportManager.ToString();
+            ConfigureEndpoint(this.Endpoint, this.ClientCredentials);
+        }
+        
+        public ReportManagerClient(EndpointConfiguration endpointConfiguration) : 
+                base(ReportManagerClient.GetBindingForEndpoint(endpointConfiguration), ReportManagerClient.GetEndpointAddress(endpointConfiguration))
+        {
+            this.Endpoint.Name = endpointConfiguration.ToString();
+            ConfigureEndpoint(this.Endpoint, this.ClientCredentials);
+        }
+        
+        public ReportManagerClient(EndpointConfiguration endpointConfiguration, string remoteAddress) : 
+                base(ReportManagerClient.GetBindingForEndpoint(endpointConfiguration), new System.ServiceModel.EndpointAddress(remoteAddress))
+        {
+            this.Endpoint.Name = endpointConfiguration.ToString();
+            ConfigureEndpoint(this.Endpoint, this.ClientCredentials);
+        }
+        
+        public ReportManagerClient(EndpointConfiguration endpointConfiguration, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(ReportManagerClient.GetBindingForEndpoint(endpointConfiguration), remoteAddress)
+        {
+            this.Endpoint.Name = endpointConfiguration.ToString();
+            ConfigureEndpoint(this.Endpoint, this.ClientCredentials);
+        }
+        
+        public ReportManagerClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(binding, remoteAddress)
+        {
+        }
+        
+        public bool ReportPlayer(int reportedPlayerId)
+        {
+            return base.Channel.ReportPlayer(reportedPlayerId);
+        }
+        
+        public System.Threading.Tasks.Task<bool> ReportPlayerAsync(int reportedPlayerId)
+        {
+            return base.Channel.ReportPlayerAsync(reportedPlayerId);
+        }
+        
+        public int GetReportCount(int playerId)
+        {
+            return base.Channel.GetReportCount(playerId);
+        }
+        
+        public System.Threading.Tasks.Task<int> GetReportCountAsync(int playerId)
+        {
+            return base.Channel.GetReportCountAsync(playerId);
+        }
+        
+        public virtual System.Threading.Tasks.Task OpenAsync()
+        {
+            return System.Threading.Tasks.Task.Factory.FromAsync(((System.ServiceModel.ICommunicationObject)(this)).BeginOpen(null, null), new System.Action<System.IAsyncResult>(((System.ServiceModel.ICommunicationObject)(this)).EndOpen));
+        }
+        
+        private static System.ServiceModel.Channels.Binding GetBindingForEndpoint(EndpointConfiguration endpointConfiguration)
+        {
+            if ((endpointConfiguration == EndpointConfiguration.NetTcpBinding_IReportManager))
+            {
+                System.ServiceModel.NetTcpBinding result = new System.ServiceModel.NetTcpBinding();
+                result.MaxBufferSize = int.MaxValue;
+                result.ReaderQuotas = System.Xml.XmlDictionaryReaderQuotas.Max;
+                result.MaxReceivedMessageSize = int.MaxValue;
+                result.Security.Mode = System.ServiceModel.SecurityMode.None;
+                result.ReliableSession.Enabled = true;
+                return result;
+            }
+            throw new System.InvalidOperationException(string.Format("Could not find endpoint with name \'{0}\'.", endpointConfiguration));
+        }
+        
+        private static System.ServiceModel.EndpointAddress GetEndpointAddress(EndpointConfiguration endpointConfiguration)
+        {
+            if ((endpointConfiguration == EndpointConfiguration.NetTcpBinding_IReportManager))
+            {
+                return new System.ServiceModel.EndpointAddress("net.tcp://localhost:8081/ReportManager");
+            }
+            throw new System.InvalidOperationException(string.Format("Could not find endpoint with name \'{0}\'.", endpointConfiguration));
+        }
+        
+        private static System.ServiceModel.Channels.Binding GetDefaultBinding()
+        {
+            return ReportManagerClient.GetBindingForEndpoint(EndpointConfiguration.NetTcpBinding_IReportManager);
+        }
+        
+        private static System.ServiceModel.EndpointAddress GetDefaultEndpointAddress()
+        {
+            return ReportManagerClient.GetEndpointAddress(EndpointConfiguration.NetTcpBinding_IReportManager);
+        }
+        
+        public enum EndpointConfiguration
+        {
+            
+            NetTcpBinding_IReportManager,
         }
     }
     
@@ -591,85 +1439,125 @@ namespace ExamExplotionService
         }
     }
     
-    public partial class LobbyManagerClient : LobbyManagerClientBase
+    public class StartGameReceivedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
     {
         
-        public LobbyManagerClient(EndpointConfiguration endpointConfiguration) : 
-                this(new LobbyManagerClientCallback(), endpointConfiguration)
+        private object[] results;
+        
+        public StartGameReceivedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState)
+        {
+            this.results = results;
+        }
+        
+        public System.Collections.Generic.Dictionary<string, bool> lobbyPlayers
+        {
+            get
+            {
+                base.RaiseExceptionIfNecessary();
+                return ((System.Collections.Generic.Dictionary<string, bool>)(this.results[0]));
+            }
+        }
+    }
+    
+    public class UpdateCurrentTurnReceivedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
+    {
+        
+        private object[] results;
+        
+        public UpdateCurrentTurnReceivedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState)
+        {
+            this.results = results;
+        }
+        
+        public string gamertag
+        {
+            get
+            {
+                base.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    public partial class GameManagerClient : GameManagerClientBase
+    {
+        
+        public GameManagerClient(EndpointConfiguration endpointConfiguration) : 
+                this(new GameManagerClientCallback(), endpointConfiguration)
         {
         }
         
-        private LobbyManagerClient(LobbyManagerClientCallback callbackImpl, EndpointConfiguration endpointConfiguration) : 
+        private GameManagerClient(GameManagerClientCallback callbackImpl, EndpointConfiguration endpointConfiguration) : 
                 base(new System.ServiceModel.InstanceContext(callbackImpl), endpointConfiguration)
         {
             callbackImpl.Initialize(this);
         }
         
-        public LobbyManagerClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
-                this(new LobbyManagerClientCallback(), binding, remoteAddress)
+        public GameManagerClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                this(new GameManagerClientCallback(), binding, remoteAddress)
         {
         }
         
-        private LobbyManagerClient(LobbyManagerClientCallback callbackImpl, System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+        private GameManagerClient(GameManagerClientCallback callbackImpl, System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(new System.ServiceModel.InstanceContext(callbackImpl), binding, remoteAddress)
         {
             callbackImpl.Initialize(this);
         }
         
-        public LobbyManagerClient() : 
-                this(new LobbyManagerClientCallback())
+        public GameManagerClient() : 
+                this(new GameManagerClientCallback())
         {
         }
         
-        private LobbyManagerClient(LobbyManagerClientCallback callbackImpl) : 
+        private GameManagerClient(GameManagerClientCallback callbackImpl) : 
                 base(new System.ServiceModel.InstanceContext(callbackImpl))
         {
             callbackImpl.Initialize(this);
         }
         
-        public event System.EventHandler<ReceiveMessageReceivedEventArgs> ReceiveMessageReceived;
+        public event System.EventHandler<UpdateCurrentTurnReceivedEventArgs> UpdateCurrentTurnReceived;
         
-        public event System.EventHandler<RepaintReceivedEventArgs> RepaintReceived;
+        public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> SyncTimerReceived;
         
-        private void OnReceiveMessageReceived(object state)
+        private void OnUpdateCurrentTurnReceived(object state)
         {
-            if ((this.ReceiveMessageReceived != null))
+            if ((this.UpdateCurrentTurnReceived != null))
             {
                 object[] results = ((object[])(state));
-                this.ReceiveMessageReceived(this, new ReceiveMessageReceivedEventArgs(results, null, false, null));
+                this.UpdateCurrentTurnReceived(this, new UpdateCurrentTurnReceivedEventArgs(results, null, false, null));
             }
         }
         
-        private void OnRepaintReceived(object state)
+        private void OnSyncTimerReceived(object state)
         {
-            if ((this.RepaintReceived != null))
+            if ((this.SyncTimerReceived != null))
             {
                 object[] results = ((object[])(state));
-                this.RepaintReceived(this, new RepaintReceivedEventArgs(results, null, false, null));
+                this.SyncTimerReceived(this, new System.ComponentModel.AsyncCompletedEventArgs(null, false, null));
             }
         }
         
-        private class LobbyManagerClientCallback : object, ILobbyManagerCallback
+        private class GameManagerClientCallback : object, IGameManagerCallback
         {
             
-            private LobbyManagerClient proxy;
+            private GameManagerClient proxy;
             
-            public void Initialize(LobbyManagerClient proxy)
+            public void Initialize(GameManagerClient proxy)
             {
                 this.proxy = proxy;
             }
             
-            public void ReceiveMessage(string gamertag, string message)
+            public void UpdateCurrentTurn(string gamertag)
             {
-                this.proxy.OnReceiveMessageReceived(new object[] {
-                            gamertag,
-                            message});
+                this.proxy.OnUpdateCurrentTurnReceived(new object[] {
+                            gamertag});
             }
             
-            public void Repaint(System.Collections.Generic.Dictionary<string, bool> playerStatus)
+            public void SyncTimer()
             {
-                this.proxy.OnRepaintReceived(new object[] {
-                            playerStatus});
+                this.proxy.OnSyncTimerReceived(new object[0]);
             }
         }
     }

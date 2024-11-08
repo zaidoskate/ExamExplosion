@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,11 +12,42 @@ namespace ExamExplosion.DataValidations
     {
         public static bool ValidateExistingGamertag(string gamertag)
         {
-            return AccountManager.VerifyExistingGamertag(gamertag);
+            try
+            {
+                return AccountManager.VerifyExistingGamertag(gamertag);
+            }
+            catch (FaultException faultException)
+            {
+                throw faultException;
+            }
+            catch (CommunicationException communicationException)
+            {
+                throw communicationException;
+            }
+            catch (TimeoutException timeoutException)
+            {
+                throw timeoutException;
+            }
         }
         public static bool ValidateExistingEmail(string email)
         {
-            return AccountManager.VerifyExistingEmail(email);
+            try
+            {
+                return AccountManager.VerifyExistingEmail(email);
+
+            }
+            catch (FaultException faultException)
+            {
+                throw faultException;
+            }
+            catch (CommunicationException communicationException)
+            {
+                throw communicationException;
+            }
+            catch (TimeoutException timeoutException)
+            {
+                throw timeoutException;
+            }
         }
 
     }

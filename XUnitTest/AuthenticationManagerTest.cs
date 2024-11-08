@@ -1,4 +1,5 @@
 using ExamExplosion;
+using ExamExplosion.ExamExplotionService;
 using ExamExplosion.Helpers;
 using ExamExplosion.Models;
 
@@ -8,86 +9,86 @@ namespace XUnitTest
     {
         private static ExamExplotionService.AuthenticationManagerClient proxy = new ExamExplotionService.AuthenticationManagerClient();
         [Fact]
-        public async void TestAddAccountSuccess()
+        public void TestAddAccountSuccess()
         {
-            ExamExplotionService.AccountM account = new ExamExplotionService.AccountM();
+            ExamExplotionService.AccountManagement account = new ExamExplotionService.AccountManagement();
             account.Name = "Dana";
             account.Email = "zaidskate@hotmail.com";
             account.Lastname = "Paz";
             account.Gamertag = "didarkrai";
             account.Password = "password123";
 
-            bool result = await proxy.AddAccountAsync(account);
+            bool result = proxy.AddAccount(account);
             Assert.True(result);
         }
 
         [Fact]
-        public async void TestAddAccountFail()
+        public void TestAddAccountFail()
         {
-            ExamExplotionService.AccountM account = new ExamExplotionService.AccountM();
+            ExamExplotionService.AccountManagement account = new ExamExplotionService.AccountManagement();
             account.Name = "Dana";
             account.Email = "zaidskate@hotmail.com";
             account.Lastname = "Paz";
             account.Password = "password123";
 
-            bool result = await proxy.AddAccountAsync(account);
+            bool result = proxy.AddAccount(account);
             Assert.False(result);
         }
 
         [Fact]
-        public async void TestUpdatePasswordSuccess()
+        public void TestUpdatePasswordSuccess()
         {
-            ExamExplotionService.AccountM account = new ExamExplotionService.AccountM();
+            ExamExplotionService.AccountManagement account = new ExamExplotionService.AccountManagement();
             account.Name = "ZaidVazquez";
             account.Email = "zaidoskate@hotmail.com";
             account.Gamertag = "zaidoskate";
             account.Password = "pos";
 
-            bool result = await proxy.UpdatePasswordAsync(account);
+            bool result = proxy.AddAccount(account);
             Assert.True(result);
         }
 
         [Fact]
-        public async void TestUpdatePasswordFail()
+        public void TestUpdatePasswordFail()
         {
-            ExamExplotionService.AccountM account = new ExamExplotionService.AccountM();
+            ExamExplotionService.AccountManagement account = new ExamExplotionService.AccountManagement();
 
-            bool result = await proxy.UpdatePasswordAsync(account);
+            bool result = proxy.AddAccount(account);
             Assert.False(result);
         }
 
         [Fact]
-        public async void TestVerifyExistingEmailSuccess()
+        public void TestVerifyExistingEmailSuccess()
         {
             string emailExisting = "zaidoskate@hotmail.com";
-            bool result = await proxy.VerifyExistingEmailAsync(emailExisting);
+            bool result = proxy.VerifyExistingEmail(emailExisting);
 
             Assert.True(result);
         }
 
         [Fact]
-        public async void TestVerifyExistingEmailFail()
+        public void TestVerifyExistingEmailFail()
         {
             string emailExisting = "notAnEmail";
-            bool result = await proxy.VerifyExistingEmailAsync(emailExisting);
+            bool result = proxy.VerifyExistingEmail(emailExisting);
 
             Assert.False(result);
         }
 
         [Fact]
-        public async void TestVerifyExistingGamertagSuccess()
+        public void TestVerifyExistingGamertagSuccess()
         {
             string gamertagExisting = "zaidoskate";
-            bool result = await proxy.VerifyExistingEmailAsync(gamertagExisting);
+            bool result = proxy.VerifyExistingEmail(gamertagExisting);
 
             Assert.True(result);
         }
 
         [Fact]
-        public async void TestVerifyExistingGamertagFail()
+        public void TestVerifyExistingGamertagFail()
         {
             string gamertagExisting = "gamertagNotExistent";
-            bool result = await proxy.VerifyExistingEmailAsync(gamertagExisting);
+            bool result = proxy.VerifyExistingEmail(gamertagExisting);
 
             Assert.False(result);
         }

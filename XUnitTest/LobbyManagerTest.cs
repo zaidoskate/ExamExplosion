@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ExamExplosion.ExamExplotionService;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,7 @@ namespace XUnitTest
 {
     public class LobbyManagerTest
     {
-        private static ExamExplotionService.LobbyManagerClient proxy = new ExamExplotionService.LobbyManagerClient();
+        private static LobbyManagerClient proxy = new LobbyManagerClient();
 
     }
 }
