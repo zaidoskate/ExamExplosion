@@ -1,6 +1,9 @@
-﻿using System;
+﻿using ExamExplosion.ExamExplotionService;
+using ExamExplosion.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -12,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace ExamExplosion
 {
@@ -20,26 +24,106 @@ namespace ExamExplosion
     /// </summary>
     public partial class Board : Page
     {
+        private GameManager gameManager = null;
+        private DispatcherTimer turnTimer;
         private List<Label> playersInGame = new List<Label>();
         private List<Image> playerImages = new List<Image>();
-        public Board(List<Label> playerGamertags)
+        private List<string> orderedGamertags;
+        private int hitPoints;
+        private int timePerTurn;
+        public int remainingTime;
+        private string gameCode;
+        private string hostGamertag;
+        public Board(List<Label> playerGamertags, string gameCode, string hostGamertag)
         {
             InitializeComponent();
-            InitializeBoard(playerGamertags);
+            gameManager = new GameManager(this);
+            this.remainingTime = timePerTurn;
+            this.hostGamertag = hostGamertag;
+            InitializeBoard(playerGamertags, gameCode);
+            orderedGamertags = playerGamertags.Select(label => label.Content.ToString()).ToList();
+            try
+            {
+                gameManager.InitializeGame(gameCode, orderedGamertags);
+            }
+            catch (FaultException faultException)
+            {
+                new AlertModal("Error", "Se produjo un error en el servidor").ShowDialog();
+                throw faultException;
+            }
+            catch (CommunicationException communicationException)
+            {
+                new AlertModal("Error de comunicación", "No se pudo conectar con el servidor.").ShowDialog();
+                throw communicationException;
+            }
+            catch (TimeoutException timeoutException)
+            {
+                new AlertModal("Tiempo de espera", "La conexión con el servidor ha expirado.").ShowDialog();
+                throw timeoutException;
+            }
+            StartTurnTimer();
         }
 
-        private void InitializeBoard(List<Label> playerGamertags)
+        public void StartTurnTimer()
         {
-            playersInGame.Add(this.player1Lbl);
-            playersInGame.Add(this.player2Lbl);
-            playersInGame.Add(this.player3Lbl);
-            playersInGame.Add(this.player4Lbl);
+            turnTimer = new DispatcherTimer();
+            turnTimer.Interval = TimeSpan.FromSeconds(1);
+            turnTimer.Tick += TurnTimer_Tick;
+            remainingTime = timePerTurn;
+            UpdateTimerLabel();
+            turnTimer.Start();
+        }
 
-            playerImages.Add(this.player1Image);
-            playerImages.Add(this.player2Image);
-            playerImages.Add(this.player3Image);
-            playerImages.Add(this.player4Image);
+        private void TurnTimer_Tick(object sender, EventArgs e)
+        {
+            if(remainingTime > 0)
+            {
+                remainingTime --;
+                UpdateTimerLabel();
+            }
+            else
+            {
+                turnTimer.Stop();
+                if (SessionManager.CurrentSession.gamertag == hostGamertag)
+                {
+                    try
+                    {
+                        GameManager.NotifyEndTurn(gameCode, currentTurnLbl.Content.ToString());
+                    }
+                    catch (FaultException faultException)
+                    {
+                        new AlertModal("Error", "Se produjo un error en el servidor").ShowDialog();
+                        throw faultException;
+                    }
+                    catch (CommunicationException communicationException)
+                    {
+                        new AlertModal("Error de comunicación", "No se pudo conectar con el servidor.").ShowDialog();
+                        throw communicationException;
+                    }
+                    catch (TimeoutException timeoutException)
+                    {
+                        new AlertModal("Tiempo de espera", "La conexión con el servidor ha expirado.").ShowDialog();
+                        throw timeoutException;
+                    }
+                }
+            }
+        }
 
+        private void UpdateTimerLabel()
+        {
+            timerLbl.Content = remainingTime.ToString();
+        }
+
+        public void UpdateCurrentTurn(string gamertag)
+        {
+            currentTurnLbl.Content = gamertag;
+            remainingTime = timePerTurn;
+            UpdateTimerLabel();
+        }
+
+        private void InitializeBoard(List<Label> playerGamertags, string gameCode)
+        {
+            InitializeListComponents();
             for (int i = 0; i < playerGamertags.Count; i++)
             {
                 playersInGame[i].Content = playerGamertags[i].Content;
@@ -61,7 +145,96 @@ namespace ExamExplosion
                     image.Visibility = Visibility.Collapsed;
                 }
             }
+            InitializeGameDetails(gameCode);
+            ConnectToGame();
         }
 
+        private void ConnectToGame()
+        {
+            try
+            {
+                gameManager.ConnectGame(gameCode, SessionManager.CurrentSession.gamertag);
+            }
+            catch (FaultException faultException)
+            {
+                new AlertModal("Error", "Se produjo un error en el servidor").ShowDialog();
+                throw faultException;
+            }
+            catch (CommunicationException communicationException)
+            {
+                new AlertModal("Error de comunicación", "No se pudo conectar con el servidor.").ShowDialog();
+                throw communicationException;
+            }
+            catch (TimeoutException timeoutException)
+            {
+                new AlertModal("Tiempo de espera", "La conexión con el servidor ha expirado.").ShowDialog();
+                throw timeoutException;
+            }
+        }
+        private void InitializeGameDetails(string gameCode)
+        {
+            try
+            {
+                GameManagement game = GameManager.GetCurrentGameDetails(gameCode);
+                this.hitPoints = game.Lives;
+                this.timePerTurn = game.TimePerTurn;
+                this.gameCode = game.InvitationCode;
+                switch (hitPoints)
+                {
+                    case 1:
+                        this.heart1Image.Visibility = Visibility.Visible;
+                        break;
+                    case 2:
+                        this.heart1Image.Visibility = Visibility.Visible;
+                        this.heart2Image.Visibility = Visibility.Visible;
+                        break;
+                    case 3:
+                        this.heart1Image.Visibility = Visibility.Visible;
+                        this.heart2Image.Visibility = Visibility.Visible;
+                        this.heart3Image.Visibility = Visibility.Visible;
+                        break;
+                }
+            }
+            catch (FaultException faultException)
+            {
+                new AlertModal("Error", "Se produjo un error en el servidor").ShowDialog();
+                throw faultException;
+            }
+            catch (CommunicationException communicationException)
+            {
+                new AlertModal("Error de comunicación", "No se pudo conectar con el servidor.").ShowDialog();
+                throw communicationException;
+            }
+            catch (TimeoutException timeoutException)
+            {
+                new AlertModal("Tiempo de espera", "La conexión con el servidor ha expirado.").ShowDialog();
+                throw timeoutException;
+            }
+        }
+
+        private void InitializeListComponents()
+        {
+            playersInGame.Add(this.player1Lbl);
+            playersInGame.Add(this.player2Lbl);
+            playersInGame.Add(this.player3Lbl);
+            playersInGame.Add(this.player4Lbl);
+
+            playerImages.Add(this.player1Image);
+            playerImages.Add(this.player2Image);
+            playerImages.Add(this.player3Image);
+            playerImages.Add(this.player4Image);
+        }
+
+        internal void UpdateTurnLabel(string gamertag)
+        {
+            this.currentTurnLbl.Content = gamertag;
+        }
+
+        public void ResetTimer()
+        {
+            remainingTime = timePerTurn;
+            UpdateTimerLabel();
+            turnTimer.Start();
+        }
     }
 }

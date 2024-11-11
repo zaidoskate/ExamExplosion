@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.Tracing;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -46,18 +47,36 @@ namespace ExamExplosion
             account.name = name;
             account.gamertag = gamertag;
 
-            bool accountAdded = AccountManager.AddAccount(account);
-            if (accountAdded)
+            try
             {
-                if (this.NavigationService != null)
+                bool accountAdded = AccountManager.AddAccount(account);
+                if (accountAdded)
                 {
-                    this.NavigationService.Navigate(new StartPage());
+                    if (this.NavigationService != null)
+                    {
+                        this.NavigationService.Navigate(new StartPage());
+                    }
+                    new AlertModal("Cuenta creada", "Se ha creado la nueva cuenta con exito.").ShowDialog();
                 }
-                new AlertModal("Cuenta creada", "Se ha creado la nueva cuenta con exito.").ShowDialog();
+                else
+                {
+                    new AlertModal("Error", "No he podido crear la cuenta, intentalo mas tarde.").ShowDialog();
+                }
             }
-            else
+            catch (FaultException faultException)
             {
-                new AlertModal("Error", "No he podido crear la cuenta, intentalo mas tarde.").ShowDialog();
+                new AlertModal("Error", "Se produjo un error en el servidor").ShowDialog();
+                throw faultException;
+            }
+            catch (CommunicationException communicationException)
+            {
+                new AlertModal("Error de comunicación", "No se pudo conectar con el servidor.").ShowDialog();
+                throw communicationException;
+            }
+            catch (TimeoutException timeoutException)
+            {
+                new AlertModal("Tiempo de espera", "La conexión con el servidor ha expirado.").ShowDialog();
+                throw timeoutException;
             }
         }
 
@@ -299,27 +318,45 @@ namespace ExamExplosion
                     return;
                 }
             }
-            bool gamertagExists = ExistingDataValidator.ValidateExistingGamertag(gamertag);
-            bool emailExists = ExistingDataValidator.ValidateExistingEmail(email);
-            string message = null;
-            if(gamertagExists && emailExists )
+            try
             {
-                message = "El gamertag y correo proporcionados ya existen con otra cuenta.";
+                bool gamertagExists = ExistingDataValidator.ValidateExistingGamertag(gamertag);
+                bool emailExists = ExistingDataValidator.ValidateExistingEmail(email);
+                string message = null;
+                if(gamertagExists && emailExists )
+                {
+                    message = "El gamertag y correo proporcionados ya existen con otra cuenta.";
+                }
+                else if(emailExists)
+                {
+                    message = "El correo ya se encuentra asociado a otra cuenta.";
+                }
+                else if (gamertagExists)
+                {
+                    message = "El gamertag proporcionado ya está en uso. Prueba con otro";
+                }
+                else
+                {
+                    SendCode();
+                    return;
+                }
+                new AlertModal("Datos existentes", message).ShowDialog();
             }
-            else if(emailExists)
+            catch (FaultException faultException)
             {
-                message = "El correo ya se encuentra asociado a otra cuenta.";
+                new AlertModal("Error", "Se produjo un error en el servidor").ShowDialog();
+                throw faultException;
             }
-            else if (gamertagExists)
+            catch (CommunicationException communicationException)
             {
-                message = "El gamertag proporcionado ya está en uso. Prueba con otro";
+                new AlertModal("Error de comunicación", "No se pudo conectar con el servidor.").ShowDialog();
+                throw communicationException;
             }
-            else
+            catch (TimeoutException timeoutException)
             {
-                SendCode();
-                return;
+                new AlertModal("Tiempo de espera", "La conexión con el servidor ha expirado.").ShowDialog();
+                throw timeoutException;
             }
-            new AlertModal("Datos existentes", message).ShowDialog();
         }
         private void SendCode()
         {

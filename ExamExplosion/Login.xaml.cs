@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -44,17 +45,34 @@ namespace ExamExplosion
             {
                 password = PasswordText.Text;
             }
-
-            if(AccountManager.validateCredentials(gamertag, password))
+            try
             {
-                if (this.NavigationService != null)
+                if (AccountManager.validateCredentials(gamertag, password))
                 {
-                    this.NavigationService.Navigate(new HomePage());
+                    if (this.NavigationService != null)
+                    {
+                        this.NavigationService.Navigate(new HomePage());
+                    }
+                }
+                else
+                {
+                    new AlertModal("Datos incorrectos", "Gamertag y/o contraseña incorrectos").ShowDialog();
                 }
             }
-            else
+            catch (FaultException faultException)
             {
-                new AlertModal("Datos incorrectos", "Gamertag y/o contraseña incorrectos").ShowDialog();
+                new AlertModal("Error", "Se produjo un error en el servidor").ShowDialog();
+                throw faultException;
+            }
+            catch (CommunicationException communicationException)
+            {
+                new AlertModal("Error de comunicación", "No se pudo conectar con el servidor.").ShowDialog();
+                throw communicationException;
+            }
+            catch (TimeoutException timeoutException)
+            {
+                new AlertModal("Tiempo de espera", "La conexión con el servidor ha expirado.").ShowDialog();
+                throw timeoutException;
             }
         }
 

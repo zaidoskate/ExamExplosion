@@ -28,6 +28,7 @@ namespace XUnitTest
     }
     public class LobbyManagerTest:IClassFixture<Fixtures>
     {
+<<<<<<< HEAD
         private static ExamExplotionService.LobbyManagerClient proxy = new ExamExplotionService.LobbyManagerClient();
         private readonly Fixtures fixture; 
 
@@ -43,6 +44,9 @@ namespace XUnitTest
             bool result = await proxy.JoinLobbyAsync(fixture.gameCode, "cristy11");
             Assert.True(result);
         }
+=======
+        private static LobbyManagerClient proxy = new LobbyManagerClient();
+>>>>>>> 3340f95c2c984b33e42aea6e3a7ceeaea69b8b3f
 
     }
 }

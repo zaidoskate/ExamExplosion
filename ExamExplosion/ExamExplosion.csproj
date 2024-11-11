@@ -91,6 +91,7 @@
     <Compile Include="DataValidations\TextValidator.cs" />
     <Compile Include="Helpers\AccountManager.cs" />
     <Compile Include="Helpers\EmailVerificationCode.cs" />
+    <Compile Include="Helpers\GameManager.cs" />
     <Compile Include="Helpers\LobbyManager.cs" />
     <Compile Include="Helpers\SessionManager.cs" />
     <Compile Include="HomePage.xaml.cs">
@@ -214,6 +215,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Connected Services\ExamExplotionService\ExamExplosion.ExamExplotionService.GameManagement.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ExamExplotionService\ExamExplosion.ExamExplotionService.PlayerManagement.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\ExamExplotionService\item.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -224,9 +231,6 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\ExamExplotionService\item3.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\ExamExplotionService\item4.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\ExamExplotionService\item41.xsd">

@@ -46,7 +46,7 @@ namespace ExamExplosion
             this.maxHP = maxHP;
             this.timePerTurn = timePerTurn;
             this.hostGamertag = owner;
-            lobbyCode = lobbyManager.CreateLobby(game);
+            InitializeLobby(game);
             InitializeComponent();
             var parentWindow = (MainWindow)Application.Current.MainWindow;
             if (parentWindow != null)
@@ -58,6 +58,30 @@ namespace ExamExplosion
             this.KeyDown += Lobby_KeyDown;
             this.Focusable = true;
             this.Focus();
+        }
+
+        private void InitializeLobby(Game game)
+        {
+            try
+            {
+                lobbyCode = lobbyManager.CreateLobby(game);
+                lobbyManager.ConnectLobby(SessionManager.CurrentSession.gamertag, this.lobbyCode);
+            }
+            catch (FaultException faultException)
+            {
+                new AlertModal("Error", "Se produjo un error en el servidor").ShowDialog();
+                throw faultException;
+            }
+            catch (CommunicationException communicationException)
+            {
+                new AlertModal("Error de comunicación", "No se pudo conectar con el servidor.").ShowDialog();
+                throw communicationException;
+            }
+            catch (TimeoutException timeoutException)
+            {
+                new AlertModal("Tiempo de espera", "La conexión con el servidor ha expirado.").ShowDialog();
+                throw timeoutException;
+            }
         }
 
         public Lobby(string lobbyCode)
@@ -101,12 +125,29 @@ namespace ExamExplosion
             imagePlayers.Add(player2Img);
             imagePlayers.Add(player3Img);
             imagePlayers.Add(player4Img);
-            lobbyManager.ConnectLobby(SessionManager.CurrentSession.gamertag, this.lobbyCode);
         }
 
         private void OnClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            lobbyManager.DisconnectLobby(lobbyCode, SessionManager.CurrentSession.gamertag);
+            try
+            {
+                lobbyManager.DisconnectLobby(lobbyCode, SessionManager.CurrentSession.gamertag);
+            }
+            catch (FaultException faultException)
+            {
+                new AlertModal("Error", "Se produjo un error en el servidor").ShowDialog();
+                throw faultException;
+            }
+            catch (CommunicationException communicationException)
+            {
+                new AlertModal("Error de comunicación", "No se pudo conectar con el servidor.").ShowDialog();
+                throw communicationException;
+            }
+            catch (TimeoutException timeoutException)
+            {
+                new AlertModal("Tiempo de espera", "La conexión con el servidor ha expirado.").ShowDialog();
+                throw timeoutException;
+            }
         }
 
         public void PrintNewMessage(string gamertag, string message)
@@ -150,9 +191,27 @@ namespace ExamExplosion
         }
         private void SendMessageButton_Click(object sender, RoutedEventArgs e)
         {
-            string message = GetTextBoxMessage();
-            lobbyManager.SendMessage(lobbyCode, message, SessionManager.CurrentSession.gamertag);
-            ClearTextBox();
+            try
+            {
+                string message = GetTextBoxMessage();
+                lobbyManager.SendMessage(lobbyCode, message, SessionManager.CurrentSession.gamertag);
+                ClearTextBox();
+            }
+            catch (FaultException faultException)
+            {
+                new AlertModal("Error", "Se produjo un error en el servidor").ShowDialog();
+                throw faultException;
+            }
+            catch (CommunicationException communicationException)
+            {
+                new AlertModal("Error de comunicación", "No se pudo conectar con el servidor.").ShowDialog();
+                throw communicationException;
+            }
+            catch (TimeoutException timeoutException)
+            {
+                new AlertModal("Tiempo de espera", "La conexión con el servidor ha expirado.").ShowDialog();
+                throw timeoutException;
+            }
         }
         private void StartButton_Click(object sender, RoutedEventArgs e)
         {
@@ -170,14 +229,50 @@ namespace ExamExplosion
                 }
                 else
                 {
-                    lobbyManager.ChangeStatus(lobbyCode, gamertag, true);
+                    try
+                    {
+                        lobbyManager.ChangeStatus(lobbyCode, gamertag, true);
+                    }
+                    catch (FaultException faultException)
+                    {
+                        new AlertModal("Error", "Se produjo un error en el servidor").ShowDialog();
+                        throw faultException;
+                    }
+                    catch (CommunicationException communicationException)
+                    {
+                        new AlertModal("Error de comunicación", "No se pudo conectar con el servidor.").ShowDialog();
+                        throw communicationException;
+                    }
+                    catch (TimeoutException timeoutException)
+                    {
+                        new AlertModal("Tiempo de espera", "La conexión con el servidor ha expirado.").ShowDialog();
+                        throw timeoutException;
+                    }
                 }
             }
         }
 
         private void SynchronizeClients()
         {
-            lobbyManager.PlayGame(lobbyCode);
+            try
+            {
+                lobbyManager.PlayGame(lobbyCode);
+            }
+            catch (FaultException faultException)
+            {
+                new AlertModal("Error", "Se produjo un error en el servidor").ShowDialog();
+                throw faultException;
+            }
+            catch (CommunicationException communicationException)
+            {
+                new AlertModal("Error de comunicación", "No se pudo conectar con el servidor.").ShowDialog();
+                throw communicationException;
+            }
+            catch (TimeoutException timeoutException)
+            {
+                new AlertModal("Tiempo de espera", "La conexión con el servidor ha expirado.").ShowDialog();
+                throw timeoutException;
+            }
         }
 
         public void NavigateToBoard()
@@ -192,7 +287,7 @@ namespace ExamExplosion
                 if (this.NavigationService != null)
                 {
                     List<Label> players = labelsGamertags.Where(label => !label.Content.Equals("")).ToList();
-                    this.NavigationService.Navigate(new Board(players));
+                    this.NavigationService.Navigate(new Board(players,lobbyCode, hostGamertag));
                     var window = Window.GetWindow(this);
                     if (window != null)
                     {
@@ -216,9 +311,30 @@ namespace ExamExplosion
 
         private void PreviousMenu(object sender, RoutedEventArgs e)
         {
-            lobbyManager.DisconnectLobby(lobbyCode, SessionManager.CurrentSession.gamertag);
-            var mainWindow = (MainWindow)Application.Current.MainWindow;
-            mainWindow.MainFrame.Navigate(new HomePage());
+            try
+            {
+                lobbyManager.DisconnectLobby(lobbyCode, SessionManager.CurrentSession.gamertag);
+            }
+            catch (FaultException faultException)
+            {
+                new AlertModal("Error", "Se produjo un error en el servidor").ShowDialog();
+                throw faultException;
+            }
+            catch (CommunicationException communicationException)
+            {
+                new AlertModal("Error de comunicación", "No se pudo conectar con el servidor.").ShowDialog();
+                throw communicationException;
+            }
+            catch (TimeoutException timeoutException)
+            {
+                new AlertModal("Tiempo de espera", "La conexión con el servidor ha expirado.").ShowDialog();
+                throw timeoutException;
+            }
+            finally
+            {
+                var mainWindow = (MainWindow)Application.Current.MainWindow;
+                mainWindow.MainFrame.Navigate(new HomePage());
+            }
         }
 
         public void ClearPlayers()

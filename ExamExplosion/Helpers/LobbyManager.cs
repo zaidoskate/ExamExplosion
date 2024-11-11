@@ -29,31 +29,104 @@ namespace ExamExplosion.Helpers
         }
         public string CreateLobby(Game game)
         {
-            GameManagement gameM = new GameManagement();
-            gameM.NumberPlayers = game.NumberPlayers;
-            gameM.TimePerTurn = game.TimePerTurn;
-            gameM.HostPlayerId = game.HostPlayerId;
-            gameM.InvitationCode = game.InvitationCode;
-            gameM.Lives = game.Lives;
+            try
+            {
+                GameManagement gameM = new GameManagement();
+                gameM.NumberPlayers = game.NumberPlayers;
+                gameM.TimePerTurn = game.TimePerTurn;
+                gameM.HostPlayerId = game.HostPlayerId;
+                gameM.InvitationCode = game.InvitationCode;
+                gameM.Lives = game.Lives;
 
-            string newCode = proxy.CreateLobby(gameM);
+                string newCode = proxy.CreateLobby(gameM);
             
-            return newCode;
+                return newCode;
+            }
+            catch (FaultException faultException)
+            {
+                //Implementar log
+                throw faultException;
+            }
+            catch (CommunicationException communicationException)
+            {
+                //Implementar log
+                throw communicationException;
+            }
+            catch (TimeoutException timeoutException)
+            {
+                //Implementar log
+                throw timeoutException;
+            }
         }
 
         public bool JoinLobby(string code, string gamertag)
         {
-            return proxy.JoinLobby(code, gamertag);
+            try
+            {
+                return proxy.JoinLobby(code, gamertag);
+
+            }
+            catch (FaultException faultException)
+            {
+                //Implementar log
+                throw faultException;
+            }
+            catch (CommunicationException communicationException)
+            {
+                //Implementar log
+                throw communicationException;
+            }
+            catch (TimeoutException timeoutException)
+            {
+                //Implementar log
+                throw timeoutException;
+            }
         }
 
         public void ConnectLobby(string gamertag, string code)
         {
-            proxy.Connect(gamertag, code);
+            try
+            {
+                proxy.Connect(gamertag, code);
+            }
+            catch (FaultException faultException)
+            {
+                //Implementar log
+                throw faultException;
+            }
+            catch (CommunicationException communicationException)
+            {
+                //Implementar log
+                throw communicationException;
+            }
+            catch (TimeoutException timeoutException)
+            {
+                //Implementar log
+                throw timeoutException;
+            }
         }
 
         public void SendMessage(string code, string message, string gamertag)
         {
-            proxy.SendMessage(code, gamertag, message);
+            try
+            {
+                proxy.SendMessage(code, gamertag, message);
+            }
+            catch (FaultException faultException)
+            {
+                //Implementar log
+                throw faultException;
+            }
+            catch (CommunicationException communicationException)
+            {
+                //Implementar log
+                throw communicationException;
+            }
+            catch (TimeoutException timeoutException)
+            {
+                //Implementar log
+                throw timeoutException;
+            }
         }
         public void ReceiveMessage(string gamertag, string message)
         {
@@ -62,7 +135,25 @@ namespace ExamExplosion.Helpers
 
         public void DisconnectLobby(string lobbyCode, string gamertag)
         {
-            proxy.Disconnect(lobbyCode, gamertag);
+            try
+            {
+                proxy.Disconnect(lobbyCode, gamertag);
+            }
+            catch (FaultException faultException)
+            {
+                //Implementar log
+                throw faultException;
+            }
+            catch (CommunicationException communicationException)
+            {
+                //Implementar log
+                throw communicationException;
+            }
+            catch (TimeoutException timeoutException)
+            {
+                //Implementar log
+                throw timeoutException;
+            }
         }
 
         public void Repaint(Dictionary<string, bool> playerStatus)
@@ -81,7 +172,25 @@ namespace ExamExplosion.Helpers
 
         public void ChangeStatus(string lobbyCode, string gamertag, bool isReady)
         {
-            proxy.UpdatePlayerStatus(lobbyCode, gamertag, isReady);
+            try
+            {
+                proxy.UpdatePlayerStatus(lobbyCode, gamertag, isReady);
+            }
+            catch (FaultException faultException)
+            {
+                //Implementar log
+                throw faultException;
+            }
+            catch (CommunicationException communicationException)
+            {
+                //Implementar log
+                throw communicationException;
+            }
+            catch (TimeoutException timeoutException)
+            {
+                //Implementar log
+                throw timeoutException;
+            }
         }
 
         public void StartGame(Dictionary<string, bool> lobbyPlayers)
@@ -97,7 +206,25 @@ namespace ExamExplosion.Helpers
 
         public void PlayGame(string lobbyCode)
         {
-            proxy.PlayGame(lobbyCode);
+            try
+            {
+                proxy.PlayGame(lobbyCode);
+            }
+            catch (FaultException faultException)
+            {
+                //Implementar log
+                throw faultException;
+            }
+            catch (CommunicationException communicationException)
+            {
+                //Implementar log
+                throw communicationException;
+            }
+            catch (TimeoutException timeoutException)
+            {
+                //Implementar log
+                throw timeoutException;
+            }
         }
     }
 }
