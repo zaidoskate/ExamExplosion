@@ -158,6 +158,7 @@ namespace ExamExplosion
                 if(currentValidPassword)
                 {
                     UpdateNewPassword();
+                    clearFields();
                 }
                 else
                 {
@@ -165,6 +166,14 @@ namespace ExamExplosion
                     return;
                 }
             }
+        }
+
+        private void clearFields()
+        {
+            txtBoxNewPsswd.Text = "";
+            txtBoxCurrentPsswd.Text = "";
+            pswdBoxCurrentPsswd.Password = "";
+            pswdBoxNewPsswd.Password = "";
         }
 
         public void UpdateNewPassword()
