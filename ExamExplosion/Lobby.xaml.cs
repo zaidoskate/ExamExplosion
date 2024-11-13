@@ -96,6 +96,25 @@ namespace ExamExplosion
             this.lobbyCode = lobbyCode;
             this.lobbyCodelbl.Content = lobbyCode;
             InitializeLobbyManager();
+            try
+            {
+                lobbyManager.ConnectLobby(SessionManager.CurrentSession.gamertag, this.lobbyCode);
+            }
+            catch (FaultException faultException)
+            {
+                new AlertModal("Error", "Se produjo un error en el servidor").ShowDialog();
+                throw faultException;
+            }
+            catch (CommunicationException communicationException)
+            {
+                new AlertModal("Error de comunicación", "No se pudo conectar con el servidor.").ShowDialog();
+                throw communicationException;
+            }
+            catch (TimeoutException timeoutException)
+            {
+                new AlertModal("Tiempo de espera", "La conexión con el servidor ha expirado.").ShowDialog();
+                throw timeoutException;
+            }
             this.KeyDown += Lobby_KeyDown;
             this.Focusable = true;
             this.Focus();
@@ -125,6 +144,7 @@ namespace ExamExplosion
             imagePlayers.Add(player2Img);
             imagePlayers.Add(player3Img);
             imagePlayers.Add(player4Img);
+
         }
 
         private void OnClosing(object sender, System.ComponentModel.CancelEventArgs e)

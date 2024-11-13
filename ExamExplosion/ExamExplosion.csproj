@@ -215,6 +215,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Connected Services\ExamExplotionService\ExamExplosion.ExamExplotionService.Card.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\ExamExplotionService\ExamExplosion.ExamExplotionService.GameManagement.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

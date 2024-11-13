@@ -45,6 +45,7 @@ namespace ExamExplosion
             try
             {
                 gameManager.InitializeGame(gameCode, orderedGamertags);
+                gameManager.InitializeDeck(gameCode, orderedGamertags.Count);
             }
             catch (FaultException faultException)
             {
