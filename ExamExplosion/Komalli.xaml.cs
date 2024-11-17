@@ -37,7 +37,7 @@ namespace ExamExplosion
 
         private void InitializeKomalli()
         {
-            int playerId = SessionManager.CurrentSession.accountId;
+            int playerId = SessionManager.CurrentSession.userId;
             UpdatePoints();
 
             accessoriesPrice.Add(1, 0);

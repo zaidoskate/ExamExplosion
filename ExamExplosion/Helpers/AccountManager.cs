@@ -24,7 +24,7 @@ namespace ExamExplosion.Helpers
 
                 if (result)
                 {
-                    LoadActualSession(account);
+                    LoadActualSession(gamertag);
                 }
 
                 return result;
@@ -46,14 +46,15 @@ namespace ExamExplosion.Helpers
             }
         }
 
-        private static void LoadActualSession(AccountManagement account)
+        private static void LoadActualSession(string gamertag)
         {
             try
             {
-                int accountId = proxy.GetAccountIdFromCurrentSession();
-                SessionManager.CurrentSession.accountId = accountId;
-                SessionManager.CurrentSession.userId = accountId;  
-                SessionManager.CurrentSession.gamertag = account.Gamertag;
+                ExamExplotionService.PlayerManagerClient proxy = new ExamExplotionService.PlayerManagerClient();
+                PlayerManagement player = proxy.GetPlayerByGamertag(gamertag);
+                SessionManager.CurrentSession.accountId = player.AccountId;
+                SessionManager.CurrentSession.userId = player.UserId;  
+                SessionManager.CurrentSession.gamertag = gamertag;
                 SessionManager.CurrentSession.isGuest = false;
             }
             catch (FaultException faultException)
