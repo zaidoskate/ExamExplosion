@@ -5,6 +5,8 @@ using System.Net.Mail;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Configuration;
+using System.IO;
 
 namespace ExamExplosion.Helpers
 {
@@ -27,12 +29,14 @@ namespace ExamExplosion.Helpers
         {
             try
             {
+                string smtpUsername = Environment.GetEnvironmentVariable("SMTP_USERNAME");
+                string smtpPassword = Environment.GetEnvironmentVariable("SMTP_PASSWORD");
+
                 SmtpClient client = new SmtpClient("smtp.gmail.com", 587)
                 {
-                    Credentials = new NetworkCredential("explosionexam@gmail.com", "lrntedutudwrnzwo"),
+                    Credentials = new NetworkCredential(smtpUsername, smtpPassword),
                     EnableSsl = true
                 };
-
                 MailMessage mailMessage = new MailMessage
                 {
                     From = new MailAddress(email),

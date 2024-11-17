@@ -1,0 +1,31 @@
+﻿<Page x:Class="ExamExplosion.Catalogue"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ExamExplosion"
+      mc:Ignorable="d" 
+            d:DesignHeight="450" d:DesignWidth="800"
+      Title="Komalli">
+    <Grid Background="#FFFFF2CC">
+        <Label Content="Catalogo de cartas" Margin="0,18,0,324" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="60" HorizontalAlignment="Center" Width="480"/>
+
+        <Button HorizontalAlignment="Center" Margin="0,335,0,0" VerticalAlignment="Top" Height="74" Width="124" Background="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand" Click="GoHome">
+            <Grid>
+                <Image VerticalAlignment="Center" Source="pack://application:,,,/Images/ButtonOrange.png" Stretch="Fill" Height="59"/>
+                <Label Content="Regresar" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="26"/>
+            </Grid>
+        </Button>
+        <Button x:Name="btnShowRightCard" HorizontalAlignment="Left" Margin="673,187,0,0" VerticalAlignment="Top" Height="85" Width="74" Background="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand" Click="ShowRightCard">
+            <Image VerticalAlignment="Top" Source="pack://application:,,,/Images/rightArrow.png" Stretch="Fill" Height="80" Width="74"/>
+        </Button>
+        <Button x:Name="btnShowLeftCard" HorizontalAlignment="Left" Margin="42,197,0,0" VerticalAlignment="Top" Height="85" Width="74" Background="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand" Click="ShowLeftCard">
+            <Image VerticalAlignment="Center" Source="pack://application:,,,/Images/leftArrow.png" Stretch="Fill" Height="80" Width="74"/>
+        </Button>
+
+        <Image HorizontalAlignment="Left" Height="116" Margin="44,10,0,0" VerticalAlignment="Top" Width="107" Source="pack://application:,,,/Images/3cardsImage.png"/>
+        <TextBlock x:Name="txtBlockDescription" FontSize="20" FontFamily="pack://application:,,,/Fonts/#VT323" Text="Con esta carta puedes solicitar que un jugador te de una carta de su elección." TextWrapping="Wrap"  Margin="372,187,176,127"/>
+        <Image x:Name="imgCard" HorizontalAlignment="Left" Height="198" VerticalAlignment="Center" Width="262" Source="pack://application:,,,/CardsPackages/NormalPackage/Please.png" Margin="138,0,0,0"/>
+        <Label x:Name="lblTitleCard" FontSize="30" FontFamily="pack://application:,,,/Fonts/#VT323" Content="Paro" Margin="373,115,203,246"/>
+    </Grid>
+</Page>

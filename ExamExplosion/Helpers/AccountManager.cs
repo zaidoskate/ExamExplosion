@@ -54,6 +54,7 @@ namespace ExamExplosion.Helpers
                 SessionManager.CurrentSession.accountId = accountId;
                 SessionManager.CurrentSession.userId = accountId;  
                 SessionManager.CurrentSession.gamertag = account.Gamertag;
+                SessionManager.CurrentSession.isGuest = false;
             }
             catch (FaultException faultException)
             {

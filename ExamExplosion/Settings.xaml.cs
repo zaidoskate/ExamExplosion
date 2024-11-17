@@ -1,5 +1,6 @@
 ﻿using ExamExplosion.DataValidations;
 using ExamExplosion.Helpers;
+using log4net;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -26,11 +27,13 @@ namespace ExamExplosion
     public partial class Settings : Page
     {
         private bool newValidPassword = false;
-        
+        private ILog log;
+
         public Settings()
         {
             InitializeComponent();
             InitializeLanguages();
+            log = LogManager.GetLogger(typeof(App));
         }
 
         private void InitializeLanguages()
@@ -117,6 +120,7 @@ namespace ExamExplosion
                 txtBoxNewPsswd.BorderBrush = Brushes.Red;
                 pswdBoxNewPsswd.BorderBrush = Brushes.Red;
                 newValidPassword = false;
+                log.Info("Formato de contrasenia incorrecto.", ex);
                 return;
             }
         }
@@ -200,17 +204,20 @@ namespace ExamExplosion
             catch (FaultException faultException)
             {
                 new AlertModal("Error", "Se produjo un error en el servidor").ShowDialog();
-                throw faultException;
+                //throw faultException;
+                log.Error("Error del servidor (FaultException)", faultException);
             }
             catch (CommunicationException communicationException)
             {
                 new AlertModal("Error de comunicación", "No se pudo conectar con el servidor.").ShowDialog();
-                throw communicationException;
+                //throw communicationException;
+                log.Warn("Problema de comunicación con el servidor", communicationException);
             }
             catch (TimeoutException timeoutException)
             {
                 new AlertModal("Tiempo de espera", "La conexión con el servidor ha expirado.").ShowDialog();
-                throw timeoutException;
+                //throw timeoutException;
+                log.Warn("Timeout al intentar conectar con el servidor", timeoutException);
             }
         }
     }

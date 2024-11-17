@@ -1,6 +1,7 @@
 ﻿using ExamExplosion.DataValidations;
 using ExamExplosion.Helpers;
 using ExamExplosion.Models;
+using log4net;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.Tracing;
@@ -32,11 +33,12 @@ namespace ExamExplosion
         string password;
         string repeatPassword;
         bool[] txtBoxesStatus = new bool[6] { false, false, false, false, false, false };
+        private ILog log;
 
         public AccountCreation()
         {
             InitializeComponent();
-
+            log = LogManager.GetLogger(typeof(App));
         }
         private void CreateAccount()
         {
@@ -66,17 +68,20 @@ namespace ExamExplosion
             catch (FaultException faultException)
             {
                 new AlertModal("Error", "Se produjo un error en el servidor").ShowDialog();
-                throw faultException;
+                //throw faultException;
+                log.Error("Error del servidor (FaultException)", faultException);
             }
             catch (CommunicationException communicationException)
             {
                 new AlertModal("Error de comunicación", "No se pudo conectar con el servidor.").ShowDialog();
-                throw communicationException;
+                //throw communicationException;
+                log.Warn("Problema de comunicación con el servidor", communicationException);
             }
             catch (TimeoutException timeoutException)
             {
                 new AlertModal("Tiempo de espera", "La conexión con el servidor ha expirado.").ShowDialog();
-                throw timeoutException;
+                //throw timeoutException;
+                log.Warn("Timeout al intentar conectar con el servidor", timeoutException);
             }
         }
 
@@ -194,11 +199,11 @@ namespace ExamExplosion
             gamertag = txtBoxGamertag.Text;
             gamertag = txtBoxGamertag.Text;
             gamertag = txtBoxGamertag.Text;
-            if (gamertag.Length >= 50)
+            if (gamertag.Length >= 10)
             {
-                gamertag = gamertag.Substring(0, 50);
+                gamertag = gamertag.Substring(0, 10);
                 txtBoxGamertag.Text = gamertag;
-                txtBoxGamertag.SelectionStart = 50;
+                txtBoxGamertag.SelectionStart = 20;
             }
             try
             { 
@@ -314,6 +319,7 @@ namespace ExamExplosion
             {
                 if(value == false)
                 {
+                    log.Info("Datos de registro de usuario incompletos o con errores");
                     new AlertModal("Datos incompletos","Corrige los campos que sean necesarios").ShowDialog();
                     return;
                 }
@@ -345,17 +351,20 @@ namespace ExamExplosion
             catch (FaultException faultException)
             {
                 new AlertModal("Error", "Se produjo un error en el servidor").ShowDialog();
-                throw faultException;
+                //throw faultException;
+                log.Error("Error del servidor (FaultException)", faultException);
             }
             catch (CommunicationException communicationException)
             {
                 new AlertModal("Error de comunicación", "No se pudo conectar con el servidor.").ShowDialog();
-                throw communicationException;
+                //throw communicationException;
+                log.Warn("Problema de comunicación con el servidor", communicationException);
             }
             catch (TimeoutException timeoutException)
             {
                 new AlertModal("Tiempo de espera", "La conexión con el servidor ha expirado.").ShowDialog();
-                throw timeoutException;
+                //throw timeoutException;
+                log.Warn("Timeout al intentar conectar con el servidor", timeoutException);
             }
         }
         private void SendCode()

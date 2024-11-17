@@ -1,6 +1,7 @@
 ﻿using ExamExplosion.ExamExplotionService;
 using ExamExplosion.Helpers;
 using ExamExplosion.Models;
+using log4net;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,6 +34,7 @@ namespace ExamExplosion
         private Dictionary<string, bool> playerReadyStatus = new Dictionary<string, bool>();
         private List<Label> labelsGamertags = new List<Label>();
         private List<Image> imagePlayers = new List<Image>();
+        private ILog log;
         public Lobby(int maxPlayers, int timePerTurn, int maxHP, string owner)
         {
             lobbyManager = new LobbyManager(this);
@@ -58,6 +60,8 @@ namespace ExamExplosion
             this.KeyDown += Lobby_KeyDown;
             this.Focusable = true;
             this.Focus();
+
+            log = LogManager.GetLogger(typeof(App));
         }
 
         private void InitializeLobby(Game game)
@@ -65,6 +69,42 @@ namespace ExamExplosion
             try
             {
                 lobbyCode = lobbyManager.CreateLobby(game);
+                lobbyManager.ConnectLobby(SessionManager.CurrentSession.gamertag, this.lobbyCode);
+            }
+            catch (FaultException faultException)
+            {
+                new AlertModal("Error", "Se produjo un error en el servidor").ShowDialog();
+                //throw faultException;
+                log.Error("Error del servidor (FaultException)", faultException);
+            }
+            catch (CommunicationException communicationException)
+            {
+                new AlertModal("Error de comunicación", "No se pudo conectar con el servidor.").ShowDialog();
+                //throw communicationException;
+                log.Warn("Problema de comunicación con el servidor", communicationException);
+            }
+            catch (TimeoutException timeoutException)
+            {
+                new AlertModal("Tiempo de espera", "La conexión con el servidor ha expirado.").ShowDialog();
+                //throw timeoutException;
+                log.Warn("Timeout al intentar conectar con el servidor", timeoutException);
+            }
+        }
+
+        public Lobby(string lobbyCode)
+        {
+            lobbyManager = new LobbyManager(this);
+            InitializeComponent();
+            var parentWindow = (MainWindow)Application.Current.MainWindow;
+            if (parentWindow != null)
+            {
+                parentWindow.Closing += OnClosing;
+            }
+            this.lobbyCode = lobbyCode;
+            this.lobbyCodelbl.Content = lobbyCode;
+            InitializeLobbyManager();
+            try
+            {
                 lobbyManager.ConnectLobby(SessionManager.CurrentSession.gamertag, this.lobbyCode);
             }
             catch (FaultException faultException)
@@ -82,20 +122,6 @@ namespace ExamExplosion
                 new AlertModal("Tiempo de espera", "La conexión con el servidor ha expirado.").ShowDialog();
                 throw timeoutException;
             }
-        }
-
-        public Lobby(string lobbyCode)
-        {
-            lobbyManager = new LobbyManager(this);
-            InitializeComponent();
-            var parentWindow = (MainWindow)Application.Current.MainWindow;
-            if (parentWindow != null)
-            {
-                parentWindow.Closing += OnClosing;
-            }
-            this.lobbyCode = lobbyCode;
-            this.lobbyCodelbl.Content = lobbyCode;
-            InitializeLobbyManager();
             this.KeyDown += Lobby_KeyDown;
             this.Focusable = true;
             this.Focus();
@@ -125,6 +151,7 @@ namespace ExamExplosion
             imagePlayers.Add(player2Img);
             imagePlayers.Add(player3Img);
             imagePlayers.Add(player4Img);
+
         }
 
         private void OnClosing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -136,17 +163,20 @@ namespace ExamExplosion
             catch (FaultException faultException)
             {
                 new AlertModal("Error", "Se produjo un error en el servidor").ShowDialog();
-                throw faultException;
+                //throw faultException;
+                log.Error("Error del servidor (FaultException)", faultException);
             }
             catch (CommunicationException communicationException)
             {
                 new AlertModal("Error de comunicación", "No se pudo conectar con el servidor.").ShowDialog();
-                throw communicationException;
+                //throw communicationException;
+                log.Warn("Problema de comunicación con el servidor", communicationException);
             }
             catch (TimeoutException timeoutException)
             {
                 new AlertModal("Tiempo de espera", "La conexión con el servidor ha expirado.").ShowDialog();
-                throw timeoutException;
+                //throw timeoutException;
+                log.Warn("Timeout al intentar conectar con el servidor", timeoutException);
             }
         }
 
@@ -200,17 +230,20 @@ namespace ExamExplosion
             catch (FaultException faultException)
             {
                 new AlertModal("Error", "Se produjo un error en el servidor").ShowDialog();
-                throw faultException;
+                //throw faultException;
+                log.Error("Error del servidor (FaultException)", faultException);
             }
             catch (CommunicationException communicationException)
             {
                 new AlertModal("Error de comunicación", "No se pudo conectar con el servidor.").ShowDialog();
-                throw communicationException;
+                //throw communicationException;
+                log.Warn("Problema de comunicación con el servidor", communicationException);
             }
             catch (TimeoutException timeoutException)
             {
                 new AlertModal("Tiempo de espera", "La conexión con el servidor ha expirado.").ShowDialog();
-                throw timeoutException;
+                //throw timeoutException;
+                log.Warn("Timeout al intentar conectar con el servidor", timeoutException);
             }
         }
         private void StartButton_Click(object sender, RoutedEventArgs e)
@@ -236,17 +269,20 @@ namespace ExamExplosion
                     catch (FaultException faultException)
                     {
                         new AlertModal("Error", "Se produjo un error en el servidor").ShowDialog();
-                        throw faultException;
+                        //throw faultException;
+                        log.Error("Error del servidor (FaultException)", faultException);
                     }
                     catch (CommunicationException communicationException)
                     {
                         new AlertModal("Error de comunicación", "No se pudo conectar con el servidor.").ShowDialog();
-                        throw communicationException;
+                        //throw communicationException;
+                        log.Warn("Problema de comunicación con el servidor", communicationException);
                     }
                     catch (TimeoutException timeoutException)
                     {
                         new AlertModal("Tiempo de espera", "La conexión con el servidor ha expirado.").ShowDialog();
-                        throw timeoutException;
+                        //throw timeoutException;
+                        log.Warn("Timeout al intentar conectar con el servidor", timeoutException);
                     }
                 }
             }
@@ -261,17 +297,20 @@ namespace ExamExplosion
             catch (FaultException faultException)
             {
                 new AlertModal("Error", "Se produjo un error en el servidor").ShowDialog();
-                throw faultException;
+                //throw faultException;
+                log.Error("Error del servidor (FaultException)", faultException);
             }
             catch (CommunicationException communicationException)
             {
                 new AlertModal("Error de comunicación", "No se pudo conectar con el servidor.").ShowDialog();
-                throw communicationException;
+                //throw communicationException;
+                log.Warn("Problema de comunicación con el servidor", communicationException);
             }
             catch (TimeoutException timeoutException)
             {
                 new AlertModal("Tiempo de espera", "La conexión con el servidor ha expirado.").ShowDialog();
-                throw timeoutException;
+                //throw timeoutException;
+                log.Warn("Timeout al intentar conectar con el servidor", timeoutException);
             }
         }
 
@@ -318,17 +357,20 @@ namespace ExamExplosion
             catch (FaultException faultException)
             {
                 new AlertModal("Error", "Se produjo un error en el servidor").ShowDialog();
-                throw faultException;
+                //throw faultException;
+                log.Error("Error del servidor (FaultException)", faultException);
             }
             catch (CommunicationException communicationException)
             {
                 new AlertModal("Error de comunicación", "No se pudo conectar con el servidor.").ShowDialog();
-                throw communicationException;
+                //throw communicationException;
+                log.Warn("Problema de comunicación con el servidor", communicationException);
             }
             catch (TimeoutException timeoutException)
             {
                 new AlertModal("Tiempo de espera", "La conexión con el servidor ha expirado.").ShowDialog();
-                throw timeoutException;
+                //throw timeoutException;
+                log.Warn("Timeout al intentar conectar con el servidor", timeoutException);
             }
             finally
             {

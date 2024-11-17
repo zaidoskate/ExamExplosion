@@ -40,6 +40,8 @@ using System.Windows;
                                               // aplicación o diccionarios de recursos específicos del tema)
 )]
 
+//Archivo log4net.config para la configuracion de logs
+[assembly: log4net.Config.XmlConfigurator(ConfigFile = "log4net.config", Watch = true)]
 
 // La información de versión de un ensamblado consta de los cuatro valores siguientes:
 //

@@ -50,10 +50,28 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net, Version=3.0.3.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>packages\log4net.3.0.3\lib\net462\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Runtime.CompilerServices.Unsafe.4.5.3\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -81,6 +99,9 @@
     <Compile Include="Board.xaml.cs">
       <DependentUpon>Board.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Catalogue.xaml.cs">
+      <DependentUpon>Catalogue.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\ExamExplotionService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -92,10 +113,16 @@
     <Compile Include="Helpers\AccountManager.cs" />
     <Compile Include="Helpers\EmailVerificationCode.cs" />
     <Compile Include="Helpers\GameManager.cs" />
+    <Compile Include="Helpers\GuestManager.cs" />
     <Compile Include="Helpers\LobbyManager.cs" />
+    <Compile Include="Helpers\PlayerManager.cs" />
+    <Compile Include="Helpers\PurchasedAccessoryManager.cs" />
     <Compile Include="Helpers\SessionManager.cs" />
     <Compile Include="HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Komalli.xaml.cs">
+      <DependentUpon>Komalli.xaml</DependentUpon>
     </Compile>
     <Compile Include="Lobby.xaml.cs">
       <DependentUpon>Lobby.xaml</DependentUpon>
@@ -103,8 +130,10 @@
     <Compile Include="Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\Accessory.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\Game.cs" />
+    <Compile Include="Models\PurchasedAccessory.cs" />
     <Compile Include="Properties\Resources.es-MX.Designer.cs">
       <DependentUpon>Resources.es-MX.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -138,6 +167,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Catalogue.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="EmailVerification.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -155,6 +188,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="HomePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Komalli.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -215,7 +252,16 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Connected Services\ExamExplotionService\ExamExplosion.ExamExplotionService.AccessoryManagement.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ExamExplotionService\ExamExplosion.ExamExplotionService.Card.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\ExamExplotionService\ExamExplosion.ExamExplotionService.GameManagement.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ExamExplotionService\ExamExplosion.ExamExplotionService.GuestManagement.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\ExamExplotionService\ExamExplosion.ExamExplotionService.PlayerManagement.datasource">
@@ -233,10 +279,66 @@
     <None Include="Connected Services\ExamExplotionService\item3.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ExamExplotionService\item41.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Connected Services\ExamExplotionService\ServiceImplementation.wsdl" />
+    <Resource Include="Images\coin.png" />
+    <Resource Include="CardsPackages\GraduatePackage\examBomb.png" />
+    <Resource Include="CardsPackages\GraduatePackage\exempt.png" />
+    <Resource Include="CardsPackages\GraduatePackage\leftTeam.png" />
+    <Resource Include="CardsPackages\GraduatePackage\please.png" />
+    <Resource Include="CardsPackages\GraduatePackage\profeA.png" />
+    <Resource Include="CardsPackages\GraduatePackage\profeM.png" />
+    <Resource Include="CardsPackages\GraduatePackage\profeO.png" />
+    <Resource Include="CardsPackages\GraduatePackage\profeR.png" />
+    <Resource Include="CardsPackages\GraduatePackage\profeS.png" />
+    <Resource Include="CardsPackages\GraduatePackage\reRegistration.png" />
+    <Resource Include="CardsPackages\GraduatePackage\shuffle.png" />
+    <Resource Include="CardsPackages\GraduatePackage\takeFromBelow.png" />
+    <Resource Include="CardsPackages\GraduatePackage\viewTheFuture.png" />
+    <Resource Include="CardsPackages\NormalPackage\examBomb.png" />
+    <Resource Include="CardsPackages\NormalPackage\exempt.png" />
+    <Resource Include="CardsPackages\NormalPackage\leftTeam.png" />
+    <Resource Include="CardsPackages\NormalPackage\please.png" />
+    <Resource Include="CardsPackages\NormalPackage\reRegistration.png" />
+    <Resource Include="CardsPackages\NormalPackage\shuffle.png" />
+    <Resource Include="CardsPackages\NormalPackage\takeFromBelow.png" />
+    <Resource Include="CardsPackages\NormalPackage\viewTheFuture.png" />
+    <Resource Include="CardsPackages\HatPackage\examBomb.png" />
+    <Resource Include="CardsPackages\HatPackage\exempt.png" />
+    <Resource Include="CardsPackages\HatPackage\leftTeam.png" />
+    <Resource Include="CardsPackages\HatPackage\please.png" />
+    <Resource Include="CardsPackages\HatPackage\reRegistration.png" />
+    <Resource Include="CardsPackages\HatPackage\shuffle.png" />
+    <Resource Include="CardsPackages\HatPackage\takeFromBelow.png" />
+    <Resource Include="CardsPackages\HatPackage\viewTheFuture.png" />
+    <Resource Include="CardsPackages\NormalPackage\profeA.png" />
+    <Resource Include="CardsPackages\NormalPackage\profeM.png" />
+    <Resource Include="CardsPackages\NormalPackage\profeO.png" />
+    <Resource Include="CardsPackages\NormalPackage\profeR.png" />
+    <Resource Include="CardsPackages\NormalPackage\profeS.png" />
+    <Resource Include="CardsPackages\CapPackages\examBomb.png" />
+    <Resource Include="CardsPackages\CapPackages\exempt.png" />
+    <Resource Include="CardsPackages\CapPackages\leftTeam.png" />
+    <Resource Include="CardsPackages\CapPackages\please.png" />
+    <Resource Include="CardsPackages\CapPackages\profeA.png" />
+    <Resource Include="CardsPackages\CapPackages\profeM.png" />
+    <Resource Include="CardsPackages\CapPackages\profeO.png" />
+    <Resource Include="CardsPackages\CapPackages\profeR.png" />
+    <Resource Include="CardsPackages\CapPackages\profeS.png" />
+    <Resource Include="CardsPackages\CapPackages\reRegistration.png" />
+    <Resource Include="CardsPackages\CapPackages\shuffle.png" />
+    <Resource Include="CardsPackages\CapPackages\takeFromBelow.png" />
+    <Resource Include="CardsPackages\CapPackages\viewTheFuture.png" />
+    <Resource Include="CardsPackages\HatPackage\profeA.png" />
+    <Resource Include="CardsPackages\HatPackage\profeM.png" />
+    <Resource Include="CardsPackages\HatPackage\profeO.png" />
+    <Resource Include="CardsPackages\HatPackage\profeR.png" />
+    <Resource Include="CardsPackages\HatPackage\profeS.png" />
+    <Resource Include="Images\leftArrow.png" />
+    <Resource Include="Images\rightArrow.png" />
+    <Content Include="log4net.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -349,5 +451,6 @@
   <ItemGroup>
     <Resource Include="Images\Stack.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

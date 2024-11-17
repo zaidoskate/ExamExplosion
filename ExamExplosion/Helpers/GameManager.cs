@@ -15,6 +15,7 @@ namespace ExamExplosion.Helpers
         private static ExamExplotionService.GameManagerClient proxy = null;
         private InstanceContext context = null;
         private Board boardPage = null;
+        private Stack<Card> deck = new Stack<Card>();
 
         public GameManager(Board boardPage)
         {
@@ -132,6 +133,38 @@ namespace ExamExplosion.Helpers
             {
                 boardPage.ResetTimer();
             });
+        }
+
+        public Card DrawCard()
+        {
+            return deck.Count > 0 ? deck.Pop() : null;
+        }
+
+        public void ShuffleDeck()
+        {
+            var cards = deck.ToList();
+            //cards.Shuffle(); NO EXISTE EL METODO SHUFFLE PARA cards
+            deck = new Stack<Card>(cards);
+        }
+
+        public void AddCardToDeck(Card card)
+        {
+            deck.Push(card);
+        }
+
+        public Card GetTopCard()
+        {
+            return deck.Peek();
+        }
+
+        public void InitializeDeck(string gameCode, int playerCount)
+        {
+            proxy.InitializeDeck(gameCode, playerCount);
+        }
+
+        private void AddStandardCardsToDeck(int cardCount)
+        {
+            throw new NotImplementedException();
         }
     }
 }

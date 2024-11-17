@@ -60,13 +60,8 @@ namespace XUnitTest
         [Fact]
         public void TestVerifyExistingEmailSuccess()
         {
-<<<<<<< HEAD
-            string emailExisting = "jesustlapahernandez@hotmail.com";
-            bool result = await proxy.VerifyExistingEmailAsync(emailExisting);
-=======
             string emailExisting = "zaidoskate@hotmail.com";
             bool result = proxy.VerifyExistingEmail(emailExisting);
->>>>>>> 3340f95c2c984b33e42aea6e3a7ceeaea69b8b3f
 
             Assert.True(result);
         }

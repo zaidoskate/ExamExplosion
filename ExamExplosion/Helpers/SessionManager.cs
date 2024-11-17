@@ -22,13 +22,14 @@ namespace ExamExplosion.Helpers
         private static SessionInfo _currentSession;
     }
 
-
     public class SessionInfo
     {
         public string gamertag { get; set; }
         public string currentLobbyCode { get; set; }
         public int userId { get; set; }
-        public int accountId {  get; set; }
+        public int accountId { get; set; }
         public bool isLobbyOwner { get; set; }
+        public bool isGuest { get; set; }
+
     }
 }

@@ -45,7 +45,10 @@ namespace ExamExplosion
 
         private void GoKomalli(object sender, RoutedEventArgs e)
         {
-
+            if (this.NavigationService != null)
+            {
+                this.NavigationService.Navigate(new Komalli());
+            }
         }
 
         private void GoLeaderboard(object sender, RoutedEventArgs e)
@@ -84,6 +87,14 @@ namespace ExamExplosion
             if (this.NavigationService != null)
             {
                 this.NavigationService.Navigate(new Settings());
+            }
+        }
+
+        private void SeeCatalogue(object sender, RoutedEventArgs e)
+        {
+            if (this.NavigationService != null)
+            {
+                this.NavigationService.Navigate(new Catalogue());
             }
         }
     }

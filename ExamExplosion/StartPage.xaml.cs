@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ExamExplosion.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -32,9 +33,22 @@ namespace ExamExplosion
         }
         private void DisplayJoinLobby(object sender, RoutedEventArgs e)
         {
+            bool newGuestAdded = GuestManager.AddGuest();
+            if (!newGuestAdded)
+            {
+                new AlertModal("Error","Ha ocurrido un error, crea una cuenta o intentalo mas tarde.").ShowDialog();
+                return;
+            }
             if (this.NavigationService != null)
             {
                 this.NavigationService.Navigate(new GameCode());
+                var window = Window.GetWindow(this);
+                if (window != null)
+                {
+                    window.Height = 420;
+                    window.Width = 420;
+                    window.SizeToContent = SizeToContent.Manual;
+                }
             }
 
         }

@@ -1,5 +1,6 @@
 ﻿using ExamExplosion.ExamExplotionService;
 using ExamExplosion.Helpers;
+using log4net;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,12 +24,13 @@ namespace ExamExplosion
     public partial class GameCode : Page
     {
         private LobbyManager lobbyManager = null;
-        
+        private ILog log;
 
         public GameCode()
         {
             InitializeComponent();
             lobbyManager = new LobbyManager();
+            log = LogManager.GetLogger(typeof(App));
         }
 
 
@@ -36,7 +38,14 @@ namespace ExamExplosion
         {
             if (this.NavigationService != null)
             {
-                this.NavigationService.Navigate(new HomePage());
+                if (SessionManager.CurrentSession.isGuest)
+                {
+                    this.NavigationService.Navigate(new StartPage());
+                }
+                else
+                {
+                    this.NavigationService.Navigate(new HomePage());
+                }
                 var window = Window.GetWindow(this);
                 if (window != null)
                 {
@@ -83,17 +92,20 @@ namespace ExamExplosion
                 catch (FaultException faultException)
                 {
                     new AlertModal("Error", "Se produjo un error en el servidor").ShowDialog();
-                    throw faultException;
+                    //throw faultException;
+                    log.Error("Error del servidor (FaultException)", faultException);
                 }
                 catch (CommunicationException communicationException)
                 {
                     new AlertModal("Error de comunicación", "No se pudo conectar con el servidor.").ShowDialog();
-                    throw communicationException;
+                    //throw communicationException;
+                    log.Warn("Problema de comunicación con el servidor", communicationException);
                 }
                 catch (TimeoutException timeoutException)
                 {
                     new AlertModal("Tiempo de espera", "La conexión con el servidor ha expirado.").ShowDialog();
-                    throw timeoutException;
+                    //throw timeoutException;
+                    log.Warn("Timeout al intentar conectar con el servidor", timeoutException);
                 }
             }
             return false;
