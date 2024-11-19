@@ -7,7 +7,7 @@
         xmlns:p ="clr-namespace:ExamExplosion.Properties"
         mc:Ignorable="d"
         Height="450" Width="800"
-        Background="#FFF2CC">
+        Background="#9f9354">
     <Grid>
         <Image Source="pack://application:,,,/Images/Exam.png" Width="200" HorizontalAlignment="Left" RenderTransformOrigin="1.118,1.155" Margin="50,0,0,0"></Image>
         <Image Source="pack://application:,,,/Images/BackCard.png" Width="150" HorizontalAlignment="Right" RenderTransformOrigin="1.118,1.155" Margin="0,-25,112,175"/>

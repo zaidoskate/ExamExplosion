@@ -8,7 +8,7 @@
       xmlns:p ="clr-namespace:ExamExplosion.Properties"
       d:DesignHeight="720" d:DesignWidth="1200"
       Title="ExamExplosion"
-      Background="#FFF2CC">
+      Background="#9f9354">
 
     <Grid>
         <Grid Width="750" VerticalAlignment="Top">

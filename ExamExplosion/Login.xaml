@@ -7,8 +7,24 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="LoginPage">
+    <Page.Background>
+        <ImageBrush ImageSource="pack://application:,,,/Images/Landscape1.jpeg" Stretch="UniformToFill" />
+    </Page.Background>
+    <Page.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+        </Style>
+    </Page.Resources>
 
-    <Grid Background="#FFFFF2CC">
+    <Grid>
         <Label Content="Log In" Margin="658,10,0,306" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="48" HorizontalAlignment="Left"/>
         <Label Content="Gamertag:" Margin="269,98,0,286" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="20" HorizontalAlignment="Left"/>
         <TextBox x:Name="txtBoxGamertag" HorizontalAlignment="Center" FontSize="30" FontFamily="pack://application:,,,/Fonts/#VT323" Margin="0,132,0,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="262" Height="32">

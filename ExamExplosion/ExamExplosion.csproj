@@ -335,6 +335,7 @@
     <Resource Include="CardsPackages\HatPackage\profeS.png" />
     <Resource Include="Images\leftArrow.png" />
     <Resource Include="Images\rightArrow.png" />
+    <Resource Include="Images\Landscape1.jpeg" />
     <Content Include="log4net.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
