@@ -11,38 +11,42 @@
     <Grid>
         <Image Source="pack://application:,,,/Images/Exam.png" Width="200" HorizontalAlignment="Left" RenderTransformOrigin="1.118,1.155" Margin="50,0,0,0"></Image>
         <Label x:Name="Leaderboardlbl" Content="Leaderboard" HorizontalAlignment="Center" VerticalAlignment="Top" VerticalContentAlignment="Center" FontSize="50" FontFamily="pack://application:,,,/Fonts/#VT323" Margin="0,30,0,0"/>
-        <Grid>
-            <Label x:Name="Gamertaglbl" Content="Gamertag" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" FontSize="30" FontFamily="pack://application:,,,/Fonts/#VT323" Margin="0,0,150,150"/>
-            <Label x:Name="Winslbl" Content="Wins" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" FontSize="30" FontFamily="pack://application:,,,/Fonts/#VT323" Margin="180,0,0,150"/>
-            <Grid>
-                <Label x:Name="Player1lbl" Content="Player 1" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center" FontSize="30" FontFamily="pack://application:,,,/Fonts/#VT323" Margin="279,157,0,0"/>
-                <Label x:Name="Player2lbl" Content="Player 2" HorizontalAlignment="Left" VerticalAlignment="Center" VerticalContentAlignment="Center" FontSize="30" FontFamily="pack://application:,,,/Fonts/#VT323" Margin="279,0,0,0"/>
-                <Label x:Name="Player3lbl" Content="Player 3" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center" FontSize="30" FontFamily="pack://application:,,,/Fonts/#VT323" Margin="279,242,0,0"/>
-                <Label x:Name="Player4lbl" Content="Player 4" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center" FontSize="30" FontFamily="pack://application:,,,/Fonts/#VT323" Margin="279,287,0,0"/>
-                <Label x:Name="Player5lbl" Content="Player 5" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center" FontSize="30" FontFamily="pack://application:,,,/Fonts/#VT323" Margin="279,327,0,0"/>
-                <Label x:Name="Player1Winslbl" Content="0" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center" FontSize="30" FontFamily="pack://application:,,,/Fonts/#VT323" Margin="437,157,0,0"/>
-                <Label x:Name="Player2Winslbl" Content="0" HorizontalAlignment="Left" VerticalAlignment="Center" VerticalContentAlignment="Center" FontSize="30" FontFamily="pack://application:,,,/Fonts/#VT323" Margin="437,0,0,0"/>
-                <Label x:Name="Player3Winslbl" Content="0" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center" FontSize="30" FontFamily="pack://application:,,,/Fonts/#VT323" Margin="437,242,0,0"/>
-                <Label x:Name="Player4Winslbl" Content="0" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center" FontSize="30" FontFamily="pack://application:,,,/Fonts/#VT323" Margin="437,287,0,0"/>
-                <Label x:Name="Player5Winslbl" Content="0" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center" FontSize="30" FontFamily="pack://application:,,,/Fonts/#VT323" Margin="437,327,0,0"/>
-            </Grid>
+        <Grid Margin="255,95,264,15">
+            <Label Content="Gamertag" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center" FontSize="30" FontFamily="pack://application:,,,/Fonts/#VT323" Margin="10,26,0,0"/>
+            <Label Content="Wins" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center" FontSize="30" FontFamily="pack://application:,,,/Fonts/#VT323" Margin="202,26,0,0"/>
+            <ItemsControl x:Name="itemsCtrlLeaderboard" Margin="16,80,0,0">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="0,5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*" />
+                                <ColumnDefinition Width="1*" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="{Binding Key}" FontSize="24" FontFamily="pack://application:,,,/Fonts/#VT323" />
+                            <TextBlock Text="{Binding Value}" FontSize="24" FontFamily="pack://application:,,,/Fonts/#VT323" Grid.Column="1" HorizontalAlignment="Center" />
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
         </Grid>
-        <Button  Width="50" Height="50" Background="Transparent" BorderBrush="Transparent" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,150,0" Cursor="Hand">
-            <Image></Image>
-        </Button>
-        <Label x:Name="OnlyFriendslbl" Content="Only friends" HorizontalAlignment="Right" VerticalAlignment="Center" VerticalContentAlignment="Center" FontSize="30" FontFamily="pack://application:,,,/Fonts/#VT323" Margin="0,0,10,0" />
-        
-        <Button Width="150" Height="100" Background="Transparent" BorderBrush="Transparent" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,150,20,0" Cursor="Hand">
+
+        <CheckBox x:Name="checkOnlyFriends" Content="Only friends" HorizontalAlignment="Left" Margin="631,202,0,0" VerticalAlignment="Top" FontSize="15" FontFamily="pack://application:,,,/Fonts/#VT323">
+            <CheckBox.LayoutTransform>
+                <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
+            </CheckBox.LayoutTransform>
+        </CheckBox>
+        <Button Width="150" Height="100" Background="Transparent" BorderBrush="Transparent" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,150,20,0" Cursor="Hand" Click="UpdateLeaderboard">
             <Grid>
                 <Image Source="pack://application:,,,/Images/ButtonGreen.png" Width="150" ></Image>
                 <Label x:Name="Showlbl" Content="Show" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="30" FontFamily="pack://application:,,,/Fonts/#VT323" Foreground="White"/>
             </Grid>
         </Button>
-        <Button Width="150" Height="100" Background="Transparent" BorderBrush="Transparent" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,320,20,0" Cursor="Hand">
+        <Button Width="150" Height="100" Background="Transparent" BorderBrush="Transparent" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,320,20,0" Cursor="Hand" Click="GoHome">
             <Grid>
                 <Image Source="pack://application:,,,/Images/ButtonOrange.png" Width="150" ></Image>
                 <Label x:Name="Exitlbl" Content="Leave" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="30" FontFamily="pack://application:,,,/Fonts/#VT323" Foreground="White"/>
             </Grid>
         </Button>
+        <CheckBox Content="" HorizontalAlignment="Left" Margin="-74,518,0,0" VerticalAlignment="Top" Height="40" Width="34"/>
     </Grid>
 </Page>
