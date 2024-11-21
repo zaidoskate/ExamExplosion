@@ -10,49 +10,58 @@ namespace ExamExplosion.Helpers
 {
     public class PurchasedAccessoryManager
     {
-        private static ExamExplotionService.AccessoryManagerClient proxy;
-
         public static List<int> GetPurchasedAccessoriesByPlayer(int playerId)
         {
-            proxy = new ExamExplotionService.AccessoryManagerClient();
-            var purchasedAccessories = proxy.GetPurchasedAccessories(playerId);
-            proxy.Close();
-            return purchasedAccessories.ToList();
+            using (var proxy = new AccessoryManagerClient())
+            {
+                var purchasedAccessories = proxy.GetPurchasedAccessories(playerId);
+                return purchasedAccessories.ToList();
+            }
         }
+
         public static Accessory GetAccessoryInUse(int playerId)
         {
-            proxy = new ExamExplotionService.AccessoryManagerClient();
-            AccessoryManagement purchasedAccessory = proxy.GetAccessoryInUse(playerId);
-            proxy.Close();
-            Accessory accessory = new Accessory();
-            accessory.accessoryId = purchasedAccessory.AccessoryId;
-            accessory.name = purchasedAccessory.AccessoryName;
-            accessory.path = purchasedAccessory.Path;
-            return accessory;
+            using (var proxy = new AccessoryManagerClient())
+            {
+                AccessoryManagement purchasedAccessory = proxy.GetAccessoryInUse(playerId);
+                Accessory accessory = new Accessory
+                {
+                    accessoryId = purchasedAccessory.AccessoryId,
+                    name = purchasedAccessory.AccessoryName,
+                    path = purchasedAccessory.Path
+                };
+                return accessory;
+            }
         }
+
         public static bool PurchaseAccessory(PurchasedAccessory purchasedAccessory)
         {
-            PurchasedAccessoryManagement purchasedAccessoryManagement = new PurchasedAccessoryManagement();
-            purchasedAccessoryManagement.AccesoryId = purchasedAccessory.accessoryId;
-            purchasedAccessoryManagement.PlayerId = purchasedAccessory.playerId;
-            purchasedAccessoryManagement.InUse = purchasedAccessoryManagement.InUse;
+            PurchasedAccessoryManagement purchasedAccessoryManagement = new PurchasedAccessoryManagement
+            {
+                AccesoryId = purchasedAccessory.accessoryId,
+                PlayerId = purchasedAccessory.playerId,
+                InUse = purchasedAccessory.inUse
+            };
 
-            proxy = new ExamExplotionService.AccessoryManagerClient();
-            bool purchasedAccessoryAdded = proxy.PurchaseAccessory(purchasedAccessoryManagement);
-            proxy.Close();
-            return purchasedAccessoryAdded;
+            using (var proxy = new AccessoryManagerClient())
+            {
+                return proxy.PurchaseAccessory(purchasedAccessoryManagement);
+            }
         }
+
         public static bool UseAccessory(PurchasedAccessory purchasedAccessory)
         {
-            PurchasedAccessoryManagement purchasedAccessoryManagement = new PurchasedAccessoryManagement();
-            purchasedAccessoryManagement.AccesoryId = purchasedAccessory.accessoryId;
-            purchasedAccessoryManagement.PlayerId = purchasedAccessory.playerId;
-            purchasedAccessoryManagement.InUse = purchasedAccessoryManagement.InUse;
+            PurchasedAccessoryManagement purchasedAccessoryManagement = new PurchasedAccessoryManagement
+            {
+                AccesoryId = purchasedAccessory.accessoryId,
+                PlayerId = purchasedAccessory.playerId,
+                InUse = purchasedAccessory.inUse
+            };
 
-            proxy = new ExamExplotionService.AccessoryManagerClient();
-            bool purchasedAccessoryAdded = proxy.SetAccessoryInUse(purchasedAccessoryManagement);
-            proxy.Close();
-            return purchasedAccessoryAdded;
+            using (var proxy = new AccessoryManagerClient())
+            {
+                return proxy.SetAccessoryInUse(purchasedAccessoryManagement);
+            }
         }
     }
 }

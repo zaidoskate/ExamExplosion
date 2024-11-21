@@ -4,15 +4,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace ExamExplosion.Helpers
 {
     public class GameManager : IGameManagerCallback
     {
-        private static ExamExplotionService.GameManagerClient proxy = null;
         private InstanceContext context = null;
         private Board boardPage = null;
         private Stack<Card> deck = new Stack<Card>();
@@ -20,7 +17,6 @@ namespace ExamExplosion.Helpers
         public GameManager(Board boardPage)
         {
             context = new InstanceContext(this);
-            proxy = new GameManagerClient(context);
             this.boardPage = boardPage;
         }
 
@@ -28,23 +24,24 @@ namespace ExamExplosion.Helpers
         {
             try
             {
-                ExamExplotionService.GameManagement gameObtained = new GameManagement();
-                gameObtained = proxy.GetGame(gameCode);
-                return gameObtained;
+                using (var proxy = new GameManagerClient(new InstanceContext(null)))
+                {
+                    return proxy.GetGame(gameCode);
+                }
             }
             catch (FaultException faultException)
             {
-                //Implementar log
+                // Implementar log
                 throw faultException;
             }
             catch (CommunicationException communicationException)
             {
-                //Implementar log
+                // Implementar log
                 throw communicationException;
             }
             catch (TimeoutException timeoutException)
             {
-                //Implementar log
+                // Implementar log
                 throw timeoutException;
             }
         }
@@ -53,21 +50,24 @@ namespace ExamExplosion.Helpers
         {
             try
             {
-                proxy.NotifyEndTurn(gameCode, gamertag);
+                using (var proxy = new GameManagerClient(new InstanceContext(null)))
+                {
+                    proxy.NotifyEndTurn(gameCode, gamertag);
+                }
             }
             catch (FaultException faultException)
             {
-                //Implementar log
+                // Implementar log
                 throw faultException;
             }
             catch (CommunicationException communicationException)
             {
-                //Implementar log
+                // Implementar log
                 throw communicationException;
             }
             catch (TimeoutException timeoutException)
             {
-                //Implementar log
+                // Implementar log
                 throw timeoutException;
             }
         }
@@ -84,22 +84,24 @@ namespace ExamExplosion.Helpers
         {
             try
             {
-                bool connected = proxy.ConnectGame(gameCode, gamertag);
-                return connected;
+                using (var proxy = new GameManagerClient(context))
+                {
+                    return proxy.ConnectGame(gameCode, gamertag);
+                }
             }
             catch (FaultException faultException)
             {
-                //Implementar log
+                // Implementar log
                 throw faultException;
             }
             catch (CommunicationException communicationException)
             {
-                //Implementar log
+                // Implementar log
                 throw communicationException;
             }
             catch (TimeoutException timeoutException)
             {
-                //Implementar log
+                // Implementar log
                 throw timeoutException;
             }
         }
@@ -108,21 +110,24 @@ namespace ExamExplosion.Helpers
         {
             try
             {
-                proxy.InitializeGameTurns(gameCode, gamertags.ToArray());
+                using (var proxy = new GameManagerClient(context))
+                {
+                    proxy.InitializeGameTurns(gameCode, gamertags.ToArray());
+                }
             }
             catch (FaultException faultException)
             {
-                //Implementar log
+                // Implementar log
                 throw faultException;
             }
             catch (CommunicationException communicationException)
             {
-                //Implementar log
+                // Implementar log
                 throw communicationException;
             }
             catch (TimeoutException timeoutException)
             {
-                //Implementar log
+                // Implementar log
                 throw timeoutException;
             }
         }
@@ -143,7 +148,7 @@ namespace ExamExplosion.Helpers
         public void ShuffleDeck()
         {
             var cards = deck.ToList();
-            //cards.Shuffle(); NO EXISTE EL METODO SHUFFLE PARA cards
+            // cards.Shuffle(); NO EXISTE EL MÉTODO SHUFFLE PARA cards
             deck = new Stack<Card>(cards);
         }
 
@@ -159,7 +164,28 @@ namespace ExamExplosion.Helpers
 
         public void InitializeDeck(string gameCode, int playerCount)
         {
-            proxy.InitializeDeck(gameCode, playerCount);
+            try
+            {
+                using (var proxy = new GameManagerClient(context))
+                {
+                    proxy.InitializeDeck(gameCode, playerCount);
+                }
+            }
+            catch (FaultException faultException)
+            {
+                // Implementar log
+                throw faultException;
+            }
+            catch (CommunicationException communicationException)
+            {
+                // Implementar log
+                throw communicationException;
+            }
+            catch (TimeoutException timeoutException)
+            {
+                // Implementar log
+                throw timeoutException;
+            }
         }
 
         private void AddStandardCardsToDeck(int cardCount)

@@ -9,30 +9,34 @@ namespace ExamExplosion.Helpers
 {
     public class PlayerManager
     {
-        private static ExamExplotionService.PlayerManagerClient proxy = new ExamExplotionService.PlayerManagerClient();
-
-        public static int GetPoinsByPlayerId(int playerId)
+        public static int GetPointsByPlayerId(int playerId)
         {
+            int points = 0;
+
             try
             {
-                int points = proxy.GetPoints(playerId);
-                return points;
+                using (var proxy = new ExamExplotionService.PlayerManagerClient())
+                {
+                    points = proxy.GetPoints(playerId);
+                }
             }
             catch (FaultException faultException)
             {
-                //Implementar log
+                // Implementar log
                 throw faultException;
             }
-            catch(CommunicationException communicationException)
+            catch (CommunicationException communicationException)
             {
-                //Implementar log
+                // Implementar log
                 throw communicationException;
             }
             catch (TimeoutException timeoutException)
             {
-                //Implementar log
+                // Implementar log
                 throw timeoutException;
             }
+
+            return points;
         }
     }
 }
