@@ -5,10 +5,36 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ExamExplosion"
       mc:Ignorable="d"
-      xmlns:p ="clr-namespace:ExamExplosion.Properties"
+      xmlns:p="clr-namespace:ExamExplosion.Properties"
       d:DesignHeight="720" d:DesignWidth="1200"
       Title="ExamExplosion"
       Background="#9f9354">
+
+    <Page.Resources>
+        <Style x:Key="ClickableCardStyle" TargetType="Border">
+            <Setter Property="RenderTransform">
+                <Setter.Value>
+                    <TranslateTransform X="0" Y="0"/>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="RenderTransform">
+                        <Setter.Value>
+                            <TranslateTransform X="0" Y="-30"/>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+                <Trigger Property="Tag" Value="Clicked">
+                    <Setter Property="RenderTransform">
+                        <Setter.Value>
+                            <TranslateTransform X="0" Y="-80"/>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
 
     <Grid>
         <Grid Width="750" VerticalAlignment="Top">
@@ -31,11 +57,14 @@
         <Image x:Name="heart1Image" Source="pack://application:,,,/Images/Heart.png" Width="100" Height="100" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,150,400,0" Visibility="Hidden"/>
         <Image x:Name="heart3Image" Source="pack://application:,,,/Images/Heart.png" Width="100" Height="100" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="400,150,0,0" Visibility="Hidden"/>
 
-        <Image x:Name="currentCardImage" Width="200" Height="200" VerticalAlignment="Center" HorizontalAlignment="Center"/>
         <Button Width="200" Height="250" Background="Transparent" BorderBrush="Transparent" VerticalAlignment="Center" Cursor="Hand" HorizontalAlignment="Right" Margin="0,0,150,0">
             <Grid>
                 <Image Source="pack://application:,,,/Images/Stack.png"/>
             </Grid>
         </Button>
+
+        <StackPanel Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="stkPanelCards">
+            
+        </StackPanel>
     </Grid>
 </Page>

@@ -35,6 +35,8 @@ namespace ExamExplosion
         public int remainingTime;
         private string gameCode;
         private string hostGamertag;
+        private Dictionary<string, string> cardNames;
+        private List<string> myCardsPaths;
         private ILog log;
         public Board(List<Label> playerGamertags, string gameCode, string hostGamertag)
         {
@@ -49,6 +51,7 @@ namespace ExamExplosion
             {
                 gameManager.InitializeGame(gameCode, orderedGamertags);
                 gameManager.InitializeDeck(gameCode, orderedGamertags.Count);
+                myCardsPaths = gameManager.GetInitialPlayerDeck(gameCode, SessionManager.CurrentSession.gamertag);
             }
             catch (FaultException faultException)
             {
@@ -68,6 +71,7 @@ namespace ExamExplosion
                 //throw timeoutException;
                 log.Warn("Timeout al intentar conectar con el servidor", timeoutException);
             }
+            UpdateCardsInHand();
             StartTurnTimer();
         }
 
@@ -240,7 +244,6 @@ namespace ExamExplosion
             playerImages.Add(this.player3Image);
             playerImages.Add(this.player4Image);
         }
-
         internal void UpdateTurnLabel(string gamertag)
         {
             this.currentTurnLbl.Content = gamertag;
@@ -251,6 +254,10 @@ namespace ExamExplosion
             remainingTime = timePerTurn;
             UpdateTimerLabel();
             turnTimer.Start();
+        }
+        private void UpdateCardsInHand()
+        {
+            Console.WriteLine(myCardsPaths.Count);
         }
     }
 }

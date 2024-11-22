@@ -255,7 +255,7 @@
     <None Include="Connected Services\ExamExplotionService\ExamExplosion.ExamExplotionService.AccessoryManagement.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\ExamExplotionService\ExamExplosion.ExamExplotionService.Card.datasource">
+    <None Include="Connected Services\ExamExplotionService\ExamExplosion.ExamExplotionService.CardManagement.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\ExamExplotionService\ExamExplosion.ExamExplotionService.GameManagement.datasource">

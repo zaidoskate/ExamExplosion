@@ -15,7 +15,7 @@ namespace ExamExplosion.Helpers
         private static ExamExplotionService.GameManagerClient proxy = null;
         private InstanceContext context = null;
         private Board boardPage = null;
-        private Stack<Card> deck = new Stack<Card>();
+        //private Stack<Card> deck = new Stack<Card>();
 
         public GameManager(Board boardPage)
         {
@@ -135,36 +135,55 @@ namespace ExamExplosion.Helpers
             });
         }
 
-        public Card DrawCard()
-        {
-            return deck.Count > 0 ? deck.Pop() : null;
-        }
+        //public Card DrawCard()
+        //{
+        //    return deck.Count > 0 ? deck.Pop() : null;
+        //}
 
-        public void ShuffleDeck()
-        {
-            var cards = deck.ToList();
-            //cards.Shuffle(); NO EXISTE EL METODO SHUFFLE PARA cards
-            deck = new Stack<Card>(cards);
-        }
+        //public void ShuffleDeck()
+        //{
+        //    var cards = deck.ToList();
+        //    //cards.Shuffle(); NO EXISTE EL METODO SHUFFLE PARA cards
+        //    deck = new Stack<Card>(cards);
+        //}
 
-        public void AddCardToDeck(Card card)
-        {
-            deck.Push(card);
-        }
+        //public void AddCardToDeck(Card card)
+        //{
+        //    deck.Push(card);
+        //}
 
-        public Card GetTopCard()
-        {
-            return deck.Peek();
-        }
+        //public Card GetTopCard()
+        //{
+        //    return deck.Peek();
+        //}
 
         public void InitializeDeck(string gameCode, int playerCount)
         {
-            proxy.InitializeDeck(gameCode, playerCount);
+            string gamertag = SessionManager.CurrentSession.gamertag;
+            proxy.InitializeDeck(gameCode, playerCount, gamertag);
         }
 
         private void AddStandardCardsToDeck(int cardCount)
         {
             throw new NotImplementedException();
+        }
+
+        public List<string> GetInitialPlayerDeck(string gameCode, string gamertag)
+        {
+            List<string> playerCardsList = new List<string>();
+
+            Dictionary<string, int> playerDeck = proxy.GetPlayerDeck(gameCode, gamertag);
+
+            foreach (var cardInDeck in playerDeck)
+            {
+                string path = cardInDeck.Key;
+                int count = cardInDeck.Value;
+                for(int i = 0; i < count; i++)
+                {
+                    playerCardsList.Add(path);
+                }
+            }
+            return playerCardsList;
         }
     }
 }
