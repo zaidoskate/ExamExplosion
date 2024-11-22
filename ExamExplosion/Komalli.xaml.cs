@@ -112,11 +112,10 @@ namespace ExamExplosion
                 UpdatePoints();
             }
         }
-
         private void UpdatePoints()
         {
-            int playerId = SessionManager.CurrentSession.accountId;
-            points = PlayerManager.GetPoinsByPlayerId(playerId);
+            int playerId = SessionManager.CurrentSession.userId;
+            points = PlayerManager.GetPointsByPlayerId(playerId);
             lblPoints.Content = points;
         }
 

@@ -50,7 +50,7 @@ namespace ExamExplosion
             }
             try
             {
-                if (AccountManager.validateCredentials(gamertag, password))
+                if (AccountManager.ValidateCredentials(gamertag, password))
                 {
                     if (this.NavigationService != null)
                     {

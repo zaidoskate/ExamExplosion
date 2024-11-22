@@ -12,7 +12,7 @@ namespace ExamExplosion.Helpers
     public class AccountManager
     {
         // Proxy para la comunicación con el servicio de autenticación.
-        private static ExamExplotionService.AuthenticationManagerClient proxy = new ExamExplotionService.AuthenticationManagerClient();
+        private static ExamExplotionService.AuthenticationManagerClient proxy;
 
         /// <summary>
         /// Valida las credenciales de un usuario con el servidor.
@@ -30,17 +30,18 @@ namespace ExamExplosion.Helpers
                     Gamertag = gamertag,
                     Password = password
                 };
-
-                // Envía las credenciales al servicio para su validación.
-                bool result = proxy.Login(account);
-
-                if (result)
+                using(proxy = new ExamExplotionService.AuthenticationManagerClient())
                 {
-                    // Si las credenciales son válidas, se carga la sesión actual del usuario.
-                    LoadActualSession(gamertag);
-                }
+                    // Envía las credenciales al servicio para su validación.
+                    bool result = proxy.Login(account);
+                    if (result)
+                    {
+                        // Si las credenciales son válidas, se carga la sesión actual del usuario.
+                        LoadActualSession(gamertag);
+                    }
 
-                return result;
+                    return result;
+                }
             }
             catch (FaultException faultException)
             {
