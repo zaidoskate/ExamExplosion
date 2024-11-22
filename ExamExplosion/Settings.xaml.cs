@@ -159,7 +159,7 @@ namespace ExamExplosion
             else
             {
                 string gamertag = SessionManager.CurrentSession.gamertag;
-                bool currentValidPassword = AccountManager.validateCredentials(gamertag, currentPassword);
+                bool currentValidPassword = AccountManager.ValidateCredentials(gamertag, currentPassword);
                 if(currentValidPassword)
                 {
                     UpdateNewPassword();

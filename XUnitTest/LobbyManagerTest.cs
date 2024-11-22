@@ -9,10 +9,10 @@ namespace XUnitTest
 {
     public class Fixtures
     {
-        public string gameCode {  get; set; }
-        public async void CreateLobby(ExamExplotionService.LobbyManagerClient proxy)
+        public string? gameCode { get; set; }
+        public async void CreateLobby(ExamExplotionService.LobbyManagerClientBase proxy)
         {
-            ExamExplotionService.GameM gameToCreate = new ExamExplotionService.GameM();
+            ExamExplotionService.GameManagement gameToCreate = new ExamExplotionService.GameManagement();
             gameToCreate.NumberPlayers = 1;
             gameToCreate.TimePerTurn = 15;
             gameToCreate.Lives = 1;
@@ -20,7 +20,7 @@ namespace XUnitTest
             string code = await proxy.CreateLobbyAsync(gameToCreate);
             this.gameCode = code;
         }
-        public async void ConnectLobby(ExamExplotionService.LobbyManagerClient proxy)
+        public async void ConnectLobby(ExamExplotionService.LobbyManagerClientBase proxy)
         {
             string gamertag = "tlapa11";
             await proxy.ConnectAsync(gamertag, gameCode);

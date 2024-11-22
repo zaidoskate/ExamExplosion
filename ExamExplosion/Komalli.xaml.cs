@@ -115,7 +115,7 @@ namespace ExamExplosion
         private void UpdatePoints()
         {
             int playerId = SessionManager.CurrentSession.userId;
-            points = PlayerManager.GetPoinsByPlayerId(playerId);
+            points = PlayerManager.GetPointsByPlayerId(playerId);
             lblPoints.Content = points;
         }
 
