@@ -29,19 +29,16 @@ namespace ExamExplosion.Helpers
             catch (FaultException faultException)
             {
                 // Implementar log
-                Console.WriteLine($"FaultException: {faultException.Message}");
                 throw;
             }
             catch (CommunicationException communicationException)
             {
                 // Implementar log
-                Console.WriteLine($"CommunicationException: {communicationException.Message}");
                 throw;
             }
             catch (TimeoutException timeoutException)
             {
                 // Implementar log
-                Console.WriteLine($"TimeoutException: {timeoutException.Message}");
                 throw;
             }
         }

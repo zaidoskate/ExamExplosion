@@ -2,48 +2,41 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
+using XUnitTest.CallbackImplementation;
 
 namespace XUnitTest
 {
-    public class Fixtures
+    public class LobbyManagerTest
     {
-        public string? gameCode { get; set; }
-        public async void CreateLobby(ExamExplotionService.LobbyManagerClientBase proxy)
+        [Fact]
+        public void TestSendMessageSuccess()
         {
-            ExamExplotionService.GameManagement gameToCreate = new ExamExplotionService.GameManagement();
-            gameToCreate.NumberPlayers = 1;
-            gameToCreate.TimePerTurn = 15;
-            gameToCreate.Lives = 1;
-            gameToCreate.HostPlayerId = 7;
-            string code = await proxy.CreateLobbyAsync(gameToCreate);
-            this.gameCode = code;
-        }
-        public async void ConnectLobby(ExamExplotionService.LobbyManagerClientBase proxy)
-        {
-            string gamertag = "tlapa11";
-            await proxy.ConnectAsync(gamertag, gameCode);
-        }
-    }
-    public class LobbyManagerTest:IClassFixture<Fixtures>
-    {/*
-        private static ExamExplotionService.LobbyManagerClient proxy = new ExamExplotionService.LobbyManagerClient();
-        private readonly Fixtures fixture; 
-
-        public LobbyManagerTest(Fixtures _fixture)
-        {
-            this.fixture = _fixture;
-            this.fixture.CreateLobby(proxy);
+            var lobbyCallbacks = new LobbyCallbacks();
+            string message = "Test";
+            lobbyCallbacks.SendMessage(message);
+            Thread.Sleep(3000);
+            Assert.Equal(message, lobbyCallbacks.MessageReceived);
         }
 
         [Fact]
-        public async void TestJoinLobbySuccess()
+        public void TestRepaintSuccess()
         {
-            bool result = await proxy.JoinLobbyAsync(fixture.gameCode, "cristy11");
-            Assert.True(result);
+            var lobbyCallbacks = new LobbyCallbacks();
+            Thread.Sleep(3000);
+            Assert.False(lobbyCallbacks.PlayerStatus);
         }
-        private static LobbyManagerClient proxy = new LobbyManagerClient();
-        */
+
+        [Fact]
+        public void TestStartGameSuccess()
+        {
+            var lobbyCallbacks = new LobbyCallbacks();
+            lobbyCallbacks.PlayGame();
+            Thread.Sleep(3000);
+            Assert.True(lobbyCallbacks.PlayerStatus);
+
+        }
     }
 }
