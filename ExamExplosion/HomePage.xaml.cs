@@ -29,7 +29,7 @@ namespace ExamExplosion
 
         private void CreateLobby(object sender, RoutedEventArgs e)
         {
-
+            SessionManager.CurrentSession.isLobbyOwner = true;
             if (this.NavigationService != null)
             {
                 this.NavigationService.Navigate(new GamePreferences());
@@ -62,7 +62,7 @@ namespace ExamExplosion
 
         private void JoinLobby(object sender, RoutedEventArgs e)
         {
-
+            SessionManager.CurrentSession.isLobbyOwner = false;
             if (this.NavigationService != null)
             {
                 this.NavigationService.Navigate(new GameCode());

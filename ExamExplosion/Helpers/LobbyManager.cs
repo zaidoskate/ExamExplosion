@@ -21,6 +21,8 @@ namespace ExamExplosion.Helpers
         /// </summary>
         private InstanceContext context = null;
 
+        private ExamExplotionService.LobbyManagerClient proxy = null;
+
         /// <summary>
         /// Referencia a la página de la interfaz de usuario del lobby para actualizar su contenido o navegar a otras vistas.
         /// </summary>
@@ -32,8 +34,9 @@ namespace ExamExplosion.Helpers
         /// <param name="_lobbyPage">La página de interfaz de usuario del lobby con la que se interactuará.</param>
         public LobbyManager(Lobby _lobbyPage)
         {
-            context = new InstanceContext(this);
             lobbyPage = _lobbyPage;
+            context = new InstanceContext(this);
+            proxy = new ExamExplotionService.LobbyManagerClient(context);
         }
 
         /// <summary>
@@ -42,6 +45,7 @@ namespace ExamExplosion.Helpers
         public LobbyManager()
         {
             context = new InstanceContext(this);
+            proxy = new ExamExplotionService.LobbyManagerClient(context);
         }
 
         /// <summary>
@@ -53,19 +57,16 @@ namespace ExamExplosion.Helpers
         {
             try
             {
-                using (var proxy = new LobbyManagerClient(context))
+                GameManagement gameM = new GameManagement
                 {
-                    GameManagement gameM = new GameManagement
-                    {
-                        NumberPlayers = game.NumberPlayers,
-                        TimePerTurn = game.TimePerTurn,
-                        HostPlayerId = game.HostPlayerId,
-                        InvitationCode = game.InvitationCode,
-                        Lives = game.Lives
-                    };
+                    NumberPlayers = game.NumberPlayers,
+                    TimePerTurn = game.TimePerTurn,
+                    HostPlayerId = game.HostPlayerId,
+                    InvitationCode = game.InvitationCode,
+                    Lives = game.Lives
+                };
 
-                    return proxy.CreateLobby(gameM);
-                }
+                return proxy.CreateLobby(gameM);
             }
             catch (FaultException faultException)
             {
@@ -94,10 +95,7 @@ namespace ExamExplosion.Helpers
         {
             try
             {
-                using (var proxy = new LobbyManagerClient(context))
-                {
-                    return proxy.JoinLobby(code, gamertag);
-                }
+                return proxy.JoinLobby(code, gamertag);
             }
             catch (FaultException faultException)
             {
@@ -125,10 +123,7 @@ namespace ExamExplosion.Helpers
         {
             try
             {
-                using (var proxy = new LobbyManagerClient(context))
-                {
-                    proxy.Connect(gamertag, code);
-                }
+                proxy.Connect(gamertag, code);
             }
             catch (FaultException faultException)
             {
@@ -157,10 +152,7 @@ namespace ExamExplosion.Helpers
         {
             try
             {
-                using (var proxy = new LobbyManagerClient(context))
-                {
-                    proxy.SendMessage(code, gamertag, message);
-                }
+                proxy.SendMessage(code, gamertag, message);
             }
             catch (FaultException faultException)
             {
@@ -198,10 +190,7 @@ namespace ExamExplosion.Helpers
         {
             try
             {
-                using (var proxy = new LobbyManagerClient(context))
-                {
-                    proxy.Disconnect(lobbyCode, gamertag);
-                }
+                proxy.Disconnect(lobbyCode, gamertag);
             }
             catch (FaultException faultException)
             {
@@ -248,10 +237,7 @@ namespace ExamExplosion.Helpers
         {
             try
             {
-                using (var proxy = new LobbyManagerClient(context))
-                {
-                    proxy.UpdatePlayerStatus(lobbyCode, gamertag, isReady);
-                }
+                proxy.UpdatePlayerStatus(lobbyCode, gamertag, isReady);
             }
             catch (FaultException faultException)
             {
@@ -278,10 +264,7 @@ namespace ExamExplosion.Helpers
         {
             Application.Current?.Dispatcher.Invoke(() =>
             {
-                foreach (var player in lobbyPlayers)
-                {
-                    lobbyPage.NavigateToBoard();
-                }
+                lobbyPage.NavigateToBoard();
             });
         }
 
@@ -293,10 +276,7 @@ namespace ExamExplosion.Helpers
         {
             try
             {
-                using (var proxy = new LobbyManagerClient(context))
-                {
-                    proxy.PlayGame(lobbyCode);
-                }
+                proxy.PlayGame(lobbyCode);
             }
             catch (FaultException faultException)
             {

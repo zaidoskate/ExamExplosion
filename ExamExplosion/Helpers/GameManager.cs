@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace ExamExplosion.Helpers
@@ -15,6 +16,10 @@ namespace ExamExplosion.Helpers
     {
         // Contexto para la comunicación con el servicio WCF.
         private InstanceContext context = null;
+
+        private ExamExplotionService.GameManagerClient proxy = null;
+        private GameResourcesManager gameResources = null;
+
         // Página de tablero utilizada para actualizar la interfaz gráfica.
         private Board boardPage = null;
         //Pila que representa el mazo de cartas
@@ -27,6 +32,8 @@ namespace ExamExplosion.Helpers
         public GameManager(Board boardPage)
         {
             context = new InstanceContext(this);
+            proxy = new GameManagerClient(context);
+            gameResources = new GameResourcesManager();
             this.boardPage = boardPage;
         }
 
@@ -39,10 +46,7 @@ namespace ExamExplosion.Helpers
         {
             try
             {
-                using (var proxy = new GameManagerClient(context))
-                {
-                    return proxy.GetGame(gameCode);
-                }
+                return proxy.GetGame(gameCode);
             }
             catch (FaultException faultException)
             {
@@ -67,10 +71,7 @@ namespace ExamExplosion.Helpers
         {
             try
             {
-                using (var proxy = new GameManagerClient(context))
-                {
-                    proxy.NotifyEndTurn(gameCode, gamertag);
-                }
+                proxy.NotifyEndTurn(gameCode, gamertag);
             }
             catch (FaultException faultException)
             {
@@ -92,12 +93,12 @@ namespace ExamExplosion.Helpers
         /// <param name="gamertag">Gamertag del jugador cuyo turno es el actual.</param>
         public void UpdateCurrentTurn(string gamertag)
         {
+            boardPage.UpdateButtonsVisibility(gamertag);
             Application.Current.Dispatcher.Invoke(() =>
             {
                 boardPage.UpdateTurnLabel(gamertag);
             });
         }
-
         /// <summary>
         /// Conecta a un jugador a un juego existente.
         /// </summary>
@@ -106,12 +107,10 @@ namespace ExamExplosion.Helpers
         /// <returns>Verdadero si la conexión fue exitosa, falso en caso contrario.</returns>
         public bool ConnectGame(string gameCode, string gamertag)
         {
+            bool playerIsConnected = false;
             try
             {
-                using (var proxy = new GameManagerClient(context))
-                {
-                    return proxy.ConnectGame(gameCode, gamertag);
-                }
+                playerIsConnected = proxy.ConnectGame(gameCode, gamertag);
             }
             catch (FaultException faultException)
             {
@@ -125,6 +124,7 @@ namespace ExamExplosion.Helpers
             {
                 throw timeoutException;
             }
+            return playerIsConnected;
         }
 
         /// <summary>
@@ -136,10 +136,7 @@ namespace ExamExplosion.Helpers
         {
             try
             {
-                using (var proxy = new GameManagerClient(context))
-                {
-                    proxy.InitializeGameTurns(gameCode, gamertags.ToArray());
-                }
+                proxy.InitializeGameTurns(gameCode, gamertags.ToArray());
             }
             catch (FaultException faultException)
             {
@@ -199,22 +196,169 @@ namespace ExamExplosion.Helpers
 
 
 
-        public List<string> GetInitialPlayerDeck(string gameCode, string gamertag)
+        //public List<string> GetInitialPlayerDeck(string gameCode, string gamertag)
+        //{
+        //    List<string> playerCardsList = new List<string>();
+
+        //    Dictionary<string, int> playerDeck = proxy.GetPlayerDeck(gameCode, gamertag);
+
+        //    foreach (var cardInDeck in playerDeck)
+        //    {
+        //        string path = cardInDeck.Key;
+        //        int count = cardInDeck.Value;
+        //        for (int i = 0; i < count; i++)
+        //        {
+        //            playerCardsList.Add(path);
+        //        }
+        //    }
+        //    return playerCardsList;
+        //}
+        public void InitializeGameDeck(string gameCode, int playerCount)
         {
-            List<string> playerCardsList = new List<string>();
-
-            Dictionary<string, int> playerDeck = proxy.GetPlayerDeck(gameCode, gamertag);
-
-            foreach (var cardInDeck in playerDeck)
+            try
             {
-                string path = cardInDeck.Key;
-                int count = cardInDeck.Value;
-                for (int i = 0; i < count; i++)
+                string gamertag = SessionManager.CurrentSession.gamertag;
+                proxy.InitializeDeck(gameCode, playerCount, gamertag);
+            }
+            catch (FaultException faultException)
+            {
+                throw faultException;
+            }
+            catch (CommunicationException communicationException)
+            {
+                throw communicationException;
+            }
+            catch (TimeoutException timeoutException)
+            {
+                throw timeoutException;
+            }
+        }
+
+        public void RecivePlayerAndGameDeck(Stack<CardManagement> gameDeck, CardManagement[] playerDeck)
+        {
+            Stack<Card> mappedGameDeck = new Stack<Card>();
+            foreach (var cardManagement in gameDeck)
+            {
+                mappedGameDeck.Push(new Card
                 {
-                    playerCardsList.Add(path);
+                    Name = cardManagement.CardName,
+                    Path = cardManagement.CardPath
+                });
+            }
+            List<Card> mappedPlayerDeck = playerDeck.Select(cardManagement => new Card
+            {
+                Name = cardManagement.CardName,
+                Path = cardManagement.CardPath,
+                IsSelected = false
+            }).ToList();
+
+            gameResources.GameDeck = mappedGameDeck;
+            gameResources.PlayerCards = mappedPlayerDeck;
+            gameResources.CurrentIndex = 0;
+
+            boardPage.UpdatePlayerDeck(mappedPlayerDeck, 0);
+            boardPage.UpdateGameDeckCount(mappedGameDeck.Count);
+        }
+
+        public void DrawCard(string gameCode, string gamertag)
+        {
+            gameResources.DrawTopCard();
+            boardPage.UpdateGameDeckCount(gameResources.GameDeck.Count);
+            try
+            {
+                proxy.NotifyDrawCard(gameCode, gamertag, true);
+            }
+            catch (FaultException faultException)
+            {
+                throw faultException;
+            }
+            catch (CommunicationException communicationException)
+            {
+                throw communicationException;
+            }
+            catch (TimeoutException timeoutException)
+            {
+                throw timeoutException;
+            }
+            boardPage.UpdatePlayerDeck(gameResources.PlayerCards, gameResources.CurrentIndex);
+            this.NotifyEndTurn(gameCode, gamertag);
+        }
+        public void RemoveCardFromStack(bool isTopCard)
+        {
+            if (isTopCard)
+            {
+                gameResources.RemoveTopCard();
+            }
+            else
+            {
+                gameResources.RemoveBottomCard();
+            }
+            boardPage.UpdateGameDeckCount(gameResources.GameDeck.Count);
+        }
+
+        public void UpdatePlayerDeck(bool showLeftCards)
+        {
+            if (showLeftCards)
+            {
+                if (gameResources.CurrentIndex > 0)
+                {
+                    gameResources.CurrentIndex -= 8;
                 }
             }
-            return playerCardsList;
+            else
+            {
+                if (gameResources.CurrentIndex < gameResources.PlayerCards.Count - 8)
+                {
+                    gameResources.CurrentIndex += 8;
+                }
+            }
+            boardPage.UpdatePlayerDeck(gameResources.PlayerCards, gameResources.CurrentIndex);
+        }
+
+        public bool SelectCard(int index)
+        {
+            bool cardSelected = false;
+            var selectedCards = gameResources.GetSelectedCardsPaths();
+            Card cardToSelect = gameResources.PlayerCards[index];
+            if (selectedCards.Count == 0)
+            {
+                cardSelected = true;
+                gameResources.PlayerCards[index].IsSelected = true;
+            }
+            else if (selectedCards.Count > 1)
+            {
+                cardSelected = false;
+            }
+            else if (cardToSelect.Path.Substring(0, 4) == selectedCards[0].Substring(0, 4))
+            {
+                cardSelected = true;
+                gameResources.PlayerCards[index].IsSelected = true;
+            }
+            return cardSelected;
+        }
+
+        public void DeselectCard(int tag)
+        {
+            gameResources.PlayerCards[tag].IsSelected = false;
+        }
+        public void PrintCardOnBoard(string path)
+        {
+            boardPage.PrintCardOnBoard(path);
+        }
+
+        public bool PlayCards(string gameCode)
+        {
+            var selectedCards = gameResources.GetSelectedCardsPaths();
+            //primero se debe validar que se pueda tirar la o las cartas
+            //validar que no estes en condicion de perder por un exam bomb
+            //validar que los dos profes sean iguales
+            //validar que sean dos profes
+            //si es alguna carta en especial como ataque o ver el futuro, se llaman los metodos al boardPage
+            //si pasa las validaciones, se pinta en todos los clientes
+            proxy.NotifyCardOnBoard(gameCode, selectedCards[0]);
+
+            //antes de terminar se deben limpiar las cartas seleccionadas del resources y del boardPage.SelectedCards
+            return true;
         }
     }
 }
