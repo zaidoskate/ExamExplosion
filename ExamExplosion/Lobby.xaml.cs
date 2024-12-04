@@ -37,6 +37,7 @@ namespace ExamExplosion
         private ILog log;
         public Lobby(int maxPlayers, int timePerTurn, int maxHP, string owner)
         {
+            log = LogManager.GetLogger(typeof(App));
             lobbyManager = new LobbyManager(this);
             Game game = new Game();
             game.NumberPlayers = maxPlayers;
@@ -61,7 +62,6 @@ namespace ExamExplosion
             this.Focusable = true;
             this.Focus();
 
-            log = LogManager.GetLogger(typeof(App));
         }
 
         private void InitializeLobby(Game game)
@@ -81,7 +81,7 @@ namespace ExamExplosion
             {
                 new AlertModal("Error de comunicación", "No se pudo conectar con el servidor.").ShowDialog();
                 //throw communicationException;
-                log.Warn("Problema de comunicación con el servidor", communicationException);
+                log.Fatal($"{communicationException.StackTrace}", communicationException);
             }
             catch (TimeoutException timeoutException)
             {

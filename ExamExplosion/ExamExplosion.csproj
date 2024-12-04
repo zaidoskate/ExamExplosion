@@ -113,6 +113,7 @@
     <Compile Include="Helpers\AccountManager.cs" />
     <Compile Include="Helpers\EmailVerificationCode.cs" />
     <Compile Include="Helpers\GameManager.cs" />
+    <Compile Include="Helpers\GameResourcesManager.cs" />
     <Compile Include="Helpers\GuestManager.cs" />
     <Compile Include="Helpers\LobbyManager.cs" />
     <Compile Include="Helpers\PlayerManager.cs" />
@@ -133,6 +134,7 @@
     </Compile>
     <Compile Include="Models\Accessory.cs" />
     <Compile Include="Models\Account.cs" />
+    <Compile Include="Models\Card.cs" />
     <Compile Include="Models\Game.cs" />
     <Compile Include="Models\PurchasedAccessory.cs" />
     <Compile Include="Properties\Resources.es-MX.Designer.cs">
@@ -256,9 +258,6 @@
     <None Include="Connected Services\ExamExplotionService\ExamExplosion.ExamExplotionService.AccessoryManagement.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\ExamExplotionService\ExamExplosion.ExamExplotionService.Card.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
     <None Include="Connected Services\ExamExplotionService\ExamExplosion.ExamExplotionService.GameManagement.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -278,6 +277,12 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\ExamExplotionService\item3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ExamExplotionService\item4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ExamExplotionService\item41.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\ExamExplotionService\ServiceImplementation.wsdl" />

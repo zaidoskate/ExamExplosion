@@ -11,16 +11,13 @@ namespace ExamExplosion
 {
     public partial class App : Application
     {
-        App()
-        {
-            log4net.Config.XmlConfigurator.Configure();
-            System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("es-MX");
-            //System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("en");
-        }
+        private static readonly ILog log = LogManager.GetLogger(typeof(App));
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            ILog log = LogManager.GetLogger(typeof(App));
+
+            log4net.Config.XmlConfigurator.Configure();
+
             log.Info("Exam Explosion - Cliente ha iniciado.");
         }
     }

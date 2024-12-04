@@ -5,10 +5,38 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ExamExplosion"
       mc:Ignorable="d"
-      xmlns:p ="clr-namespace:ExamExplosion.Properties"
+      xmlns:p="clr-namespace:ExamExplosion.Properties"
       d:DesignHeight="720" d:DesignWidth="1200"
       Title="ExamExplosion"
       Background="#9f9354">
+
+    <Page.Resources>
+        <Style x:Key="CardStyle" TargetType="Image">
+            <Setter Property="RenderTransform">
+                <Setter.Value>
+                    <TranslateTransform X="0" Y="0"/>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="RenderTransform">
+                        <Setter.Value>
+                            <TranslateTransform X="0" Y="-14"/>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="Cursor" Value="Hand"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Storyboard x:Key="CardDrawAnimation">
+            <DoubleAnimation Storyboard.TargetName="animatedCard"
+                         Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"
+                         From="0" To="150" Duration="0:0:0.5" />
+            <DoubleAnimation Storyboard.TargetName="animatedCard"
+                         Storyboard.TargetProperty="Opacity"
+                         From="1" To="0" Duration="0:0:0.5" />
+        </Storyboard>
+    </Page.Resources>
 
     <Grid>
         <Grid Width="750" VerticalAlignment="Top">
@@ -27,15 +55,41 @@
         <Image x:Name="player3Image" Source="pack://application:,,,/Images/Player.png" Width="150" Height="150" VerticalAlignment="Bottom" HorizontalAlignment="Right" Visibility="Hidden"/>
         <Label x:Name="player3Lbl" HorizontalAlignment="Right" VerticalAlignment="Bottom" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="40" Margin="0,0,0,175" Visibility="Hidden"/>
 
-        <Image x:Name="heart2Image" Source="pack://application:,,,/Images/Heart.png" Width="100" Height="100" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,150,0,0" Visibility="Hidden"/>
-        <Image x:Name="heart1Image" Source="pack://application:,,,/Images/Heart.png" Width="100" Height="100" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,150,400,0" Visibility="Hidden"/>
-        <Image x:Name="heart3Image" Source="pack://application:,,,/Images/Heart.png" Width="100" Height="100" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="400,150,0,0" Visibility="Hidden"/>
+        <Image x:Name="heart2Image" Source="pack://application:,,,/Images/Heart.png" Width="50" Height="50" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,150,0,0" Visibility="Hidden"/>
+        <Image x:Name="heart1Image" Source="pack://application:,,,/Images/Heart.png" Width="50" Height="50" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,150,400,0" Visibility="Hidden"/>
+        <Image x:Name="heart3Image" Source="pack://application:,,,/Images/Heart.png" Width="50" Height="50" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="400,150,0,0" Visibility="Hidden"/>
 
-        <Image x:Name="currentCardImage" Width="200" Height="200" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-        <Button Width="200" Height="250" Background="Transparent" BorderBrush="Transparent" VerticalAlignment="Center" Cursor="Hand" HorizontalAlignment="Right" Margin="0,0,150,0">
+        <Button x:Name="btnStack" Click="DrawCard" Width="200" Height="250" Background="Transparent" BorderBrush="Transparent" VerticalAlignment="Top" Cursor="Hand" HorizontalAlignment="Right" Margin="0,225,52,0">
             <Grid>
                 <Image Source="pack://application:,,,/Images/Stack.png"/>
             </Grid>
         </Button>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="234,480,0,114" Width="314">
+            <WrapPanel x:Name="SelectedCards" Width="220" Height="137">
+            </WrapPanel>
+            <Button x:Name="btnPlayCards" Height="65" Width="66"  Click="PlayCards" Background="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand">
+                <Image Source="pack://application:,,,/Images/SendMessageImage.png" Height="55" Width="66"></Image>
+            </Button>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,576,0,0" Width="780">
+            <Button x:Name="btnShowLeftCard" Height="139" Width="74" Background="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand" Click="ShowLeftCards">
+                <Image VerticalAlignment="Center" Source="pack://application:,,,/Images/leftArrow.png" Stretch="Fill" Height="70" Width="50"/>
+            </Button>
+            <WrapPanel x:Name="PlayerDeck" Width="640" Height="131"/>
+            <Button x:Name="btnShowRightCard" Height="134" Width="74" Background="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand" Click="ShowRightCards">
+                <Image VerticalAlignment="Top" Source="pack://application:,,,/Images/rightArrow.png" Stretch="Fill" Height="70" Width="50"/>
+            </Button>
+        </StackPanel>
+        <TextBlock x:Name="txtBlockCardName" HorizontalAlignment="Left" Margin="724,535,0,0"  FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="25" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <Label x:Name="remainingCardsNumber" HorizontalAlignment="Left" Margin="1029,480,0,0"  FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="25" VerticalAlignment="Top"/>
+
+        <Image x:Name="animatedCard" Visibility="Collapsed" Source="pack://application:,,,/Images/BackCard.png" Height="150" Opacity="1" RenderTransformOrigin="0.5,0.5" Margin="998,333,91,237">
+            <Image.RenderTransform>
+                <TranslateTransform />
+            </Image.RenderTransform>
+        </Image>
+        <Rectangle HorizontalAlignment="Left" Height="270" Margin="575,0,0,0" Stroke="Black" VerticalAlignment="Center" Width="225" Fill="White"/>
+        <Image x:Name="CardOnBoard" HorizontalAlignment="Left" Height="223" Margin="604,255,0,0" VerticalAlignment="Top" Width="164"/>
     </Grid>
 </Page>
