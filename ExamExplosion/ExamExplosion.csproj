@@ -118,6 +118,7 @@
     <Compile Include="Helpers\LobbyManager.cs" />
     <Compile Include="Helpers\PlayerManager.cs" />
     <Compile Include="Helpers\PurchasedAccessoryManager.cs" />
+    <Compile Include="Helpers\ReportManager.cs" />
     <Compile Include="Helpers\SessionManager.cs" />
     <Compile Include="HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
@@ -279,6 +280,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\ExamExplotionService\item4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ExamExplotionService\item41.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\ExamExplotionService\ServiceImplementation.wsdl" />

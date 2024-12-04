@@ -211,5 +211,25 @@ namespace ExamExplosion.Helpers
                 throw timeoutException;
             }
         }
+
+        public int GetAccountIdByGamertag(string gamertag)
+        {
+            try
+            {
+                return proxy.GetAccountIdByGamertag(gamertag);
+            }
+            catch (FaultException faultException)
+            {
+                throw faultException;
+            }
+            catch (CommunicationException communicationException)
+            {
+                throw communicationException;
+            }
+            catch (TimeoutException timeoutException)
+            {
+                throw timeoutException;
+            }
+        }
     }
 }

@@ -164,6 +164,7 @@ namespace ExamExplosion
                 {
                     try
                     {
+                        GameManager gameManager = new GameManager(this);
                         gameManager.NotifyEndTurn(gameCode, currentTurnLbl.Content.ToString());
                     }
                     catch (FaultException faultException)
@@ -257,6 +258,7 @@ namespace ExamExplosion
         {
             try
             {
+                GameManager gameManager = new GameManager(this);
                 GameManagement game = gameManager.GetCurrentGameDetails(gameCode);
                 this.hitPoints = game.Lives;
                 this.timePerTurn = game.TimePerTurn;
