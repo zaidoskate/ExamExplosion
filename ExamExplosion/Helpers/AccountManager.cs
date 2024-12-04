@@ -11,9 +11,6 @@ namespace ExamExplosion.Helpers
     /// </summary>
     public class AccountManager
     {
-        // Proxy para la comunicación con el servicio de autenticación.
-        private static ExamExplotionService.AuthenticationManagerClient proxy;
-
         /// <summary>
         /// Valida las credenciales de un usuario con el servidor.
         /// </summary>
@@ -24,19 +21,17 @@ namespace ExamExplosion.Helpers
         {
             try
             {
-                // Configura el objeto AccountManagement con las credenciales proporcionadas.
                 var account = new ExamExplotionService.AccountManagement
                 {
                     Gamertag = gamertag,
                     Password = password
                 };
-                using(proxy = new ExamExplotionService.AuthenticationManagerClient())
+
+                using (var proxy = new ExamExplotionService.AuthenticationManagerClient())
                 {
-                    // Envía las credenciales al servicio para su validación.
                     bool result = proxy.Login(account);
                     if (result)
                     {
-                        // Si las credenciales son válidas, se carga la sesión actual del usuario.
                         LoadActualSession(gamertag);
                     }
 
@@ -45,17 +40,14 @@ namespace ExamExplosion.Helpers
             }
             catch (FaultException faultException)
             {
-                // Loguear error y lanzar excepción de fallo del servicio.
                 throw faultException;
             }
             catch (CommunicationException communicationException)
             {
-                // Loguear error y lanzar excepción de comunicación.
                 throw communicationException;
             }
             catch (TimeoutException timeoutException)
             {
-                // Loguear error y lanzar excepción de tiempo de espera.
                 throw timeoutException;
             }
         }
@@ -68,15 +60,15 @@ namespace ExamExplosion.Helpers
         {
             try
             {
-                // Se conecta al servicio para obtener la información del jugador.
-                var playerProxy = new ExamExplotionService.PlayerManagerClient();
-                var player = playerProxy.GetPlayerByGamertag(gamertag);
+                using (var playerProxy = new ExamExplotionService.PlayerManagerClient())
+                {
+                    var player = playerProxy.GetPlayerByGamertag(gamertag);
 
-                // Actualiza los datos de la sesión actual.
-                SessionManager.CurrentSession.accountId = player.AccountId;
-                SessionManager.CurrentSession.userId = player.UserId;
-                SessionManager.CurrentSession.gamertag = gamertag;
-                SessionManager.CurrentSession.isGuest = false;
+                    SessionManager.CurrentSession.accountId = player.AccountId;
+                    SessionManager.CurrentSession.userId = player.UserId;
+                    SessionManager.CurrentSession.gamertag = gamertag;
+                    SessionManager.CurrentSession.isGuest = false;
+                }
             }
             catch (FaultException faultException)
             {
@@ -110,7 +102,10 @@ namespace ExamExplosion.Helpers
 
             try
             {
-                return proxy.AddAccount(account);
+                using (var proxy = new ExamExplotionService.AuthenticationManagerClient())
+                {
+                    return proxy.AddAccount(account);
+                }
             }
             catch (FaultException faultException)
             {
@@ -135,7 +130,10 @@ namespace ExamExplosion.Helpers
         {
             try
             {
-                return proxy.VerifyExistingEmail(email);
+                using (var proxy = new ExamExplotionService.AuthenticationManagerClient())
+                {
+                    return proxy.VerifyExistingEmail(email);
+                }
             }
             catch (FaultException faultException)
             {
@@ -160,7 +158,10 @@ namespace ExamExplosion.Helpers
         {
             try
             {
-                return proxy.VerifyExistingGamertag(gamertag);
+                using (var proxy = new ExamExplotionService.AuthenticationManagerClient())
+                {
+                    return proxy.VerifyExistingGamertag(gamertag);
+                }
             }
             catch (FaultException faultException)
             {
@@ -191,7 +192,11 @@ namespace ExamExplosion.Helpers
                     Gamertag = gamertag,
                     Password = newPassword
                 };
-                return proxy.UpdatePassword(account);
+
+                using (var proxy = new ExamExplotionService.AuthenticationManagerClient())
+                {
+                    return proxy.UpdatePassword(account);
+                }
             }
             catch (FaultException faultException)
             {
