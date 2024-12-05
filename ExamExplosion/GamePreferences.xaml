@@ -14,8 +14,8 @@
         <TextBlock x:Name="MaxPlayersValue" Text="2" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,68,0,0" FontSize="20" FontFamily="pack://application:,,,/Fonts/#VT323"/>
 
         <Label x:Name="TimePerTurnlbl" Content="Time" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="40" FontFamily="pack://application:,,,/Fonts/#VT323" Margin="0,95,0,0"></Label>
-        <Slider x:Name="TimePerTurnSlider" Minimum="15" Maximum="120" Value="15" TickFrequency="15" IsSnapToTickEnabled="True" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,145,0,0" Width="200" ValueChanged="TimePerTurnSlider_ValueChanged"/>
-        <TextBlock x:Name="TimePerTurnValue" Text="15" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,168,0,0" FontSize="20" FontFamily="pack://application:,,,/Fonts/#VT323"/>
+        <Slider x:Name="TimePerTurnSlider" Minimum="30" Maximum="120" Value="15" TickFrequency="15" IsSnapToTickEnabled="True" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,145,0,0" Width="200" ValueChanged="TimePerTurnSlider_ValueChanged"/>
+        <TextBlock x:Name="TimePerTurnValue" Text="30" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,168,0,0" FontSize="20" FontFamily="pack://application:,,,/Fonts/#VT323"/>
 
         <Label x:Name="MaxHPlbl" Content="Max HP" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="40" FontFamily="pack://application:,,,/Fonts/#VT323" Margin="0,192,0,0"></Label>
         <Slider x:Name="MaxHPSlider" Minimum="1" Maximum="3" Value="1" TickFrequency="1" IsSnapToTickEnabled="True" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,242,0,0" Width="200" ValueChanged="MaxHPSlider_ValueChanged"/>

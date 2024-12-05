@@ -420,7 +420,11 @@ namespace ExamExplosion
         private void DrawCard(object sender, RoutedEventArgs e)
         {
             gameManager.DrawCard(gameCode, SessionManager.CurrentSession.gamertag);
+            DrawCardAnimation();
+        }
 
+        public void DrawCardAnimation()
+        {
             animatedCard.RenderTransform = new TranslateTransform(0, 0);
             animatedCard.Opacity = 1;
             animatedCard.Visibility = Visibility.Visible;
@@ -450,6 +454,34 @@ namespace ExamExplosion
         public void PrintCardOnBoard(string path)
         {
             CardOnBoard.Source = new BitmapImage(new Uri($"pack://application:,,,/CardsPackages/{this.defaultPackage}/{path}.png", UriKind.Absolute));
+        }
+
+        public void ShowTopCards(List<Card> topCards)
+        {
+            if (topCards.Count >= 1)
+            {
+                string cardPath = topCards[0].Path;
+                FirstCard.Source = new BitmapImage(new Uri($"pack://application:,,,/CardsPackages/{this.defaultPackage}/{cardPath}.png", UriKind.Absolute));
+            }
+
+            if (topCards.Count >= 2)
+            {
+                string cardPath = topCards[1].Path;
+                SecondCard.Source = new BitmapImage(new Uri($"pack://application:,,,/CardsPackages/NormalPackage/{topCards[1].Path}.png", UriKind.Absolute));
+            }
+
+            if (topCards.Count == 3)
+            {
+                string cardPath = topCards[2].Path;
+                ThirdCard.Source = new BitmapImage(new Uri($"pack://application:,,,/CardsPackages/{this.defaultPackage}/{topCards[2].Path}.png", UriKind.Absolute));
+            }
+        }
+
+        public void ResetTopCardsPath()
+        {
+           this.FirstCard.Source = null;
+           this.SecondCard.Source = null;
+           this.ThirdCard.Source = null;
         }
     }
 }

@@ -11,6 +11,9 @@ namespace ExamExplosion.Helpers
     /// </summary>
     public class AccountManager
     {
+        // Proxy para la comunicación con el servicio de autenticación.
+        private static ExamExplotionService.AuthenticationManagerClient proxy = new ExamExplotionService.AuthenticationManagerClient();
+        
         /// <summary>
         /// Valida las credenciales de un usuario con el servidor.
         /// </summary>
@@ -217,6 +220,26 @@ namespace ExamExplosion.Helpers
             try
             {
                 return proxy.GetAccountIdByGamertag(gamertag);
+            }
+            catch (FaultException faultException)
+            {
+                throw faultException;
+            }
+            catch (CommunicationException communicationException)
+            {
+                throw communicationException;
+            }
+            catch (TimeoutException timeoutException)
+            {
+                throw timeoutException;
+            }
+        }
+
+        public bool DeactivateAccount(string gamertag)
+        {
+            try
+            {
+                return proxy.DeactivateAccount(gamertag);
             }
             catch (FaultException faultException)
             {
