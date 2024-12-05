@@ -411,7 +411,7 @@ namespace ExamExplosion
         }
         private void PlayCards(object sender, RoutedEventArgs e)
         {
-            //aqui solo se valida si se pudo o no jugar la carta, si se pudo se muestra una ventana emergente o un mensaje en el Board sin parar el timer
+            //aqui solo se valida si se pudo o no jugar la carta, si se pudo se muestra un mensaje predeterminado de que no se puede
             if(gameManager.PlayCards(gameCode))
             {
 

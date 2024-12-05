@@ -65,19 +65,16 @@ namespace ExamExplosion
             catch (FaultException faultException)
             {
                 new AlertModal("Error", "Se produjo un error en el servidor").ShowDialog();
-                //throw faultException;
                 log.Error("Error del servidor (FaultException)", faultException);
             }
             catch (CommunicationException communicationException)
             {
                 new AlertModal("Error de comunicación", "No se pudo conectar con el servidor.").ShowDialog();
-                //throw communicationException;
                 log.Warn("Problema de comunicación con el servidor", communicationException);
             }
             catch (TimeoutException timeoutException)
             {
                 new AlertModal("Tiempo de espera", "La conexión con el servidor ha expirado.").ShowDialog();
-                //throw timeoutException;
                 log.Warn("Timeout al intentar conectar con el servidor", timeoutException);
             }
         }

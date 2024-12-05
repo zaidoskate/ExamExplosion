@@ -2,6 +2,7 @@ using ExamExplosion;
 using ExamExplosion.ExamExplotionService;
 using ExamExplosion.Helpers;
 using ExamExplosion.Models;
+using Xunit;
 
 namespace XUnitTest
 {
