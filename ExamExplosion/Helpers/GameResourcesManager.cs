@@ -107,5 +107,18 @@ namespace ExamExplosion.Helpers
             }
             return paths;
         }
+        
+        public List<Card> SeeTheFuture()
+        {
+            List<Card> topThreeCards = new List<Card>();
+            List<Card> deckSnapshot = GameDeck.ToList();
+
+            for (int i = 0; i < Math.Min(3, deckSnapshot.Count); i++)
+            {
+                topThreeCards.Add(deckSnapshot[i]);
+            }
+
+            return topThreeCards;
+        }
     }
 }

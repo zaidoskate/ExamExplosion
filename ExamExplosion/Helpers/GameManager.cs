@@ -69,6 +69,7 @@ namespace ExamExplosion.Helpers
         /// <param name="gamertag">Gamertag del jugador que termina su turno.</param>
         public void NotifyEndTurn(string gameCode, string gamertag)
         {
+            boardPage.ResetTopCardsPath();
             try
             {
                 proxy.NotifyEndTurn(gameCode, gamertag);
@@ -283,6 +284,37 @@ namespace ExamExplosion.Helpers
             boardPage.UpdatePlayerDeck(gameResources.PlayerCards, gameResources.CurrentIndex);
             this.NotifyEndTurn(gameCode, gamertag);
         }
+
+        public void DrawBottomCard(string gameCode, string gamertag)
+        {
+            gameResources.DrawBottomCard();
+            boardPage.UpdateGameDeckCount(gameResources.GameDeck.Count);
+            boardPage.DrawCardAnimation();
+            try
+            {
+                proxy.NotifyDrawCard(gameCode, gamertag, false);
+            }
+            catch (FaultException faultException)
+            {
+                throw faultException;
+            }
+            catch (CommunicationException communicationException)
+            {
+                throw communicationException;
+            }
+            catch (TimeoutException timeoutException)
+            {
+                throw timeoutException;
+            }
+            boardPage.UpdatePlayerDeck(gameResources.PlayerCards, gameResources.CurrentIndex);
+            this.NotifyEndTurn(gameCode, gamertag);
+        }
+
+        public void SeeTheFuture()
+        {
+            List<Card> topCards = gameResources.SeeTheFuture();
+            boardPage.ShowTopCards(topCards);
+        }
         public void RemoveCardFromStack(bool isTopCard)
         {
             if (isTopCard)
@@ -349,6 +381,38 @@ namespace ExamExplosion.Helpers
         public bool PlayCards(string gameCode)
         {
             var selectedCards = gameResources.GetSelectedCardsPaths();
+            if (selectedCards.Count == 1)
+            {
+                string cardSelected = selectedCards[0];
+                switch (cardSelected)
+                {
+                    case "takeFromBelow":
+                        DrawBottomCard(gameCode, SessionManager.CurrentSession.gamertag);
+                        break;
+                    case "exempt":
+                        //exempt
+                        break;
+                    case "leftTeam":
+                        //leftTeam
+                        break;
+                    case "shuffle":
+                        //shuffle
+                        break;
+                    case "viewTheFuture":
+                        SeeTheFuture();
+                        break;
+                    case "please":
+                        //paro
+                        break;
+                }
+            }
+            else
+            {
+                if (selectedCards.All(card => card == selectedCards[0]))
+                {
+                
+                }
+            }
             //primero se debe validar que se pueda tirar la o las cartas
             //validar que no estes en condicion de perder por un exam bomb
             //validar que los dos profes sean iguales

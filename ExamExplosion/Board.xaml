@@ -91,5 +91,12 @@
         </Image>
         <Rectangle HorizontalAlignment="Left" Height="270" Margin="575,0,0,0" Stroke="Black" VerticalAlignment="Center" Width="225" Fill="White"/>
         <Image x:Name="CardOnBoard" HorizontalAlignment="Left" Height="223" Margin="604,255,0,0" VerticalAlignment="Top" Width="164"/>
+        <Grid Width="500" Height="250" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="35,0,0,0">
+            <Grid x:Name="Cards">
+                <Image x:Name="FirstCard" Height="250" Width="166" HorizontalAlignment="Left"/>
+                <Image x:Name="SecondCard" Height="250" Width="166"/>
+                <Image x:Name="ThirdCard" Height="250" Width="166" HorizontalAlignment="Right"/>
+            </Grid>
+        </Grid>
     </Grid>
 </Page>

@@ -40,21 +40,25 @@ namespace ExamExplosion
                 switch (clickedButton.Name)
                 {
                     case "ReportPlayer1":
-                        idPlayerReported = accountManager.GetAccountIdByGamertag(player1lbl.Content.ToString());
+                        reportedPlayer = player1lbl.Content.ToString();
+                        idPlayerReported = accountManager.GetAccountIdByGamertag(reportedPlayer);
                         break;
                     case "ReportPlayer2":
-                        idPlayerReported = accountManager.GetAccountIdByGamertag(player2lbl.Content.ToString());
+                        reportedPlayer = player2lbl.Content.ToString();
+                        idPlayerReported = accountManager.GetAccountIdByGamertag(reportedPlayer);
                         break;
                     case "ReportPlayer3":
-                        idPlayerReported = accountManager.GetAccountIdByGamertag(player3lbl.Content.ToString());
+                        reportedPlayer = player3lbl.Content.ToString();
+                        idPlayerReported = accountManager.GetAccountIdByGamertag(reportedPlayer);
                         break;
                     case "ReportPlayer4":
-                        idPlayerReported = accountManager.GetAccountIdByGamertag(player4lbl.Content.ToString());
+                        reportedPlayer = player4lbl.Content.ToString();
+                        idPlayerReported = accountManager.GetAccountIdByGamertag(reportedPlayer);
                         break;
                 }
                 if (idPlayerReported != -1)
                 {
-                    reportManager.ReportPlayer(idPlayerReported);
+                    reportManager.ReportPlayer(idPlayerReported, reportedPlayer);
                     new AlertModal("Jugador reportado", "Has reportado a este jugador.").ShowDialog();
                 }
                 else
