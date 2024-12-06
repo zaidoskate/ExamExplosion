@@ -391,5 +391,10 @@ namespace ExamExplosion
             player3Img.Source = null;
             player4Img.Source = null;
         }
+
+        internal void UpdateHost()
+        {
+            hostGamertag = player1Lbl.Content.ToString();
+        }
     }
 }

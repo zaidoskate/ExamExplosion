@@ -69,7 +69,6 @@ namespace ExamExplosion.Helpers
         /// <param name="gamertag">Gamertag del jugador que termina su turno.</param>
         public void NotifyEndTurn(string gameCode, string gamertag)
         {
-            boardPage.ResetTopCardsPath();
             try
             {
                 proxy.NotifyEndTurn(gameCode, gamertag);
@@ -315,6 +314,40 @@ namespace ExamExplosion.Helpers
             List<Card> topCards = gameResources.SeeTheFuture();
             boardPage.ShowTopCards(topCards);
         }
+
+        public void ShuffleDeck(string gameCode)
+        {
+            Stack<Card> gameDeckShuffled = gameResources.ShuffleGameDeck();
+            Stack<CardManagement> mappedGameDeck = new Stack<CardManagement>();
+            foreach (var card in gameDeckShuffled)
+            {
+                mappedGameDeck.Push(new CardManagement
+                {
+                   CardName = card.Name,
+                   CardPath = card.Path,
+                });
+            }
+            proxy.SendShuffleDeck(gameCode, mappedGameDeck);
+        }
+
+        public void RequestCard(string gameCode, string playerRequested, string playerRequesting)
+        {
+            proxy.RequestCard(gameCode, playerRequested, playerRequesting);
+        }
+        public void ReceiveGameDeck(Stack<CardManagement> gameDeck)
+        {
+            Stack<Card> mappedGameDeck = new Stack<Card>();
+            foreach (var cardManagement in gameDeck)
+            {
+                mappedGameDeck.Push(new Card
+                {
+                    Name = cardManagement.CardName,
+                    Path = cardManagement.CardPath
+                });
+            }
+            gameResources.GameDeck = mappedGameDeck;
+        }
+
         public void RemoveCardFromStack(bool isTopCard)
         {
             if (isTopCard)
@@ -396,13 +429,13 @@ namespace ExamExplosion.Helpers
                         //leftTeam
                         break;
                     case "shuffle":
-                        //shuffle
+                        ShuffleDeck(gameCode);
                         break;
                     case "viewTheFuture":
                         SeeTheFuture();
                         break;
                     case "please":
-                        //paro
+                        boardPage.StartPlayerSelection(gameCode); ;
                         break;
                 }
             }
@@ -423,6 +456,34 @@ namespace ExamExplosion.Helpers
 
             //antes de terminar se deben limpiar las cartas seleccionadas del resources y del boardPage.SelectedCards
             return true;
+        }
+
+        public void NotifyCardRequested(string gameCode, string playerRequesting)
+        {
+            if (gameResources.PlayerCards.Count > 0)
+            {
+                Random random = new Random();
+                int randomIndex = random.Next(gameResources.PlayerCards.Count);
+
+                Card cardToSend = gameResources.PlayerCards[randomIndex];
+                CardManagement cardManagement = new CardManagement{ CardName = cardToSend.Name, CardPath = cardToSend.Path };
+
+                gameResources.PlayerCards.RemoveAt(randomIndex);
+                boardPage.UpdatePlayerDeck(gameResources.PlayerCards, gameResources.CurrentIndex);
+                proxy.SendCardToPlayer(gameCode, playerRequesting, cardManagement);
+                boardPage.ShowCardRequested(playerRequesting);
+            }
+        }
+
+        public void NotifyCardReceived(CardManagement card)
+        {
+            if (card != null)
+            {
+                Card cardObtained = new Card{ Name = card.CardName, Path = card.CardPath };
+                gameResources.AddCard(cardObtained);
+                boardPage.UpdatePlayerDeck(gameResources.PlayerCards, gameResources.CurrentIndex);
+                boardPage.ShowCardObtained(card.CardName);
+            }
         }
     }
 }
