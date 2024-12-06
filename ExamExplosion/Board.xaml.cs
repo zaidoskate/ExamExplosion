@@ -386,16 +386,21 @@ namespace ExamExplosion
             }
             else
             {
-                var cardToRemove = SelectedCards.Children
+                RemoveSelectedCards(clickedCard);
+            }
+        }
+
+        private void RemoveSelectedCards(Image clickedCard)
+        {
+            var cardToRemove = SelectedCards.Children
                 .OfType<Image>()
                 .FirstOrDefault(img => (int)img.Tag == (int)clickedCard.Tag);
 
-                if (cardToRemove != null)
-                {
-                    gameManager.DeselectCard((int)clickedCard.Tag);
-                    SelectedCards.Children.Remove(cardToRemove);
-                    clickedCard.Opacity = 1.0;
-                }
+            if (cardToRemove != null)
+            {
+                gameManager.DeselectCard((int)clickedCard.Tag);
+                SelectedCards.Children.Remove(cardToRemove);
+                clickedCard.Opacity = 1.0;
             }
         }
 
@@ -413,7 +418,7 @@ namespace ExamExplosion
             //aqui solo se valida si se pudo o no jugar la carta, si se pudo se muestra un mensaje predeterminado de que no se puede
             if(gameManager.PlayCards(gameCode))
             {
-
+                
             }
         }
         private void DrawCard(object sender, RoutedEventArgs e)
@@ -527,20 +532,27 @@ namespace ExamExplosion
                 if (CardOnBoard.Source is BitmapImage bitmapImage)
                 {
                     string cardOnBoard = bitmapImage.UriSource.ToString();
-                    switch (cardOnBoard)
+                    var requestCardRoutes = new List<string>
+            {
+                "pack://application:,,,/CardsPackages/NormalPackage/please.png",
+                "pack://application:,,,/CardsPackages/NormalPackage/profeA.png",
+                "pack://application:,,,/CardsPackages/NormalPackage/profeM.png",
+                "pack://application:,,,/CardsPackages/NormalPackage/profeO.png",
+                "pack://application:,,,/CardsPackages/NormalPackage/profeR.png",
+                "pack://application:,,,/CardsPackages/NormalPackage/profeS.png"
+            };
+                    if (requestCardRoutes.Contains(cardOnBoard))
                     {
-                        case "pack://application:,,,/CardsPackages/NormalPackage/please.png":
-                            gameManager.RequestCard(gameCode, selectedPlayer, SessionManager.CurrentSession.gamertag);
-                            break;
-                        case "pack://application:,,,/CardsPackages/NormalPackage/leftTeam.png":
-                            //implementa el attack
-                            break;
-                        default:
-                            break;
+                        gameManager.RequestCard(gameCode, selectedPlayer, SessionManager.CurrentSession.gamertag);
+                    }
+                    else if (cardOnBoard == "pack://application:,,,/CardsPackages/NormalPackage/leftTeam.png")
+                    {
+                        // Implementa el ataque
                     }
                 }
             }
         }
+
 
         internal void ShowCardRequested(string playerRequesting)
         {
@@ -550,6 +562,18 @@ namespace ExamExplosion
         internal void ShowCardObtained(string cardName)
         {
             new AlertModal("Carta obtenida", $"Has obtenido una carta: {cardName}").ShowDialog();
+        }
+
+        internal void ClearSelectedCards()
+        {
+            var cardsToRemove = SelectedCards.Children.OfType<Image>().ToList();
+
+            foreach (var card in cardsToRemove)
+            {
+                int cardId = (int)card.Tag;
+                SelectedCards.Children.Remove(card);
+                gameManager.RemoveCardFromPlayerHand(cardId);
+            }
         }
     }
 }
