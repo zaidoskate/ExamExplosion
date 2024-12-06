@@ -48,16 +48,12 @@ namespace ExamExplosion.Helpers
         {
             this.GameDeck.Pop();
         }
-        public void ShuffleGameDeck()
+        public Stack<Card> ShuffleGameDeck()
         {
-            Card[] cardsToShuffle = {null, null, null};
-            cardsToShuffle[0] = GameDeck.Pop();
-            cardsToShuffle[1] = GameDeck.Pop();
-            cardsToShuffle[2] = GameDeck.Pop();
-
-            GameDeck.Push(cardsToShuffle[0]);
-            GameDeck.Push(cardsToShuffle[1]);
-            GameDeck.Push(cardsToShuffle[2]);
+            List<Card> cards = this.GameDeck.ToList();
+            cards = cards.OrderBy(cardDeck => Guid.NewGuid()).ToList();
+            Stack<Card> stack = new Stack<Card>(cards);
+            return stack;
         }
         public void AddReRegistrationCard(int index)
         {

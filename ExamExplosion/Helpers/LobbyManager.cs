@@ -218,6 +218,7 @@ namespace ExamExplosion.Helpers
             Application.Current.Dispatcher.Invoke(() =>
             {
                 lobbyPage.ClearPlayers();
+                lobbyPage.UpdateHost();
                 int index = 0;
                 foreach (var player in playerStatus)
                 {

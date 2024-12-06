@@ -92,19 +92,16 @@ namespace ExamExplosion
             catch (FaultException faultException)
             {
                 new AlertModal("Error", "Se produjo un error en el servidor").ShowDialog();
-                //throw faultException;
                 log.Error("Error del servidor (FaultException)", faultException);
             }
             catch (CommunicationException communicationException)
             {
                 new AlertModal("Error de comunicación", "No se pudo conectar con el servidor.").ShowDialog();
-                //throw communicationException;
                 log.Warn("Problema de comunicación con el servidor", communicationException);
             }
             catch (TimeoutException timeoutException)
             {
                 new AlertModal("Tiempo de espera", "La conexión con el servidor ha expirado.").ShowDialog();
-                //throw timeoutException;
                 log.Warn("Timeout al intentar conectar con el servidor", timeoutException);
             }
         }
@@ -160,6 +157,8 @@ namespace ExamExplosion
             else
             {
                 turnTimer.Stop();
+                ResetTopCardsPath();
+                ResetPlayerButtonVisibility();
                 if (SessionManager.CurrentSession.gamertag == hostGamertag)
                 {
                     try
@@ -467,7 +466,7 @@ namespace ExamExplosion
             if (topCards.Count >= 2)
             {
                 string cardPath = topCards[1].Path;
-                SecondCard.Source = new BitmapImage(new Uri($"pack://application:,,,/CardsPackages/NormalPackage/{topCards[1].Path}.png", UriKind.Absolute));
+                SecondCard.Source = new BitmapImage(new Uri($"pack://application:,,,/CardsPackages/{this.defaultPackage}/{topCards[1].Path}.png", UriKind.Absolute));
             }
 
             if (topCards.Count == 3)
@@ -479,9 +478,78 @@ namespace ExamExplosion
 
         public void ResetTopCardsPath()
         {
-           this.FirstCard.Source = null;
-           this.SecondCard.Source = null;
-           this.ThirdCard.Source = null;
+            this.FirstCard.Source = null;
+            this.SecondCard.Source = null;
+            this.ThirdCard.Source = null;
+        }
+
+        internal void StartPlayerSelection(string gameCode)
+        {
+            MakePlayerButtonVisible();
+            FirstPlayerBtn.Click += (sender, e) => HandlePlayerSelected(this.player1Lbl.Content.ToString(), gameCode);
+            SecondPlayerBtn.Click += (sender, e) => HandlePlayerSelected(this.player2Lbl.Content.ToString(), gameCode);
+            ThirdPlayerBtn.Click += (sender, e) => HandlePlayerSelected(this.player3Lbl.Content.ToString(), gameCode);
+            FourthPlayerBtn.Click += (sender, e) => HandlePlayerSelected(this.player4Lbl.Content.ToString(), gameCode);
+        }
+
+        private void MakePlayerButtonVisible()
+        {
+            if(this.player1Lbl.Visibility == Visibility.Visible)
+            {
+                this.FirstPlayerBtn.Visibility = Visibility.Visible;
+            }
+            if (this.player2Lbl.Visibility == Visibility.Visible)
+            {
+                this.SecondPlayerBtn.Visibility = Visibility.Visible;
+            }
+            if (this.player3Lbl.Visibility == Visibility.Visible)
+            {
+                this.ThirdPlayerBtn.Visibility = Visibility.Visible;
+            }
+            if (this.player4Lbl.Visibility == Visibility.Visible)
+            {
+                this.FourthPlayerBtn.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void ResetPlayerButtonVisibility()
+        {
+            FirstPlayerBtn.Visibility = Visibility.Hidden;
+            SecondPlayerBtn.Visibility = Visibility.Hidden;
+            ThirdPlayerBtn.Visibility = Visibility.Hidden;
+            FourthPlayerBtn.Visibility = Visibility.Hidden;
+        }
+
+        private void HandlePlayerSelected(string selectedPlayer, string gameCode)
+        {
+            if (selectedPlayer != SessionManager.CurrentSession.gamertag)
+            {
+                if (CardOnBoard.Source is BitmapImage bitmapImage)
+                {
+                    string cardOnBoard = bitmapImage.UriSource.ToString();
+                    switch (cardOnBoard)
+                    {
+                        case "pack://application:,,,/CardsPackages/NormalPackage/please.png":
+                            gameManager.RequestCard(gameCode, selectedPlayer, SessionManager.CurrentSession.gamertag);
+                            break;
+                        case "pack://application:,,,/CardsPackages/NormalPackage/leftTeam.png":
+                            //implementa el attack
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+        }
+
+        internal void ShowCardRequested(string playerRequesting)
+        {
+            new AlertModal($"{playerRequesting} te solicito una carta", $"Se le ha otorgado una de tus cartas a {playerRequesting}").ShowDialog();
+        }
+
+        internal void ShowCardObtained(string cardName)
+        {
+            new AlertModal("Carta obtenida", $"Has obtenido una carta: {cardName}").ShowDialog();
         }
     }
 }
