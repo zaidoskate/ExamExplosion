@@ -138,7 +138,6 @@ namespace ExamExplosion
                 lblNameErrorMessage.Content = ex.Message;
                 txtBoxName.BorderBrush = Brushes.Red;
                 txtBoxesStatus[0] = false;
-                return;
             }
         }
 
@@ -165,7 +164,6 @@ namespace ExamExplosion
                 lblLastnameErrorMessage.Content = ex.Message;
                 txtBoxLastname.BorderBrush = Brushes.Red;
                 txtBoxesStatus[1] = false;
-                return;
             }
         }
         private void ValidateEmail(object sender, TextChangedEventArgs e)
@@ -191,7 +189,6 @@ namespace ExamExplosion
                 lblEmailErrorMessage.Content = ex.Message;
                 txtBoxEmail.BorderBrush = Brushes.Red;
                 txtBoxesStatus[2] = false;
-                return;
             }
         }
         private void ValidateGamertag(object sender, TextChangedEventArgs e)
@@ -219,7 +216,6 @@ namespace ExamExplosion
                 lblGamertagErrorMessage.Content = ex.Message;
                 txtBoxGamertag.BorderBrush = Brushes.Red;
                 txtBoxesStatus[3] = false;
-                return;
             }
         }
         private void ValidatePassword(object sender, TextChangedEventArgs e)
@@ -243,7 +239,6 @@ namespace ExamExplosion
                 txtBoxPassword.BorderBrush = Brushes.Red;
                 pswdBoxPassword.BorderBrush = Brushes.Red;
                 txtBoxesStatus[4] = false;
-                return;
             }
         }
         private void ValidatePasswordBox(object sender, RoutedEventArgs e)
@@ -267,7 +262,6 @@ namespace ExamExplosion
                 txtBoxPassword.BorderBrush = Brushes.Red;
                 pswdBoxPassword.BorderBrush = Brushes.Red;
                 txtBoxesStatus[4] = false;
-                return;
             }
         }
         private void ValidateRepeatPassword(object sender, TextChangedEventArgs e)
@@ -288,7 +282,6 @@ namespace ExamExplosion
                 txtBoxRepeatPassword.BorderBrush = Brushes.Red;
                 pswdBoxRepeatPassword.BorderBrush = Brushes.Red;
                 txtBoxesStatus[5] = false;
-                return;
             }
         }
         private void ValidateRepeatPasswordBox(object sender, RoutedEventArgs e)
@@ -309,7 +302,6 @@ namespace ExamExplosion
                 txtBoxRepeatPassword.BorderBrush = Brushes.Red;
                 pswdBoxRepeatPassword.BorderBrush = Brushes.Red;
                 txtBoxesStatus[5] = false;
-                return;
             }
         }
 
@@ -317,7 +309,7 @@ namespace ExamExplosion
         {
             foreach(bool value in txtBoxesStatus)
             {
-                if(value == false)
+                if(!value)
                 {
                     log.Info("Datos de registro de usuario incompletos o con errores");
                     new AlertModal("Datos incompletos","Corrige los campos que sean necesarios").ShowDialog();

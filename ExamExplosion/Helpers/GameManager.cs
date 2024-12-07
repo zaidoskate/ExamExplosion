@@ -14,16 +14,10 @@ namespace ExamExplosion.Helpers
     /// </summary>
     public class GameManager : IGameManagerCallback
     {
-        // Contexto para la comunicación con el servicio WCF.
-        private InstanceContext context = null;
+        private readonly ExamExplotionService.GameManagerClient proxy = null;
+        private readonly GameResourcesManager gameResources = null;
 
-        private ExamExplotionService.GameManagerClient proxy = null;
-        private GameResourcesManager gameResources = null;
-
-        // Página de tablero utilizada para actualizar la interfaz gráfica.
-        private Board boardPage = null;
-        //Pila que representa el mazo de cartas
-        //private Stack<Card> deck = new Stack<Card>();
+        private readonly Board boardPage = null;
 
         /// <summary>
         /// Inicializa una nueva instancia de la clase GameManager.
@@ -31,7 +25,7 @@ namespace ExamExplosion.Helpers
         /// <param name="boardPage">Instancia de la página del tablero asociada al juego.</param>
         public GameManager(Board boardPage)
         {
-            context = new InstanceContext(this);
+            InstanceContext context = new InstanceContext(this);
             proxy = new GameManagerClient(context);
             gameResources = new GameResourcesManager();
             this.boardPage = boardPage;
@@ -441,9 +435,10 @@ namespace ExamExplosion.Helpers
             }
             else
             {
-                if (selectedCards.All(card => card == selectedCards[0]))
+                List<string> teacherCards = new List<string> { "profeA", "profeM", "profeO", "profeR", "profeS" };
+                if (selectedCards.Count == 2 && selectedCards[0] == selectedCards[1] && teacherCards.Contains(selectedCards[0]))
                 {
-                
+                    boardPage.StartPlayerSelection(gameCode);
                 }
             }
             //primero se debe validar que se pueda tirar la o las cartas
@@ -453,6 +448,7 @@ namespace ExamExplosion.Helpers
             //si es alguna carta en especial como ataque o ver el futuro, se llaman los metodos al boardPage
             //si pasa las validaciones, se pinta en todos los clientes
             proxy.NotifyCardOnBoard(gameCode, selectedCards[0]);
+            boardPage.ClearSelectedCards();
 
             //antes de terminar se deben limpiar las cartas seleccionadas del resources y del boardPage.SelectedCards
             return true;
@@ -469,6 +465,7 @@ namespace ExamExplosion.Helpers
                 CardManagement cardManagement = new CardManagement{ CardName = cardToSend.Name, CardPath = cardToSend.Path };
 
                 gameResources.PlayerCards.RemoveAt(randomIndex);
+                RemoveCardFromPlayerHand(randomIndex);
                 boardPage.UpdatePlayerDeck(gameResources.PlayerCards, gameResources.CurrentIndex);
                 proxy.SendCardToPlayer(gameCode, playerRequesting, cardManagement);
                 boardPage.ShowCardRequested(playerRequesting);
@@ -484,6 +481,13 @@ namespace ExamExplosion.Helpers
                 boardPage.UpdatePlayerDeck(gameResources.PlayerCards, gameResources.CurrentIndex);
                 boardPage.ShowCardObtained(card.CardName);
             }
+        }
+
+        internal void RemoveCardFromPlayerHand(int cardId)
+        {
+            var playerHand = gameResources.PlayerCards;
+            playerHand.RemoveAt(cardId);
+            boardPage.UpdatePlayerDeck(gameResources.PlayerCards, gameResources.CurrentIndex);
         }
     }
 }

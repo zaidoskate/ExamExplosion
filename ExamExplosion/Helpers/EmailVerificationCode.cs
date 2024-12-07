@@ -10,7 +10,7 @@ using System.IO;
 
 namespace ExamExplosion.Helpers
 {
-    public class EmailVerificationCode
+    public static class EmailVerificationCode
     {
         public static string GenerateCode()
         {

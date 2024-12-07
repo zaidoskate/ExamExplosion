@@ -63,34 +63,6 @@ namespace ExamExplosion
             this.Focus();
 
         }
-
-        private void InitializeLobby(Game game)
-        {
-            try
-            {
-                lobbyCode = lobbyManager.CreateLobby(game);
-                lobbyManager.ConnectLobby(SessionManager.CurrentSession.gamertag, this.lobbyCode);
-            }
-            catch (FaultException faultException)
-            {
-                new AlertModal("Error", "Se produjo un error en el servidor").ShowDialog();
-                //throw faultException;
-                log.Error("Error del servidor (FaultException)", faultException);
-            }
-            catch (CommunicationException communicationException)
-            {
-                new AlertModal("Error de comunicación", "No se pudo conectar con el servidor.").ShowDialog();
-                //throw communicationException;
-                log.Fatal($"{communicationException.StackTrace}", communicationException);
-            }
-            catch (TimeoutException timeoutException)
-            {
-                new AlertModal("Tiempo de espera", "La conexión con el servidor ha expirado.").ShowDialog();
-                //throw timeoutException;
-                log.Warn("Timeout al intentar conectar con el servidor", timeoutException);
-            }
-        }
-
         public Lobby(string lobbyCode)
         {
             lobbyManager = new LobbyManager(this);
@@ -126,6 +98,34 @@ namespace ExamExplosion
             this.Focusable = true;
             this.Focus();
         }
+
+        private void InitializeLobby(Game game)
+        {
+            try
+            {
+                lobbyCode = lobbyManager.CreateLobby(game);
+                lobbyManager.ConnectLobby(SessionManager.CurrentSession.gamertag, this.lobbyCode);
+            }
+            catch (FaultException faultException)
+            {
+                new AlertModal("Error", "Se produjo un error en el servidor").ShowDialog();
+                //throw faultException;
+                log.Error("Error del servidor (FaultException)", faultException);
+            }
+            catch (CommunicationException communicationException)
+            {
+                new AlertModal("Error de comunicación", "No se pudo conectar con el servidor.").ShowDialog();
+                //throw communicationException;
+                log.Fatal($"{communicationException.StackTrace}", communicationException);
+            }
+            catch (TimeoutException timeoutException)
+            {
+                new AlertModal("Tiempo de espera", "La conexión con el servidor ha expirado.").ShowDialog();
+                //throw timeoutException;
+                log.Warn("Timeout al intentar conectar con el servidor", timeoutException);
+            }
+        }
+
         private void Lobby_KeyDown(object sender, KeyEventArgs e)
         {
             if(e.Key == Key.Enter)
@@ -255,37 +255,44 @@ namespace ExamExplosion
             {
                 Image playerImage = imagePlayers[playerIndex];
                 bool ready = playerImage.Source != null && playerImage.Source.ToString() == "pack://application:,,,/Images/ReadyImage.png";
-
-                if (ready && this.hostGamertag == SessionManager.CurrentSession.gamertag)
+                if (AtLeastTwoPlayers())
                 {
-                    SynchronizeClients();
-                }
-                else
-                {
-                    try
+                    if (ready && this.hostGamertag == SessionManager.CurrentSession.gamertag)
                     {
-                        lobbyManager.ChangeStatus(lobbyCode, gamertag, true);
+                        SynchronizeClients();
                     }
-                    catch (FaultException faultException)
+                    else
                     {
-                        new AlertModal("Error", "Se produjo un error en el servidor").ShowDialog();
-                        //throw faultException;
-                        log.Error("Error del servidor (FaultException)", faultException);
-                    }
-                    catch (CommunicationException communicationException)
-                    {
-                        new AlertModal("Error de comunicación", "No se pudo conectar con el servidor.").ShowDialog();
-                        //throw communicationException;
-                        log.Warn("Problema de comunicación con el servidor", communicationException);
-                    }
-                    catch (TimeoutException timeoutException)
-                    {
-                        new AlertModal("Tiempo de espera", "La conexión con el servidor ha expirado.").ShowDialog();
-                        //throw timeoutException;
-                        log.Warn("Timeout al intentar conectar con el servidor", timeoutException);
+                        try
+                        {
+                            lobbyManager.ChangeStatus(lobbyCode, gamertag, true);
+                        }
+                        catch (FaultException faultException)
+                        {
+                            new AlertModal("Error", "Se produjo un error en el servidor").ShowDialog();
+                            //throw faultException;
+                            log.Error("Error del servidor (FaultException)", faultException);
+                        }
+                        catch (CommunicationException communicationException)
+                        {
+                            new AlertModal("Error de comunicación", "No se pudo conectar con el servidor.").ShowDialog();
+                            //throw communicationException;
+                            log.Warn("Problema de comunicación con el servidor", communicationException);
+                        }
+                        catch (TimeoutException timeoutException)
+                        {
+                            new AlertModal("Tiempo de espera", "La conexión con el servidor ha expirado.").ShowDialog();
+                            //throw timeoutException;
+                            log.Warn("Timeout al intentar conectar con el servidor", timeoutException);
+                        }
                     }
                 }
             }
+        }
+
+        private bool AtLeastTwoPlayers()
+        {
+            return !player2Lbl.Content.Equals("");
         }
 
         private void SynchronizeClients()
@@ -395,6 +402,14 @@ namespace ExamExplosion
         internal void UpdateHost()
         {
             hostGamertag = player1Lbl.Content.ToString();
+            if (SessionManager.CurrentSession.gamertag.Equals(player1Lbl.Content.ToString()))
+            {
+                SessionManager.CurrentSession.isLobbyOwner = true;
+            }
+            else
+            {
+                SessionManager.CurrentSession.isLobbyOwner = false;
+            }
         }
     }
 }

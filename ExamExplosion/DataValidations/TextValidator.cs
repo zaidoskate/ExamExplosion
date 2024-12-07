@@ -7,13 +7,13 @@ using System.Text.RegularExpressions;
 
 namespace ExamExplosion.DataValidations
 {
-    public class TextValidator
+    public static class TextValidator
     {
         public static void ValidateEmailFormat(string text)
         {
             string pattern = @"^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-zA-Z]{2,}$";
             bool result = Regex.IsMatch(text, pattern);
-            if(result == false)
+            if(!result)
             {
                 throw new DataValidationException("Correo invalido");
             }
@@ -22,7 +22,7 @@ namespace ExamExplosion.DataValidations
         {
             string pattern = @"^[A-ZÀ-ÿ][a-zA-ZÀ-ÿ'., ]*$";
             bool result = Regex.IsMatch(text, pattern);
-            if (result == false)
+            if (!result)
             {
                 throw new DataValidationException("Formato de nombre incorrecto.");
             }
@@ -31,7 +31,7 @@ namespace ExamExplosion.DataValidations
         {
             string pattern = @"^[a-zA-Z0-9-]+$";
             bool result = Regex.IsMatch(text, pattern);
-            if (result == false)
+            if (!result)
             {
                 throw new DataValidationException("Solo letras y numeros.");
             }
@@ -40,7 +40,7 @@ namespace ExamExplosion.DataValidations
         {
             string pattern = @"^\d";
             bool result = Regex.IsMatch(text, pattern);
-            if (result == true)
+            if (result)
             {
                 throw new DataValidationException("Debe empezar con letra.");
             }
@@ -48,7 +48,7 @@ namespace ExamExplosion.DataValidations
         public static void ValidateNotBlanks(string text)
         {
             bool result = String.IsNullOrEmpty(text);
-            if (result == true)
+            if (result)
             {
                 throw new DataValidationException("Este es un campo obligatorio.");
             }
