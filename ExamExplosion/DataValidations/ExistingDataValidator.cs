@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ExamExplosion.DataValidations
 {
-    public class ExistingDataValidator
+    public static class ExistingDataValidator
     {
         public static bool ValidateExistingGamertag(string gamertag)
         {

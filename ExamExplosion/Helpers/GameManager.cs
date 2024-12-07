@@ -14,16 +14,10 @@ namespace ExamExplosion.Helpers
     /// </summary>
     public class GameManager : IGameManagerCallback
     {
-        // Contexto para la comunicación con el servicio WCF.
-        private InstanceContext context = null;
+        private readonly ExamExplotionService.GameManagerClient proxy = null;
+        private readonly GameResourcesManager gameResources = null;
 
-        private ExamExplotionService.GameManagerClient proxy = null;
-        private GameResourcesManager gameResources = null;
-
-        // Página de tablero utilizada para actualizar la interfaz gráfica.
-        private Board boardPage = null;
-        //Pila que representa el mazo de cartas
-        //private Stack<Card> deck = new Stack<Card>();
+        private readonly Board boardPage = null;
 
         /// <summary>
         /// Inicializa una nueva instancia de la clase GameManager.
@@ -31,7 +25,7 @@ namespace ExamExplosion.Helpers
         /// <param name="boardPage">Instancia de la página del tablero asociada al juego.</param>
         public GameManager(Board boardPage)
         {
-            context = new InstanceContext(this);
+            InstanceContext context = new InstanceContext(this);
             proxy = new GameManagerClient(context);
             gameResources = new GameResourcesManager();
             this.boardPage = boardPage;
