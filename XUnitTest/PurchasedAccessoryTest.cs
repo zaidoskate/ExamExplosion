@@ -1,4 +1,4 @@
-﻿using ExamExplosion.ExamExplotionService;
+﻿using ExamExplotionService;
 using ExamExplosion.Models;
 using System;
 using System.Collections.Generic;
@@ -36,7 +36,7 @@ namespace XUnitTest
                 InUse = false
             };
             bool accessoryPurchased = false;
-            using (var proxy = new AccessoryManagerClient())
+            using (var proxy = new ExamExplotionService.AccessoryManagerClient())
             {
                 accessoryPurchased = proxy.PurchaseAccessory(purchasedAccessoryManagement);
             }
@@ -46,7 +46,7 @@ namespace XUnitTest
         public void GetAccessoryInUse()
         {
             int currentAccessoryId = -1;
-            using (var proxy = new AccessoryManagerClient())
+            using (var proxy = new ExamExplotionService.AccessoryManagerClient())
             {
                 AccessoryManagement purchasedAccessory = proxy.GetAccessoryInUse(17);
                 currentAccessoryId = purchasedAccessory.AccessoryId;
@@ -56,7 +56,7 @@ namespace XUnitTest
         }
         public static List<int> GetPurchasedAccessoriesByPlayer(int playerId)
         {
-            using (var proxy = new AccessoryManagerClient())
+            using (var proxy = new ExamExplotionService.AccessoryManagerClient())
             {
                 var purchasedAccessories = proxy.GetPurchasedAccessories(playerId);
                 return purchasedAccessories.ToList();

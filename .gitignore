@@ -194,3 +194,7 @@ bin
 obj
 *.resx
 ExamExplosion/Connected Services/
+
+# Sonar Qube
+ExamExplosion/.sonarqube
+.sonarqube
