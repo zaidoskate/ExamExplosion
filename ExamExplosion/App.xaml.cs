@@ -18,7 +18,7 @@ namespace ExamExplosion
 
             log4net.Config.XmlConfigurator.Configure();
 
-            log.Info("Exam Explosion - Cliente ha iniciado.");
+            log.Debug("Exam Explosion - Cliente ha iniciado.");
         }
     }
 }

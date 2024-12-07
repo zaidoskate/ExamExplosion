@@ -19,8 +19,6 @@ namespace ExamExplosion.Helpers
         /// <summary>
         /// Contexto de instancia utilizado para la comunicación duplex con el servidor.
         /// </summary>
-        private InstanceContext context = null;
-
         private ExamExplotionService.LobbyManagerClient proxy = null;
 
         /// <summary>
@@ -35,7 +33,7 @@ namespace ExamExplosion.Helpers
         public LobbyManager(Lobby _lobbyPage)
         {
             lobbyPage = _lobbyPage;
-            context = new InstanceContext(this);
+            InstanceContext context = new InstanceContext(this);
             proxy = new ExamExplotionService.LobbyManagerClient(context);
         }
 
@@ -44,7 +42,7 @@ namespace ExamExplosion.Helpers
         /// </summary>
         public LobbyManager()
         {
-            context = new InstanceContext(this);
+            InstanceContext context = new InstanceContext(this);
             proxy = new ExamExplotionService.LobbyManagerClient(context);
         }
 
@@ -70,17 +68,14 @@ namespace ExamExplosion.Helpers
             }
             catch (FaultException faultException)
             {
-                // Implementar log
                 throw faultException;
             }
             catch (CommunicationException communicationException)
             {
-                // Implementar log
                 throw communicationException;
             }
             catch (TimeoutException timeoutException)
             {
-                // Implementar log
                 throw timeoutException;
             }
         }
@@ -99,17 +94,14 @@ namespace ExamExplosion.Helpers
             }
             catch (FaultException faultException)
             {
-                // Implementar log
                 throw faultException;
             }
             catch (CommunicationException communicationException)
             {
-                // Implementar log
                 throw communicationException;
             }
             catch (TimeoutException timeoutException)
             {
-                // Implementar log
                 throw timeoutException;
             }
         }
@@ -127,17 +119,14 @@ namespace ExamExplosion.Helpers
             }
             catch (FaultException faultException)
             {
-                // Implementar log
                 throw faultException;
             }
             catch (CommunicationException communicationException)
             {
-                // Implementar log
                 throw communicationException;
             }
             catch (TimeoutException timeoutException)
             {
-                // Implementar log
                 throw timeoutException;
             }
         }
@@ -156,17 +145,14 @@ namespace ExamExplosion.Helpers
             }
             catch (FaultException faultException)
             {
-                // Implementar log
                 throw faultException;
             }
             catch (CommunicationException communicationException)
             {
-                // Implementar log
                 throw communicationException;
             }
             catch (TimeoutException timeoutException)
             {
-                // Implementar log
                 throw timeoutException;
             }
         }
@@ -194,17 +180,14 @@ namespace ExamExplosion.Helpers
             }
             catch (FaultException faultException)
             {
-                // Implementar log
                 throw faultException;
             }
             catch (CommunicationException communicationException)
             {
-                // Implementar log
                 throw communicationException;
             }
             catch (TimeoutException timeoutException)
             {
-                // Implementar log
                 throw timeoutException;
             }
         }
@@ -241,17 +224,14 @@ namespace ExamExplosion.Helpers
             }
             catch (FaultException faultException)
             {
-                // Implementar log
                 throw faultException;
             }
             catch (CommunicationException communicationException)
             {
-                // Implementar log
                 throw communicationException;
             }
             catch (TimeoutException timeoutException)
             {
-                // Implementar log
                 throw timeoutException;
             }
         }
@@ -280,17 +260,14 @@ namespace ExamExplosion.Helpers
             }
             catch (FaultException faultException)
             {
-                // Implementar log
                 throw faultException;
             }
             catch (CommunicationException communicationException)
             {
-                // Implementar log
                 throw communicationException;
             }
             catch (TimeoutException timeoutException)
             {
-                // Implementar log
                 throw timeoutException;
             }
         }

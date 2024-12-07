@@ -28,18 +28,15 @@ namespace ExamExplosion.Helpers
             }
             catch (FaultException faultException)
             {
-                // Implementar log
-                throw;
+                throw faultException;
             }
             catch (CommunicationException communicationException)
             {
-                // Implementar log
-                throw;
+                throw communicationException;
             }
             catch (TimeoutException timeoutException)
             {
-                // Implementar log
-                throw;
+                throw timeoutException;
             }
         }
 
@@ -61,21 +58,15 @@ namespace ExamExplosion.Helpers
             }
             catch (FaultException faultException)
             {
-                // Implementar log
-                Console.WriteLine($"FaultException: {faultException.Message}");
-                throw;
+                throw faultException;
             }
             catch (CommunicationException communicationException)
             {
-                // Implementar log
-                Console.WriteLine($"CommunicationException: {communicationException.Message}");
-                throw;
+                throw communicationException;
             }
             catch (TimeoutException timeoutException)
             {
-                // Implementar log
-                Console.WriteLine($"TimeoutException: {timeoutException.Message}");
-                throw;
+                throw timeoutException;
             }
         }
 
@@ -98,17 +89,14 @@ namespace ExamExplosion.Helpers
             }
             catch (FaultException faultException)
             {
-                // Implementar log
                 throw faultException;
             }
             catch (CommunicationException communicationException)
             {
-                // Implementar log
                 throw communicationException;
             }
             catch (TimeoutException timeoutException)
             {
-                // Implementar log
                 throw timeoutException;
             }
         }

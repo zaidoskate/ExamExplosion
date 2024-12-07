@@ -157,56 +157,6 @@ namespace ExamExplosion.Helpers
             });
         }
 
-        /// <summary>
-        /// Extrae una carta del mazo.
-        /// </summary>
-        /// <returns>La carta extraída, o null si el mazo está vacío.</returns>
-
-        //public Card DrawCard()
-        //{
-        //    string gamertag = SessionManager.CurrentSession.gamertag;
-        //    proxy.InitializeDeck(gameCode, playerCount, gamertag);
-        //}
-
-        /// <summary>
-        /// Mezcla las cartas del mazo.
-        /// </summary>
-        //public void ShuffleDeck()
-        //{
-        //    var cards = deck.ToList();
-        //    //cards.Shuffle(); NO EXISTE EL METODO SHUFFLE PARA cards
-        //    deck = new Stack<Card>(cards);
-        //}
-
-        /// <summary>
-        /// Agrega una carta al mazo.
-        /// </summary>
-        /// <param name="card">Carta a agregar.</param>
-        //public void AddCardToDeck(Card card)
-        //{
-        //    List<string> playerCardsList = new List<string>();
-
-        //    Dictionary<string, int> playerDeck = proxy.GetPlayerDeck(gameCode, gamertag);
-
-
-
-        //public List<string> GetInitialPlayerDeck(string gameCode, string gamertag)
-        //{
-        //    List<string> playerCardsList = new List<string>();
-
-        //    Dictionary<string, int> playerDeck = proxy.GetPlayerDeck(gameCode, gamertag);
-
-        //    foreach (var cardInDeck in playerDeck)
-        //    {
-        //        string path = cardInDeck.Key;
-        //        int count = cardInDeck.Value;
-        //        for (int i = 0; i < count; i++)
-        //        {
-        //            playerCardsList.Add(path);
-        //        }
-        //    }
-        //    return playerCardsList;
-        //}
         public void InitializeGameDeck(string gameCode, int playerCount)
         {
             try
@@ -326,7 +276,22 @@ namespace ExamExplosion.Helpers
 
         public void RequestCard(string gameCode, string playerRequested, string playerRequesting)
         {
-            proxy.RequestCard(gameCode, playerRequested, playerRequesting);
+            try
+            {
+                proxy.RequestCard(gameCode, playerRequested, playerRequesting);
+            }
+            catch (FaultException faultException)
+            {
+                throw faultException;
+            }
+            catch (CommunicationException communicationException)
+            {
+                throw communicationException;
+            }
+            catch (TimeoutException timeoutException)
+            {
+                throw timeoutException;
+            }
         }
         public void ReceiveGameDeck(Stack<CardManagement> gameDeck)
         {
@@ -447,7 +412,22 @@ namespace ExamExplosion.Helpers
             //validar que sean dos profes
             //si es alguna carta en especial como ataque o ver el futuro, se llaman los metodos al boardPage
             //si pasa las validaciones, se pinta en todos los clientes
-            proxy.NotifyCardOnBoard(gameCode, selectedCards[0]);
+            try
+            {
+                proxy.NotifyCardOnBoard(gameCode, selectedCards[0]);
+            }
+            catch (FaultException faultException)
+            {
+                throw faultException;
+            }
+            catch (CommunicationException communicationException)
+            {
+                throw communicationException;
+            }
+            catch (TimeoutException timeoutException)
+            {
+                throw timeoutException;
+            }
             boardPage.ClearSelectedCards();
 
             //antes de terminar se deben limpiar las cartas seleccionadas del resources y del boardPage.SelectedCards
@@ -467,7 +447,22 @@ namespace ExamExplosion.Helpers
                 gameResources.PlayerCards.RemoveAt(randomIndex);
                 RemoveCardFromPlayerHand(randomIndex);
                 boardPage.UpdatePlayerDeck(gameResources.PlayerCards, gameResources.CurrentIndex);
-                proxy.SendCardToPlayer(gameCode, playerRequesting, cardManagement);
+                try
+                {
+                    proxy.SendCardToPlayer(gameCode, playerRequesting, cardManagement);
+                }
+                catch (FaultException faultException)
+                {
+                    throw faultException;
+                }
+                catch (CommunicationException communicationException)
+                {
+                    throw communicationException;
+                }
+                catch (TimeoutException timeoutException)
+                {
+                    throw timeoutException;
+                }
                 boardPage.ShowCardRequested(playerRequesting);
             }
         }
@@ -483,7 +478,7 @@ namespace ExamExplosion.Helpers
             }
         }
 
-        internal void RemoveCardFromPlayerHand(int cardId)
+        public void RemoveCardFromPlayerHand(int cardId)
         {
             var playerHand = gameResources.PlayerCards;
             playerHand.RemoveAt(cardId);

@@ -343,7 +343,7 @@
     <Resource Include="Images\rightArrow.png" />
     <Resource Include="Images\Landscape1.jpeg" />
     <Content Include="log4net.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

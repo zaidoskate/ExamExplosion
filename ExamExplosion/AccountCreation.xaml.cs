@@ -68,19 +68,16 @@ namespace ExamExplosion
             catch (FaultException faultException)
             {
                 new AlertModal("Error", "Se produjo un error en el servidor").ShowDialog();
-                //throw faultException;
                 log.Error("Error del servidor (FaultException)", faultException);
             }
             catch (CommunicationException communicationException)
             {
                 new AlertModal("Error de comunicación", "No se pudo conectar con el servidor.").ShowDialog();
-                //throw communicationException;
                 log.Warn("Problema de comunicación con el servidor", communicationException);
             }
             catch (TimeoutException timeoutException)
             {
                 new AlertModal("Tiempo de espera", "La conexión con el servidor ha expirado.").ShowDialog();
-                //throw timeoutException;
                 log.Warn("Timeout al intentar conectar con el servidor", timeoutException);
             }
         }
@@ -133,9 +130,9 @@ namespace ExamExplosion
                 txtBoxName.BorderBrush = Brushes.Black;
                 txtBoxesStatus[0] = true;
             }
-            catch(DataValidationException ex)
+            catch(DataValidationException dataValidationException)
             {
-                lblNameErrorMessage.Content = ex.Message;
+                lblNameErrorMessage.Content = dataValidationException.Message;
                 txtBoxName.BorderBrush = Brushes.Red;
                 txtBoxesStatus[0] = false;
             }
@@ -159,9 +156,9 @@ namespace ExamExplosion
                 txtBoxLastname.BorderBrush = Brushes.Black;
                 txtBoxesStatus[1] = true;
             }
-            catch (DataValidationException ex)
+            catch (DataValidationException dataValidationException)
             {
-                lblLastnameErrorMessage.Content = ex.Message;
+                lblLastnameErrorMessage.Content = dataValidationException.Message;
                 txtBoxLastname.BorderBrush = Brushes.Red;
                 txtBoxesStatus[1] = false;
             }
@@ -184,9 +181,9 @@ namespace ExamExplosion
                 txtBoxEmail.BorderBrush = Brushes.Black;
                 txtBoxesStatus[2] = true;
             }
-            catch (DataValidationException ex)
+            catch (DataValidationException dataValidationException)
             {
-                lblEmailErrorMessage.Content = ex.Message;
+                lblEmailErrorMessage.Content = dataValidationException.Message;
                 txtBoxEmail.BorderBrush = Brushes.Red;
                 txtBoxesStatus[2] = false;
             }
@@ -211,9 +208,9 @@ namespace ExamExplosion
                 txtBoxGamertag.BorderBrush = Brushes.Black;
                 txtBoxesStatus[3] = true;
             }
-            catch (DataValidationException ex)
+            catch (DataValidationException dataValidationException)
             {
-                lblGamertagErrorMessage.Content = ex.Message;
+                lblGamertagErrorMessage.Content = dataValidationException.Message;
                 txtBoxGamertag.BorderBrush = Brushes.Red;
                 txtBoxesStatus[3] = false;
             }
@@ -233,9 +230,9 @@ namespace ExamExplosion
                 pswdBoxPassword.BorderBrush = Brushes.Black;
                 txtBoxesStatus[4] = true;
             }
-            catch (DataValidationException ex)
+            catch (DataValidationException dataValidationException)
             {
-                lblPasswordErrorMessage.Text = ex.Message;
+                lblPasswordErrorMessage.Text = dataValidationException.Message;
                 txtBoxPassword.BorderBrush = Brushes.Red;
                 pswdBoxPassword.BorderBrush = Brushes.Red;
                 txtBoxesStatus[4] = false;
@@ -256,9 +253,9 @@ namespace ExamExplosion
                 pswdBoxPassword.BorderBrush = Brushes.Black;
                 txtBoxesStatus[4] = true;
             }
-            catch (DataValidationException ex)
+            catch (DataValidationException dataValidationException)
             {
-                lblPasswordErrorMessage.Text = ex.Message;
+                lblPasswordErrorMessage.Text = dataValidationException.Message;
                 txtBoxPassword.BorderBrush = Brushes.Red;
                 pswdBoxPassword.BorderBrush = Brushes.Red;
                 txtBoxesStatus[4] = false;
@@ -276,9 +273,9 @@ namespace ExamExplosion
                 pswdBoxRepeatPassword.BorderBrush = Brushes.Black;
                 txtBoxesStatus[5] = true;
             }
-            catch (DataValidationException ex)
+            catch (DataValidationException dataValidationException)
             {
-                lblRepeatPasswordErrorMessage.Content = ex.Message;
+                lblRepeatPasswordErrorMessage.Content = dataValidationException.Message;
                 txtBoxRepeatPassword.BorderBrush = Brushes.Red;
                 pswdBoxRepeatPassword.BorderBrush = Brushes.Red;
                 txtBoxesStatus[5] = false;
@@ -296,9 +293,9 @@ namespace ExamExplosion
                 pswdBoxRepeatPassword.BorderBrush = Brushes.Black;
                 txtBoxesStatus[5] = true;
             }
-            catch (DataValidationException ex)
+            catch (DataValidationException dataValidationException)
             {
-                lblRepeatPasswordErrorMessage.Content = ex.Message;
+                lblRepeatPasswordErrorMessage.Content = dataValidationException.Message;
                 txtBoxRepeatPassword.BorderBrush = Brushes.Red;
                 pswdBoxRepeatPassword.BorderBrush = Brushes.Red;
                 txtBoxesStatus[5] = false;
@@ -343,19 +340,16 @@ namespace ExamExplosion
             catch (FaultException faultException)
             {
                 new AlertModal("Error", "Se produjo un error en el servidor").ShowDialog();
-                //throw faultException;
                 log.Error("Error del servidor (FaultException)", faultException);
             }
             catch (CommunicationException communicationException)
             {
                 new AlertModal("Error de comunicación", "No se pudo conectar con el servidor.").ShowDialog();
-                //throw communicationException;
                 log.Warn("Problema de comunicación con el servidor", communicationException);
             }
             catch (TimeoutException timeoutException)
             {
                 new AlertModal("Tiempo de espera", "La conexión con el servidor ha expirado.").ShowDialog();
-                //throw timeoutException;
                 log.Warn("Timeout al intentar conectar con el servidor", timeoutException);
             }
         }

@@ -7,11 +7,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Configuration;
 using System.IO;
+using log4net;
 
 namespace ExamExplosion.Helpers
 {
     public static class EmailVerificationCode
     {
+        private static readonly ILog log = LogManager.GetLogger(typeof(App));
         public static string GenerateCode()
         {
             const string letters = "abcdefghijklmnopqrstuvwxyz";
@@ -27,6 +29,7 @@ namespace ExamExplosion.Helpers
         }
         public static bool SendEmail(string email, string code)
         {
+            bool emailSent = false;
             try
             {
                 string smtpUsername = Environment.GetEnvironmentVariable("SMTP_USERNAME");
@@ -48,16 +51,17 @@ namespace ExamExplosion.Helpers
                 mailMessage.To.Add(email);
 
                 client.Send(mailMessage);
+                emailSent = true;
             }
-            catch (SmtpFailedRecipientException ex)
+            catch (SmtpFailedRecipientException smtpFailRecipientException)
             {
-                return false;
+                log.Warn("Correo no existente", smtpFailRecipientException);
             }
-            catch (SmtpException ex)
+            catch (SmtpException smtpException)
             {
-                return false;
+                log.Warn(smtpException);
             }
-            return true;
+            return emailSent;
         }
     }
 }

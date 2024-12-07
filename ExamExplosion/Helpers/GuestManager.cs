@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,8 +14,24 @@ namespace ExamExplosion.Helpers
         {
             bool newGuestAdded = false;
             ExamExplotionService.PlayerManagerClient proxy = new ExamExplotionService.PlayerManagerClient();
-            GuestManagement newGuest = proxy.AddGuest();
-            if(newGuest != null )
+            GuestManagement newGuest = null;
+            try
+            {
+                newGuest = proxy.AddGuest();
+            }
+            catch (FaultException faultException)
+            {
+                throw faultException;
+            }
+            catch (CommunicationException communicationException)
+            {
+                throw communicationException;
+            }
+            catch (TimeoutException timeoutException)
+            {
+                throw timeoutException;
+            }
+            if (newGuest != null )
             {
                 SessionManager.CurrentSession.isGuest = true;
                 SessionManager.CurrentSession.isLobbyOwner = false;

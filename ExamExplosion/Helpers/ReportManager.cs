@@ -27,18 +27,15 @@ namespace ExamExplosion.Helpers
             }
             catch (FaultException faultException)
             {
-                // Implementar log
-                throw;
+                throw faultException;
             }
             catch (CommunicationException communicationException)
             {
-                // Implementar log
-                throw;
+                throw communicationException;
             }
             catch (TimeoutException timeoutException)
             {
-                // Implementar log
-                throw;
+                throw timeoutException;
             }
             return reported;
         }

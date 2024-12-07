@@ -1,7 +1,9 @@
 ﻿using ExamExplosion.Helpers;
+using log4net;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -22,11 +24,13 @@ namespace ExamExplosion
     {
         private ReportManager reportManager = null;
         private AccountManager accountManager = null;
+        private ILog log;
         public EndGame()
         {
             accountManager = new AccountManager();
             reportManager = new ReportManager();
             InitializeComponent();
+            log = LogManager.GetLogger(typeof(App));
         }
 
         private void ReportPlayer(object sender, RoutedEventArgs e)
@@ -37,24 +41,42 @@ namespace ExamExplosion
             {
                 string reportedPlayer = string.Empty;
                 int idPlayerReported = -1;
-                switch (clickedButton.Name)
+                try
                 {
-                    case "ReportPlayer1":
-                        reportedPlayer = player1lbl.Content.ToString();
-                        idPlayerReported = accountManager.GetAccountIdByGamertag(reportedPlayer);
-                        break;
-                    case "ReportPlayer2":
-                        reportedPlayer = player2lbl.Content.ToString();
-                        idPlayerReported = accountManager.GetAccountIdByGamertag(reportedPlayer);
-                        break;
-                    case "ReportPlayer3":
-                        reportedPlayer = player3lbl.Content.ToString();
-                        idPlayerReported = accountManager.GetAccountIdByGamertag(reportedPlayer);
-                        break;
-                    case "ReportPlayer4":
-                        reportedPlayer = player4lbl.Content.ToString();
-                        idPlayerReported = accountManager.GetAccountIdByGamertag(reportedPlayer);
-                        break;
+                    switch (clickedButton.Name)
+                    {
+                        case "ReportPlayer1":
+                            reportedPlayer = player1lbl.Content.ToString();
+                            idPlayerReported = accountManager.GetAccountIdByGamertag(reportedPlayer);
+                            break;
+                        case "ReportPlayer2":
+                            reportedPlayer = player2lbl.Content.ToString();
+                            idPlayerReported = accountManager.GetAccountIdByGamertag(reportedPlayer);
+                            break;
+                        case "ReportPlayer3":
+                            reportedPlayer = player3lbl.Content.ToString();
+                            idPlayerReported = accountManager.GetAccountIdByGamertag(reportedPlayer);
+                            break;
+                        case "ReportPlayer4":
+                            reportedPlayer = player4lbl.Content.ToString();
+                            idPlayerReported = accountManager.GetAccountIdByGamertag(reportedPlayer);
+                            break;
+                    }
+                }
+                catch (FaultException faultException)
+                {
+                    new AlertModal("Error", "Se produjo un error en el servidor").ShowDialog();
+                    log.Error("Error del servidor (FaultException)", faultException);
+                }
+                catch (CommunicationException communicationException)
+                {
+                    new AlertModal("Error de comunicación", "No se pudo conectar con el servidor.").ShowDialog();
+                    log.Warn("Problema de comunicación con el servidor", communicationException);
+                }
+                catch (TimeoutException timeoutException)
+                {
+                    new AlertModal("Tiempo de espera", "La conexión con el servidor ha expirado.").ShowDialog();
+                    log.Warn("Timeout al intentar conectar con el servidor", timeoutException);
                 }
                 if (idPlayerReported != -1)
                 {

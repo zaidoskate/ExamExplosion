@@ -3,6 +3,7 @@ using ExamExplosion.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 
 namespace ExamExplosion.Helpers
 {
@@ -19,10 +20,25 @@ namespace ExamExplosion.Helpers
         /// <returns>Una lista de identificadores de los accesorios comprados por el jugador.</returns>
         public static List<int> GetPurchasedAccessoriesByPlayer(int playerId)
         {
-            using (var proxy = new AccessoryManagerClient())
+            try
             {
-                var purchasedAccessories = proxy.GetPurchasedAccessories(playerId);
-                return purchasedAccessories.ToList();
+                using (var proxy = new AccessoryManagerClient())
+                {
+                    var purchasedAccessories = proxy.GetPurchasedAccessories(playerId);
+                    return purchasedAccessories.ToList();
+                }
+            }
+            catch (FaultException faultException)
+            {
+                throw faultException;
+            }
+            catch (CommunicationException communicationException)
+            {
+                throw communicationException;
+            }
+            catch (TimeoutException timeoutException)
+            {
+                throw timeoutException;
             }
         }
 
@@ -33,16 +49,31 @@ namespace ExamExplosion.Helpers
         /// <returns>Un objeto <see cref="Accessory"/> que contiene los detalles del accesorio en uso.</returns>
         public static Accessory GetAccessoryInUse(int playerId)
         {
-            using (var proxy = new AccessoryManagerClient())
+            try
             {
-                AccessoryManagement purchasedAccessory = proxy.GetAccessoryInUse(playerId);
-                Accessory accessory = new Accessory
+                using (var proxy = new AccessoryManagerClient())
                 {
-                    accessoryId = purchasedAccessory.AccessoryId,
-                    name = purchasedAccessory.AccessoryName,
-                    path = purchasedAccessory.Path
-                };
-                return accessory;
+                    AccessoryManagement purchasedAccessory = proxy.GetAccessoryInUse(playerId);
+                    Accessory accessory = new Accessory
+                    {
+                        accessoryId = purchasedAccessory.AccessoryId,
+                        name = purchasedAccessory.AccessoryName,
+                        path = purchasedAccessory.Path
+                    };
+                    return accessory;
+                }
+            }
+            catch (FaultException faultException)
+            {
+                throw faultException;
+            }
+            catch (CommunicationException communicationException)
+            {
+                throw communicationException;
+            }
+            catch (TimeoutException timeoutException)
+            {
+                throw timeoutException;
             }
         }
 
@@ -59,10 +90,24 @@ namespace ExamExplosion.Helpers
                 PlayerId = purchasedAccessory.playerId,
                 InUse = purchasedAccessory.inUse
             };
-
-            using (var proxy = new AccessoryManagerClient())
+            try
             {
-                return proxy.PurchaseAccessory(purchasedAccessoryManagement);
+                using (var proxy = new AccessoryManagerClient())
+                {
+                    return proxy.PurchaseAccessory(purchasedAccessoryManagement);
+                }
+            }
+            catch (FaultException faultException)
+            {
+                throw faultException;
+            }
+            catch (CommunicationException communicationException)
+            {
+                throw communicationException;
+            }
+            catch (TimeoutException timeoutException)
+            {
+                throw timeoutException;
             }
         }
 
@@ -79,10 +124,24 @@ namespace ExamExplosion.Helpers
                 PlayerId = purchasedAccessory.playerId,
                 InUse = purchasedAccessory.inUse
             };
-
-            using (var proxy = new AccessoryManagerClient())
+            try
             {
-                return proxy.SetAccessoryInUse(purchasedAccessoryManagement);
+                using (var proxy = new AccessoryManagerClient())
+                {
+                    return proxy.SetAccessoryInUse(purchasedAccessoryManagement);
+                }
+            }
+            catch (FaultException faultException)
+            {
+                throw faultException;
+            }
+            catch (CommunicationException communicationException)
+            {
+                throw communicationException;
+            }
+            catch (TimeoutException timeoutException)
+            {
+                throw timeoutException;
             }
         }
     }

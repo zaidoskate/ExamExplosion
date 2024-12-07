@@ -5,6 +5,7 @@ using log4net;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -28,11 +29,13 @@ namespace ExamExplosion
         Dictionary<int, int> accessoriesPrice = new Dictionary<int, int>();
         int accessoryIdSelected = 0;
         int points = 0;
+        private ILog log;
 
         public Komalli()
         {
             InitializeComponent();
             InitializeKomalli();
+            log = LogManager.GetLogger(typeof(App));
         }
 
         private void InitializeKomalli()
@@ -69,9 +72,28 @@ namespace ExamExplosion
                 }
             }
 
-            Accessory accessory = PurchasedAccessoryManager.GetAccessoryInUse(playerId);
-            accessoryIdSelected = accessory.accessoryId;
-            switch (accessory.accessoryId)
+            Accessory accessory = null;
+            try
+            {
+                accessory = PurchasedAccessoryManager.GetAccessoryInUse(playerId);
+                accessoryIdSelected = accessory.accessoryId;
+            }
+            catch (FaultException faultException)
+            {
+                new AlertModal("Error", "Se produjo un error en el servidor").ShowDialog();
+                log.Error("Error del servidor (FaultException)", faultException);
+            }
+            catch (CommunicationException communicationException)
+            {
+                new AlertModal("Error de comunicación", "No se pudo conectar con el servidor.").ShowDialog();
+                log.Warn("Problema de comunicación con el servidor", communicationException);
+            }
+            catch (TimeoutException timeoutException)
+            {
+                new AlertModal("Tiempo de espera", "La conexión con el servidor ha expirado.").ShowDialog();
+                log.Warn("Timeout al intentar conectar con el servidor", timeoutException);
+            }
+            switch (accessoryIdSelected)
             {
                 case 1:
                     radioBtnNormalPackage.IsChecked = true;
@@ -105,18 +127,56 @@ namespace ExamExplosion
             {
                 new AlertModal("Puntos insuficientes", "Necesitas ganar mas partidas para poder comprarlo.").ShowDialog();
             }
-            else if (PurchasedAccessoryManager.PurchaseAccessory(purchasedAccessory))
+            else
             {
-                new AlertModal("Accesorio comprado", "Ahora puedes utilizar este paquete de cartas para visualizarlas en tu juego.").ShowDialog();
-                UpdatePurchasedAccessories(accessoryIdSelected);
-                UpdatePoints();
+                try
+                {
+                    PurchasedAccessoryManager.PurchaseAccessory(purchasedAccessory);
+                    new AlertModal("Accesorio comprado", "Ahora puedes utilizar este paquete de cartas para visualizarlas en tu juego.").ShowDialog();
+                    UpdatePurchasedAccessories(accessoryIdSelected);
+                    UpdatePoints();
+                }
+                catch (FaultException faultException)
+                {
+                    new AlertModal("Error", "Se produjo un error en el servidor").ShowDialog();
+                    log.Error("Error del servidor (FaultException)", faultException);
+                }
+                catch (CommunicationException communicationException)
+                {
+                    new AlertModal("Error de comunicación", "No se pudo conectar con el servidor.").ShowDialog();
+                    log.Warn("Problema de comunicación con el servidor", communicationException);
+                }
+                catch (TimeoutException timeoutException)
+                {
+                    new AlertModal("Tiempo de espera", "La conexión con el servidor ha expirado.").ShowDialog();
+                    log.Warn("Timeout al intentar conectar con el servidor", timeoutException);
+                }
+                
             }
         }
         private void UpdatePoints()
         {
             int playerId = SessionManager.CurrentSession.userId;
+            try
+            {
+                lblPoints.Content = points;
+            }
+            catch (FaultException faultException)
+            {
+                new AlertModal("Error", "Se produjo un error en el servidor").ShowDialog();
+                log.Error("Error del servidor (FaultException)", faultException);
+            }
+            catch (CommunicationException communicationException)
+            {
+                new AlertModal("Error de comunicación", "No se pudo conectar con el servidor.").ShowDialog();
+                log.Warn("Problema de comunicación con el servidor", communicationException);
+            }
+            catch (TimeoutException timeoutException)
+            {
+                new AlertModal("Tiempo de espera", "La conexión con el servidor ha expirado.").ShowDialog();
+                log.Warn("Timeout al intentar conectar con el servidor", timeoutException);
+            }
             points = PlayerManager.GetPointsByPlayerId(playerId);
-            lblPoints.Content = points;
         }
 
         private void UpdatePurchasedAccessories(int accessoryIdSelected)
@@ -146,8 +206,26 @@ namespace ExamExplosion
             purchasedAccessory.playerId = SessionManager.CurrentSession.accountId;
             purchasedAccessory.accessoryId = accessoryIdSelected;
             purchasedAccessory.inUse = true;
-            PurchasedAccessoryManager.UseAccessory(purchasedAccessory);
-            new AlertModal("Accesorio en uso", "Ahora puedes visualizar las cartas con el estilo adquirido.").ShowDialog();
+            try
+            {
+                PurchasedAccessoryManager.UseAccessory(purchasedAccessory);
+                new AlertModal("Accesorio en uso", "Ahora puedes visualizar las cartas con el estilo adquirido.").ShowDialog();
+            }
+            catch (FaultException faultException)
+            {
+                new AlertModal("Error", "Se produjo un error en el servidor").ShowDialog();
+                log.Error("Error del servidor (FaultException)", faultException);
+            }
+            catch (CommunicationException communicationException)
+            {
+                new AlertModal("Error de comunicación", "No se pudo conectar con el servidor.").ShowDialog();
+                log.Warn("Problema de comunicación con el servidor", communicationException);
+            }
+            catch (TimeoutException timeoutException)
+            {
+                new AlertModal("Tiempo de espera", "La conexión con el servidor ha expirado.").ShowDialog();
+                log.Warn("Timeout al intentar conectar con el servidor", timeoutException);
+            }
         }
         private void PackageSelected(object sender, RoutedEventArgs e)
         {

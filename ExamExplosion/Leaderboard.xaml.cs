@@ -1,4 +1,5 @@
 ﻿using ExamExplosion.Helpers;
+using log4net;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,11 +24,13 @@ namespace ExamExplosion
     {
         private Dictionary<string, int> globalLeaderboard;
         private Dictionary<string, int> friendsLeaderboard;
+        private ILog log;
         public Leaderboard()
         {
             InitializeComponent();
             InitializeLeaderboardsLists();
             UpdateLeaderboard(null, null);
+            log = LogManager.GetLogger(typeof(App));
         }
 
         private void InitializeLeaderboardsLists()
@@ -40,15 +43,18 @@ namespace ExamExplosion
             }
             catch (FaultException faultException)
             {
-                new AlertModal("Error con el servidor","Ha ocurrido un error interno con el servidor.").ShowDialog();
+                new AlertModal("Error", "Se produjo un error en el servidor").ShowDialog();
+                log.Error("Error del servidor (FaultException)", faultException);
             }
             catch (CommunicationException communicationException)
             {
-                new AlertModal("Error de conexion", "Se ha perdido conexion con el servidor, intentalo mas tarde.").ShowDialog();
+                new AlertModal("Error de comunicación", "No se pudo conectar con el servidor.").ShowDialog();
+                log.Warn("Problema de comunicación con el servidor", communicationException);
             }
             catch (TimeoutException timeoutException)
             {
-                new AlertModal("Error con el servidor", "Ha ocurrido un error interno con el servidor.").ShowDialog();
+                new AlertModal("Tiempo de espera", "La conexión con el servidor ha expirado.").ShowDialog();
+                log.Warn("Timeout al intentar conectar con el servidor", timeoutException);
             }
         }
 
