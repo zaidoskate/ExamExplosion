@@ -102,11 +102,6 @@
     <Compile Include="Catalogue.xaml.cs">
       <DependentUpon>Catalogue.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Connected Services\ExamExplotionService\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
     <Compile Include="DataValidations\DataValidationException.cs" />
     <Compile Include="DataValidations\ExistingDataValidator.cs" />
     <Compile Include="DataValidations\TextValidator.cs" />
@@ -255,37 +250,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="Connected Services\ExamExplotionService\ExamExplosion.ExamExplotionService.AccessoryManagement.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\ExamExplotionService\ExamExplosion.ExamExplotionService.GameManagement.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\ExamExplotionService\ExamExplosion.ExamExplotionService.GuestManagement.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\ExamExplotionService\ExamExplosion.ExamExplotionService.PlayerManagement.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\ExamExplotionService\item.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\ExamExplotionService\item1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\ExamExplotionService\item2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\ExamExplotionService\item3.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\ExamExplotionService\item4.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\ExamExplotionService\item41.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\ExamExplotionService\ServiceImplementation.wsdl" />
     <Resource Include="Images\coin.png" />
     <Resource Include="CardsPackages\GraduatePackage\examBomb.png" />
     <Resource Include="CardsPackages\GraduatePackage\exempt.png" />
@@ -416,24 +380,6 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadataStorage Include="Connected Services\ExamExplotionService\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\ExamExplotionService\item.disco" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\ExamExplotionService\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\ExamExplotionService\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\ExamExplotionService\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.es-MX.resx">

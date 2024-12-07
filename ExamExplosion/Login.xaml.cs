@@ -50,16 +50,21 @@ namespace ExamExplosion
             }
             try
             {
-                if (AccountManager.ValidateCredentials(gamertag, password))
+                int idAccount = AccountManager.ValidateCredentials(gamertag, password);
+                if (idAccount > 0)
                 {
                     if (this.NavigationService != null)
                     {
                         this.NavigationService.Navigate(new HomePage());
                     }
                 }
-                else
+                else if(idAccount == -1)
                 {
                     new AlertModal("Datos incorrectos", "Gamertag y/o contraseña incorrectos").ShowDialog();
+                }
+                else if (idAccount == -2)
+                {
+                    new AlertModal("Cuenta inactiva", "Tu cuenta esta inactiva por exceso de reportes.").ShowDialog();
                 }
             }
             catch (FaultException faultException)

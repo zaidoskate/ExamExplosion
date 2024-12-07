@@ -17,7 +17,7 @@ namespace ExamExplosion.Helpers
         /// <param name="gamertag">Nombre de usuario (gamertag).</param>
         /// <param name="password">Contraseña del usuario.</param>
         /// <returns>Verdadero si las credenciales son válidas, falso en caso contrario.</returns>
-        public static bool ValidateCredentials(string gamertag, string password)
+        public static int ValidateCredentials(string gamertag, string password)
         {
             try
             {
@@ -29,8 +29,8 @@ namespace ExamExplosion.Helpers
 
                 using (var proxy = new ExamExplotionService.AuthenticationManagerClient())
                 {
-                    bool result = proxy.Login(account);
-                    if (result)
+                    int result = proxy.Login(account);
+                    if (result > 0)
                     {
                         LoadActualSession(gamertag);
                     }
