@@ -159,6 +159,7 @@ namespace ExamExplosion
             int playerId = SessionManager.CurrentSession.userId;
             try
             {
+                points = PlayerManager.GetPointsByPlayerId(playerId);
                 lblPoints.Content = points;
             }
             catch (FaultException faultException)
@@ -176,7 +177,6 @@ namespace ExamExplosion
                 new AlertModal("Tiempo de espera", "La conexión con el servidor ha expirado.").ShowDialog();
                 log.Warn("Timeout al intentar conectar con el servidor", timeoutException);
             }
-            points = PlayerManager.GetPointsByPlayerId(playerId);
         }
 
         private void UpdatePurchasedAccessories(int accessoryIdSelected)

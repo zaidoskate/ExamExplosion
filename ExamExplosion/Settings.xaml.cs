@@ -159,7 +159,7 @@ namespace ExamExplosion
             else
             {
                 string gamertag = SessionManager.CurrentSession.gamertag;
-                bool currentValidPassword = false;
+                int currentValidPassword = 0;
                 try
                 {
                     currentValidPassword = AccountManager.ValidateCredentials(gamertag, currentPassword);
@@ -179,7 +179,7 @@ namespace ExamExplosion
                     new AlertModal("Tiempo de espera", "La conexión con el servidor ha expirado.").ShowDialog();
                     log.Warn("Timeout al intentar conectar con el servidor", timeoutException);
                 }
-                if (currentValidPassword)
+                if (currentValidPassword > 0)
                 {
                     UpdateNewPassword();
                     clearFields();

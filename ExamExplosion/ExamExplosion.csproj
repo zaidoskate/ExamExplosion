@@ -96,17 +96,26 @@
     <Compile Include="AlertModal.xaml.cs">
       <DependentUpon>AlertModal.xaml</DependentUpon>
     </Compile>
+    <Compile Include="BlockAndFriendsList.xaml.cs">
+      <DependentUpon>BlockAndFriendsList.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Board.xaml.cs">
       <DependentUpon>Board.xaml</DependentUpon>
     </Compile>
     <Compile Include="Catalogue.xaml.cs">
       <DependentUpon>Catalogue.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Connected Services\ExamExplotionService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="DataValidations\DataValidationException.cs" />
     <Compile Include="DataValidations\ExistingDataValidator.cs" />
     <Compile Include="DataValidations\TextValidator.cs" />
     <Compile Include="Helpers\AccountManager.cs" />
     <Compile Include="Helpers\EmailVerificationCode.cs" />
+    <Compile Include="Helpers\FriendsAndBloquedPlayersManager.cs" />
     <Compile Include="Helpers\GameManager.cs" />
     <Compile Include="Helpers\GameResourcesManager.cs" />
     <Compile Include="Helpers\GuestManager.cs" />
@@ -147,6 +156,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="QuestionModal.xaml.cs">
+      <DependentUpon>QuestionModal.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
@@ -158,6 +170,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AlertModal.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BlockAndFriendsList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -232,6 +248,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="QuestionModal.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Settings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -306,9 +326,47 @@
     <Resource Include="Images\leftArrow.png" />
     <Resource Include="Images\rightArrow.png" />
     <Resource Include="Images\Landscape1.jpeg" />
+    <None Include="Connected Services\ExamExplotionService\ExamExplosion.ExamExplotionService.AccessoryManagement.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ExamExplotionService\ExamExplosion.ExamExplotionService.GameManagement.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ExamExplotionService\ExamExplosion.ExamExplotionService.GuestManagement.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ExamExplotionService\ExamExplosion.ExamExplotionService.PlayerManagement.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ExamExplotionService\item.disco" />
+    <None Include="Connected Services\ExamExplotionService\configuration91.svcinfo" />
+    <None Include="Connected Services\ExamExplotionService\configuration.svcinfo" />
+    <None Include="Connected Services\ExamExplotionService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Resource Include="Images\FriendsAndBlockIcon.png" />
+    <Resource Include="Images\block.png" />
+    <Resource Include="Images\openBlock.png" />
     <Content Include="log4net.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="Connected Services\ExamExplotionService\item.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ExamExplotionService\item1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ExamExplotionService\item2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ExamExplotionService\item3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ExamExplotionService\item4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ExamExplotionService\ServiceImplementation.wsdl" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -404,6 +462,8 @@
   <ItemGroup>
     <Resource Include="Images\Stack.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\ExamExplotionService\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

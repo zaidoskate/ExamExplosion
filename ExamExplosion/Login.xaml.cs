@@ -20,12 +20,11 @@ namespace ExamExplosion
 {
     public partial class Login : Page
     {
-        private ILog log;
+        private static readonly ILog log = LogManager.GetLogger(typeof(App));
         public Login()
         {
             InitializeComponent();
             txtBoxGamertag.Focus();
-            ILog log = LogManager.GetLogger(typeof(App));
         }
         private void CancelLogIn(object sender, RoutedEventArgs e)
         {

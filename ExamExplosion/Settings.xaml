@@ -10,7 +10,7 @@
       Title="Settings">
 
     <Grid Background="#FFFFF2CC">
-        <Label Content="{x:Static p:Resources.globalLblSettings}" Margin="342,10,0,332" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="60" HorizontalAlignment="Left" Width="348"/>
+        <Label Content="Settings" Margin="342,10,0,332" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="60" HorizontalAlignment="Left" Width="348"/>
         <Image HorizontalAlignment="Left" VerticalAlignment="Top" Width="98" Source="pack://application:,,,/Images/Settings.png" Stretch="Fill" Height="94" Margin="244,10,0,0"/>
 
         <Button HorizontalAlignment="Left" Margin="141,253,0,0" VerticalAlignment="Top" Height="56" Width="94" Background="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand" Click="LoadLanguage">

@@ -97,5 +97,13 @@ namespace ExamExplosion
                 this.NavigationService.Navigate(new Catalogue());
             }
         }
+
+        private void ViewFriendAndBlockList(object sender, RoutedEventArgs e)
+        {
+            if (this.NavigationService != null)
+            {
+                this.NavigationService.Navigate(new BlockAndFriendsList());
+            }
+        }
     }
 }

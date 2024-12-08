@@ -55,7 +55,7 @@
         <Button HorizontalAlignment="Left" Margin="684,24,0,0" VerticalAlignment="Top" Background="Transparent" BorderBrush="{x:Null}" Cursor="Hand" Click="GoSettings">
             <Grid Height="108">
                 <Image HorizontalAlignment="Center" VerticalAlignment="Top" Width="80" Source="pack://application:,,,/Images/Settings.png" Stretch="Fill" Height="80" />
-                <Label Content="{x:Static p:Resources.globalLblSettings}" HorizontalAlignment="Right" VerticalAlignment="Top" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="24" Height="53" Margin="-15,65,0,0"/>
+                <Label Content="Settings" HorizontalAlignment="Right" VerticalAlignment="Top" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="24" Height="53" Margin="-15,65,0,0"/>
             </Grid>
         </Button>
         <Button HorizontalAlignment="Left" Margin="691,235,0,0" VerticalAlignment="Top" Background="Transparent" BorderBrush="{x:Null}" Cursor="Hand" Click="LogOut">
@@ -68,6 +68,9 @@
         <Label x:Name="lblGamertag" Content="Gamertag" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="24" Margin="23,95,0,0" Width="118" Height="65"/>
         <Button HorizontalAlignment="Left" Margin="10,165,0,0" VerticalAlignment="Top" Background="Transparent" BorderBrush="{x:Null}" Cursor="Hand" Click="SeeCatalogue">
             <Image HorizontalAlignment="Left" Height="216" Margin="0,0,0,0" VerticalAlignment="Top" Width="180" Source="pack://application:,,,/Images/3cardsImage.png"/>
+        </Button>
+        <Button HorizontalAlignment="Center" Margin="0,361,0,0" VerticalAlignment="Top" Click="ViewFriendAndBlockList" Height="42" Width="46">
+            <Image Source="pack://application:,,,/Images/FriendsAndBlockIcon.png" Height="40" Width="42" />
         </Button>
 
     </Grid>
