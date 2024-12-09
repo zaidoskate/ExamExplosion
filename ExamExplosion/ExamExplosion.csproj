@@ -351,6 +351,7 @@
     <Resource Include="Images\FriendsAndBlockIcon.png" />
     <Resource Include="Images\block.png" />
     <Resource Include="Images\openBlock.png" />
+    <Resource Include="Images\BackgroundCards.jpeg" />
     <Content Include="log4net.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

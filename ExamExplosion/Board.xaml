@@ -39,7 +39,9 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
-
+        <Storyboard x:Key="FadeOutAnimation">
+            <DoubleAnimation Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:8" />
+        </Storyboard>
         <Storyboard x:Key="CardDrawAnimation">
             <DoubleAnimation Storyboard.TargetName="animatedCardImg"
                              Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"
@@ -133,7 +135,6 @@
                        Visibility="Hidden" />
             </Grid>
         </Button>
-
         <Button x:Name="fourthPlayerBtn" 
                 Width="150" 
                 Height="250"
@@ -188,7 +189,7 @@
             </Grid>
         </Button>
 
-        <Image x:Name="heart2Img" 
+        <Image x:Name="heart2Image" 
                Source="pack://application:,,,/Images/Heart.png"
                Width="50" 
                Height="50"
@@ -197,7 +198,7 @@
                Margin="0,150,0,0" 
                Visibility="Hidden" />
 
-        <Image x:Name="heart1Img" 
+        <Image x:Name="heart1Image" 
                Source="pack://application:,,,/Images/Heart.png"
                Width="50" 
                Height="50"
@@ -206,7 +207,7 @@
                Margin="0,150,400,0" 
                Visibility="Hidden" />
 
-        <Image x:Name="heart3Img" 
+        <Image x:Name="heart3Image" 
                Source="pack://application:,,,/Images/Heart.png"
                Width="50" 
                Height="50"
@@ -231,7 +232,7 @@
             </Grid>
         </Button>
 
-        <StackPanel x:Name="selectedCardsStackPanel" 
+        <StackPanel x:Name="stackPanelSelectedCards" 
                     Orientation="Horizontal"
                     HorizontalAlignment="Left" 
                     Margin="234,480,0,114" 
@@ -252,7 +253,7 @@
             </Button>
         </StackPanel>
 
-        <StackPanel x:Name="playerDeckStackPanel" 
+        <StackPanel x:Name="stackPanelPlayerCards" 
                     Orientation="Horizontal"
                     HorizontalAlignment="Center" 
                     Margin="0,576,0,0" 
@@ -315,15 +316,9 @@
                 <TranslateTransform />
             </Image.RenderTransform>
         </Image>
-
-        <Rectangle HorizontalAlignment="Left" 
-                   Height="270"
-                   Margin="575,0,0,0" 
-                   Stroke="Black"
-                   VerticalAlignment="Center" 
-                   Width="225" 
-                   Fill="White" />
-
+        <Grid HorizontalAlignment="Left" Height="240" Margin="575,0,0,0"  VerticalAlignment="Center" Width="225">
+            <Image Source="Pack://application:,,,/Images/BackgroundCards.jpeg"></Image>
+        </Grid>
         <Image x:Name="cardOnBoardImg" 
                HorizontalAlignment="Left"
                Height="223" 
@@ -336,7 +331,7 @@
               VerticalAlignment="Center"
               HorizontalAlignment="Left" 
               Margin="35,0,0,0">
-            <Grid x:Name="cardsGrid">
+            <Grid x:Name="cardsGrid" Opacity="0">
                 <Image x:Name="firstCardImg" 
                        Height="250" 
                        Width="166"
@@ -349,6 +344,10 @@
                        Width="166"
                        HorizontalAlignment="Right" />
             </Grid>
+        </Grid>
+        <Grid x:Name="NotificationGrid" Margin="751,130,252,485" Opacity="0">
+            <Rectangle HorizontalAlignment="Left" Height="100" Margin="0,0,0,0" Fill="#d58cff" VerticalAlignment="Top" Width="192"/>
+            <TextBlock x:Name="txtBlockNotification" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="16" TextWrapping="Wrap" Text="No hay mensaje" Margin="0,0,0,0"></TextBlock>
         </Grid>
     </Grid>
 </Page>

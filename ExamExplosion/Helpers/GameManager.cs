@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
+using System.ServiceModel.Channels;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -204,53 +205,71 @@ namespace ExamExplosion.Helpers
             boardPage.UpdateGameDeckCount(mappedGameDeck.Count);
         }
 
-        public void DrawCard(string gameCode, string gamertag)
+        public bool DrawCard(string gameCode, string gamertag)
         {
+            if(gameResources.GameDeck.Count == 0)
+            {
+                return false;
+            }
             gameResources.DrawTopCard();
-            boardPage.UpdateGameDeckCount(gameResources.GameDeck.Count);
-            try
+            if (gameResources.HasBomb)
             {
-                proxy.NotifyDrawCard(gameCode, gamertag, true);
+                boardPage.DisplayNotification("Utiliza una reinscripcion para ganar al repite o perderas una vida.");
+                boardPage.DisplayExamBomb();
+                return false;
             }
-            catch (FaultException faultException)
+            else
             {
-                throw faultException;
+                boardPage.UpdateGameDeckCount(gameResources.GameDeck.Count);
+                try
+                {
+                    proxy.NotifyDrawCard(gameCode, gamertag, true);
+                }
+                catch (FaultException faultException)
+                {
+                    throw faultException;
+                }
+                catch (CommunicationException communicationException)
+                {
+                    throw communicationException;
+                }
+                catch (TimeoutException timeoutException)
+                {
+                    throw timeoutException;
+                }
+                boardPage.UpdatePlayerDeck(gameResources.PlayerCards, gameResources.CurrentIndex);
+                this.NotifyEndTurn(gameCode, gamertag);
+                return true;
             }
-            catch (CommunicationException communicationException)
-            {
-                throw communicationException;
-            }
-            catch (TimeoutException timeoutException)
-            {
-                throw timeoutException;
-            }
-            boardPage.UpdatePlayerDeck(gameResources.PlayerCards, gameResources.CurrentIndex);
-            this.NotifyEndTurn(gameCode, gamertag);
+            
         }
 
         public void DrawBottomCard(string gameCode, string gamertag)
         {
-            gameResources.DrawBottomCard();
-            boardPage.UpdateGameDeckCount(gameResources.GameDeck.Count);
-            boardPage.DrawCardAnimation();
-            try
+            if (gameResources.GameDeck.Count != 0)
             {
-                proxy.NotifyDrawCard(gameCode, gamertag, false);
+                gameResources.DrawBottomCard();
+                boardPage.UpdateGameDeckCount(gameResources.GameDeck.Count);
+                boardPage.DrawCardAnimation();
+                try
+                {
+                    proxy.NotifyDrawCard(gameCode, gamertag, false);
+                }
+                catch (FaultException faultException)
+                {
+                    throw faultException;
+                }
+                catch (CommunicationException communicationException)
+                {
+                    throw communicationException;
+                }
+                catch (TimeoutException timeoutException)
+                {
+                    throw timeoutException;
+                }
+                boardPage.UpdatePlayerDeck(gameResources.PlayerCards, gameResources.CurrentIndex);
+                this.NotifyEndTurn(gameCode, gamertag);
             }
-            catch (FaultException faultException)
-            {
-                throw faultException;
-            }
-            catch (CommunicationException communicationException)
-            {
-                throw communicationException;
-            }
-            catch (TimeoutException timeoutException)
-            {
-                throw timeoutException;
-            }
-            boardPage.UpdatePlayerDeck(gameResources.PlayerCards, gameResources.CurrentIndex);
-            this.NotifyEndTurn(gameCode, gamertag);
         }
 
         public void SeeTheFuture()
@@ -326,14 +345,14 @@ namespace ExamExplosion.Helpers
             {
                 if (gameResources.CurrentIndex > 0)
                 {
-                    gameResources.CurrentIndex -= 8;
+                    gameResources.CurrentIndex -= 6;
                 }
             }
             else
             {
-                if (gameResources.CurrentIndex < gameResources.PlayerCards.Count - 8)
+                if (gameResources.CurrentIndex < gameResources.PlayerCards.Count - 6)
                 {
-                    gameResources.CurrentIndex += 8;
+                    gameResources.CurrentIndex += 6;
                 }
             }
             boardPage.UpdatePlayerDeck(gameResources.PlayerCards, gameResources.CurrentIndex);
@@ -353,7 +372,7 @@ namespace ExamExplosion.Helpers
             {
                 cardSelected = false;
             }
-            else if (cardToSelect.Path.Substring(0, 4) == selectedCards[0].Substring(0, 4))
+            else if (cardToSelect.Path == selectedCards[0])
             {
                 cardSelected = true;
                 gameResources.PlayerCards[index].IsSelected = true;
@@ -370,32 +389,42 @@ namespace ExamExplosion.Helpers
             boardPage.PrintCardOnBoard(path);
         }
 
-        public bool PlayCards(string gameCode)
+        public void PlayCards(string gameCode)
         {
             var selectedCards = gameResources.GetSelectedCardsPaths();
             if (selectedCards.Count == 1)
             {
                 string cardSelected = selectedCards[0];
-                switch (cardSelected)
+                if (gameResources.HasBomb)
                 {
-                    case "takeFromBelow":
-                        DrawBottomCard(gameCode, SessionManager.CurrentSession.gamertag);
-                        break;
-                    case "exempt":
-                        //exempt
-                        break;
-                    case "leftTeam":
-                        //leftTeam
-                        break;
-                    case "shuffle":
-                        ShuffleDeck(gameCode);
-                        break;
-                    case "viewTheFuture":
-                        SeeTheFuture();
-                        break;
-                    case "please":
-                        boardPage.StartPlayerSelection(gameCode); ;
-                        break;
+                    if(cardSelected == "reRegistration")
+                    {
+                        ReinsertExamBomb(gameCode);
+                    }
+                }
+                else
+                {
+                    switch (cardSelected)
+                    {
+                        case "takeFromBelow":
+                            DrawBottomCard(gameCode, SessionManager.CurrentSession.gamertag);
+                            break;
+                        case "exempt":
+                            SendDoubleTurn(gameCode, "next");
+                            break;
+                        case "leftTeam":
+                            boardPage.StartPlayerSelection(gameCode);
+                            break;
+                        case "shuffle":
+                            ShuffleDeck(gameCode);
+                            break;
+                        case "viewTheFuture":
+                            SeeTheFuture();
+                            break;
+                        case "please":
+                            boardPage.StartPlayerSelection(gameCode);
+                            break;
+                    }
                 }
             }
             else
@@ -406,12 +435,6 @@ namespace ExamExplosion.Helpers
                     boardPage.StartPlayerSelection(gameCode);
                 }
             }
-            //primero se debe validar que se pueda tirar la o las cartas
-            //validar que no estes en condicion de perder por un exam bomb
-            //validar que los dos profes sean iguales
-            //validar que sean dos profes
-            //si es alguna carta en especial como ataque o ver el futuro, se llaman los metodos al boardPage
-            //si pasa las validaciones, se pinta en todos los clientes
             try
             {
                 proxy.NotifyCardOnBoard(gameCode, selectedCards[0]);
@@ -429,9 +452,12 @@ namespace ExamExplosion.Helpers
                 throw timeoutException;
             }
             boardPage.ClearSelectedCards();
+        }
 
-            //antes de terminar se deben limpiar las cartas seleccionadas del resources y del boardPage.SelectedCards
-            return true;
+        public void SendDoubleTurn(string gameCode, string gamertag)
+        {
+            proxy.SendDoubleTurn(gameCode, gamertag);
+            proxy.NotifyMessage(gameCode, SessionManager.CurrentSession.gamertag, gamertag, "Tu proximo turno sera doble");
         }
 
         public void NotifyCardRequested(string gameCode, string playerRequesting)
@@ -483,6 +509,54 @@ namespace ExamExplosion.Helpers
             var playerHand = gameResources.PlayerCards;
             playerHand.RemoveAt(cardId);
             boardPage.UpdatePlayerDeck(gameResources.PlayerCards, gameResources.CurrentIndex);
+        }
+
+        public void ReciveNotification(string message)
+        {
+            boardPage.DisplayNotification(message);
+        }
+
+        public void EndTheGame(string gameCode, string winnerGamertag)
+        {
+            boardPage.GoEndGame(gameCode, winnerGamertag);
+        }
+
+        public bool ValidateLostGame(string gameCode)
+        {
+            bool lostGame = false;
+            string gamertag = SessionManager.CurrentSession.gamertag;
+
+            if (gameResources.HasBomb)
+            {
+                if(gameResources.Hp > 1)
+                {
+                    gameResources.ReduceHp();
+                    boardPage.RemoveHp(gameResources.Hp);
+                    ReinsertExamBomb(gameCode);
+                }
+                else
+                {
+                    boardPage.DeletePlayerDeck();
+                    boardPage.DisplayNotification("Has perdido");
+                    proxy.NotifyMessage(gameCode, gamertag , "all", $"{gamertag} ha perdido.");
+                    proxy.RemovePlayerByGame(gameCode, gamertag);
+                    lostGame = true;
+                }
+                proxy.NotifyEndTurn(gameCode, gamertag);
+            }
+
+            return lostGame;
+        }
+
+        private void ReinsertExamBomb(string gameCode)
+        {
+            proxy.SendExamBomb(gameCode, gameResources.GameDeck.Count);
+        }
+
+        public void ReciveAndAddExamBomb(int index)
+        {
+            gameResources.AddExamBomb(index);
+            boardPage.UpdateGameDeckCount(gameResources.GameDeck.Count);
         }
     }
 }

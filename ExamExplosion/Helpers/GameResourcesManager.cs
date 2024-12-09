@@ -13,6 +13,7 @@ namespace ExamExplosion.Helpers
         public List<Card> PlayerCards { get; set; }
         public int CurrentIndex {  get; set; }
         public int Hp {  get; set; }
+        public bool HasBomb {  get; set; }
         public GameResourcesManager() { 
         
         }
@@ -20,13 +21,19 @@ namespace ExamExplosion.Helpers
         public void DrawBottomCard()
         {
             Card bottomCard = GameDeck.ToArray().Last();
-            PlayerCards.Add(bottomCard);
+            if(!IsBombLastCard(bottomCard))
+            {
+                PlayerCards.Add(bottomCard);
+            }
             RemoveBottomCard();
         }
         public void DrawTopCard()
         {
             Card card = this.GameDeck.Pop();
-            PlayerCards.Add(card);
+            if (!IsBombLastCard(card))
+            {
+                PlayerCards.Add(card);
+            }
         }
         public void RemoveBottomCard()
         {
@@ -60,6 +67,16 @@ namespace ExamExplosion.Helpers
             Card newCard = new Card();
             newCard.Path = "reRegistration";
             newCard.Name = "Re registration";
+
+            List<Card> gameDeckList = new List<Card>(GameDeck);
+            gameDeckList.Insert(index, newCard);
+            GameDeck = new Stack<Card>(gameDeckList);
+        }
+        public void AddExamBomb(int index)
+        {
+            Card newCard = new Card();
+            newCard.Path = "examBomb";
+            newCard.Name = "Repite";
 
             List<Card> gameDeckList = new List<Card>(GameDeck);
             gameDeckList.Insert(index, newCard);
@@ -115,6 +132,20 @@ namespace ExamExplosion.Helpers
             }
 
             return topThreeCards;
+        }
+        private bool IsBombLastCard(Card card)
+        {
+            bool isBomb = false;
+            if(card.Path == "examBomb" || this.HasBomb)
+            {
+                this.HasBomb = true;
+                isBomb = true;
+            }
+            else
+            {
+                this.HasBomb = false;
+            }
+            return isBomb;
         }
     }
 }
