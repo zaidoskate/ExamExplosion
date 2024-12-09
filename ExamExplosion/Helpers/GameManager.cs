@@ -392,6 +392,10 @@ namespace ExamExplosion.Helpers
         public void PlayCards(string gameCode)
         {
             var selectedCards = gameResources.GetSelectedCardsPaths();
+            if(selectedCards.Count < 1)
+            {
+                return;
+            }
             if (selectedCards.Count == 1)
             {
                 string cardSelected = selectedCards[0];
