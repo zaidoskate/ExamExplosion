@@ -16,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ExamExplosion.Properties;
 
 namespace ExamExplosion
 {
@@ -56,7 +57,7 @@ namespace ExamExplosion
             BlockedPlayers.Clear();
         }
 
-        private void GoHome(object sender, RoutedEventArgs e)
+        private void NavigateHomePage(object sender, RoutedEventArgs e)
         {
             if (this.NavigationService != null)
             {
@@ -69,7 +70,7 @@ namespace ExamExplosion
             string gamertag = (string) button.Tag;
             int playerId = SessionManager.CurrentSession.userId;
             
-            QuestionModal questionModal = new QuestionModal("Desbloquear jugador", $"¿Deseas desbloquear a {gamertag}?");
+            QuestionModal questionModal = new QuestionModal(ExamExplosion.Properties.Resources.blockAndFriendsListLblUnblock,ExamExplosion.Properties.Resources.blockAndFriendsListLblQuestion +  $" ({gamertag})");
             questionModal.ShowDialog();
             if(questionModal.DialogResult == true)
             {
@@ -80,18 +81,21 @@ namespace ExamExplosion
                 }
                 catch (FaultException faultException)
                 {
-                    new AlertModal("Error", "Se produjo un error en el servidor").ShowDialog();
+                    new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblFaultException).ShowDialog();
                     log.Error("Error del servidor (FaultException)", faultException);
+                    NavigateStartPage();
                 }
                 catch (CommunicationException communicationException)
                 {
-                    new AlertModal("Error de comunicación", "No se pudo conectar con el servidor.").ShowDialog();
+                    new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblCommunicationException).ShowDialog();
                     log.Warn("Problema de comunicación con el servidor", communicationException);
+                    NavigateStartPage();
                 }
                 catch (TimeoutException timeoutException)
                 {
-                    new AlertModal("Tiempo de espera", "La conexión con el servidor ha expirado.").ShowDialog();
+                    new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblTimeoutException).ShowDialog();
                     log.Warn("Timeout al intentar conectar con el servidor", timeoutException);
+                    NavigateStartPage();
                 }
                 BlockedPlayers.Remove(gamertag);
             }
@@ -107,18 +111,21 @@ namespace ExamExplosion
             }
             catch (FaultException faultException)
             {
-                new AlertModal("Error", "Se produjo un error en el servidor").ShowDialog();
+                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblFaultException).ShowDialog();
                 log.Error("Error del servidor (FaultException)", faultException);
+                NavigateStartPage();
             }
             catch (CommunicationException communicationException)
             {
-                new AlertModal("Error de comunicación", "No se pudo conectar con el servidor.").ShowDialog();
+                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblCommunicationException).ShowDialog();
                 log.Warn("Problema de comunicación con el servidor", communicationException);
+                NavigateStartPage();
             }
             catch (TimeoutException timeoutException)
             {
-                new AlertModal("Tiempo de espera", "La conexión con el servidor ha expirado.").ShowDialog();
+                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblTimeoutException).ShowDialog();
                 log.Warn("Timeout al intentar conectar con el servidor", timeoutException);
+                NavigateStartPage();
             }
             foreach (var bloquedPlayer in blockedPlayers)
             {
@@ -137,7 +144,7 @@ namespace ExamExplosion
             string gamertag = (string)button.Tag;
             int playerId = SessionManager.CurrentSession.userId;
 
-            QuestionModal questionModal = new QuestionModal("Eliminar amigo", $"¿Deseas eliminar a {gamertag} de tus amigos?");
+            QuestionModal questionModal = new QuestionModal(ExamExplosion.Properties.Resources.blockAndFriendsListLblDeleteFriend, ExamExplosion.Properties.Resources.blockAndFriendsListLblUnfriendQuestion + $" ({gamertag})");
             questionModal.ShowDialog();
             if (questionModal.DialogResult == true)
             {
@@ -148,18 +155,22 @@ namespace ExamExplosion
                 }
                 catch (FaultException faultException)
                 {
-                    new AlertModal("Error", "Se produjo un error en el servidor").ShowDialog();
+                    new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblFaultException).ShowDialog();
                     log.Error("Error del servidor (FaultException)", faultException);
+                    NavigateStartPage();
                 }
                 catch (CommunicationException communicationException)
                 {
-                    new AlertModal("Error de comunicación", "No se pudo conectar con el servidor.").ShowDialog();
+                    new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblCommunicationException).ShowDialog();
                     log.Warn("Problema de comunicación con el servidor", communicationException);
+                    NavigateStartPage();
                 }
                 catch (TimeoutException timeoutException)
                 {
-                    new AlertModal("Tiempo de espera", "La conexión con el servidor ha expirado.").ShowDialog();
+
+                    new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblTimeoutException).ShowDialog();
                     log.Warn("Timeout al intentar conectar con el servidor", timeoutException);
+                    NavigateStartPage();
                 }
                 Friends.Remove(gamertag);
             }
@@ -174,18 +185,21 @@ namespace ExamExplosion
             }
             catch (FaultException faultException)
             {
-                new AlertModal("Error", "Se produjo un error en el servidor").ShowDialog();
+                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblFaultException).ShowDialog();
                 log.Error("Error del servidor (FaultException)", faultException);
+                NavigateStartPage();
             }
             catch (CommunicationException communicationException)
             {
-                new AlertModal("Error de comunicación", "No se pudo conectar con el servidor.").ShowDialog();
+                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblCommunicationException).ShowDialog();
                 log.Warn("Problema de comunicación con el servidor", communicationException);
+                NavigateStartPage();
             }
             catch (TimeoutException timeoutException)
             {
-                new AlertModal("Tiempo de espera", "La conexión con el servidor ha expirado.").ShowDialog();
+                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblTimeoutException).ShowDialog();
                 log.Warn("Timeout al intentar conectar con el servidor", timeoutException);
+                NavigateStartPage();
             }
 
             foreach (var friend in friendsList)
@@ -196,6 +210,13 @@ namespace ExamExplosion
                 {
                     playersData[gamertag] = friend.Key;
                 }
+            }
+        }
+        private void NavigateStartPage()
+        {
+            if (this.NavigationService != null)
+            {
+                this.NavigationService.Navigate(new StartPage());
             }
         }
     }

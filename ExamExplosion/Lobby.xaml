@@ -4,11 +4,11 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ExamExplosion"
-      xmlns:p ="clr-namespace:ExamExplosion.Properties"
+      xmlns:p="clr-namespace:ExamExplosion.Properties"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="Lobby"
-      >
+      d:DesignHeight="450" 
+      d:DesignWidth="800"
+      Title="Lobby">
     <Page.Background>
         <ImageBrush ImageSource="pack://application:,,,/Images/Landscape1.jpeg" Stretch="UniformToFill" />
     </Page.Background>
@@ -19,55 +19,230 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="TextBox">
                         <Border CornerRadius="15" BorderBrush="Gray" BorderThickness="2" Background="White">
-                            <ScrollViewer x:Name="PART_ContentHost"/>
+                            <ScrollViewer x:Name="PART_ContentHost" />
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+        </Style>
     </Page.Resources>
 
     <Grid>
-        <Grid>
-            <Label Content="Players" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="50" FontFamily="pack://application:,,,/Fonts/#VT323" Foreground="Black" Margin="50,30,0,0"/>
-            <Label x:Name="player1Lbl"  HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="40" FontFamily="pack://application:,,,/Fonts/#VT323" Foreground="Black" Margin="49,90,0,0"/>
-            <Image x:Name="player1Img" Source="pack://application:,,,/Images/NoReadyImage.png" Stretch="UniformToFill" StretchDirection="DownOnly" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="246,92,0,0" Height="52" Width="51" />
-            <Label x:Name="player2Lbl" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="40" FontFamily="pack://application:,,,/Fonts/#VT323" Foreground="Black" Margin="50,148,0,0"/>
-            <Image x:Name="player2Img" Source="pack://application:,,,/Images/NoReadyImage.png" Stretch="UniformToFill" StretchDirection="DownOnly" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="246,150,0,0" Height="52" Width="51" />
-            <Label x:Name="player3Lbl" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="40" FontFamily="pack://application:,,,/Fonts/#VT323" Foreground="Black" Margin="50,209,0,0"/>
-            <Image x:Name="player3Img" Source="pack://application:,,,/Images/NoReadyImage.png" Stretch="UniformToFill" StretchDirection="DownOnly" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="246,207,0,0" Height="52" Width="51" />
-            <Label x:Name="player4Lbl" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="40" FontFamily="pack://application:,,,/Fonts/#VT323" Foreground="Black" Margin="50,266,0,0"/>
-            <Image x:Name="player4Img" Source="pack://application:,,,/Images/NoReadyImage.png" Stretch="UniformToFill" StretchDirection="DownOnly" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="246,264,0,0" Height="52" Width="51" />
-        </Grid>
-        <Grid>
-            <Button Width="100" Height="55" Background="Transparent" BorderBrush="Transparent" VerticalAlignment="Bottom" Cursor="Hand" HorizontalAlignment="Left" Margin="200,0,0,20" Click="PreviousMenu">
-                <Grid>
-                    <Image Source="pack://application:,,,/Images/ButtonOrange.png" Width="100" StretchDirection="DownOnly"></Image>
-                    <Label Content="Leave" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" FontSize="25" FontFamily="pack://application:,,,/Fonts/#VT323" Foreground="White"/>
-                </Grid>
-            </Button>
-            <Button Width="100" Height="50" Background="Transparent" BorderBrush="Transparent" VerticalAlignment="Bottom" Cursor="Hand" HorizontalAlignment="Left" Margin="50,0,0,20" Click="StartButton_Click">
-                <Grid>
-                    <Image Source="pack://application:,,,/Images/ButtonGreen.png" Width="100" StretchDirection="DownOnly"></Image>
-                    <Label Content="Start" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" FontSize="25" FontFamily="pack://application:,,,/Fonts/#VT323" Foreground="White"/>
-                </Grid>
-            </Button>
-        </Grid>
-        <Label x:Name="lobbyCodelbl" Content="Lobby" HorizontalAlignment="Right" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="50" FontFamily="pack://application:,,,/Fonts/#VT323" Foreground="Black" Margin="0,30,150,0"/>
-        <Label  HorizontalAlignment="Right" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="50" FontFamily="pack://application:,,,/Fonts/#VT323" Foreground="Black" Margin="0,50,50,0"/>
-        <Image Source="pack://application:,,,/Images/Bomb.png" Width="86" HorizontalAlignment="Left" Margin="343,168,0,168"/>
-        <Label Content="Chat" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="40" FontFamily="pack://application:,,,/Fonts/#VT323" Margin="0,100,270,0" Foreground="Gray"/>
-        <Grid>
-            <Border BorderBrush="Black" BorderThickness="5" Width="320" Height="200" CornerRadius="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,76,20,0" >
-                <ScrollViewer VerticalScrollBarVisibility="Auto" Background="Black">
-                    <StackPanel x:Name="chatStackPanel" Orientation="Vertical"/>
-                </ScrollViewer>
-            </Border>
-            <TextBox x:Name="messageTxtBox" Width="320" Height="50" VerticalAlignment="Bottom" HorizontalAlignment="Right" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Margin="0,0,20,20" FontSize="30" FontFamily="pack://application:,,,/Fonts/#VT323"/>
-        </Grid>
-        <Button Width="50" Height="50" Background="Transparent" BorderBrush="Transparent" VerticalAlignment="Bottom" Cursor="Hand" HorizontalAlignment="Right" Margin="0,0,25,20" Click="SendMessageButton_Click">
+        <Label x:Name="playersLbl" 
+               Content="{x:Static p:Resources.lobbyLblPlayers}" 
+               HorizontalAlignment="Left" 
+               VerticalAlignment="Top" 
+               HorizontalContentAlignment="Center" 
+               VerticalContentAlignment="Center" 
+               FontSize="50" 
+               FontFamily="pack://application:,,,/Fonts/#VT323" 
+               Foreground="Black" 
+               Margin="50,30,0,0" />
+
+        <Label x:Name="player1Lbl" 
+               HorizontalAlignment="Left" 
+               VerticalAlignment="Top" 
+               HorizontalContentAlignment="Center" 
+               VerticalContentAlignment="Center" 
+               FontSize="40" 
+               FontFamily="pack://application:,,,/Fonts/#VT323" 
+               Foreground="Black" 
+               Margin="49,90,0,0" />
+        <Image x:Name="player1Img" 
+               Source="pack://application:,,,/Images/NoReadyImage.png" 
+               Stretch="UniformToFill" 
+               StretchDirection="DownOnly" 
+               HorizontalAlignment="Left" 
+               VerticalAlignment="Top" 
+               Margin="246,92,0,0" 
+               Height="52" 
+               Width="51" />
+
+        <Label x:Name="player2Lbl" 
+               HorizontalAlignment="Left" 
+               VerticalAlignment="Top" 
+               HorizontalContentAlignment="Center" 
+               VerticalContentAlignment="Center" 
+               FontSize="40" 
+               FontFamily="pack://application:,,,/Fonts/#VT323" 
+               Foreground="Black" 
+               Margin="50,148,0,0" />
+        <Image x:Name="player2Img" 
+               Source="pack://application:,,,/Images/NoReadyImage.png" 
+               Stretch="UniformToFill" 
+               StretchDirection="DownOnly" 
+               HorizontalAlignment="Left" 
+               VerticalAlignment="Top" 
+               Margin="246,150,0,0" 
+               Height="52" 
+               Width="51" />
+
+        <Label x:Name="player3Lbl" 
+               HorizontalAlignment="Left" 
+               VerticalAlignment="Top" 
+               HorizontalContentAlignment="Center" 
+               VerticalContentAlignment="Center" 
+               FontSize="40" 
+               FontFamily="pack://application:,,,/Fonts/#VT323" 
+               Foreground="Black" 
+               Margin="50,209,0,0" />
+        <Image x:Name="player3Img" 
+               Source="pack://application:,,,/Images/NoReadyImage.png" 
+               Stretch="UniformToFill" 
+               StretchDirection="DownOnly" 
+               HorizontalAlignment="Left" 
+               VerticalAlignment="Top" 
+               Margin="246,207,0,0" 
+               Height="52" 
+               Width="51" />
+
+        <Label x:Name="player4Lbl" 
+               HorizontalAlignment="Left" 
+               VerticalAlignment="Top" 
+               HorizontalContentAlignment="Center" 
+               VerticalContentAlignment="Center" 
+               FontSize="40" 
+               FontFamily="pack://application:,,,/Fonts/#VT323" 
+               Foreground="Black" 
+               Margin="50,266,0,0" />
+        <Image x:Name="player4Img" 
+               Source="pack://application:,,,/Images/NoReadyImage.png" 
+               Stretch="UniformToFill" 
+               StretchDirection="DownOnly" 
+               HorizontalAlignment="Left" 
+               VerticalAlignment="Top" 
+               Margin="246,264,0,0" 
+               Height="52" 
+               Width="51" />
+
+        <Button x:Name="leaveBtn" 
+                Width="100" 
+                Height="55" 
+                Background="Transparent" 
+                BorderBrush="Transparent" 
+                VerticalAlignment="Bottom" 
+                Cursor="Hand" 
+                HorizontalAlignment="Left" 
+                Margin="200,0,0,20" 
+                Click="PreviousMenu">
             <Grid>
-                <Image Source="pack://application:,,,/Images/SendMessageImage.png" Width="48" StretchDirection="DownOnly"/>
+                <Image x:Name="leaveImg" 
+                       Source="pack://application:,,,/Images/ButtonOrange.png" 
+                       Width="100" 
+                       StretchDirection="DownOnly" />
+                <Label x:Name="leaveLbl" 
+                       Content="{x:Static p:Resources.globalBtnLeave}" 
+                       HorizontalAlignment="Center" 
+                       VerticalAlignment="Center" 
+                       VerticalContentAlignment="Center" 
+                       FontSize="25" 
+                       FontFamily="pack://application:,,,/Fonts/#VT323" 
+                       Foreground="White" />
+            </Grid>
+        </Button>
+
+        <Button x:Name="startBtn" 
+                Width="100" 
+                Height="50" 
+                Background="Transparent" 
+                BorderBrush="Transparent" 
+                VerticalAlignment="Bottom" 
+                Cursor="Hand" 
+                HorizontalAlignment="Left" 
+                Margin="50,0,0,20" 
+                Click="StartButton_Click">
+            <Grid>
+                <Image x:Name="startImg" 
+                       Source="pack://application:,,,/Images/ButtonGreen.png" 
+                       Width="100" 
+                       StretchDirection="DownOnly" />
+                <Label x:Name="startLbl" 
+                       Content="{x:Static p:Resources.lobbyBtnStart}" 
+                       HorizontalAlignment="Center" 
+                       VerticalAlignment="Center" 
+                       VerticalContentAlignment="Center" 
+                       FontSize="25" 
+                       FontFamily="pack://application:,,,/Fonts/#VT323" 
+                       Foreground="White" />
+            </Grid>
+        </Button>
+
+        <Image Source="pack://application:,,,/Images/Bomb.png" 
+               Width="86" 
+               HorizontalAlignment="Left" 
+               Margin="343,168,0,168"/>
+
+        <Label x:Name="lobbyCodeLbl" 
+               Content="{x:Static p:Resources.lobbyLblGameTitle}" 
+               HorizontalAlignment="Right" 
+               VerticalAlignment="Top" 
+               HorizontalContentAlignment="Center" 
+               VerticalContentAlignment="Center" 
+               FontSize="50" 
+               FontFamily="pack://application:,,,/Fonts/#VT323" 
+               Foreground="Black" 
+               Margin="0,30,150,0" />
+
+        <Label x:Name="chatLbl" 
+               Content="{x:Static p:Resources.lobbyLblChat}" 
+               HorizontalAlignment="Right" 
+               VerticalAlignment="Top" 
+               FontSize="40" 
+               FontFamily="pack://application:,,,/Fonts/#VT323" 
+               Margin="0,100,270,0" 
+               Foreground="Gray" />
+
+        <Border BorderBrush="Black" 
+                BorderThickness="5" 
+                Width="320" 
+                Height="200" 
+                CornerRadius="10" 
+                HorizontalAlignment="Right" 
+                VerticalAlignment="Center" 
+                Margin="0,76,20,0">
+            <ScrollViewer VerticalScrollBarVisibility="Auto" Background="Black">
+                <StackPanel x:Name="chatStackPanel" Orientation="Vertical" />
+            </ScrollViewer>
+        </Border>
+
+        <TextBox x:Name="messageTxtBox" 
+                 Width="320" 
+                 Height="50" 
+                 VerticalAlignment="Bottom" 
+                 HorizontalAlignment="Right" 
+                 HorizontalContentAlignment="Left" 
+                 VerticalContentAlignment="Center" 
+                 Margin="0,0,20,20" 
+                 FontSize="30" 
+                 FontFamily="pack://application:,,,/Fonts/#VT323"
+                 MaxLength="30"/>
+
+        <Button x:Name="sendMessageBtn" 
+                Width="50" 
+                Height="50" 
+                Background="Transparent" 
+                BorderBrush="Transparent" 
+                VerticalAlignment="Bottom" 
+                Cursor="Hand" 
+                HorizontalAlignment="Right" 
+                Margin="0,0,25,20" 
+                Click="SendMessageButton_Click">
+            <Grid>
+                <Image x:Name="sendMessageImg" 
+                       Source="pack://application:,,,/Images/SendMessageImage.png" 
+                       Width="48" 
+                       StretchDirection="DownOnly" />
             </Grid>
         </Button>
     </Grid>

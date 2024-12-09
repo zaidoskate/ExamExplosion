@@ -1,4 +1,5 @@
 ﻿using ExamExplosion.Helpers;
+using ExamExplosion.Properties;
 using log4net;
 using System;
 using System.Collections.Generic;
@@ -61,31 +62,36 @@ namespace ExamExplosion
                             reportedPlayer = player4lbl.Content.ToString();
                             idPlayerReported = accountManager.GetAccountIdByGamertag(reportedPlayer);
                             break;
+                        default:
+                            break;
                     }
                 }
                 catch (FaultException faultException)
                 {
-                    new AlertModal("Error", "Se produjo un error en el servidor").ShowDialog();
+                    new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblFaultException).ShowDialog();
                     log.Error("Error del servidor (FaultException)", faultException);
+                    NavigateStartPage();
                 }
                 catch (CommunicationException communicationException)
                 {
-                    new AlertModal("Error de comunicación", "No se pudo conectar con el servidor.").ShowDialog();
+                    new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblCommunicationException).ShowDialog();
                     log.Warn("Problema de comunicación con el servidor", communicationException);
+                    NavigateStartPage();
                 }
                 catch (TimeoutException timeoutException)
                 {
-                    new AlertModal("Tiempo de espera", "La conexión con el servidor ha expirado.").ShowDialog();
+                    new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblTimeoutException).ShowDialog();
                     log.Warn("Timeout al intentar conectar con el servidor", timeoutException);
+                    NavigateStartPage();
                 }
                 if (idPlayerReported != -1)
                 {
                     reportManager.ReportPlayer(idPlayerReported, reportedPlayer);
-                    new AlertModal("Jugador reportado", "Has reportado a este jugador.").ShowDialog();
+                    new AlertModal(ExamExplosion.Properties.Resources.endGameLblReportTitle, ExamExplosion.Properties.Resources.endGameLblPlayerReported).ShowDialog();
                 }
                 else
                 {
-                    new AlertModal("Error al reportar al jugador", "Ocurrió un error interno al reportar al jugador.").ShowDialog();
+                    new AlertModal(ExamExplosion.Properties.Resources.endGameLblReportError, ExamExplosion.Properties.Resources.endGameLblReportErrorDescription).ShowDialog();
                 }
             }
         }
@@ -102,6 +108,13 @@ namespace ExamExplosion
                     window.Width = 800;
                     window.SizeToContent = SizeToContent.Manual;
                 }
+            }
+        }
+        private void NavigateStartPage()
+        {
+            if (this.NavigationService != null)
+            {
+                this.NavigationService.Navigate(new StartPage());
             }
         }
     }

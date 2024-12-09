@@ -18,6 +18,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ExamExplosion.Properties;
 
 namespace ExamExplosion
 {
@@ -32,8 +33,8 @@ namespace ExamExplosion
         string email;
         string password;
         string repeatPassword;
-        bool[] txtBoxesStatus = new bool[6] { false, false, false, false, false, false };
-        private ILog log;
+        private readonly bool[] txtBoxesStatus = new bool[6] { false, false, false, false, false, false };
+        private readonly ILog log;
 
         public AccountCreation()
         {
@@ -58,166 +59,169 @@ namespace ExamExplosion
                     {
                         this.NavigationService.Navigate(new StartPage());
                     }
-                    new AlertModal("Cuenta creada", "Se ha creado la nueva cuenta con exito.").ShowDialog();
+                    new AlertModal(ExamExplosion.Properties.Resources.globalLblDone, ExamExplosion.Properties.Resources.accountCreationLblAccountCreated).ShowDialog();
                 }
                 else
                 {
-                    new AlertModal("Error", "No he podido crear la cuenta, intentalo mas tarde.").ShowDialog();
+                    new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.accountCreationCreationError).ShowDialog();
                 }
             }
             catch (FaultException faultException)
             {
-                new AlertModal("Error", "Se produjo un error en el servidor").ShowDialog();
+                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblFaultException).ShowDialog();
                 log.Error("Error del servidor (FaultException)", faultException);
+                NavigateStartPage();
             }
             catch (CommunicationException communicationException)
             {
-                new AlertModal("Error de comunicación", "No se pudo conectar con el servidor.").ShowDialog();
+                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblCommunicationException).ShowDialog();
                 log.Warn("Problema de comunicación con el servidor", communicationException);
+                NavigateStartPage();
             }
             catch (TimeoutException timeoutException)
             {
-                new AlertModal("Tiempo de espera", "La conexión con el servidor ha expirado.").ShowDialog();
+                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblTimeoutException).ShowDialog();
                 log.Warn("Timeout al intentar conectar con el servidor", timeoutException);
+                NavigateStartPage();
             }
         }
 
-        private void CancelAccountCreation(object sender, RoutedEventArgs e)
+        private void NavigateStartPage(object sender, RoutedEventArgs e)
         {
             if (this.NavigationService != null)
             {
                 this.NavigationService.Navigate(new StartPage());
             }
         }
-        private void ChangePasswordVisibility(object sender, RoutedEventArgs e)
+        private void ChangePasswordVisibilityBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (txtBoxPassword.Visibility == Visibility.Collapsed)
+            if (passwordTxtBox.Visibility == Visibility.Collapsed)
             {
-                txtBoxPassword.Text = pswdBoxPassword.Password;
-                txtBoxRepeatPassword.Text = pswdBoxRepeatPassword.Password;
+                passwordTxtBox.Text = passwordPswdBox.Password;
+                repeatPasswordTxtBox.Text = repeatPasswordPswdBox.Password;
 
-                txtBoxPassword.Visibility = Visibility.Visible;
-                pswdBoxPassword.Visibility = Visibility.Collapsed;
-                txtBoxRepeatPassword.Visibility = Visibility.Visible;
-                pswdBoxRepeatPassword.Visibility = Visibility.Collapsed;
+                passwordTxtBox.Visibility = Visibility.Visible;
+                passwordPswdBox.Visibility = Visibility.Collapsed;
+                repeatPasswordTxtBox.Visibility = Visibility.Visible;
+                repeatPasswordPswdBox.Visibility = Visibility.Collapsed;
             }
             else
             {
-                pswdBoxPassword.Password = txtBoxPassword.Text;
-                pswdBoxRepeatPassword.Password = txtBoxRepeatPassword.Text;
+                passwordPswdBox.Password = passwordTxtBox.Text;
+                repeatPasswordPswdBox.Password = repeatPasswordTxtBox.Text;
 
-                txtBoxPassword.Visibility = Visibility.Collapsed;
-                pswdBoxPassword.Visibility = Visibility.Visible;
-                txtBoxRepeatPassword.Visibility = Visibility.Collapsed;
-                pswdBoxRepeatPassword.Visibility = Visibility.Visible;
+                passwordTxtBox.Visibility = Visibility.Collapsed;
+                passwordPswdBox.Visibility = Visibility.Visible;
+                repeatPasswordTxtBox.Visibility = Visibility.Collapsed;
+                repeatPasswordPswdBox.Visibility = Visibility.Visible;
             }
         }
 
         private void ValidateName(object sender, TextChangedEventArgs e)
         {
-            name = txtBoxName.Text;
+            name = nameTxtBox.Text;
             if (name.Length >= 50)
             {
                 name = name.Substring(0, 50);
-                txtBoxName.Text = name;
-                txtBoxName.SelectionStart = 50;
+                nameTxtBox.Text = name;
+                nameTxtBox.SelectionStart = 50;
             }
             try
             {
                 TextValidator.ValidateNotBlanks(name);
                 TextValidator.ValidateNameFormat(name);
-                lblNameErrorMessage.Content = "";
-                txtBoxName.BorderBrush = Brushes.Black;
+                nameErrorMessageLbl.Content = "";
+                nameTxtBox.BorderBrush = Brushes.Black;
                 txtBoxesStatus[0] = true;
             }
             catch(DataValidationException dataValidationException)
             {
-                lblNameErrorMessage.Content = dataValidationException.Message;
-                txtBoxName.BorderBrush = Brushes.Red;
+                nameErrorMessageLbl.Content = dataValidationException.Message;
+                nameTxtBox.BorderBrush = Brushes.Red;
                 txtBoxesStatus[0] = false;
             }
         }
 
         private void ValidateLastname(object sender, TextChangedEventArgs e)
         {
-            lastname = txtBoxLastname.Text;
-            lastname = txtBoxLastname.Text;
+            lastname = lastnameTxtBox.Text;
+            lastname = lastnameTxtBox.Text;
             if (lastname.Length >= 50)
             {
                 lastname = lastname.Substring(0, 50);
-                txtBoxLastname.Text = lastname;
-                txtBoxLastname.SelectionStart = 50;
+                lastnameTxtBox.Text = lastname;
+                lastnameTxtBox.SelectionStart = 50;
             }
             try
             {
                 TextValidator.ValidateNotBlanks(lastname);
                 TextValidator.ValidateNameFormat(lastname);
-                lblLastnameErrorMessage.Content = "";
-                txtBoxLastname.BorderBrush = Brushes.Black;
+                lastnameErrorMessageLbl.Content = "";
+                lastnameTxtBox.BorderBrush = Brushes.Black;
                 txtBoxesStatus[1] = true;
             }
             catch (DataValidationException dataValidationException)
             {
-                lblLastnameErrorMessage.Content = dataValidationException.Message;
-                txtBoxLastname.BorderBrush = Brushes.Red;
+                lastnameErrorMessageLbl.Content = dataValidationException.Message;
+                lastnameTxtBox.BorderBrush = Brushes.Red;
                 txtBoxesStatus[1] = false;
             }
         }
         private void ValidateEmail(object sender, TextChangedEventArgs e)
         {
-            email = txtBoxEmail.Text;
-            email = txtBoxEmail.Text;
+            email = emailTxtBox.Text;
+            email = emailTxtBox.Text;
             if (email.Length >= 50)
             {
                 email = email.Substring(0, 50);
-                txtBoxEmail.Text = email;
-                txtBoxEmail.SelectionStart = 50;
+                emailTxtBox.Text = email;
+                emailTxtBox.SelectionStart = 50;
             }
             try
             {
                 TextValidator.ValidateNotBlanks(email);
                 TextValidator.ValidateEmailFormat(email);
-                lblEmailErrorMessage.Content = "";
-                txtBoxEmail.BorderBrush = Brushes.Black;
+                emailErrorMessageLbl.Content = "";
+                emailTxtBox.BorderBrush = Brushes.Black;
                 txtBoxesStatus[2] = true;
             }
             catch (DataValidationException dataValidationException)
             {
-                lblEmailErrorMessage.Content = dataValidationException.Message;
-                txtBoxEmail.BorderBrush = Brushes.Red;
+                emailErrorMessageLbl.Content = dataValidationException.Message;
+                emailTxtBox.BorderBrush = Brushes.Red;
                 txtBoxesStatus[2] = false;
             }
         }
         private void ValidateGamertag(object sender, TextChangedEventArgs e)
         {
-            gamertag = txtBoxGamertag.Text;
-            gamertag = txtBoxGamertag.Text;
-            gamertag = txtBoxGamertag.Text;
+            gamertag = gamertagTxtBox.Text;
+            gamertag = gamertagTxtBox.Text;
+            gamertag = gamertagTxtBox.Text;
             if (gamertag.Length >= 10)
             {
                 gamertag = gamertag.Substring(0, 10);
-                txtBoxGamertag.Text = gamertag;
-                txtBoxGamertag.SelectionStart = 20;
+                gamertagTxtBox.Text = gamertag;
+                gamertagTxtBox.SelectionStart = 20;
             }
             try
             { 
                 TextValidator.ValidateNotBlanks(gamertag);
                 TextValidator.ValidateGamertagFormat(gamertag);
                 TextValidator.ValidateGamertagFirstLetter(gamertag);
-                lblGamertagErrorMessage.Content = "";
-                txtBoxGamertag.BorderBrush = Brushes.Black;
+                gamertagErrorMessageLbl.Content = "";
+                gamertagTxtBox.BorderBrush = Brushes.Black;
                 txtBoxesStatus[3] = true;
             }
             catch (DataValidationException dataValidationException)
             {
-                lblGamertagErrorMessage.Content = dataValidationException.Message;
-                txtBoxGamertag.BorderBrush = Brushes.Red;
+                gamertagErrorMessageLbl.Content = dataValidationException.Message;
+                gamertagTxtBox.BorderBrush = Brushes.Red;
                 txtBoxesStatus[3] = false;
             }
         }
         private void ValidatePassword(object sender, TextChangedEventArgs e)
         {
-            password = txtBoxPassword.Text;
+            password = passwordTxtBox.Text;
             ValidateRepeatPassword(null, null);
             ValidateRepeatPasswordBox(null, null);
             try
@@ -225,22 +229,22 @@ namespace ExamExplosion
                 TextValidator.ValidateNotBlanks(password);
                 TextValidator.ValidatePasswordLength(password);
                 TextValidator.ValidatePassword(password);
-                lblPasswordErrorMessage.Text = "";
-                txtBoxPassword.BorderBrush = Brushes.Black;
-                pswdBoxPassword.BorderBrush = Brushes.Black;
+                passwordErrorMessageLbl.Content = "";
+                passwordTxtBox.BorderBrush = Brushes.Black;
+                passwordPswdBox.BorderBrush = Brushes.Black;
                 txtBoxesStatus[4] = true;
             }
             catch (DataValidationException dataValidationException)
             {
-                lblPasswordErrorMessage.Text = dataValidationException.Message;
-                txtBoxPassword.BorderBrush = Brushes.Red;
-                pswdBoxPassword.BorderBrush = Brushes.Red;
+                passwordErrorMessageLbl.Content = dataValidationException.Message;
+                passwordTxtBox.BorderBrush = Brushes.Red;
+                passwordPswdBox.BorderBrush = Brushes.Red;
                 txtBoxesStatus[4] = false;
             }
         }
         private void ValidatePasswordBox(object sender, RoutedEventArgs e)
         {
-            password = pswdBoxPassword.Password;
+            password = passwordPswdBox.Password;
             ValidateRepeatPassword(null, null);
             ValidateRepeatPasswordBox(null, null);
             try
@@ -248,68 +252,68 @@ namespace ExamExplosion
                 TextValidator.ValidateNotBlanks(password);
                 TextValidator.ValidatePasswordLength(password);
                 TextValidator.ValidatePassword(password);
-                lblPasswordErrorMessage.Text = "";
-                txtBoxPassword.BorderBrush = Brushes.Black;
-                pswdBoxPassword.BorderBrush = Brushes.Black;
+                passwordErrorMessageLbl.Content = "";
+                passwordTxtBox.BorderBrush = Brushes.Black;
+                passwordPswdBox.BorderBrush = Brushes.Black;
                 txtBoxesStatus[4] = true;
             }
             catch (DataValidationException dataValidationException)
             {
-                lblPasswordErrorMessage.Text = dataValidationException.Message;
-                txtBoxPassword.BorderBrush = Brushes.Red;
-                pswdBoxPassword.BorderBrush = Brushes.Red;
+                passwordErrorMessageLbl.Content = dataValidationException.Message;
+                passwordTxtBox.BorderBrush = Brushes.Red;
+                passwordPswdBox.BorderBrush = Brushes.Red;
                 txtBoxesStatus[4] = false;
             }
         }
         private void ValidateRepeatPassword(object sender, TextChangedEventArgs e)
         {
-            repeatPassword = txtBoxRepeatPassword.Text;
+            repeatPassword = repeatPasswordTxtBox.Text;
             try
             {
                 TextValidator.ValidateNotBlanks(repeatPassword);
                 TextValidator.ValidateRepeatResponse(repeatPassword, password);
-                lblRepeatPasswordErrorMessage.Content = "";
-                txtBoxRepeatPassword.BorderBrush = Brushes.Black;
-                pswdBoxRepeatPassword.BorderBrush = Brushes.Black;
+                repeatPasswordErrorMessageLbl.Content = "";
+                repeatPasswordTxtBox.BorderBrush = Brushes.Black;
+                repeatPasswordPswdBox.BorderBrush = Brushes.Black;
                 txtBoxesStatus[5] = true;
             }
             catch (DataValidationException dataValidationException)
             {
-                lblRepeatPasswordErrorMessage.Content = dataValidationException.Message;
-                txtBoxRepeatPassword.BorderBrush = Brushes.Red;
-                pswdBoxRepeatPassword.BorderBrush = Brushes.Red;
+                repeatPasswordErrorMessageLbl.Content = dataValidationException.Message;
+                repeatPasswordTxtBox.BorderBrush = Brushes.Red;
+                repeatPasswordPswdBox.BorderBrush = Brushes.Red;
                 txtBoxesStatus[5] = false;
             }
         }
         private void ValidateRepeatPasswordBox(object sender, RoutedEventArgs e)
         {
-            repeatPassword = pswdBoxRepeatPassword.Password;
+            repeatPassword = repeatPasswordPswdBox.Password;
             try
             {
                 TextValidator.ValidateNotBlanks(repeatPassword);
                 TextValidator.ValidateRepeatResponse(repeatPassword, password);
-                lblRepeatPasswordErrorMessage.Content = "";
-                txtBoxRepeatPassword.BorderBrush = Brushes.Black;
-                pswdBoxRepeatPassword.BorderBrush = Brushes.Black;
+                repeatPasswordErrorMessageLbl.Content = "";
+                repeatPasswordTxtBox.BorderBrush = Brushes.Black;
+                repeatPasswordPswdBox.BorderBrush = Brushes.Black;
                 txtBoxesStatus[5] = true;
             }
             catch (DataValidationException dataValidationException)
             {
-                lblRepeatPasswordErrorMessage.Content = dataValidationException.Message;
-                txtBoxRepeatPassword.BorderBrush = Brushes.Red;
-                pswdBoxRepeatPassword.BorderBrush = Brushes.Red;
+                repeatPasswordErrorMessageLbl.Content = dataValidationException.Message;
+                repeatPasswordTxtBox.BorderBrush = Brushes.Red;
+                repeatPasswordPswdBox.BorderBrush = Brushes.Red;
                 txtBoxesStatus[5] = false;
             }
         }
 
-        private void VerifyData(object sender, RoutedEventArgs e)
+        private void VerifyDataBtn_Click(object sender, RoutedEventArgs e)
         {
             foreach(bool value in txtBoxesStatus)
             {
                 if(!value)
                 {
                     log.Info("Datos de registro de usuario incompletos o con errores");
-                    new AlertModal("Datos incompletos","Corrige los campos que sean necesarios").ShowDialog();
+                    new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.accountCreationLblMissingInformation).ShowDialog();
                     return;
                 }
             }
@@ -320,37 +324,40 @@ namespace ExamExplosion
                 string message = null;
                 if(gamertagExists && emailExists )
                 {
-                    message = "El gamertag y correo proporcionados ya existen con otra cuenta.";
+                    message = ExamExplosion.Properties.Resources.accountCreationEmailAndGamertagTaken;
                 }
                 else if(emailExists)
                 {
-                    message = "El correo ya se encuentra asociado a otra cuenta.";
+                    message = ExamExplosion.Properties.Resources.accountCreationLblLinkedEmail;
                 }
                 else if (gamertagExists)
                 {
-                    message = "El gamertag proporcionado ya está en uso. Prueba con otro";
+                    message = ExamExplosion.Properties.Resources.accountCreationLblExistingGamertag;
                 }
                 else
                 {
                     SendCode();
                     return;
                 }
-                new AlertModal("Datos existentes", message).ShowDialog();
+                new AlertModal(ExamExplosion.Properties.Resources.accountCreationExistingData, message).ShowDialog();
             }
             catch (FaultException faultException)
             {
-                new AlertModal("Error", "Se produjo un error en el servidor").ShowDialog();
+                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblFaultException).ShowDialog();
                 log.Error("Error del servidor (FaultException)", faultException);
+                NavigateStartPage();
             }
             catch (CommunicationException communicationException)
             {
-                new AlertModal("Error de comunicación", "No se pudo conectar con el servidor.").ShowDialog();
+                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblCommunicationException).ShowDialog();
                 log.Warn("Problema de comunicación con el servidor", communicationException);
+                NavigateStartPage();
             }
             catch (TimeoutException timeoutException)
             {
-                new AlertModal("Tiempo de espera", "La conexión con el servidor ha expirado.").ShowDialog();
+                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblTimeoutException).ShowDialog();
                 log.Warn("Timeout al intentar conectar con el servidor", timeoutException);
+                NavigateStartPage();
             }
         }
         private void SendCode()
@@ -370,7 +377,14 @@ namespace ExamExplosion
             }
             else
             {
-                new AlertModal("Error al enviar el correo", "Revisa tu conexion a internet o proporciona un correo existente").ShowDialog();
+                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.accountCreationLblEmailError).ShowDialog();
+            }
+        }
+        private void NavigateStartPage()
+        {
+            if (this.NavigationService != null)
+            {
+                this.NavigationService.Navigate(new StartPage());
             }
         }
     }

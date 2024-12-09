@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
+using ExamExplosion.Properties;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace ExamExplosion.DataValidations
 {
@@ -15,7 +17,7 @@ namespace ExamExplosion.DataValidations
             bool result = Regex.IsMatch(text, pattern);
             if(!result)
             {
-                throw new DataValidationException("Correo invalido");
+                throw new DataValidationException(Resources.accountCreationLblInvalidEmail);
             }
         }
         public static void ValidateNameFormat(string text)
@@ -24,7 +26,7 @@ namespace ExamExplosion.DataValidations
             bool result = Regex.IsMatch(text, pattern);
             if (!result)
             {
-                throw new DataValidationException("Formato de nombre incorrecto.");
+                throw new DataValidationException(Resources.accountCreationLblInvalidName);
             }
         }
         public static void ValidateGamertagFormat(string text)
@@ -33,7 +35,7 @@ namespace ExamExplosion.DataValidations
             bool result = Regex.IsMatch(text, pattern);
             if (!result)
             {
-                throw new DataValidationException("Solo letras y numeros.");
+                throw new DataValidationException(Resources.accountCreationLblInvalidGamertag);
             }
         }
         public static void ValidateGamertagFirstLetter(string text)
@@ -42,15 +44,15 @@ namespace ExamExplosion.DataValidations
             bool result = Regex.IsMatch(text, pattern);
             if (result)
             {
-                throw new DataValidationException("Debe empezar con letra.");
+                throw new DataValidationException(Resources.accountCreationLblInvalidGamertagInitial);
             }
         }
         public static void ValidateNotBlanks(string text)
         {
-            bool result = String.IsNullOrEmpty(text);
+            bool result = String.IsNullOrWhiteSpace(text);
             if (result)
             {
-                throw new DataValidationException("Este es un campo obligatorio.");
+                throw new DataValidationException(Resources.globalLblNotBlanks);
             }
         }
         public static void ValidatePassword(string text)
@@ -59,7 +61,7 @@ namespace ExamExplosion.DataValidations
             bool result = Regex.IsMatch(text, pattern);
             if (!result)
             {
-                throw new DataValidationException("Caracteres especiales permitidos: #,$,%,&,!");
+                throw new DataValidationException(Resources.globalLblSpecialCharacters);
             }
         }
         public static void ValidatePasswordLength(string text)
@@ -68,7 +70,7 @@ namespace ExamExplosion.DataValidations
             bool result = Regex.IsMatch(text, pattern);
             if (!result)
             {
-                throw new DataValidationException("De 8 a 20 caracteres");
+                throw new DataValidationException(Resources.globalLblPasswordLength);
             }
         }
 
@@ -76,7 +78,17 @@ namespace ExamExplosion.DataValidations
         {
             if(repeatPassword != password)
             {
-                throw new DataValidationException("No coinciden.");
+                throw new DataValidationException(Resources.globalLblPasswordCoincidence);
+            }
+        }
+
+        public static void ValidateChatFormat(string message)
+        {
+            string pattern = @"^[a-zA-Z0-9\s.,!?;:'""()\-]+$";
+            bool result = Regex.IsMatch(message, pattern);
+            if (!result)
+            {
+                throw new DataValidationException();
             }
         }
     }

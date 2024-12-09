@@ -1,69 +1,261 @@
 ﻿<Page x:Class="ExamExplosion.Settings"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:ExamExplosion"
       xmlns:p="clr-namespace:ExamExplosion.Properties"
-      mc:Ignorable="d" 
+      mc:Ignorable="d"
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Settings">
+    <Page.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+        </Style>
+    </Page.Resources>
 
-    <Grid Background="#FFFFF2CC">
-        <Label Content="Settings" Margin="342,10,0,332" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="60" HorizontalAlignment="Left" Width="348"/>
-        <Image HorizontalAlignment="Left" VerticalAlignment="Top" Width="98" Source="pack://application:,,,/Images/Settings.png" Stretch="Fill" Height="94" Margin="244,10,0,0"/>
+    <Page.Background>
+        <ImageBrush ImageSource="pack://application:,,,/Images/Landscape1.jpeg" Stretch="UniformToFill" />
+    </Page.Background>
 
-        <Button HorizontalAlignment="Left" Margin="141,253,0,0" VerticalAlignment="Top" Height="56" Width="94" Background="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand" Click="LoadLanguage">
+    <Grid>
+        <Label x:Name="settingsLbl" 
+               Content="{x:Static p:Resources.globalLblSettings}" 
+               Margin="342,10,0,332" 
+               FontFamily="pack://application:,,,/Fonts/#VT323" 
+               FontSize="60" 
+               HorizontalAlignment="Left" 
+               Width="348" />
+
+        <Image x:Name="settingsImg" 
+               HorizontalAlignment="Left" 
+               VerticalAlignment="Top" 
+               Width="98" 
+               Height="94" 
+               Margin="244,10,0,0" 
+               Source="pack://application:,,,/Images/Settings.png" 
+               Stretch="Fill" />
+
+        <Button x:Name="saveLanguageBtn" 
+                HorizontalAlignment="Left" 
+                Margin="141,253,0,0" 
+                VerticalAlignment="Top" 
+                Height="56" 
+                Width="94" 
+                Background="{x:Null}" 
+                BorderBrush="{x:Null}" 
+                Cursor="Hand" 
+                Click="LoadLanguage">
             <Grid>
-                <Image HorizontalAlignment="Left" VerticalAlignment="Center" Width="90" Source="pack://application:,,,/Images/ButtonGreen.png" Stretch="Fill" Height="50"/>
-                <Label Content="Save" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="20"/>
+                <Image x:Name="saveLanguageImg" 
+                       HorizontalAlignment="Left" 
+                       VerticalAlignment="Center" 
+                       Width="90" 
+                       Height="50" 
+                       Source="pack://application:,,,/Images/ButtonGreen.png" 
+                       Stretch="Fill" />
+                <Label x:Name="saveLanguageLbl" 
+                       Content="{x:Static p:Resources.settingsBtnSave}" 
+                       HorizontalAlignment="Center" 
+                       VerticalAlignment="Center" 
+                       FontFamily="pack://application:,,,/Fonts/#VT323" 
+                       FontSize="20" />
             </Grid>
         </Button>
-        <Button HorizontalAlignment="Center" Margin="0,334,0,0" VerticalAlignment="Top" Height="74" Width="152" Background="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand" Click="GoHmePage" >
+
+        <Button x:Name="backBtn" 
+                HorizontalAlignment="Center" 
+                Margin="0,334,0,0" 
+                VerticalAlignment="Top" 
+                Height="74" 
+                Width="152" 
+                Background="{x:Null}" 
+                BorderBrush="{x:Null}" 
+                Cursor="Hand" 
+                Click="GoHmePage">
             <Grid>
-                <Image HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" Source="pack://application:,,,/Images/ButtonOrange.png" Stretch="Fill" Height="80"/>
-                <Label Content="Back" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="27"/>
+                <Image x:Name="backImg" 
+                       HorizontalAlignment="Left" 
+                       VerticalAlignment="Center" 
+                       Width="150" 
+                       Height="80" 
+                       Source="pack://application:,,,/Images/ButtonOrange.png" 
+                       Stretch="Fill" />
+                <Label x:Name="backLbl" 
+                       Content="{x:Static p:Resources.globalBtnLeave}" 
+                       HorizontalAlignment="Center" 
+                       VerticalAlignment="Center" 
+                       FontFamily="pack://application:,,,/Fonts/#VT323" 
+                       FontSize="27" />
             </Grid>
         </Button>
-        <Button HorizontalAlignment="Left" Margin="721,156,0,0" VerticalAlignment="Top" Height="40" Width="46" Background="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand" Click="ChangePasswordVisibility">
-            <Image HorizontalAlignment="Left" VerticalAlignment="Top" Width="42" Source="pack://application:,,,/Images/Eye.png" Stretch="Fill" Height="31"/>
+
+        <Button x:Name="togglePasswordVisibilityBtn" 
+                HorizontalAlignment="Left" 
+                Margin="721,156,0,0" 
+                VerticalAlignment="Top" 
+                Height="40" 
+                Width="46" 
+                Background="{x:Null}" 
+                BorderBrush="{x:Null}" 
+                Cursor="Hand" 
+                Click="ChangePasswordVisibility">
+            <Image x:Name="togglePasswordVisibilityImg" 
+                   HorizontalAlignment="Left" 
+                   VerticalAlignment="Top" 
+                   Width="42" 
+                   Height="31" 
+                   Source="pack://application:,,,/Images/Eye.png" 
+                   Stretch="Fill" />
         </Button>
-        <ComboBox x:Name="CmbBoxLanguages" FontSize="30" FontFamily="pack://application:,,,/Fonts/#VT323" HorizontalAlignment="Left" Margin="93,163,0,0" VerticalAlignment="Top" Width="242" Height="33" BorderBrush="White">
+
+        <ComboBox x:Name="languagesCmbBox" 
+                  FontSize="30" 
+                  FontFamily="pack://application:,,,/Fonts/#VT323" 
+                  HorizontalAlignment="Left" 
+                  Margin="93,163,0,0" 
+                  VerticalAlignment="Top" 
+                  Width="242" 
+                  Height="33" 
+                  BorderBrush="White">
             <ComboBox.Effect>
-                <DropShadowEffect/>
+                <DropShadowEffect />
             </ComboBox.Effect>
-            <ComboBoxItem x:Name="EnglishOption" Content="English"/>
-            <ComboBoxItem x:Name="SpanishOption" Content="Español"/>
+            <ComboBoxItem x:Name="englishOption" Content="English" />
+            <ComboBoxItem x:Name="spanishOption" Content="Español" />
         </ComboBox>
-        <TextBox x:Name="txtBoxCurrentPsswd" Visibility="Collapsed" HorizontalAlignment="Left" FontSize="30" FontFamily="pack://application:,,,/Fonts/#VT323" Margin="446,127,0,0" VerticalAlignment="Top" Width="262" Height="32">
+
+        <TextBox x:Name="currentPasswordTxtBox" 
+                 Visibility="Collapsed" 
+                 HorizontalAlignment="Left" 
+                 FontSize="30" 
+                 FontFamily="pack://application:,,,/Fonts/#VT323" 
+                 Margin="446,127,0,0" 
+                 VerticalAlignment="Top" 
+                 Width="262" 
+                 Height="32">
             <TextBox.Effect>
-                <DropShadowEffect/>
+                <DropShadowEffect />
             </TextBox.Effect>
         </TextBox>
-        <PasswordBox x:Name="pswdBoxCurrentPsswd" HorizontalAlignment="Left" FontSize="30" FontFamily="pack://application:,,,/Fonts/#VT323" Margin="446,127,0,0" VerticalAlignment="Top" Width="262" Height="32">
+
+        <PasswordBox x:Name="currentPasswordPswdBox" 
+                     HorizontalAlignment="Left" 
+                     Margin="446,127,0,0" 
+                     FontSize="30" 
+                     FontFamily="pack://application:,,,/Fonts/#VT323" 
+                     VerticalAlignment="Top" 
+                     Width="262" 
+                     Height="32">
             <PasswordBox.Effect>
-                <DropShadowEffect/>
+                <DropShadowEffect />
             </PasswordBox.Effect>
         </PasswordBox>
-        <TextBox x:Name="txtBoxNewPsswd" Visibility="Collapsed" HorizontalAlignment="Left" FontSize="30" FontFamily="pack://application:,,,/Fonts/#VT323" Margin="446,193,0,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="262" Height="32" RenderTransformOrigin="0.375,-0.05" TextChanged="ValidateNewPassword">
+
+        <TextBox x:Name="newPasswordTxtBox" 
+                 Visibility="Collapsed" 
+                 HorizontalAlignment="Left" 
+                 FontSize="30" 
+                 FontFamily="pack://application:,,,/Fonts/#VT323" 
+                 Margin="446,193,0,0" 
+                 TextWrapping="NoWrap" 
+                 VerticalAlignment="Top" 
+                 Width="262" 
+                 Height="32" 
+                 TextChanged="ValidateNewPassword">
             <TextBox.Effect>
-                <DropShadowEffect/>
+                <DropShadowEffect />
             </TextBox.Effect>
         </TextBox>
-        <PasswordBox x:Name="pswdBoxNewPsswd" HorizontalAlignment="Left" Margin="446,193,0,0" FontSize="30" FontFamily="pack://application:,,,/Fonts/#VT323" VerticalAlignment="Top" Width="262" Height="32" RenderTransformOrigin="0.375,-0.05" PasswordChanged="ValidateNewPasswordBox">
+
+        <PasswordBox x:Name="newPasswordPswdBox" 
+                     HorizontalAlignment="Left" 
+                     Margin="446,193,0,0" 
+                     FontSize="30" 
+                     FontFamily="pack://application:,,,/Fonts/#VT323" 
+                     VerticalAlignment="Top" 
+                     Width="262" 
+                     Height="32" 
+                     PasswordChanged="ValidateNewPasswordBox">
             <PasswordBox.Effect>
-                <DropShadowEffect/>
+                <DropShadowEffect />
             </PasswordBox.Effect>
         </PasswordBox>
-        <Button HorizontalAlignment="Left" Margin="560,259,0,0" VerticalAlignment="Top" Height="56" Width="94" Background="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand" Click="ValdatePasswords">
+
+        <Button x:Name="savePasswordBtn" 
+                HorizontalAlignment="Left" 
+                Margin="560,259,0,0" 
+                VerticalAlignment="Top" 
+                Height="56" 
+                Width="94" 
+                Background="{x:Null}" 
+                BorderBrush="{x:Null}" 
+                Cursor="Hand" 
+                Click="ValdatePasswords">
             <Grid>
-                <Image HorizontalAlignment="Left" VerticalAlignment="Center" Width="90" Source="/Images/ButtonGreen.png" Stretch="Fill" Height="50"/>
-                <Label Content="Save" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="20"/>
+                <Image x:Name="savePasswordImg" 
+                       HorizontalAlignment="Left" 
+                       VerticalAlignment="Center" 
+                       Width="90" 
+                       Height="50" 
+                       Source="pack://application:,,,/Images/ButtonGreen.png" 
+                       Stretch="Fill" />
+                <Label x:Name="savePasswordLbl" 
+                       Content="{x:Static p:Resources.settingsBtnSave}" 
+                       HorizontalAlignment="Center" 
+                       VerticalAlignment="Center" 
+                       FontFamily="pack://application:,,,/Fonts/#VT323" 
+                       FontSize="20" />
             </Grid>
         </Button>
-        <Label Content="Language" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="20" HorizontalAlignment="Left" Margin="93,138,0,0" VerticalAlignment="Top" Width="194" Height="42"/>
-        <Label Content="Current password" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="20" HorizontalAlignment="Left" Margin="446,97,0,0" VerticalAlignment="Top" Width="194" Height="42"/>
-        <Label Content="New password" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="20" HorizontalAlignment="Left" Margin="446,167,0,0" VerticalAlignment="Top" Width="194" Height="42"/>
-        <TextBlock x:Name="txtBlockNewPasswordMessage" HorizontalAlignment="Left" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="14" Margin="446,230,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="33" Width="262" Foreground="#FFE00000"/>
+
+        <Label x:Name="languageLbl" 
+               Content="Language" 
+               FontFamily="pack://application:,,,/Fonts/#VT323" 
+               FontSize="20" 
+               HorizontalAlignment="Left" 
+               Margin="93,138,0,0" 
+               VerticalAlignment="Top" 
+               Width="194" 
+               Height="42" />
+
+        <Label x:Name="currentPasswordLbl" 
+               Content="{x:Static p:Resources.settingsLblCurrentPassword}" 
+               FontFamily="pack://application:,,,/Fonts/#VT323" 
+               FontSize="20" 
+               HorizontalAlignment="Left" 
+               Margin="446,97,0,0" 
+               VerticalAlignment="Top" 
+               Width="194" 
+               Height="42" />
+
+        <Label x:Name="newPasswordLbl" 
+               Content="{x:Static p:Resources.settingsLblNewPassword}" 
+               FontFamily="pack://application:,,,/Fonts/#VT323" 
+               FontSize="20" 
+               HorizontalAlignment="Left" 
+               Margin="446,167,0,0" 
+               VerticalAlignment="Top" 
+               Width="194" 
+               Height="42" />
+
+        <TextBlock x:Name="newPasswordMessageTxtBlock" 
+                   HorizontalAlignment="Left" 
+                   FontFamily="pack://application:,,,/Fonts/#VT323" 
+                   FontSize="14" 
+                   Margin="446,230,0,0" 
+                   TextWrapping="Wrap" 
+                   VerticalAlignment="Top" 
+                   Height="33" 
+                   Width="262" 
+                   Foreground="#FFE00000" />
     </Grid>
 </Page>

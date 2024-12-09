@@ -63,9 +63,369 @@ namespace ExamExplosion.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Email verification.
         /// </summary>
-        public static string createAccountLblEmailVer {
+        public static string accountCreationblEmailVerTitle {
             get {
-                return ResourceManager.GetString("createAccountLblEmailVer", resourceCulture);
+                return ResourceManager.GetString("accountCreationblEmailVerTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error occurred while creating the account.
+        /// </summary>
+        public static string accountCreationCreationError {
+            get {
+                return ResourceManager.GetString("accountCreationCreationError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email and gamertag already in use.
+        /// </summary>
+        public static string accountCreationEmailAndGamertagTaken {
+            get {
+                return ResourceManager.GetString("accountCreationEmailAndGamertagTaken", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Provided data already exists in another account.
+        /// </summary>
+        public static string accountCreationExistingData {
+            get {
+                return ResourceManager.GetString("accountCreationExistingData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your account has been created successfully.
+        /// </summary>
+        public static string accountCreationLblAccountCreated {
+            get {
+                return ResourceManager.GetString("accountCreationLblAccountCreated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error sending email, check if it is spelled correctly and your internet connectioni.
+        /// </summary>
+        public static string accountCreationLblEmailError {
+            get {
+                return ResourceManager.GetString("accountCreationLblEmailError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter the code sent to your email.
+        /// </summary>
+        public static string accountCreationLblEmailVerification {
+            get {
+                return ResourceManager.GetString("accountCreationLblEmailVerification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The gamertag already exists.
+        /// </summary>
+        public static string accountCreationLblExistingGamertag {
+            get {
+                return ResourceManager.GetString("accountCreationLblExistingGamertag", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid email.
+        /// </summary>
+        public static string accountCreationLblInvalidEmail {
+            get {
+                return ResourceManager.GetString("accountCreationLblInvalidEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Only letters and numbers.
+        /// </summary>
+        public static string accountCreationLblInvalidGamertag {
+            get {
+                return ResourceManager.GetString("accountCreationLblInvalidGamertag", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to It must start with a letter.
+        /// </summary>
+        public static string accountCreationLblInvalidGamertagInitial {
+            get {
+                return ResourceManager.GetString("accountCreationLblInvalidGamertagInitial", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name format incorrect.
+        /// </summary>
+        public static string accountCreationLblInvalidName {
+            get {
+                return ResourceManager.GetString("accountCreationLblInvalidName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This email is linked to another account.
+        /// </summary>
+        public static string accountCreationLblLinkedEmail {
+            get {
+                return ResourceManager.GetString("accountCreationLblLinkedEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Missing information, complete required fields.
+        /// </summary>
+        public static string accountCreationLblMissingInformation {
+            get {
+                return ResourceManager.GetString("accountCreationLblMissingInformation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Blocked players.
+        /// </summary>
+        public static string blockAndFriendsListLblBlockedUsers {
+            get {
+                return ResourceManager.GetString("blockAndFriendsListLblBlockedUsers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unfriend.
+        /// </summary>
+        public static string blockAndFriendsListLblDeleteFriend {
+            get {
+                return ResourceManager.GetString("blockAndFriendsListLblDeleteFriend", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Friend.
+        /// </summary>
+        public static string blockAndFriendsListLblFriend {
+            get {
+                return ResourceManager.GetString("blockAndFriendsListLblFriend", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do you want to unblock this player?.
+        /// </summary>
+        public static string blockAndFriendsListLblQuestion {
+            get {
+                return ResourceManager.GetString("blockAndFriendsListLblQuestion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unblock player.
+        /// </summary>
+        public static string blockAndFriendsListLblUnblock {
+            get {
+                return ResourceManager.GetString("blockAndFriendsListLblUnblock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do you want to unfriend this player?.
+        /// </summary>
+        public static string blockAndFriendsListLblUnfriendQuestion {
+            get {
+                return ResourceManager.GetString("blockAndFriendsListLblUnfriendQuestion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You obtained.
+        /// </summary>
+        public static string boardLblCardObtained {
+            get {
+                return ResourceManager.GetString("boardLblCardObtained", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to requested you a card.
+        /// </summary>
+        public static string boardLblCardRequested {
+            get {
+                return ResourceManager.GetString("boardLblCardRequested", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You have lost a life unless you can re-register..
+        /// </summary>
+        public static string catalogueLblExamBombDescription {
+            get {
+                return ResourceManager.GetString("catalogueLblExamBombDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to End your turn without taking a card..
+        /// </summary>
+        public static string catalogueLblExemptDescription {
+            get {
+                return ResourceManager.GetString("catalogueLblExemptDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The player of your choice gives you a card..
+        /// </summary>
+        public static string catalogueLblFavorDescription {
+            get {
+                return ResourceManager.GetString("catalogueLblFavorDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your turn is passed to the next person..
+        /// </summary>
+        public static string catalogueLblLeftTeamDescription {
+            get {
+                return ResourceManager.GetString("catalogueLblLeftTeamDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You recover from a exam bomb, you don&apos;t lose your life.
+        /// </summary>
+        public static string catalogueLblReRegistrationDescription {
+            get {
+                return ResourceManager.GetString("catalogueLblReRegistrationDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You shuffle the cards.
+        /// </summary>
+        public static string catalogueLblShuffleDescription {
+            get {
+                return ResourceManager.GetString("catalogueLblShuffleDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You take a card from the bottom of the stack.
+        /// </summary>
+        public static string catalogueLblTakeBelowDescription {
+            get {
+                return ResourceManager.GetString("catalogueLblTakeBelowDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Put together two cards from the same teacher and a player must give you a card..
+        /// </summary>
+        public static string catalogueLblTeacherDescription {
+            get {
+                return ResourceManager.GetString("catalogueLblTeacherDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Catalogue.
+        /// </summary>
+        public static string catalogueLblTitle {
+            get {
+                return ResourceManager.GetString("catalogueLblTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You can see the next 3 cards of the Stack without shuffling..
+        /// </summary>
+        public static string catalogueLblViewFutureDescription {
+            get {
+                return ResourceManager.GetString("catalogueLblViewFutureDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The code is incorrect..
+        /// </summary>
+        public static string emailVerificationLblIncorrectCode {
+            get {
+                return ResourceManager.GetString("emailVerificationLblIncorrectCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You reported this player.
+        /// </summary>
+        public static string endGameLblPlayerReported {
+            get {
+                return ResourceManager.GetString("endGameLblPlayerReported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Report error.
+        /// </summary>
+        public static string endGameLblReportError {
+            get {
+                return ResourceManager.GetString("endGameLblReportError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occurred while reporting this player.
+        /// </summary>
+        public static string endGameLblReportErrorDescription {
+            get {
+                return ResourceManager.GetString("endGameLblReportErrorDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Player reported.
+        /// </summary>
+        public static string endGameLblReportTitle {
+            get {
+                return ResourceManager.GetString("endGameLblReportTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ingresa el código de partida.
+        /// </summary>
+        public static string gameCodeLblEnterCode {
+            get {
+                return ResourceManager.GetString("gameCodeLblEnterCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The code entered does not belong to any available lobby.
+        /// </summary>
+        public static string gameCodeLblInexistentLobby {
+            get {
+                return ResourceManager.GetString("gameCodeLblInexistentLobby", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Inexistent lobby.
+        /// </summary>
+        public static string gameCodeLblInexistentLobbyTitle {
+            get {
+                return ResourceManager.GetString("gameCodeLblInexistentLobbyTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Game code.
+        /// </summary>
+        public static string gameCodeLblTitle {
+            get {
+                return ResourceManager.GetString("gameCodeLblTitle", resourceCulture);
             }
         }
         
@@ -75,6 +435,33 @@ namespace ExamExplosion.Properties {
         public static string gameLblWinner {
             get {
                 return ResourceManager.GetString("gameLblWinner", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Max HP.
+        /// </summary>
+        public static string gamePreferencesLblMaxHp {
+            get {
+                return ResourceManager.GetString("gamePreferencesLblMaxHp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Max players.
+        /// </summary>
+        public static string gamePreferencesLblMaxPlayers {
+            get {
+                return ResourceManager.GetString("gamePreferencesLblMaxPlayers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Time per turn.
+        /// </summary>
+        public static string gamePreferencesLblTime {
+            get {
+                return ResourceManager.GetString("gamePreferencesLblTime", resourceCulture);
             }
         }
         
@@ -133,11 +520,92 @@ namespace ExamExplosion.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Account.
+        /// </summary>
+        public static string globalLblAccount {
+            get {
+                return ResourceManager.GetString("globalLblAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Game code.
         /// </summary>
         public static string globalLblCode {
             get {
                 return ResourceManager.GetString("globalLblCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not connect to the server..
+        /// </summary>
+        public static string globalLblCommunicationException {
+            get {
+                return ResourceManager.GetString("globalLblCommunicationException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hecho.
+        /// </summary>
+        public static string globalLblDone {
+            get {
+                return ResourceManager.GetString("globalLblDone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email.
+        /// </summary>
+        public static string globalLblEmail {
+            get {
+                return ResourceManager.GetString("globalLblEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
+        public static string globalLblError {
+            get {
+                return ResourceManager.GetString("globalLblError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exam bomb.
+        /// </summary>
+        public static string globalLblExamBombCard {
+            get {
+                return ResourceManager.GetString("globalLblExamBombCard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exempt.
+        /// </summary>
+        public static string globalLblExemptCard {
+            get {
+                return ResourceManager.GetString("globalLblExemptCard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occurred with the server.
+        /// </summary>
+        public static string globalLblFaultException {
+            get {
+                return ResourceManager.GetString("globalLblFaultException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Favor.
+        /// </summary>
+        public static string globalLblFavorCard {
+            get {
+                return ResourceManager.GetString("globalLblFavorCard", resourceCulture);
             }
         }
         
@@ -151,6 +619,15 @@ namespace ExamExplosion.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Lastname.
+        /// </summary>
+        public static string globalLblLastname {
+            get {
+                return ResourceManager.GetString("globalLblLastname", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Leaderboard.
         /// </summary>
         public static string globalLblLeaderboard {
@@ -160,11 +637,74 @@ namespace ExamExplosion.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Left team.
+        /// </summary>
+        public static string globalLblLeftTeamCard {
+            get {
+                return ResourceManager.GetString("globalLblLeftTeamCard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string globalLblName {
+            get {
+                return ResourceManager.GetString("globalLblName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Required.
+        /// </summary>
+        public static string globalLblNotBlanks {
+            get {
+                return ResourceManager.GetString("globalLblNotBlanks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password.
+        /// </summary>
+        public static string globalLblPassword {
+            get {
+                return ResourceManager.GetString("globalLblPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Passwords must be the same.
+        /// </summary>
+        public static string globalLblPasswordCoincidence {
+            get {
+                return ResourceManager.GetString("globalLblPasswordCoincidence", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 8 to 20 characters.
+        /// </summary>
+        public static string globalLblPasswordLength {
+            get {
+                return ResourceManager.GetString("globalLblPasswordLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Players.
         /// </summary>
         public static string globalLblPlayers {
             get {
                 return ResourceManager.GetString("globalLblPlayers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Repeat password.
+        /// </summary>
+        public static string globalLblRepeatPassword {
+            get {
+                return ResourceManager.GetString("globalLblRepeatPassword", resourceCulture);
             }
         }
         
@@ -187,11 +727,218 @@ namespace ExamExplosion.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Code to join a game.
+        ///   Looks up a localized string similar to Shuffle.
         /// </summary>
-        public static string JoinCode {
+        public static string globalLblShuffleCard {
             get {
-                return ResourceManager.GetString("JoinCode", resourceCulture);
+                return ResourceManager.GetString("globalLblShuffleCard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Special characters allowed: #,$,%,&amp;,!.
+        /// </summary>
+        public static string globalLblSpecialCharacters {
+            get {
+                return ResourceManager.GetString("globalLblSpecialCharacters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Take from below.
+        /// </summary>
+        public static string globalLblTakeBelowCard {
+            get {
+                return ResourceManager.GetString("globalLblTakeBelowCard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Teacher A.
+        /// </summary>
+        public static string globalLblTeacherACard {
+            get {
+                return ResourceManager.GetString("globalLblTeacherACard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Teacher M.
+        /// </summary>
+        public static string globalLblTeacherMCard {
+            get {
+                return ResourceManager.GetString("globalLblTeacherMCard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Teacher O.
+        /// </summary>
+        public static string globalLblTeacherOCard {
+            get {
+                return ResourceManager.GetString("globalLblTeacherOCard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Teacher R.
+        /// </summary>
+        public static string globalLblTeacherRCard {
+            get {
+                return ResourceManager.GetString("globalLblTeacherRCard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Teacher S.
+        /// </summary>
+        public static string globalLblTeacherSCard {
+            get {
+                return ResourceManager.GetString("globalLblTeacherSCard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The connection to the server has expired.
+        /// </summary>
+        public static string globalLblTimeoutException {
+            get {
+                return ResourceManager.GetString("globalLblTimeoutException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View the future.
+        /// </summary>
+        public static string globalLblViewFutureCard {
+            get {
+                return ResourceManager.GetString("globalLblViewFutureCard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Re registration.
+        /// </summary>
+        public static string globalReRegistrationCard {
+            get {
+                return ResourceManager.GetString("globalReRegistrationCard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Log out.
+        /// </summary>
+        public static string homeLblLogout {
+            get {
+                return ResourceManager.GetString("homeLblLogout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Buy.
+        /// </summary>
+        public static string komalliBtnBuy {
+            get {
+                return ResourceManager.GetString("komalliBtnBuy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use.
+        /// </summary>
+        public static string komalliBtnUse {
+            get {
+                return ResourceManager.GetString("komalliBtnUse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Now your cards look like this.
+        /// </summary>
+        public static string komalliLblAccessoryInUse {
+            get {
+                return ResourceManager.GetString("komalliLblAccessoryInUse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pack in use.
+        /// </summary>
+        public static string komalliLblAccessoryInUseTitle {
+            get {
+                return ResourceManager.GetString("komalliLblAccessoryInUseTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cap.
+        /// </summary>
+        public static string komalliLblCap {
+            get {
+                return ResourceManager.GetString("komalliLblCap", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Graduated.
+        /// </summary>
+        public static string komalliLblGraduated {
+            get {
+                return ResourceManager.GetString("komalliLblGraduated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hat.
+        /// </summary>
+        public static string komalliLblHat {
+            get {
+                return ResourceManager.GetString("komalliLblHat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You need to win more games to purchase this pack.
+        /// </summary>
+        public static string komalliLblInsuficientPoints {
+            get {
+                return ResourceManager.GetString("komalliLblInsuficientPoints", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not enough points.
+        /// </summary>
+        public static string komalliLblInsuficientPointsTitle {
+            get {
+                return ResourceManager.GetString("komalliLblInsuficientPointsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Now you can use it to see cards like this in your games.
+        /// </summary>
+        public static string komalliLblPackPurchased {
+            get {
+                return ResourceManager.GetString("komalliLblPackPurchased", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pack purchased.
+        /// </summary>
+        public static string komalliLblPackPurchasedTitle {
+            get {
+                return ResourceManager.GetString("komalliLblPackPurchasedTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Points.
+        /// </summary>
+        public static string komalliLblPoints {
+            get {
+                return ResourceManager.GetString("komalliLblPoints", resourceCulture);
             }
         }
         
@@ -250,29 +997,119 @@ namespace ExamExplosion.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Max HP.
+        ///   Looks up a localized string similar to Login.
         /// </summary>
-        public static string lobbySettingsLblMaxHp {
+        public static string loginBtnLogin {
             get {
-                return ResourceManager.GetString("lobbySettingsLblMaxHp", resourceCulture);
+                return ResourceManager.GetString("loginBtnLogin", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Max players.
+        ///   Looks up a localized string similar to Your account is inactive due to another player&apos;s reports..
         /// </summary>
-        public static string lobbySettingsLblMaxPlayers {
+        public static string loginLblAccountInactive {
             get {
-                return ResourceManager.GetString("lobbySettingsLblMaxPlayers", resourceCulture);
+                return ResourceManager.GetString("loginLblAccountInactive", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Time per turn.
+        ///   Looks up a localized string similar to Can not login.
         /// </summary>
-        public static string lobbySettingsLblTime {
+        public static string loginLblCannotLogin {
             get {
-                return ResourceManager.GetString("lobbySettingsLblTime", resourceCulture);
+                return ResourceManager.GetString("loginLblCannotLogin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gamertag and/or password are incorrect.
+        /// </summary>
+        public static string loginLblInvalidCredentials {
+            get {
+                return ResourceManager.GetString("loginLblInvalidCredentials", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Log In.
+        /// </summary>
+        public static string loginLblTitle {
+            get {
+                return ResourceManager.GetString("loginLblTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save.
+        /// </summary>
+        public static string settingsBtnSave {
+            get {
+                return ResourceManager.GetString("settingsBtnSave", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Current password.
+        /// </summary>
+        public static string settingsLblCurrentPassword {
+            get {
+                return ResourceManager.GetString("settingsLblCurrentPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Current password does not match this.
+        /// </summary>
+        public static string settingsLblCurrentPasswordWrong {
+            get {
+                return ResourceManager.GetString("settingsLblCurrentPasswordWrong", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wrong password.
+        /// </summary>
+        public static string settingsLblCurrentPasswordWrongTitle {
+            get {
+                return ResourceManager.GetString("settingsLblCurrentPasswordWrongTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New password.
+        /// </summary>
+        public static string settingsLblNewPassword {
+            get {
+                return ResourceManager.GetString("settingsLblNewPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your password has been updated.
+        /// </summary>
+        public static string settingsLblPasswordUpdated {
+            get {
+                return ResourceManager.GetString("settingsLblPasswordUpdated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password updated.
+        /// </summary>
+        public static string settingsLblPasswordUpdatedTitle {
+            get {
+                return ResourceManager.GetString("settingsLblPasswordUpdatedTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occurred while updating your password.
+        /// </summary>
+        public static string settingsLblPasswordUpdateError {
+            get {
+                return ResourceManager.GetString("settingsLblPasswordUpdateError", resourceCulture);
             }
         }
         

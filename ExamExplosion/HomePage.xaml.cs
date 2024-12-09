@@ -24,10 +24,10 @@ namespace ExamExplosion
         public HomePage()
         {
             InitializeComponent();
-            lblGamertag.Content = SessionManager.CurrentSession.gamertag;
+            gamertagLbl.Content = SessionManager.CurrentSession.gamertag;
         }
 
-        private void CreateLobby(object sender, RoutedEventArgs e)
+        private void NavigateGamePreferencesPage(object sender, RoutedEventArgs e)
         {
             SessionManager.CurrentSession.isLobbyOwner = true;
             if (this.NavigationService != null)
@@ -43,7 +43,7 @@ namespace ExamExplosion
             }
         }
 
-        private void GoKomalli(object sender, RoutedEventArgs e)
+        private void NavigateKomalliPage(object sender, RoutedEventArgs e)
         {
             if (this.NavigationService != null)
             {
@@ -51,7 +51,7 @@ namespace ExamExplosion
             }
         }
 
-        private void GoLeaderboard(object sender, RoutedEventArgs e)
+        private void NavigateLeaderboardPage(object sender, RoutedEventArgs e)
         {
 
             if (this.NavigationService != null)
@@ -60,7 +60,7 @@ namespace ExamExplosion
             }
         }
 
-        private void JoinLobby(object sender, RoutedEventArgs e)
+        private void NavigateGameCodePage(object sender, RoutedEventArgs e)
         {
             SessionManager.CurrentSession.isLobbyOwner = false;
             if (this.NavigationService != null)
@@ -82,7 +82,7 @@ namespace ExamExplosion
                 this.NavigationService.Navigate(new StartPage());
             }
         }
-        private void GoSettings(object sender, RoutedEventArgs e)
+        private void NavigateSettingsPage(object sender, RoutedEventArgs e)
         {
             if (this.NavigationService != null)
             {
@@ -90,7 +90,7 @@ namespace ExamExplosion
             }
         }
 
-        private void SeeCatalogue(object sender, RoutedEventArgs e)
+        private void NavigateCataloguePage(object sender, RoutedEventArgs e)
         {
             if (this.NavigationService != null)
             {

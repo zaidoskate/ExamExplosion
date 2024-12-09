@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using ExamExplosion.Properties;
 
 namespace ExamExplosion
 {
@@ -39,7 +40,7 @@ namespace ExamExplosion
             string codeEntered = txtBoxCode.Text;
             if(codeEntered != this.code)
             {
-                new AlertModal("Codigo incorrecto","El codigo ingresado no coincide con el codigo enviado.").ShowDialog();
+                new AlertModal(ExamExplosion.Properties.Resources.globalLblError , ExamExplosion.Properties.Resources.emailVerificationLblIncorrectCode).ShowDialog();
             }
             else
             {

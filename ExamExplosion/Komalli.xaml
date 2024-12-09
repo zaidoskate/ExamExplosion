@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ExamExplosion"
+      xmlns:p="clr-namespace:ExamExplosion.Properties"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Komalli">
@@ -24,57 +25,208 @@
         </Style>
     </Page.Resources>
     <Grid>
-        <Label Content="Komalli" Margin="139,22,0,320" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="60" HorizontalAlignment="Left"/>
+        <Label 
+            Content="Komalli" 
+            Margin="139,22,0,320" 
+            FontFamily="pack://application:,,,/Fonts/#VT323" 
+            FontSize="60" 
+            HorizontalAlignment="Left"/>
 
-        <Button x:Name="btnBuyAccessory" HorizontalAlignment="Left" Margin="79,328,0,0" VerticalAlignment="Top" Height="75" Width="153" Background="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand" Click="BuyPackage">
+        <Button 
+            x:Name="buyAccessoryBtn" 
+            HorizontalAlignment="Left" 
+            Margin="79,328,0,0" 
+            VerticalAlignment="Top" 
+            Height="75" 
+            Width="153" 
+            Background="{x:Null}" 
+            BorderBrush="{x:Null}" 
+            Cursor="Hand" 
+            Click="BuyPackageBtn_Click">
             <Grid>
-                <Image HorizontalAlignment="Left" VerticalAlignment="Center" Width="140" Source="pack://application:,,,/Images/ButtonGreen.png" Stretch="Fill" Height="80"/>
-                <Label Content="Comprar" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="24"/>
+                <Image HorizontalAlignment="Left" 
+                       VerticalAlignment="Center" 
+                       Width="140" 
+                       Source="pack://application:,,,/Images/ButtonGreen.png" 
+                       Stretch="Fill" 
+                       Height="80"/>
+                <Label 
+                    Content="{x:Static p:Resources.komalliBtnBuy}" 
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center" 
+                    FontFamily="pack://application:,,,/Fonts/#VT323" 
+                    FontSize="24"/>
             </Grid>
         </Button>
-        <Button x:Name="btnUseAccessory" HorizontalAlignment="Center" Margin="0,332,0,0" VerticalAlignment="Top" Height="75" Width="148" Background="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand" Click="UsePackage">
+        <Button 
+            x:Name="useAccessoryBtn" 
+            HorizontalAlignment="Center" 
+            Margin="0,332,0,0" 
+            VerticalAlignment="Top" 
+            Height="75" 
+            Width="148" 
+            Background="{x:Null}" 
+            BorderBrush="{x:Null}" 
+            Cursor="Hand" 
+            Click="UsePackageBtn_Click">
             <Grid>
-                <Image VerticalAlignment="Center" Source="pack://application:,,,/Images/ButtonGreen.png" Stretch="Fill" Height="80"/>
-                <Label Content="Usar" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="24" RenderTransformOrigin="0.5,0.5"/>
+                <Image 
+                    VerticalAlignment="Center" 
+                    Source="pack://application:,,,/Images/ButtonGreen.png" 
+                    Stretch="Fill" 
+                    Height="80"/>
+                <Label 
+                    Content="{x:Static p:Resources.komalliBtnUse}" 
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center" 
+                    FontFamily="pack://application:,,,/Fonts/#VT323" 
+                    FontSize="24" 
+                    RenderTransformOrigin="0.5,0.5"/>
             </Grid>
         </Button>
-        <Button HorizontalAlignment="Left" Margin="559,336,0,0" VerticalAlignment="Top" Height="75" Width="147" Background="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand" Click="GoHome">
+        <Button 
+            HorizontalAlignment="Left" 
+            Margin="559,336,0,0" 
+            VerticalAlignment="Top" 
+            Height="75" 
+            Width="147" 
+            Background="{x:Null}" 
+            BorderBrush="{x:Null}" 
+            Cursor="Hand" 
+            Click="NavigateHomePage">
             <Grid>
-                <Image VerticalAlignment="Center" Source="pack://application:,,,/Images/ButtonOrange.png" Stretch="Fill" Height="80"/>
-                <Label Content="Regresar" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="24"/>
+                <Image 
+                    VerticalAlignment="Center" 
+                    Source="pack://application:,,,/Images/ButtonOrange.png" 
+                    Stretch="Fill" 
+                    Height="80"/>
+                <Label 
+                    Content="{x:Static p:Resources.globalBtnLeave}" 
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center" 
+                    FontFamily="pack://application:,,,/Fonts/#VT323" 
+                    FontSize="24"/>
             </Grid>
         </Button>
-        <Image HorizontalAlignment="Left" VerticalAlignment="Top" Width="43" Source="pack://application:,,,/Images/Coin.png" Stretch="Fill" Height="42" Margin="590,22,0,0" />
-        <Label Content="Puntos:" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="24" Height="53" Margin="638,21,0,0" Width="78"/>
-        <Label x:Name="lblPoints" Content="0" HorizontalAlignment="Left" Margin="715,22,0,0" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="24" VerticalAlignment="Top"/>
+        <Image 
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top" 
+            Width="43" 
+            Source="pack://application:,,,/Images/Coin.png" 
+            Stretch="Fill" 
+            Height="42" 
+            Margin="590,22,0,0" />
+        <Label 
+            Content="{x:Static p:Resources.komalliLblPoints}" 
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top" 
+            FontFamily="pack://application:,,,/Fonts/#VT323" 
+            FontSize="24" 
+            Height="53" 
+            Margin="638,21,0,0" 
+            Width="78"/>
+        <Label 
+            x:Name="pointsLbl" 
+            Content="0" 
+            HorizontalAlignment="Left" 
+            Margin="715,22,0,0" 
+            FontFamily="pack://application:,,,/Fonts/#VT323" 
+            FontSize="24" 
+            VerticalAlignment="Top"/>
 
-        <Image HorizontalAlignment="Left" Height="80" Margin="44,10,0,0" VerticalAlignment="Top" Width="76" Source="pack://application:,,,/Images/KomalliImage.png"/>
+        <Image 
+            HorizontalAlignment="Left" 
+            Height="80" 
+            Margin="44,10,0,0" 
+            VerticalAlignment="Top" 
+            Width="76" 
+            Source="pack://application:,,,/Images/KomalliImage.png"/>
 
-        <RadioButton x:Name="radioBtnNormalPackage" GroupName="PackagesGroup" Margin="44,131,617,131" IsChecked="False" Background="Transparent" Checked="PackageSelected">
+        <RadioButton 
+            x:Name="normalPackageRadioBtn" 
+            GroupName="PackagesGroup" 
+            Margin="44,131,617,131" 
+            IsChecked="False" 
+            Background="Transparent" 
+            Checked="PackageSelectedBtn_Click">
             <Grid>
-                <Label FontSize="20" FontFamily="pack://application:,,,/Fonts/#VT323" Content="Normal  &#xD;&#xA;0" Margin="0,0,0,69"/>
-                <Image HorizontalAlignment="Center" Height="110" VerticalAlignment="Top" Width="140" Source="pack://application:,,,/CardsPackages/NormalPackage/profeA.png" Margin="0,49,0,0"/>
+                <Label 
+                    FontSize="20" 
+                    FontFamily="pack://application:,,,/Fonts/#VT323" 
+                    Content="Normal  &#xD;&#xA;0" 
+                    Margin="0,0,0,69"/>
+                <Image 
+                    HorizontalAlignment="Center" 
+                    Height="110" 
+                    VerticalAlignment="Top" 
+                    Width="140" 
+                    Source="pack://application:,,,/CardsPackages/NormalPackage/profeA.png" 
+                    Margin="0,49,0,0"/>
             </Grid>
         </RadioButton>
-        <RadioButton x:Name="radioBtnCapPackage" GroupName="PackagesGroup" Margin="219,130,442,132" IsChecked="False" Background="Transparent" Checked="PackageSelected">
+        <RadioButton 
+            x:Name="capPackageRadioBtn" 
+            GroupName="PackagesGroup" 
+            Margin="219,130,442,132" 
+            IsChecked="False" 
+            Background="Transparent" 
+            Checked="PackageSelectedBtn_Click">
             <Grid>
-                <Label FontSize="20" FontFamily="pack://application:,,,/Fonts/#VT323" Content="Gorra &#xD;&#xA;100" Margin="0,0,0,69"/>
-                <Image HorizontalAlignment="Center" Height="110" VerticalAlignment="Top" Width="140" Source="pack://application:,,,/CardsPackages/CapPackages/profeO.png" Margin="0,49,0,0"/>
+                <Label 
+                    FontSize="20" 
+                    FontFamily="pack://application:,,,/Fonts/#VT323" 
+                    Content="{x:Static p:Resources.komalliLblCap}" 
+                    Margin="0,0,0,69"/>
+                <Image 
+                    HorizontalAlignment="Center" 
+                    Height="110" 
+                    VerticalAlignment="Top" 
+                    Width="140" 
+                    Source="pack://application:,,,/CardsPackages/CapPackages/profeO.png" 
+                    Margin="0,49,0,0"/>
             </Grid>
         </RadioButton>
-        <RadioButton x:Name="radioBtnHatPackage" GroupName="PackagesGroup" Margin="420,130,261,132" IsChecked="False" Background="Transparent" Checked="PackageSelected">
+        <RadioButton x:Name="hatPackageRadioBtn" 
+                     GroupName="PackagesGroup" 
+                     Margin="420,130,261,132" 
+                     IsChecked="False" 
+                     Background="Transparent" 
+                     Checked="PackageSelectedBtn_Click">
             <Grid>
-                <Label FontSize="20" FontFamily="pack://application:,,,/Fonts/#VT323" Content="Sombrero  &#xA;300" Margin="0,0,0,69"/>
-                <Image HorizontalAlignment="Center" Height="110" VerticalAlignment="Top" Width="140" Source="/CardsPackages/HatPackage/profeR.png" Margin="0,49,0,0"/>
+                <Label 
+                    FontSize="20" 
+                    FontFamily="pack://application:,,,/Fonts/#VT323" 
+                    Content = "{x:Static p:Resources.komalliLblHat}" 
+                    Margin="0,0,0,69"/>
+                <Image 
+                    HorizontalAlignment="Center" 
+                    Height="110" 
+                    VerticalAlignment="Top" 
+                    Width="140" 
+                    Source="/CardsPackages/HatPackage/profeR.png" 
+                    Margin="0,49,0,0"/>
             </Grid>
         </RadioButton>
-        <RadioButton x:Name="radioBtnGraduatedPackage" GroupName="PackagesGroup" Margin="597,130,65,132" IsChecked="False" Background="Transparent" Checked="PackageSelected">
+        <RadioButton x:Name="graduatedPackageRadioBtn" 
+                     GroupName="PackagesGroup" 
+                     Margin="597,130,65,132" 
+                     IsChecked="False" 
+                     Background="Transparent" 
+                     Checked="PackageSelectedBtn_Click">
             <Grid>
-                <Label FontSize="20" FontFamily="pack://application:,,,/Fonts/#VT323" Content="Graduado &#xA;500" Margin="0,0,0,69"/>
-                <Image HorizontalAlignment="Center" Height="110" VerticalAlignment="Top" Width="140" Source="/CardsPackages/GraduatePackage/profeM.png" Margin="0,49,0,0"/>
+                <Label 
+                    FontSize="20" 
+                    FontFamily="pack://application:,,,/Fonts/#VT323" 
+                    Content="{x:Static p:Resources.komalliLblGraduated}" 
+                    Margin="0,0,0,69"/>
+                <Image 
+                    HorizontalAlignment="Center" 
+                    Height="110" 
+                    VerticalAlignment="Top" 
+                    Width="140" 
+                    Source="/CardsPackages/GraduatePackage/profeM.png" 
+                    Margin="0,49,0,0"/>
             </Grid>
         </RadioButton>
-
-
     </Grid>
 </Page>

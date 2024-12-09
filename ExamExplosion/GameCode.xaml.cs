@@ -1,5 +1,6 @@
 ﻿using ExamExplosion.ExamExplotionService;
 using ExamExplosion.Helpers;
+using ExamExplosion.Properties;
 using log4net;
 using System;
 using System.Collections.Generic;
@@ -23,8 +24,8 @@ namespace ExamExplosion
     /// </summary>
     public partial class GameCode : Page
     {
-        private LobbyManager lobbyManager = null;
-        private ILog log;
+        private readonly LobbyManager lobbyManager = null;
+        private readonly ILog log;
 
         public GameCode()
         {
@@ -34,7 +35,7 @@ namespace ExamExplosion
         }
 
 
-        private void GoHome(object sender, RoutedEventArgs e)
+        private void NavigateHomePage(object sender, RoutedEventArgs e)
         {
             if (this.NavigationService != null)
             {
@@ -85,33 +86,51 @@ namespace ExamExplosion
                     }
                     else
                     {
-                        new AlertModal("No existe tal lobby", "El código introducido no pertenece a ninguna lobby disponible").ShowDialog();
+                        new AlertModal(ExamExplosion.Properties.Resources.gameCodeLblInexistentLobbyTitle, ExamExplosion.Properties.Resources.gameCodeLblInexistentLobby).ShowDialog();
                     }
                     return joined;
                 }
                 catch (FaultException faultException)
                 {
-                    new AlertModal("Error", "Se produjo un error en el servidor").ShowDialog();
+                    new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblFaultException).ShowDialog();
                     log.Error("Error del servidor (FaultException)", faultException);
+                    NavigateStartPage();
                 }
                 catch (CommunicationException communicationException)
                 {
-                    new AlertModal("Error de comunicación", "No se pudo conectar con el servidor.").ShowDialog();
+                    new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblCommunicationException).ShowDialog();
                     log.Warn("Problema de comunicación con el servidor", communicationException);
+                    NavigateStartPage();
                 }
                 catch (TimeoutException timeoutException)
                 {
-                    new AlertModal("Tiempo de espera", "La conexión con el servidor ha expirado.").ShowDialog();
+                    new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblTimeoutException).ShowDialog();
                     log.Warn("Timeout al intentar conectar con el servidor", timeoutException);
+                    NavigateStartPage();
                 }
             }
             return false;
         }
 
-        private void JoinClick(object sender, RoutedEventArgs e)
+        private void JoinBtn_Click(object sender, RoutedEventArgs e)
         {
             string enteredCode = lobbyCodeTxtBox.Text.ToUpper();
             JoinLobby(enteredCode, SessionManager.CurrentSession.gamertag);
+        }
+
+        private void NavigateStartPage()
+        {
+            if (this.NavigationService != null)
+            {
+                this.NavigationService.Navigate(new StartPage());
+                var window = Window.GetWindow(this);
+                if (window != null)
+                {
+                    window.Height = 450;
+                    window.Width = 800;
+                    window.SizeToContent = SizeToContent.Manual;
+                }
+            }
         }
     }
 }
