@@ -57,6 +57,36 @@ namespace ExamExplosion
             orderedGamertags = playerGamertags.Select(label => label.Content.ToString()).ToList();
             log = LogManager.GetLogger(typeof(App));
             InitializeGameResources(gameCode, orderedGamertags);
+            AddPlayersToGame(orderedGamertags, gameCode);
+        }
+
+        private void AddPlayersToGame(List<string> playerGamertags, string gameCode)
+        {
+            try
+            {
+                if(hostGamertag == SessionManager.CurrentSession.gamertag)
+                {
+                    gameManager.AddPlayersToGame(playerGamertags, gameCode);
+                }
+            }
+            catch (FaultException faultException)
+            {
+                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblFaultException).ShowDialog();
+                log.Error("Error del servidor (FaultException)", faultException);
+                NavigateStartPage();
+            }
+            catch (CommunicationException communicationException)
+            {
+                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblCommunicationException).ShowDialog();
+                log.Warn("Problema de comunicación con el servidor", communicationException);
+                NavigateStartPage();
+            }
+            catch (TimeoutException timeoutException)
+            {
+                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblTimeoutException).ShowDialog();
+                log.Warn("Timeout al intentar conectar con el servidor", timeoutException);
+                NavigateStartPage();
+            }
         }
 
         private void LoadCardNames()
@@ -304,7 +334,7 @@ namespace ExamExplosion
 
         public void UpdatePlayerDeck(List<Card> playerDeckImages, int currentIndex)
         {
-            stackPanelPlayerCards.Children.Clear();
+            playerDeckWrapPanel.Children.Clear();
             int maxDisplay = Math.Min(6, playerDeckImages.Count - currentIndex);
             for (int i = 0; i < maxDisplay; i++)
             {
@@ -327,7 +357,7 @@ namespace ExamExplosion
                 {
                     image.Opacity = 1;
                 }
-                stackPanelPlayerCards.Children.Add(image);
+                playerDeckWrapPanel.Children.Add(image);
             }
         }
 
@@ -402,10 +432,32 @@ namespace ExamExplosion
         {
             ResetTopCardsPath();
             ResetPlayerButtonVisibility();
-            bool drawCard = gameManager.DrawCard(gameCode, SessionManager.CurrentSession.gamertag);
-            if (drawCard)
+            try
             {
-                DrawCardAnimation();
+                bool drawCard = gameManager.DrawCard(gameCode, SessionManager.CurrentSession.gamertag);
+                if (drawCard)
+                {
+                    DrawCardAnimation();
+                }
+
+            }
+            catch (FaultException faultException)
+            {
+                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblFaultException).ShowDialog();
+                log.Error("Error del servidor (FaultException)", faultException);
+                NavigateStartPage();
+            }
+            catch (CommunicationException communicationException)
+            {
+                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblCommunicationException).ShowDialog();
+                log.Warn("Problema de comunicación con el servidor", communicationException);
+                NavigateStartPage();
+            }
+            catch (TimeoutException timeoutException)
+            {
+                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblTimeoutException).ShowDialog();
+                log.Warn("Timeout al intentar conectar con el servidor", timeoutException);
+                NavigateStartPage();
             }
         }
 

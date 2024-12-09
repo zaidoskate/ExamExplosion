@@ -358,6 +358,78 @@ namespace ExamExplosion.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Could not friend this player.
+        /// </summary>
+        public static string endGameLblAddFriendError {
+            get {
+                return ResourceManager.GetString("endGameLblAddFriendError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occurred while friending this person.
+        /// </summary>
+        public static string endGameLblAddFriendErrorDescription {
+            get {
+                return ResourceManager.GetString("endGameLblAddFriendErrorDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Friend added.
+        /// </summary>
+        public static string endGameLblAddFriendTitle {
+            get {
+                return ResourceManager.GetString("endGameLblAddFriendTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error while blocking.
+        /// </summary>
+        public static string endGameLblBlockError {
+            get {
+                return ResourceManager.GetString("endGameLblBlockError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occurred while blocking this player.
+        /// </summary>
+        public static string endGameLblBlockErrorDescription {
+            get {
+                return ResourceManager.GetString("endGameLblBlockErrorDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Player blocked.
+        /// </summary>
+        public static string endGameLblBlockTitle {
+            get {
+                return ResourceManager.GetString("endGameLblBlockTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You added this player as a friend.
+        /// </summary>
+        public static string endGameLblPlayerAdded {
+            get {
+                return ResourceManager.GetString("endGameLblPlayerAdded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You blocked this player.
+        /// </summary>
+        public static string endGameLblPlayerBlocked {
+            get {
+                return ResourceManager.GetString("endGameLblPlayerBlocked", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You reported this player.
         /// </summary>
         public static string endGameLblPlayerReported {

@@ -7,6 +7,7 @@ using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace ExamExplosion.Helpers
 {
@@ -19,6 +20,12 @@ namespace ExamExplosion.Helpers
         private readonly GameResourcesManager gameResources = null;
 
         private readonly Board boardPage = null;
+
+        public GameManager()
+        {
+            InstanceContext context = new InstanceContext(this);
+            proxy = new GameManagerClient(context);
+        }
 
         /// <summary>
         /// Inicializa una nueva instancia de la clase GameManager.
@@ -561,6 +568,72 @@ namespace ExamExplosion.Helpers
         {
             gameResources.AddExamBomb(index);
             boardPage.UpdateGameDeckCount(gameResources.GameDeck.Count);
+        }
+
+        public int GetGameId(string gameCode)
+        {
+            int gameId = -1;
+            try
+            {
+                gameId = proxy.GetGameId(gameCode);
+            }
+            catch (FaultException faultException)
+            {
+                throw faultException;
+            }
+            catch (CommunicationException communicationException)
+            {
+                throw communicationException;
+            }
+            catch (TimeoutException timeoutException)
+            {
+                throw timeoutException;
+            }
+            return gameId;
+
+        }
+
+        public List<int> GetPlayersByGameCode(int gameId)
+        {
+            List<int> playersId = new List<int>();
+            playersId = proxy.GetGamePlayers(gameId).ToList();
+            return playersId;
+        }
+
+        public List<int> GetPlayersId(List<string> gamertags)
+        {
+            List<int> playerIds = new List<int>();
+            AccountManager accountManager = new AccountManager();
+            foreach (var gamertag in gamertags)
+            {
+                playerIds.Add(accountManager.GetAccountIdByGamertag(gamertag));
+            }
+            return playerIds;
+        }
+
+        public void AddPlayer(int playerId, int gameId)
+        {
+            
+        }
+
+        public void AddPlayersToGame(List<string> playerGamertags, string gameCode)
+        {
+            try
+            {
+                proxy.AddPlayersToGame(playerGamertags.ToArray(), gameCode);
+            }
+            catch (FaultException faultException)
+            {
+                throw faultException;
+            }
+            catch (CommunicationException communicationException)
+            {
+                throw communicationException;
+            }
+            catch (TimeoutException timeoutException)
+            {
+                throw timeoutException;
+            }
         }
     }
 }

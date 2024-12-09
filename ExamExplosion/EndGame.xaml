@@ -49,14 +49,15 @@
                RenderTransformOrigin="1.118,1.155" 
                Margin="0,78,0,72" />
         <Grid>
-            <Label Content="{x:Static p:Resources.gameLblWinner}" 
+            <Label x:Name="gameResultLbl"
+                   Content="" 
                    HorizontalAlignment="Left" 
                    Margin="317,0,0,0" 
                    VerticalAlignment="Top" 
                    HorizontalContentAlignment="Center" 
                    FontSize="60" 
                    FontFamily="pack://application:,,,/Fonts/#VT323" />
-            <Label x:Name="winnerGamertaglbl" 
+            <Label x:Name="winnerGamertagLbl" 
                    Content="Player" 
                    HorizontalAlignment="Left" 
                    Margin="341,70,0,0" 
@@ -71,79 +72,83 @@
                    HorizontalContentAlignment="Center" 
                    FontSize="60" 
                    FontFamily="pack://application:,,,/Fonts/#VT323" />
-            <Label x:Name="player1lbl" 
-                   Content="Player" 
+            <Label Visibility="Hidden" x:Name="player1lbl" 
+                   Content="" 
                    HorizontalAlignment="Left" 
                    Margin="270,184,0,0" 
                    VerticalAlignment="Top" 
                    HorizontalContentAlignment="Center" 
                    FontSize="40" 
                    FontFamily="pack://application:,,,/Fonts/#VT323" />
-            <Label x:Name="player2lbl" 
-                   Content="Player" 
+            <Label Visibility="Hidden" x:Name="player2lbl" 
+                   Content="" 
                    HorizontalAlignment="Left" 
                    Margin="270,239,0,0" 
                    VerticalAlignment="Top" 
                    HorizontalContentAlignment="Center" 
                    FontSize="40" 
                    FontFamily="pack://application:,,,/Fonts/#VT323" />
-            <Label x:Name="player3lbl" 
-                   Content="Player" 
+            <Label Visibility="Hidden" x:Name="player3lbl" 
+                   Content="" 
                    HorizontalAlignment="Left" 
                    Margin="270,294,0,0" 
                    VerticalAlignment="Top" 
                    HorizontalContentAlignment="Center" 
                    FontSize="40" 
                    FontFamily="pack://application:,,,/Fonts/#VT323" />
-            <Label x:Name="player4lbl" 
-                   Content="Player" 
+            <Label Visibility="Hidden" x:Name="player4lbl" 
+                   Content="" 
                    HorizontalAlignment="Left" 
                    Margin="270,349,0,0" 
                    VerticalAlignment="Top" 
                    HorizontalContentAlignment="Center" 
                    FontSize="40" 
                    FontFamily="pack://application:,,,/Fonts/#VT323" />
-            <Button Width="60" 
+            <Button Visibility="Hidden"  Width="60"  x:Name="AddFriendPlayer1"
                     Height="60" 
                     Background="Transparent" 
                     BorderBrush="Transparent" 
                     VerticalAlignment="Center" 
                     HorizontalAlignment="Center" 
                     Margin="63,0,0,20"
-                    Cursor="Hand">
+                    Cursor="Hand"
+                    Click="AddFriend">
                 <Image Source="/Images/AddFriendImage.png" Width="50" />
             </Button>
-            <Button Width="60" 
+            <Button Visibility="Hidden"  Width="60" x:Name="AddFriendPlayer2"
                     Height="60" 
                     Background="Transparent" 
                     BorderBrush="Transparent" 
                     VerticalAlignment="Center" 
                     HorizontalAlignment="Center" 
                     Margin="63,90,0,0"
-                    Cursor="Hand">
+                    Cursor="Hand"
+                    Click="AddFriend">
                 <Image Source="/Images/AddFriendImage.png" Width="50" />
             </Button>
-            <Button Width="60" 
+            <Button Visibility="Hidden"  Width="60" x:Name="AddFriendPlayer3"
                     Height="60" 
                     Background="Transparent" 
                     BorderBrush="Transparent" 
                     VerticalAlignment="Center" 
                     HorizontalAlignment="Center" 
                     Margin="63,200,0,0"
-                    Cursor="Hand">
+                    Cursor="Hand"
+                    Click="AddFriend">
                 <Image Source="/Images/AddFriendImage.png" Width="50" />
             </Button>
-            <Button Width="60" 
+            <Button Visibility="Hidden"  Width="60" x:Name="AddFriendPlayer4"
                     Height="60" 
                     Background="Transparent" 
                     BorderBrush="Transparent" 
                     VerticalAlignment="Center" 
                     HorizontalAlignment="Center" 
                     Margin="63,320,0,0"
-                    Cursor="Hand">
+                    Cursor="Hand"
+                    Click="AddFriend">
                 <Image Source="/Images/AddFriendImage.png" Width="50" />
             </Button>
-            <Button x:Name="ReportPlayer1" 
+            <Button Visibility="Hidden"  x:Name="ReportPlayer1" 
                     Width="60" 
                     Height="60" 
                     Background="Transparent" 
@@ -155,7 +160,7 @@
                     Click="ReportPlayer">
                 <Image Source="/Images/ReportImage.png" Width="50" />
             </Button>
-            <Button x:Name="ReportPlayer2" 
+            <Button Visibility="Hidden"  x:Name="ReportPlayer2" 
                     Width="60" 
                     Height="60" 
                     Background="Transparent" 
@@ -167,7 +172,7 @@
                     Click="ReportPlayer">
                 <Image Source="/Images/ReportImage.png" Width="50" />
             </Button>
-            <Button x:Name="ReportPlayer3" 
+            <Button Visibility="Hidden"  x:Name="ReportPlayer3" 
                     Width="60" 
                     Height="60" 
                     Background="Transparent" 
@@ -179,7 +184,7 @@
                     Click="ReportPlayer">
                 <Image Source="/Images/ReportImage.png" Width="50" />
             </Button>
-            <Button x:Name="ReportPlayer4" 
+            <Button Visibility="Hidden"  x:Name="ReportPlayer4" 
                     Width="60" 
                     Height="60" 
                     Background="Transparent" 
@@ -190,6 +195,51 @@
                     Cursor="Hand"
                     Click="ReportPlayer">
                 <Image Source="/Images/ReportImage.png" Width="50" />
+            </Button>
+
+            <Button Visibility="Hidden"  Width="60" x:Name="BlockPlayer1"
+                Height="60" 
+                Background="Transparent" 
+                BorderBrush="Transparent" 
+                VerticalAlignment="Center" 
+                HorizontalAlignment="Center" 
+                Margin="294,0,0,20"
+                Cursor="Hand"
+                    Click="BlockPlayer">
+                <Image Source="/Images/Block.png" Width="50" />
+            </Button>
+            <Button Visibility="Hidden"  Width="60" x:Name="BlockPlayer2"
+                Height="60" 
+                Background="Transparent" 
+                BorderBrush="Transparent" 
+                VerticalAlignment="Center" 
+                HorizontalAlignment="Center" 
+                Margin="294,90,0,0"
+                Cursor="Hand"
+                    Click="BlockPlayer">
+                <Image Source="/Images/Block.png" Width="50" />
+            </Button>
+            <Button Visibility="Hidden"  Width="60" x:Name="BlockPlayer3"
+                Height="60" 
+                Background="Transparent" 
+                BorderBrush="Transparent" 
+                VerticalAlignment="Center" 
+                HorizontalAlignment="Center" 
+                Margin="294,200,0,0"
+                Cursor="Hand"
+                    Click="BlockPlayer">
+                <Image Source="/Images/Block.png" Width="50" />
+            </Button>
+            <Button Visibility="Hidden"  Width="60" x:Name="BlockPlayer4"
+                Height="60" 
+                Background="Transparent" 
+                BorderBrush="Transparent" 
+                VerticalAlignment="Center" 
+                HorizontalAlignment="Center" 
+                Margin="294,320,0,0"
+                Cursor="Hand"
+                    Click="BlockPlayer">
+                <Image Source="/Images/Block.png" Width="50" />
             </Button>
         </Grid>
         <Button Width="150" 
