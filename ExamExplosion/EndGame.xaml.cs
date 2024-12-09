@@ -25,7 +25,7 @@ namespace ExamExplosion
         private ReportManager reportManager = null;
         private AccountManager accountManager = null;
         private ILog log;
-        public EndGame()
+        public EndGame(string gameCode, string winnerGamertag)
         {
             accountManager = new AccountManager();
             reportManager = new ReportManager();

@@ -28,6 +28,9 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+        <Storyboard x:Key="FadeOutAnimation">
+            <DoubleAnimation Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:8" />
+        </Storyboard>
         <Storyboard x:Key="CardDrawAnimation">
             <DoubleAnimation Storyboard.TargetName="animatedCard"
                          Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"
@@ -81,14 +84,14 @@
             </Grid>
         </Button>
 
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="234,480,0,114" Width="314">
+        <StackPanel x:Name="stackPanelSelectedCards" Orientation="Horizontal" HorizontalAlignment="Left" Margin="234,480,0,114" Width="314">
             <WrapPanel x:Name="SelectedCards" Width="220" Height="137">
             </WrapPanel>
             <Button x:Name="btnPlayCards" Height="65" Width="66"  Click="PlayCards" Background="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand">
                 <Image Source="pack://application:,,,/Images/SendMessageImage.png" Height="55" Width="66"></Image>
             </Button>
         </StackPanel>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,576,0,0" Width="780">
+        <StackPanel x:Name="stackPanelPlayerCards" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,576,0,0" Width="780">
             <Button x:Name="btnShowLeftCard" Height="139" Width="74" Background="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand" Click="ShowLeftCards">
                 <Image VerticalAlignment="Center" Source="pack://application:,,,/Images/leftArrow.png" Stretch="Fill" Height="70" Width="50"/>
             </Button>
@@ -105,14 +108,20 @@
                 <TranslateTransform />
             </Image.RenderTransform>
         </Image>
-        <Rectangle HorizontalAlignment="Left" Height="270" Margin="575,0,0,0" Stroke="Black" VerticalAlignment="Center" Width="225" Fill="White"/>
-        <Image x:Name="CardOnBoard" HorizontalAlignment="Left" Height="223" Margin="604,255,0,0" VerticalAlignment="Top" Width="164"/>
+        <Grid HorizontalAlignment="Left" Height="240" Margin="575,0,0,0"  VerticalAlignment="Center" Width="225">
+            <Image Source="Pack://application:,,,/Images/BackgroundCards.jpeg"></Image>
+        </Grid>
+        <Image x:Name="CardOnBoard" HorizontalAlignment="Left" Height="190" Margin="540,256,0,0" VerticalAlignment="Top" Width="308"/>
         <Grid Width="500" Height="250" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="35,0,0,0">
-            <Grid x:Name="Cards">
+            <Grid x:Name="Cards" Opacity="0">
                 <Image x:Name="FirstCard" Height="250" Width="166" HorizontalAlignment="Left"/>
                 <Image x:Name="SecondCard" Height="250" Width="166"/>
                 <Image x:Name="ThirdCard" Height="250" Width="166" HorizontalAlignment="Right"/>
             </Grid>
+        </Grid>
+        <Grid x:Name="NotificationGrid" Margin="751,130,252,485" Opacity="0">
+            <Rectangle HorizontalAlignment="Left" Height="100" Margin="0,0,0,0" Fill="#d58cff" VerticalAlignment="Top" Width="192"/>
+            <TextBlock x:Name="txtBlockNotification" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="16" TextWrapping="Wrap" Text="No hay mensaje" Margin="0,0,0,0"></TextBlock>
         </Grid>
     </Grid>
 </Page>

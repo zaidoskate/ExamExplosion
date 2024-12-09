@@ -154,30 +154,9 @@ namespace ExamExplosion
             else
             {
                 turnTimer.Stop();
-                ResetTopCardsPath();
-                ResetPlayerButtonVisibility();
-                if (SessionManager.CurrentSession.gamertag == hostGamertag)
+                if (!gameManager.ValidateLostGame(gameCode))
                 {
-                    try
-                    {
-                        GameManager gameManager = new GameManager(this);
-                        gameManager.NotifyEndTurn(gameCode, currentTurnLbl.Content.ToString());
-                    }
-                    catch (FaultException faultException)
-                    {
-                        new AlertModal("Error", "Se produjo un error en el servidor").ShowDialog();
-                        log.Error("Error del servidor (FaultException)", faultException);
-                    }
-                    catch (CommunicationException communicationException)
-                    {
-                        new AlertModal("Error de comunicación", "No se pudo conectar con el servidor.").ShowDialog();
-                        log.Warn("Problema de comunicación con el servidor", communicationException);
-                    }
-                    catch (TimeoutException timeoutException)
-                    {
-                        new AlertModal("Tiempo de espera", "La conexión con el servidor ha expirado.").ShowDialog();
-                        log.Warn("Timeout al intentar conectar con el servidor", timeoutException);
-                    }
+                    DrawCard(null, null);
                 }
             }
         }
@@ -313,7 +292,7 @@ namespace ExamExplosion
         public void UpdatePlayerDeck(List<Card> playerDeckImages, int currentIndex)
         {
             PlayerDeck.Children.Clear();
-            int maxDisplay = Math.Min(8, playerDeckImages.Count - currentIndex);
+            int maxDisplay = Math.Min(6, playerDeckImages.Count - currentIndex);
             for (int i = 0; i < maxDisplay; i++)
             {
                 Card card = playerDeckImages[currentIndex + i];
@@ -403,16 +382,18 @@ namespace ExamExplosion
         }
         private void PlayCards(object sender, RoutedEventArgs e)
         {
-            //aqui solo se valida si se pudo o no jugar la carta, si se pudo se muestra un mensaje predeterminado de que no se puede
-            if(gameManager.PlayCards(gameCode))
-            {
-                
-            }
+            ResetTopCardsPath();
+            gameManager.PlayCards(gameCode);
         }
         private void DrawCard(object sender, RoutedEventArgs e)
         {
-            gameManager.DrawCard(gameCode, SessionManager.CurrentSession.gamertag);
-            DrawCardAnimation();
+            ResetTopCardsPath();
+            ResetPlayerButtonVisibility();
+            bool drawCard = gameManager.DrawCard(gameCode, SessionManager.CurrentSession.gamertag);
+            if (drawCard)
+            {
+                DrawCardAnimation();
+            }
         }
 
         public void DrawCardAnimation()
@@ -455,18 +436,19 @@ namespace ExamExplosion
                 string cardPath = topCards[0].Path;
                 FirstCard.Source = new BitmapImage(new Uri($"pack://application:,,,/CardsPackages/{this.defaultPackage}/{cardPath}.png", UriKind.Absolute));
             }
-
             if (topCards.Count >= 2)
             {
                 string cardPath = topCards[1].Path;
                 SecondCard.Source = new BitmapImage(new Uri($"pack://application:,,,/CardsPackages/{this.defaultPackage}/{cardPath}.png", UriKind.Absolute));
             }
-
             if (topCards.Count == 3)
             {
                 string cardPath = topCards[2].Path;
                 ThirdCard.Source = new BitmapImage(new Uri($"pack://application:,,,/CardsPackages/{this.defaultPackage}/{cardPath}.png", UriKind.Absolute));
             }
+            Cards.Opacity = 1;
+            var storyboard = (Storyboard)FindResource("FadeOutAnimation");
+            storyboard.Begin(Cards);
         }
 
         public void ResetTopCardsPath()
@@ -533,7 +515,7 @@ namespace ExamExplosion
                 }
                 else if (cardOnBoard == "pack://application:,,,/CardsPackages/NormalPackage/leftTeam.png")
                 {
-                    // Implementa el ataque
+                    gameManager.SendDoubleTurn(gameCode, selectedPlayer);
                 }
             }
         }
@@ -541,12 +523,14 @@ namespace ExamExplosion
 
         public void ShowCardRequested(string playerRequesting)
         {
-            new AlertModal($"{playerRequesting} te solicito una carta", $"Se le ha otorgado una de tus cartas a {playerRequesting}").ShowDialog();
+            string message = $"Se le ha otorgado una de tus cartas a {playerRequesting}";
+            DisplayNotification(message);
         }
 
         public void ShowCardObtained(string cardName)
         {
-            new AlertModal("Carta obtenida", $"Has obtenido una carta: {cardName}").ShowDialog();
+            string message = $"Has obtenido una carta: {cardName}";
+            DisplayNotification(message);
         }
 
         public void ClearSelectedCards()
@@ -558,6 +542,65 @@ namespace ExamExplosion
                 int cardId = (int)card.Tag;
                 SelectedCards.Children.Remove(card);
                 gameManager.RemoveCardFromPlayerHand(cardId);
+            }
+        }
+        public void DisplayNotification(string message)
+        {
+            txtBlockNotification.Text = message;
+            NotificationGrid.Opacity = 1;
+            var storyboard = (Storyboard)FindResource("FadeOutAnimation");
+            storyboard.Begin(NotificationGrid);
+        }
+
+        public void DisplayExamBomb()
+        {
+            string cardPath = "examBomb";
+            ThirdCard.Source = new BitmapImage(new Uri($"pack://application:,,,/CardsPackages/{this.defaultPackage}/{cardPath}.png", UriKind.Absolute));
+            NotificationGrid.Opacity = 1;
+            var storyboard = (Storyboard)FindResource("FadeOutAnimation");
+            storyboard.Begin(Cards);
+        }
+
+        public void GoEndGame(string gameCode, string winnerGamertag)
+        {
+            if (this.NavigationService != null)
+            {
+                this.NavigationService.Navigate(new EndGame(gameCode, winnerGamertag));
+                var window = Window.GetWindow(this);
+                if (window != null)
+                {
+                    window.Height = 450;
+                    window.Width = 800;
+                    window.SizeToContent = SizeToContent.Manual;
+                }
+            }
+        }
+
+        public void DeletePlayerDeck()
+        {
+            stackPanelPlayerCards.Opacity = 0;
+            stackPanelSelectedCards.Opacity = 0;    
+        }
+
+        public void RemoveHp(int hp)
+        {
+            switch (hp)
+            {
+                case 1:
+                    this.heart1Image.Visibility = Visibility.Visible;
+                    this.heart2Image.Visibility = Visibility.Collapsed;
+                    this.heart3Image.Visibility = Visibility.Collapsed;
+                    break;
+                case 2:
+                    this.heart1Image.Visibility = Visibility.Visible;
+                    this.heart2Image.Visibility = Visibility.Visible;
+                    this.heart3Image.Visibility = Visibility.Collapsed;
+                    break;
+                case 3:
+                    this.heart1Image.Visibility = Visibility.Visible;
+                    this.heart2Image.Visibility = Visibility.Visible;
+                    this.heart3Image.Visibility = Visibility.Visible;
+                    break;
             }
         }
     }
