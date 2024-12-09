@@ -15,16 +15,19 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ExamExplosion.Properties;
+using ExamExplosion.DataValidations;
 
 namespace ExamExplosion
 {
     public partial class Login : Page
     {
-        private static readonly ILog log = LogManager.GetLogger(typeof(App));
+        private readonly ILog log;
         public Login()
         {
             InitializeComponent();
-            txtBoxGamertag.Focus();
+            gamertagTxtBox.Focus();
+            log = LogManager.GetLogger(typeof(App));
         }
         private void CancelLogIn(object sender, RoutedEventArgs e)
         {
@@ -37,15 +40,15 @@ namespace ExamExplosion
         private void ValidateLogIn(object sender, RoutedEventArgs e)
         {
             string password;
-            string gamertag = txtBoxGamertag.Text;
+            string gamertag = gamertagTxtBox.Text;
 
-            if (PasswordBox.Visibility == Visibility.Visible)
+            if (passwordPswdBox.Visibility == Visibility.Visible)
             {
-                password = PasswordBox.Password;
+                password = passwordPswdBox.Password;
             }
             else
             {
-                password = PasswordText.Text;
+                password = passwordTxtBox.Text;
             }
             try
             {
@@ -59,43 +62,72 @@ namespace ExamExplosion
                 }
                 else if(idAccount == -1)
                 {
-                    new AlertModal("Datos incorrectos", "Gamertag y/o contraseña incorrectos").ShowDialog();
+                    new AlertModal(ExamExplosion.Properties.Resources.loginLblCannotLogin, ExamExplosion.Properties.Resources.loginLblInvalidCredentials).ShowDialog();
                 }
                 else if (idAccount == -2)
                 {
-                    new AlertModal("Cuenta inactiva", "Tu cuenta esta inactiva por exceso de reportes.").ShowDialog();
+                    new AlertModal(ExamExplosion.Properties.Resources.loginLblCannotLogin, ExamExplosion.Properties.Resources.loginLblAccountInactive).ShowDialog();
                 }
             }
             catch (FaultException faultException)
             {
-                new AlertModal("Error", "Se produjo un error en el servidor").ShowDialog();
+                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblFaultException).ShowDialog();
                 log.Error("Error del servidor (FaultException)", faultException);
+                NavigateStartPage();
             }
             catch (CommunicationException communicationException)
             {
-                new AlertModal("Error de comunicación", "No se pudo conectar con el servidor.").ShowDialog();
+                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblCommunicationException).ShowDialog();
                 log.Warn("Problema de comunicación con el servidor", communicationException);
+                NavigateStartPage();
             }
             catch (TimeoutException timeoutException)
             {
-                new AlertModal("Tiempo de espera", "La conexión con el servidor ha expirado.").ShowDialog();
+                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblTimeoutException).ShowDialog();
                 log.Warn("Timeout al intentar conectar con el servidor", timeoutException);
+                NavigateStartPage();
+            }
+        }
+
+        private void GamertagTxtBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (e.Text.Contains(" "))
+            {
+                e.Handled = true;
+            }
+        }
+
+
+        private void ValidatePassword(object sender, RoutedEventArgs e)
+        {
+            var passwordBox = sender as PasswordBox;
+
+            if (passwordBox != null && passwordBox.Password.Contains(" "))
+            {
+                passwordBox.Password = passwordBox.Password.Replace(" ", string.Empty);
             }
         }
 
         private void ChangePasswordVisibility(object sender, RoutedEventArgs e)
         {
-            if (PasswordBox.Visibility == Visibility.Visible)
+            if (passwordPswdBox.Visibility == Visibility.Visible)
             {
-                PasswordText.Text = PasswordBox.Password;
-                PasswordText.Visibility = Visibility.Visible; 
-                PasswordBox.Visibility = Visibility.Collapsed;
+                passwordTxtBox.Text = passwordPswdBox.Password;
+                passwordTxtBox.Visibility = Visibility.Visible; 
+                passwordPswdBox.Visibility = Visibility.Collapsed;
             }
             else
             {
-                PasswordBox.Password = PasswordText.Text; 
-                PasswordBox.Visibility = Visibility.Visible;
-                PasswordText.Visibility = Visibility.Collapsed;
+                passwordPswdBox.Password = passwordTxtBox.Text; 
+                passwordPswdBox.Visibility = Visibility.Visible;
+                passwordTxtBox.Visibility = Visibility.Collapsed;
+            }
+        }
+        private void NavigateStartPage()
+        {
+            if (this.NavigationService != null)
+            {
+                this.NavigationService.Navigate(new StartPage());
             }
         }
     }

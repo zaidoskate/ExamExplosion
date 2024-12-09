@@ -1,13 +1,14 @@
 ﻿<Page x:Class="ExamExplosion.GameCode"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ExamExplosion"
-        xmlns:p ="clr-namespace:ExamExplosion.Properties"
-        mc:Ignorable="d"
-        Height="400" Width="400"
-        Background="#FFF2CC">
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:local="clr-namespace:ExamExplosion"
+      xmlns:p="clr-namespace:ExamExplosion.Properties"
+      mc:Ignorable="d"
+      Height="400" 
+      Width="400"
+      Background="#FFF2CC">
     <Page.Resources>
         <Style TargetType="TextBox">
             <Setter Property="Template">
@@ -20,24 +21,84 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+        </Style>
     </Page.Resources>
-    
     <Grid>
-        <Label x:Name="GameCodelbl" Content="Code" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="40" FontFamily="pack://application:,,,/Fonts/#VT323" Margin="0,30,0,0"></Label>
-
-        <Label x:Name="EmailCodelbl" Content="Code" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" FontSize="20" FontFamily="pack://application:,,,/Fonts/#VT323" Margin="0,0,0,50" ></Label>
-        <TextBox x:Name="lobbyCodeTxtBox" Width="270" Height="50" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Margin="0,50,0,0" FontSize="40" FontFamily="pack://application:,,,/Fonts/#VT323"/>
-
-        <Button Width="150" Height="75" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="20,0,0,20" Background="Transparent" BorderBrush="Transparent" Click="JoinClick">
+        <Label x:Name="GameCodelbl" 
+               Content="{x:Static p:Resources.gameCodeLblTitle}" 
+               HorizontalAlignment="Center" 
+               VerticalAlignment="Top" 
+               FontSize="40" 
+               FontFamily="pack://application:,,,/Fonts/#VT323" 
+               Margin="0,30,0,0" />
+        <Label x:Name="EmailCodelbl" 
+               Content="{x:Static p:Resources.gameCodeLblEnterCode}" 
+               HorizontalAlignment="Center" 
+               VerticalAlignment="Center" 
+               HorizontalContentAlignment="Center" 
+               FontSize="20" 
+               FontFamily="pack://application:,,,/Fonts/#VT323" 
+               Margin="0,0,0,50" />
+        <TextBox x:Name="lobbyCodeTxtBox" 
+                 Width="270" 
+                 Height="50" 
+                 VerticalAlignment="Center" 
+                 HorizontalAlignment="Center" 
+                 HorizontalContentAlignment="Center" 
+                 Margin="0,50,0,0" 
+                 FontSize="40" 
+                 FontFamily="pack://application:,,,/Fonts/#VT323"
+                 MaxLength="4"/>
+        <Button Width="150" 
+                Height="75" 
+                VerticalAlignment="Bottom" 
+                HorizontalAlignment="Left" 
+                Margin="20,0,0,20" 
+                Background="Transparent" 
+                BorderBrush="Transparent" 
+                Cursor="Hand"
+                Click="JoinBtn_Click">
             <Grid>
-                <Image Source="pack://application:,,,/Images/ButtonGreen.png" Width="150"></Image>
-                <Label x:Name="Createlbl" Content="Join"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="40" FontFamily="pack://application:,,,/Fonts/#VT323" Foreground="White"/>
+                <Image Source="pack://application:,,,/Images/ButtonGreen.png" 
+                       Width="150" />
+                <Label x:Name="Createlbl" 
+                       Content="{x:Static p:Resources.globalBtnJoin}" 
+                       HorizontalContentAlignment="Center" 
+                       VerticalContentAlignment="Center" 
+                       FontSize="40" 
+                       FontFamily="pack://application:,,,/Fonts/#VT323" 
+                       Foreground="White" />
             </Grid>
         </Button>
-        <Button Width="150" Height="75" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,20,20" Background="Transparent" BorderBrush="Transparent" Click="GoHome">
+        <Button Width="150" 
+                Height="75" 
+                VerticalAlignment="Bottom" 
+                HorizontalAlignment="Right" 
+                Margin="0,0,20,20" 
+                Background="Transparent" 
+                BorderBrush="Transparent"
+                Cursor="Hand"
+                Click="NavigateHomePage">
             <Grid>
-                <Image Source="pack://application:,,,/Images/ButtonOrange.png" Width="150"></Image>
-                <Label x:Name="Cancellbl" Content="Leave" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="40" FontFamily="pack://application:,,,/Fonts/#VT323" Foreground="White"/>
+                <Image Source="pack://application:,,,/Images/ButtonOrange.png" 
+                       Width="150" />
+                <Label x:Name="Cancellbl" 
+                       Content="{x:Static p:Resources.globalBtnLeave}" 
+                       HorizontalContentAlignment="Center" 
+                       VerticalContentAlignment="Center" 
+                       FontSize="40" 
+                       FontFamily="pack://application:,,,/Fonts/#VT323" 
+                       Foreground="White" />
             </Grid>
         </Button>
     </Grid>

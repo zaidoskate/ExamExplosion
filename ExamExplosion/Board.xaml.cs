@@ -21,6 +21,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using System.IO;
+using ExamExplosion.Properties;
 
 namespace ExamExplosion
 {
@@ -31,15 +32,15 @@ namespace ExamExplosion
     {
         private GameManager gameManager = null;
         private DispatcherTimer turnTimer;
-        private List<Label> playersInGame = new List<Label>();
-        private List<Image> playerImages = new List<Image>();
-        private List<string> orderedGamertags;
+        private readonly List<Label> playersInGame = new List<Label>();
+        private readonly List<Image> playerImages = new List<Image>();
+        private readonly List<string> orderedGamertags;
         private int hitPoints;
         private int timePerTurn;
         private int remainingTime;
         private string gameCode;
         private string hostGamertag;
-        private ILog log;
+        private readonly ILog log;
         private string defaultPackage;
         private Dictionary<string, string> cardsNames;
 
@@ -61,19 +62,19 @@ namespace ExamExplosion
         private void LoadCardNames()
         {
             cardsNames = new Dictionary<string, string>();
-            cardsNames.Add("examBomb", "Repite");
-            cardsNames.Add("exempt", "Excentar");
-            cardsNames.Add("leftTeam", "Deja el equipo");
-            cardsNames.Add("please", "Paro");
-            cardsNames.Add("profeA", "Profe A");
-            cardsNames.Add("profeO", "Profe O");
-            cardsNames.Add("profeS", "Profe S");
-            cardsNames.Add("profeR", "Profe R");
-            cardsNames.Add("profeM", "Profe M");
-            cardsNames.Add("reRegistration", "Re inscripcion");
-            cardsNames.Add("shuffle", "Revolver");
-            cardsNames.Add("takeFromBelow", "Tomar de abajo");
-            cardsNames.Add("viewTheFuture", "Ver el futuro");
+            cardsNames.Add("examBomb", ExamExplosion.Properties.Resources.globalLblExamBombCard);
+            cardsNames.Add("exempt", ExamExplosion.Properties.Resources.globalLblExemptCard);
+            cardsNames.Add("leftTeam", ExamExplosion.Properties.Resources.globalLblLeftTeamCard);
+            cardsNames.Add("please", ExamExplosion.Properties.Resources.globalLblFavorCard);
+            cardsNames.Add("profeA", ExamExplosion.Properties.Resources.globalLblTeacherACard);
+            cardsNames.Add("profeO", ExamExplosion.Properties.Resources.globalLblTeacherOCard);
+            cardsNames.Add("profeS", ExamExplosion.Properties.Resources.globalLblTeacherSCard);
+            cardsNames.Add("profeR", ExamExplosion.Properties.Resources.globalLblTeacherRCard);
+            cardsNames.Add("profeM", ExamExplosion.Properties.Resources.globalLblTeacherMCard);
+            cardsNames.Add("reRegistration", ExamExplosion.Properties.Resources.globalReRegistrationCard);
+            cardsNames.Add("shuffle", ExamExplosion.Properties.Resources.globalLblShuffleCard);
+            cardsNames.Add("takeFromBelow", ExamExplosion.Properties.Resources.globalLblTakeBelowCard);
+            cardsNames.Add("viewTheFuture", ExamExplosion.Properties.Resources.globalLblViewFutureCard);
         }
 
         private void LoadPackageInUse()
@@ -91,18 +92,21 @@ namespace ExamExplosion
             }
             catch (FaultException faultException)
             {
-                new AlertModal("Error", "Se produjo un error en el servidor").ShowDialog();
+                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblFaultException).ShowDialog();
                 log.Error("Error del servidor (FaultException)", faultException);
+                NavigateStartPage();
             }
             catch (CommunicationException communicationException)
             {
-                new AlertModal("Error de comunicación", "No se pudo conectar con el servidor.").ShowDialog();
+                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblCommunicationException).ShowDialog();
                 log.Warn("Problema de comunicación con el servidor", communicationException);
+                NavigateStartPage();
             }
             catch (TimeoutException timeoutException)
             {
-                new AlertModal("Tiempo de espera", "La conexión con el servidor ha expirado.").ShowDialog();
+                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblTimeoutException).ShowDialog();
                 log.Warn("Timeout al intentar conectar con el servidor", timeoutException);
+                NavigateStartPage();
             }
         }
 
@@ -119,18 +123,21 @@ namespace ExamExplosion
             }
             catch (FaultException faultException)
             {
-                new AlertModal("Error", "Se produjo un error en el servidor").ShowDialog();
+                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblFaultException).ShowDialog();
                 log.Error("Error del servidor (FaultException)", faultException);
+                NavigateStartPage();
             }
             catch (CommunicationException communicationException)
             {
-                new AlertModal("Error de comunicación", "No se pudo conectar con el servidor.").ShowDialog();
+                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblCommunicationException).ShowDialog();
                 log.Warn("Problema de comunicación con el servidor", communicationException);
+                NavigateStartPage();
             }
             catch (TimeoutException timeoutException)
             {
-                new AlertModal("Tiempo de espera", "La conexión con el servidor ha expirado.").ShowDialog();
+                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblTimeoutException).ShowDialog();
                 log.Warn("Timeout al intentar conectar con el servidor", timeoutException);
+                NavigateStartPage();
             }
         }
 
@@ -156,7 +163,7 @@ namespace ExamExplosion
                 turnTimer.Stop();
                 if (!gameManager.ValidateLostGame(gameCode))
                 {
-                    DrawCard(null, null);
+                    DrawCardBtn_Click(null, null);
                 }
             }
         }
@@ -209,18 +216,21 @@ namespace ExamExplosion
             }
             catch (FaultException faultException)
             {
-                new AlertModal("Error", "Se produjo un error en el servidor").ShowDialog();
+                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblFaultException).ShowDialog();
                 log.Error("Error del servidor (FaultException)", faultException);
+                NavigateStartPage();
             }
             catch (CommunicationException communicationException)
             {
-                new AlertModal("Error de comunicación", "No se pudo conectar con el servidor.").ShowDialog();
+                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblCommunicationException).ShowDialog();
                 log.Warn("Problema de comunicación con el servidor", communicationException);
+                NavigateStartPage();
             }
             catch (TimeoutException timeoutException)
             {
-                new AlertModal("Tiempo de espera", "La conexión con el servidor ha expirado.").ShowDialog();
+                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblTimeoutException).ShowDialog();
                 log.Warn("Timeout al intentar conectar con el servidor", timeoutException);
+                NavigateStartPage();
             }
         }
         private void InitializeGameDetails(string gameCode)
@@ -250,18 +260,21 @@ namespace ExamExplosion
             }
             catch (FaultException faultException)
             {
-                new AlertModal("Error", "Se produjo un error en el servidor").ShowDialog();
+                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblFaultException).ShowDialog();
                 log.Error("Error del servidor (FaultException)", faultException);
+                NavigateStartPage();
             }
             catch (CommunicationException communicationException)
             {
-                new AlertModal("Error de comunicación", "No se pudo conectar con el servidor.").ShowDialog();
+                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblCommunicationException).ShowDialog();
                 log.Warn("Problema de comunicación con el servidor", communicationException);
+                NavigateStartPage();
             }
             catch (TimeoutException timeoutException)
             {
-                new AlertModal("Tiempo de espera", "La conexión con el servidor ha expirado.").ShowDialog();
+                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblTimeoutException).ShowDialog();
                 log.Warn("Timeout al intentar conectar con el servidor", timeoutException);
+                NavigateStartPage();
             }
         }
 
@@ -272,10 +285,10 @@ namespace ExamExplosion
             playersInGame.Add(this.player3Lbl);
             playersInGame.Add(this.player4Lbl);
 
-            playerImages.Add(this.player1Image);
-            playerImages.Add(this.player2Image);
-            playerImages.Add(this.player3Image);
-            playerImages.Add(this.player4Image);
+            playerImages.Add(this.player1Img);
+            playerImages.Add(this.player2Img);
+            playerImages.Add(this.player3Img);
+            playerImages.Add(this.player4Img);
         }
         internal void UpdateTurnLabel(string gamertag)
         {
@@ -291,7 +304,7 @@ namespace ExamExplosion
 
         public void UpdatePlayerDeck(List<Card> playerDeckImages, int currentIndex)
         {
-            PlayerDeck.Children.Clear();
+            stackPanelPlayerCards.Children.Clear();
             int maxDisplay = Math.Min(6, playerDeckImages.Count - currentIndex);
             for (int i = 0; i < maxDisplay; i++)
             {
@@ -304,7 +317,7 @@ namespace ExamExplosion
                     Style = (Style)FindResource("CardStyle"),
                     Tag = (int)(currentIndex + i)
                 };
-                image.MouseLeftButtonDown += CardClicked;
+                image.MouseLeftButtonDown += CardClickedBtn_Click;
                 image.MouseEnter += CardOver;
                 if (card.IsSelected)
                 {
@@ -314,7 +327,7 @@ namespace ExamExplosion
                 {
                     image.Opacity = 1;
                 }
-                PlayerDeck.Children.Add(image);
+                stackPanelPlayerCards.Children.Add(image);
             }
         }
 
@@ -329,13 +342,13 @@ namespace ExamExplosion
                 string path = System.IO.Path.GetFileNameWithoutExtension(imageName);
                 if (cardsNames.ContainsKey(path))
                 {
-                    txtBlockCardName.Text = cardsNames[path];
+                    cardNameTxtBlock.Text = cardsNames[path];
                 }
             }
         }
 
 
-        private void CardClicked(object sender, MouseButtonEventArgs e)
+        private void CardClickedBtn_Click(object sender, MouseButtonEventArgs e)
         {
             var clickedCard = sender as Image;
             if (clickedCard.Opacity == 1.0 && gameManager.SelectCard((int)clickedCard.Tag))
@@ -348,7 +361,7 @@ namespace ExamExplosion
                     Style = (Style)FindResource("CardStyle"),
                     Tag = clickedCard.Tag
                 };
-                SelectedCards.Children.Add(newCard);
+                selectedCardsWrapPanel.Children.Add(newCard);
                 clickedCard.Opacity = 0.5;
             }
             else
@@ -359,33 +372,33 @@ namespace ExamExplosion
 
         private void RemoveSelectedCards(Image clickedCard)
         {
-            var cardToRemove = SelectedCards.Children
+            var cardToRemove = selectedCardsWrapPanel.Children
                 .OfType<Image>()
                 .FirstOrDefault(img => (int)img.Tag == (int)clickedCard.Tag);
 
             if (cardToRemove != null)
             {
                 gameManager.DeselectCard((int)clickedCard.Tag);
-                SelectedCards.Children.Remove(cardToRemove);
+                selectedCardsWrapPanel.Children.Remove(cardToRemove);
                 clickedCard.Opacity = 1.0;
             }
         }
 
-        private void ShowLeftCards(object sender, RoutedEventArgs e)
+        private void ShowLeftCardsBtn_Click(object sender, RoutedEventArgs e)
         {
             gameManager.UpdatePlayerDeck(true);
         }
 
-        private void ShowRightCards(object sender, RoutedEventArgs e)
+        private void ShowRightCardsBtn_Click(object sender, RoutedEventArgs e)
         {
             gameManager.UpdatePlayerDeck(false);
         }
-        private void PlayCards(object sender, RoutedEventArgs e)
+        private void PlayCardsBtn_Click(object sender, RoutedEventArgs e)
         {
             ResetTopCardsPath();
             gameManager.PlayCards(gameCode);
         }
-        private void DrawCard(object sender, RoutedEventArgs e)
+        private void DrawCardBtn_Click(object sender, RoutedEventArgs e)
         {
             ResetTopCardsPath();
             ResetPlayerButtonVisibility();
@@ -398,9 +411,9 @@ namespace ExamExplosion
 
         public void DrawCardAnimation()
         {
-            animatedCard.RenderTransform = new TranslateTransform(0, 0);
-            animatedCard.Opacity = 1;
-            animatedCard.Visibility = Visibility.Visible;
+            animatedCardImg.RenderTransform = new TranslateTransform(0, 0);
+            animatedCardImg.Opacity = 1;
+            animatedCardImg.Visibility = Visibility.Visible;
 
             var storyboard = (Storyboard)FindResource("CardDrawAnimation");
             storyboard.Begin();
@@ -410,23 +423,23 @@ namespace ExamExplosion
             string gamertag = SessionManager.CurrentSession.gamertag;
             if (gamertag == gamertagInTurn)
             {
-                btnPlayCards.IsEnabled = true;
-                btnStack.IsEnabled = true;
+                playCardsBtn.IsEnabled = true;
+                stackBtn.IsEnabled = true;
             }
             else
             {
-                btnPlayCards.IsEnabled = false;
-                btnStack.IsEnabled = false;
+                playCardsBtn.IsEnabled = false;
+                stackBtn.IsEnabled = false;
             }
         }
 
         public void UpdateGameDeckCount(int count)
         {
-            remainingCardsNumber.Content = count;
+            remainingCardsLbl.Content = count;
         }
         public void PrintCardOnBoard(string path)
         {
-            CardOnBoard.Source = new BitmapImage(new Uri($"pack://application:,,,/CardsPackages/{this.defaultPackage}/{path}.png", UriKind.Absolute));
+            cardOnBoardImg.Source = new BitmapImage(new Uri($"pack://application:,,,/CardsPackages/{this.defaultPackage}/{path}.png", UriKind.Absolute));
         }
 
         public void ShowTopCards(List<Card> topCards)
@@ -434,72 +447,72 @@ namespace ExamExplosion
             if (topCards.Count >= 1)
             {
                 string cardPath = topCards[0].Path;
-                FirstCard.Source = new BitmapImage(new Uri($"pack://application:,,,/CardsPackages/{this.defaultPackage}/{cardPath}.png", UriKind.Absolute));
+                firstCardImg.Source = new BitmapImage(new Uri($"pack://application:,,,/CardsPackages/{this.defaultPackage}/{cardPath}.png", UriKind.Absolute));
             }
             if (topCards.Count >= 2)
             {
                 string cardPath = topCards[1].Path;
-                SecondCard.Source = new BitmapImage(new Uri($"pack://application:,,,/CardsPackages/{this.defaultPackage}/{cardPath}.png", UriKind.Absolute));
+                secondCardImg.Source = new BitmapImage(new Uri($"pack://application:,,,/CardsPackages/{this.defaultPackage}/{cardPath}.png", UriKind.Absolute));
             }
             if (topCards.Count == 3)
             {
                 string cardPath = topCards[2].Path;
-                ThirdCard.Source = new BitmapImage(new Uri($"pack://application:,,,/CardsPackages/{this.defaultPackage}/{cardPath}.png", UriKind.Absolute));
+                thirdCardImg.Source = new BitmapImage(new Uri($"pack://application:,,,/CardsPackages/{this.defaultPackage}/{cardPath}.png", UriKind.Absolute));
             }
-            Cards.Opacity = 1;
+            cardsGrid.Opacity = 1;
             var storyboard = (Storyboard)FindResource("FadeOutAnimation");
-            storyboard.Begin(Cards);
+            storyboard.Begin(cardsGrid);
         }
 
         public void ResetTopCardsPath()
         {
-            this.FirstCard.Source = null;
-            this.SecondCard.Source = null;
-            this.ThirdCard.Source = null;
+            this.firstCardImg.Source = null;
+            this.secondCardImg.Source = null;
+            this.thirdCardImg.Source = null;
         }
 
         internal void StartPlayerSelection(string gameCode)
         {
             MakePlayerButtonVisible();
-            FirstPlayerBtn.Click += (sender, e) => HandlePlayerSelected(this.player1Lbl.Content.ToString(), gameCode);
-            SecondPlayerBtn.Click += (sender, e) => HandlePlayerSelected(this.player2Lbl.Content.ToString(), gameCode);
-            ThirdPlayerBtn.Click += (sender, e) => HandlePlayerSelected(this.player3Lbl.Content.ToString(), gameCode);
-            FourthPlayerBtn.Click += (sender, e) => HandlePlayerSelected(this.player4Lbl.Content.ToString(), gameCode);
+            firstPlayerBtn.Click += (sender, e) => HandlePlayerSelected(this.player1Lbl.Content.ToString(), gameCode);
+            secondPlayerBtn.Click += (sender, e) => HandlePlayerSelected(this.player2Lbl.Content.ToString(), gameCode);
+            thirdPlayerBtn.Click += (sender, e) => HandlePlayerSelected(this.player3Lbl.Content.ToString(), gameCode);
+            fourthPlayerBtn.Click += (sender, e) => HandlePlayerSelected(this.player4Lbl.Content.ToString(), gameCode);
         }
 
         private void MakePlayerButtonVisible()
         {
             if(this.player1Lbl.Visibility == Visibility.Visible)
             {
-                this.FirstPlayerBtn.Visibility = Visibility.Visible;
+                this.firstPlayerBtn.Visibility = Visibility.Visible;
             }
             if (this.player2Lbl.Visibility == Visibility.Visible)
             {
-                this.SecondPlayerBtn.Visibility = Visibility.Visible;
+                this.secondPlayerBtn.Visibility = Visibility.Visible;
             }
             if (this.player3Lbl.Visibility == Visibility.Visible)
             {
-                this.ThirdPlayerBtn.Visibility = Visibility.Visible;
+                this.thirdPlayerBtn.Visibility = Visibility.Visible;
             }
             if (this.player4Lbl.Visibility == Visibility.Visible)
             {
-                this.FourthPlayerBtn.Visibility = Visibility.Visible;
+                this.fourthPlayerBtn.Visibility = Visibility.Visible;
             }
         }
 
         private void ResetPlayerButtonVisibility()
         {
-            FirstPlayerBtn.Visibility = Visibility.Hidden;
-            SecondPlayerBtn.Visibility = Visibility.Hidden;
-            ThirdPlayerBtn.Visibility = Visibility.Hidden;
-            FourthPlayerBtn.Visibility = Visibility.Hidden;
+            firstPlayerBtn.Visibility = Visibility.Hidden;
+            secondPlayerBtn.Visibility = Visibility.Hidden;
+            thirdPlayerBtn.Visibility = Visibility.Hidden;
+            fourthPlayerBtn.Visibility = Visibility.Hidden;
         }
 
         private void HandlePlayerSelected(string selectedPlayer, string gameCode)
         {
-            if (selectedPlayer != SessionManager.CurrentSession.gamertag && CardOnBoard.Source is BitmapImage bitmapImage)
+            if (selectedPlayer != SessionManager.CurrentSession.gamertag && cardOnBoardImg.Source is BitmapImage bitmapImage)
             {
-                string cardOnBoard = bitmapImage.UriSource.ToString();
+                string cardOnBoardImg = bitmapImage.UriSource.ToString();
                 var requestCardRoutes = new List<string>
                 {
                     "pack://application:,,,/CardsPackages/NormalPackage/please.png",
@@ -509,11 +522,11 @@ namespace ExamExplosion
                     "pack://application:,,,/CardsPackages/NormalPackage/profeR.png",
                     "pack://application:,,,/CardsPackages/NormalPackage/profeS.png"
                 };
-                if (requestCardRoutes.Contains(cardOnBoard))
+                if (requestCardRoutes.Contains(cardOnBoardImg))
                 {
                     gameManager.RequestCard(gameCode, selectedPlayer, SessionManager.CurrentSession.gamertag);
                 }
-                else if (cardOnBoard == "pack://application:,,,/CardsPackages/NormalPackage/leftTeam.png")
+                else if (cardOnBoardImg == "pack://application:,,,/CardsPackages/NormalPackage/leftTeam.png")
                 {
                     gameManager.SendDoubleTurn(gameCode, selectedPlayer);
                 }
@@ -535,12 +548,12 @@ namespace ExamExplosion
 
         public void ClearSelectedCards()
         {
-            var cardsToRemove = SelectedCards.Children.OfType<Image>().ToList();
+            var cardsToRemove = this.selectedCardsWrapPanel.Children.OfType<Image>().ToList();
 
             foreach (var card in cardsToRemove)
             {
                 int cardId = (int)card.Tag;
-                SelectedCards.Children.Remove(card);
+                selectedCardsWrapPanel.Children.Remove(card);
                 gameManager.RemoveCardFromPlayerHand(cardId);
             }
         }
@@ -555,10 +568,10 @@ namespace ExamExplosion
         public void DisplayExamBomb()
         {
             string cardPath = "examBomb";
-            ThirdCard.Source = new BitmapImage(new Uri($"pack://application:,,,/CardsPackages/{this.defaultPackage}/{cardPath}.png", UriKind.Absolute));
+            thirdCardImg.Source = new BitmapImage(new Uri($"pack://application:,,,/CardsPackages/{this.defaultPackage}/{cardPath}.png", UriKind.Absolute));
             NotificationGrid.Opacity = 1;
             var storyboard = (Storyboard)FindResource("FadeOutAnimation");
-            storyboard.Begin(Cards);
+            storyboard.Begin(cardsGrid);
         }
 
         public void GoEndGame(string gameCode, string winnerGamertag)
@@ -575,7 +588,20 @@ namespace ExamExplosion
                 }
             }
         }
-
+        private void NavigateStartPage()
+        {
+            if (this.NavigationService != null)
+            {
+                this.NavigationService.Navigate(new StartPage());
+                var window = Window.GetWindow(this);
+                if (window != null)
+                {
+                    window.Height = 450;
+                    window.Width = 800;
+                    window.SizeToContent = SizeToContent.Manual;
+                }
+            }
+        }
         public void DeletePlayerDeck()
         {
             stackPanelPlayerCards.Opacity = 0;

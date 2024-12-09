@@ -26,8 +26,8 @@ namespace ExamExplosion
     /// </summary>
     public partial class Settings : Page
     {
-        private bool newValidPassword = false;
-        private ILog log;
+        private bool _newValidPassword = false;
+        private readonly ILog log;
 
         public Settings()
         {
@@ -40,11 +40,11 @@ namespace ExamExplosion
         {
             if (Thread.CurrentThread.CurrentUICulture.Name == "es-MX")
             {
-                CmbBoxLanguages.SelectedItem = SpanishOption;
+                languagesCmbBox.SelectedItem = spanishOption;
             }
             else
             {
-                CmbBoxLanguages.SelectedItem = EnglishOption;
+                languagesCmbBox.SelectedItem = englishOption;
             }
         }
 
@@ -57,69 +57,69 @@ namespace ExamExplosion
         }
         private void ChangePasswordVisibility(object sender, RoutedEventArgs e)
         {
-            if (txtBoxCurrentPsswd.Visibility == Visibility.Collapsed)
+            if (currentPasswordTxtBox.Visibility == Visibility.Collapsed)
             {
-                txtBoxCurrentPsswd.Text = pswdBoxCurrentPsswd.Password;
-                txtBoxNewPsswd.Text = pswdBoxNewPsswd.Password;
+                currentPasswordTxtBox.Text = currentPasswordPswdBox.Password;
+                newPasswordTxtBox.Text = newPasswordPswdBox.Password;
 
-                txtBoxCurrentPsswd.Visibility = Visibility.Visible;
-                pswdBoxCurrentPsswd.Visibility = Visibility.Collapsed;
-                txtBoxNewPsswd.Visibility = Visibility.Visible;
-                pswdBoxNewPsswd.Visibility = Visibility.Collapsed;
+                currentPasswordTxtBox.Visibility = Visibility.Visible;
+                currentPasswordPswdBox.Visibility = Visibility.Collapsed;
+                newPasswordTxtBox.Visibility = Visibility.Visible;
+                newPasswordPswdBox.Visibility = Visibility.Collapsed;
             }
             else
             {
-                pswdBoxCurrentPsswd.Password = txtBoxCurrentPsswd.Text;
-                pswdBoxNewPsswd.Password = txtBoxNewPsswd.Text;
+                currentPasswordPswdBox.Password = currentPasswordTxtBox.Text;
+                newPasswordPswdBox.Password = newPasswordTxtBox.Text;
 
-                txtBoxCurrentPsswd.Visibility = Visibility.Collapsed;
-                pswdBoxCurrentPsswd.Visibility = Visibility.Visible;
-                txtBoxNewPsswd.Visibility = Visibility.Collapsed;
-                pswdBoxNewPsswd.Visibility = Visibility.Visible;
+                currentPasswordTxtBox.Visibility = Visibility.Collapsed;
+                currentPasswordPswdBox.Visibility = Visibility.Visible;
+                newPasswordTxtBox.Visibility = Visibility.Collapsed;
+                newPasswordPswdBox.Visibility = Visibility.Visible;
             }
         }
 
         private void ValidateNewPassword(object sender, TextChangedEventArgs e)
         {
-            string password = txtBoxNewPsswd.Text;
+            string password = newPasswordTxtBox.Text;
             try
             {
                 TextValidator.ValidateNotBlanks(password);
                 TextValidator.ValidatePasswordLength(password);
                 TextValidator.ValidatePassword(password);
-                txtBlockNewPasswordMessage.Text = "";
-                txtBoxNewPsswd.BorderBrush = Brushes.Black;
-                pswdBoxNewPsswd.BorderBrush = Brushes.Black;
-                newValidPassword = true;
+                newPasswordMessageTxtBlock.Text = "";
+                newPasswordTxtBox.BorderBrush = Brushes.Black;
+                newPasswordPswdBox.BorderBrush = Brushes.Black;
+                _newValidPassword = true;
             }
             catch (DataValidationException ex)
             {
-                txtBlockNewPasswordMessage.Text = ex.Message;
-                txtBoxNewPsswd.BorderBrush = Brushes.Red;
-                pswdBoxNewPsswd.BorderBrush = Brushes.Red;
-                newValidPassword = false;
+                newPasswordMessageTxtBlock.Text = ex.Message;
+                newPasswordTxtBox.BorderBrush = Brushes.Red;
+                newPasswordPswdBox.BorderBrush = Brushes.Red;
+                _newValidPassword = false;
                 return;
             }
         }
         private void ValidateNewPasswordBox(object sender, RoutedEventArgs e)
         {
-            string password = pswdBoxNewPsswd.Password;
+            string password = newPasswordPswdBox.Password;
             try
             {
                 TextValidator.ValidateNotBlanks(password);
                 TextValidator.ValidatePasswordLength(password);
                 TextValidator.ValidatePassword(password);
-                txtBlockNewPasswordMessage.Text = "";
-                txtBoxNewPsswd.BorderBrush = Brushes.Black;
-                pswdBoxNewPsswd.BorderBrush = Brushes.Black;
-                newValidPassword = true;
+                newPasswordMessageTxtBlock.Text = "";
+                newPasswordTxtBox.BorderBrush = Brushes.Black;
+                newPasswordPswdBox.BorderBrush = Brushes.Black;
+                _newValidPassword = true;
             }
             catch (DataValidationException ex)
             {
-                txtBlockNewPasswordMessage.Text = ex.Message;
-                txtBoxNewPsswd.BorderBrush = Brushes.Red;
-                pswdBoxNewPsswd.BorderBrush = Brushes.Red;
-                newValidPassword = false;
+                newPasswordMessageTxtBlock.Text = ex.Message;
+                newPasswordTxtBox.BorderBrush = Brushes.Red;
+                newPasswordPswdBox.BorderBrush = Brushes.Red;
+                _newValidPassword = false;
                 log.Info("Formato de contrasenia incorrecto.", ex);
                 return;
             }
@@ -127,11 +127,11 @@ namespace ExamExplosion
 
         private void LoadLanguage(object sender, RoutedEventArgs e)
         {
-            if (CmbBoxLanguages.SelectedItem == EnglishOption)
+            if (languagesCmbBox.SelectedItem == englishOption)
             {
                 ChangeLanguage("en");
             }
-            else if (CmbBoxLanguages.SelectedItem == SpanishOption)
+            else if (languagesCmbBox.SelectedItem == spanishOption)
             {
                 ChangeLanguage("es-MX");
             }
@@ -146,12 +146,12 @@ namespace ExamExplosion
 
         private void ValdatePasswords(object sender, RoutedEventArgs e)
         {
-            string currentPassword = txtBoxCurrentPsswd.Text;
-            if(txtBoxCurrentPsswd.Visibility == Visibility.Collapsed )
+            string currentPassword = currentPasswordTxtBox.Text;
+            if(currentPasswordTxtBox.Visibility == Visibility.Collapsed )
             {
-                currentPassword = pswdBoxCurrentPsswd.Password;
+                currentPassword = currentPasswordPswdBox.Password;
             }
-            if (!newValidPassword || currentPassword.Length == 0) 
+            if (!_newValidPassword || currentPassword.Length == 0) 
             {
                 new AlertModal("Datos incompletos", "Corrige los campos que sean necesarios").ShowDialog();
                 return;
@@ -166,18 +166,21 @@ namespace ExamExplosion
                 }
                 catch (FaultException faultException)
                 {
-                    new AlertModal("Error", "Se produjo un error en el servidor").ShowDialog();
+                    new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblFaultException).ShowDialog();
                     log.Error("Error del servidor (FaultException)", faultException);
+                    NavigateStartPage();
                 }
                 catch (CommunicationException communicationException)
                 {
-                    new AlertModal("Error de comunicación", "No se pudo conectar con el servidor.").ShowDialog();
+                    new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblCommunicationException).ShowDialog();
                     log.Warn("Problema de comunicación con el servidor", communicationException);
+                    NavigateStartPage();
                 }
                 catch (TimeoutException timeoutException)
                 {
-                    new AlertModal("Tiempo de espera", "La conexión con el servidor ha expirado.").ShowDialog();
+                    new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblTimeoutException).ShowDialog();
                     log.Warn("Timeout al intentar conectar con el servidor", timeoutException);
+                    NavigateStartPage();
                 }
                 if (currentValidPassword > 0)
                 {
@@ -186,7 +189,7 @@ namespace ExamExplosion
                 }
                 else
                 {
-                    new AlertModal("Contrasenia incorrecta", "La contrasenia ingresada no coincide con tu contrasenia actual.").ShowDialog();
+                    new AlertModal(ExamExplosion.Properties.Resources.settingsLblCurrentPasswordWrongTitle, ExamExplosion.Properties.Resources.settingsLblCurrentPasswordWrong).ShowDialog();
                     return;
                 }
             }
@@ -194,46 +197,57 @@ namespace ExamExplosion
 
         private void clearFields()
         {
-            txtBoxNewPsswd.Text = "";
-            txtBoxCurrentPsswd.Text = "";
-            pswdBoxCurrentPsswd.Password = "";
-            pswdBoxNewPsswd.Password = "";
+            newPasswordTxtBox.Text = "";
+            currentPasswordTxtBox.Text = "";
+            currentPasswordPswdBox.Password = "";
+            newPasswordPswdBox.Password = "";
         }
 
         public void UpdateNewPassword()
         {
             string gamertag = SessionManager.CurrentSession.gamertag;
-            string newPassword = txtBoxNewPsswd.Text;
-            if (txtBoxNewPsswd.Visibility == Visibility.Collapsed)
+            string newPassword = newPasswordTxtBox.Text;
+            if (newPasswordTxtBox.Visibility == Visibility.Collapsed)
             {
-                newPassword = pswdBoxNewPsswd.Password;
+                newPassword = newPasswordPswdBox.Password;
             }
             try
             {
                 bool passwordUpdated = AccountManager.UpdatePassword(gamertag, newPassword);
                 if(passwordUpdated)
                 {
-                    new AlertModal("Contrasenia actualizada", "Se ha actualzado la contrasenia de tu cuenta con exito.").ShowDialog();
+                    new AlertModal(ExamExplosion.Properties.Resources.settingsLblPasswordUpdatedTitle, ExamExplosion.Properties.Resources.settingsLblPasswordUpdated).ShowDialog();
                 }
                 else
                 {
-                    new AlertModal("Error", "No se ha actualzado la contrasenia. Intentalo mas tarde.").ShowDialog();
+                    new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.settingsLblPasswordUpdateError).ShowDialog();
                 }
             }
             catch (FaultException faultException)
             {
-                new AlertModal("Error", "Se produjo un error en el servidor").ShowDialog();
+                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblFaultException).ShowDialog();
                 log.Error("Error del servidor (FaultException)", faultException);
+                NavigateStartPage();
             }
             catch (CommunicationException communicationException)
             {
-                new AlertModal("Error de comunicación", "No se pudo conectar con el servidor.").ShowDialog();
+                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblCommunicationException).ShowDialog();
                 log.Warn("Problema de comunicación con el servidor", communicationException);
+                NavigateStartPage();
             }
             catch (TimeoutException timeoutException)
             {
-                new AlertModal("Tiempo de espera", "La conexión con el servidor ha expirado.").ShowDialog();
+                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblTimeoutException).ShowDialog();
                 log.Warn("Timeout al intentar conectar con el servidor", timeoutException);
+                NavigateStartPage();
+            }
+        }
+
+        private void NavigateStartPage()
+        {
+            if (this.NavigationService != null)
+            {
+                this.NavigationService.Navigate(new StartPage());
             }
         }
     }

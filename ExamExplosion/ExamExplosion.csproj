@@ -341,6 +341,9 @@
     <None Include="Connected Services\ExamExplotionService\item.disco" />
     <None Include="Connected Services\ExamExplotionService\configuration91.svcinfo" />
     <None Include="Connected Services\ExamExplotionService\configuration.svcinfo" />
+    <None Include="Connected Services\ExamExplotionService\item41.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\ExamExplotionService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>

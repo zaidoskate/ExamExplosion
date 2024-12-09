@@ -6,12 +6,14 @@
       xmlns:local="clr-namespace:ExamExplosion"
       xmlns:p="clr-namespace:ExamExplosion.Properties"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="450" 
+      d:DesignWidth="800"
       Title="HomePage">
 
     <Page.Background>
         <ImageBrush ImageSource="pack://application:,,,/Images/Landscape1.jpeg" Stretch="UniformToFill" />
     </Page.Background>
+
     <Page.Resources>
         <Style TargetType="Button">
             <Setter Property="Template">
@@ -21,57 +23,199 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
         </Style>
     </Page.Resources>
+
     <Grid>
-        <Label Content="Exam Explotion" Margin="0,22,0,320" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="60" HorizontalAlignment="Center"/>
+        <Label x:Name="titleLbl" 
+               Content="{x:Static p:Resources.Title}" 
+               FontFamily="pack://application:,,,/Fonts/#VT323" 
+               FontSize="60" 
+               HorizontalAlignment="Center" 
+               Margin="0,22,0,320" />
 
-        <Button HorizontalAlignment="Left" Margin="207,165,0,0" VerticalAlignment="Top" Height="75" Width="153" Background="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand" Click="CreateLobby">
+        <Button x:Name="createLobbyBtn" 
+                HorizontalAlignment="Left" 
+                Margin="207,165,0,0" 
+                VerticalAlignment="Top" 
+                Height="75" 
+                Width="153" 
+                Cursor="Hand" 
+                Click="NavigateGamePreferencesPage">
             <Grid>
-                <Image HorizontalAlignment="Left" VerticalAlignment="Center" Width="140" Source="pack://application:,,,/Images/ButtonGreen.png" Stretch="Fill" Height="80"/>
-                <Label Content="Create" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="24"/>
+                <Image x:Name="createLobbyImg" 
+                       Source="pack://application:,,,/Images/ButtonGreen.png" 
+                       Stretch="Fill" 
+                       Width="140" 
+                       Height="80" />
+                <Label x:Name="createLobbyLbl" 
+                       Content="{x:Static p:Resources.globalBtnCreate}" 
+                       FontFamily="pack://application:,,,/Fonts/#VT323" 
+                       FontSize="24" 
+                       HorizontalAlignment="Center" 
+                       VerticalAlignment="Center" />
             </Grid>
         </Button>
-        <Button HorizontalAlignment="Left" Margin="460,165,0,0" VerticalAlignment="Top" Height="75" Width="147" Background="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand" Click="JoinLobby">
+
+        <Button x:Name="joinLobbyBtn" 
+                HorizontalAlignment="Left" 
+                Margin="460,165,0,0" 
+                VerticalAlignment="Top" 
+                Height="75" 
+                Width="147" 
+                Cursor="Hand" 
+                Click="NavigateGameCodePage">
             <Grid>
-                <Image VerticalAlignment="Center" Source="pack://application:,,,/Images/ButtonGreen.png" Stretch="Fill" Height="80"/>
-                <Label Content="Join" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="24"/>
+                <Image x:Name="joinLobbyImg" 
+                       Source="pack://application:,,,/Images/ButtonGreen.png" 
+                       Stretch="Fill" 
+                       Height="80" />
+                <Label x:Name="joinLobbyLbl" 
+                       Content="{x:Static p:Resources.globalBtnJoin}" 
+                       FontFamily="pack://application:,,,/Fonts/#VT323" 
+                       FontSize="24" 
+                       HorizontalAlignment="Center" 
+                       VerticalAlignment="Center" />
             </Grid>
         </Button>
-        <Button HorizontalAlignment="Left" Margin="208,296,0,0" VerticalAlignment="Top" Height="75" Width="152" Background="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand" Click="GoKomalli">
+
+        <Button x:Name="goKomalliBtn" 
+                HorizontalAlignment="Left" 
+                Margin="208,296,0,0" 
+                VerticalAlignment="Top" 
+                Height="75" 
+                Width="152" 
+                Cursor="Hand" 
+                Click="NavigateKomalliPage">
             <Grid>
-                <Image HorizontalAlignment="Left" VerticalAlignment="Center" Width="140" Source="pack://application:,,,/Images/ButtonGreen.png" Stretch="Fill" Height="80"/>
-                <Label Content="Komalli" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="24"/>
+                <Image x:Name="goKomalliImg" 
+                       Source="pack://application:,,,/Images/ButtonGreen.png" 
+                       Stretch="Fill" 
+                       Width="140" 
+                       Height="80" />
+                <Label x:Name="goKomalliLbl" 
+                       Content="Komalli" 
+                       FontFamily="pack://application:,,,/Fonts/#VT323" 
+                       FontSize="24" 
+                       HorizontalAlignment="Center" 
+                       VerticalAlignment="Center" />
             </Grid>
         </Button>
-        <Button HorizontalAlignment="Left" Margin="460,296,0,0" VerticalAlignment="Top" Height="75" Width="147" Background="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand" Click="GoLeaderboard">
+
+        <Button x:Name="goLeaderboardBtn" 
+                HorizontalAlignment="Left" 
+                Margin="460,296,0,0" 
+                VerticalAlignment="Top" 
+                Height="75" 
+                Width="147" 
+                Cursor="Hand" 
+                Click="NavigateLeaderboardPage">
             <Grid>
-                <Image HorizontalAlignment="Left" VerticalAlignment="Center" Width="140" Source="pack://application:,,,/Images/ButtonGreen.png" Stretch="Fill" Height="80"/>
-                <Label Content="Leaderboard" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="24"/>
+                <Image x:Name="goLeaderboardImg" 
+                       Source="pack://application:,,,/Images/ButtonGreen.png" 
+                       Stretch="Fill" 
+                       Width="140" 
+                       Height="80" />
+                <Label x:Name="goLeaderboardLbl" 
+                       Content="{x:Static p:Resources.globalLblLeaderboard}" 
+                       FontFamily="pack://application:,,,/Fonts/#VT323" 
+                       FontSize="24" 
+                       HorizontalAlignment="Center" 
+                       VerticalAlignment="Center" />
             </Grid>
         </Button>
-        <Button HorizontalAlignment="Left" Margin="684,24,0,0" VerticalAlignment="Top" Background="Transparent" BorderBrush="{x:Null}" Cursor="Hand" Click="GoSettings">
+
+        <Button x:Name="goSettingsBtn" 
+                HorizontalAlignment="Left" 
+                Margin="684,24,0,0" 
+                VerticalAlignment="Top" 
+                Cursor="Hand" 
+                Click="NavigateSettingsPage">
             <Grid Height="108">
-                <Image HorizontalAlignment="Center" VerticalAlignment="Top" Width="80" Source="pack://application:,,,/Images/Settings.png" Stretch="Fill" Height="80" />
-                <Label Content="Settings" HorizontalAlignment="Right" VerticalAlignment="Top" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="24" Height="53" Margin="-15,65,0,0"/>
+                <Image x:Name="goSettingsImg" 
+                       Source="pack://application:,,,/Images/Settings.png" 
+                       Stretch="Fill" 
+                       Width="80" 
+                       Height="80" />
+                <Label x:Name="goSettingsLbl" 
+                       Content="{x:Static p:Resources.globalLblSettings}" 
+                       FontFamily="pack://application:,,,/Fonts/#VT323" 
+                       FontSize="24" 
+                       HorizontalAlignment="Right" 
+                       VerticalAlignment="Top" 
+                       Height="53" 
+                       Margin="-15,65,0,0" />
             </Grid>
-        </Button>
-        <Button HorizontalAlignment="Left" Margin="691,235,0,0" VerticalAlignment="Top" Background="Transparent" BorderBrush="{x:Null}" Cursor="Hand" Click="LogOut">
-            <Grid>
-                <Image HorizontalAlignment="Center" VerticalAlignment="Top" Width="80" Source="pack://application:,,,/Images/LogOut.png" Stretch="Fill" Height="80"/>
-                <Label Content="Log Out" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="24" Margin="0,70,0,0"/>
-            </Grid>
-        </Button>
-        <Image HorizontalAlignment="Left" Height="80" Margin="44,10,0,0" VerticalAlignment="Top" Width="76" Source="pack://application:,,,/Images/User.png"/>
-        <Label x:Name="lblGamertag" Content="Gamertag" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="pack://application:,,,/Fonts/#VT323" FontSize="24" Margin="23,95,0,0" Width="118" Height="65"/>
-        <Button HorizontalAlignment="Left" Margin="10,165,0,0" VerticalAlignment="Top" Background="Transparent" BorderBrush="{x:Null}" Cursor="Hand" Click="SeeCatalogue">
-            <Image HorizontalAlignment="Left" Height="216" Margin="0,0,0,0" VerticalAlignment="Top" Width="180" Source="pack://application:,,,/Images/3cardsImage.png"/>
-        </Button>
-        <Button HorizontalAlignment="Center" Margin="0,361,0,0" VerticalAlignment="Top" Click="ViewFriendAndBlockList" Height="42" Width="46">
-            <Image Source="pack://application:,,,/Images/FriendsAndBlockIcon.png" Height="40" Width="42" />
         </Button>
 
+        <Button x:Name="logOutBtn" 
+                HorizontalAlignment="Left" 
+                Margin="691,235,0,0" 
+                VerticalAlignment="Top" 
+                Cursor="Hand" 
+                Click="LogOut">
+            <Grid>
+                <Image x:Name="logOutImg" 
+                       Source="pack://application:,,,/Images/LogOut.png" 
+                       Stretch="Fill" 
+                       Width="80" 
+                       Height="80" />
+                <Label x:Name="logOutLbl" 
+                       Content="{x:Static p:Resources.homeLblLogout}" 
+                       FontFamily="pack://application:,,,/Fonts/#VT323" 
+                       FontSize="24" 
+                       HorizontalAlignment="Left" 
+                       VerticalAlignment="Top" 
+                       Margin="0,70,0,0" />
+            </Grid>
+        </Button>
+
+        <Image x:Name="userImg" 
+               HorizontalAlignment="Left" 
+               VerticalAlignment="Top" 
+               Width="76" 
+               Height="80" 
+               Margin="44,10,0,0" 
+               Source="pack://application:,,,/Images/User.png" />
+
+        <Label x:Name="gamertagLbl" 
+               Content="Gamertag" 
+               FontFamily="pack://application:,,,/Fonts/#VT323" 
+               FontSize="24" 
+               HorizontalContentAlignment="Center" 
+               HorizontalAlignment="Left" 
+               VerticalAlignment="Top" 
+               Margin="23,95,0,0" 
+               Width="118" 
+               Height="65" />
+
+        <Button x:Name="seeCatalogueBtn" 
+                HorizontalAlignment="Left" 
+                Margin="10,165,0,0" 
+                VerticalAlignment="Top" 
+                Cursor="Hand" 
+                Click="NavigateCataloguePage">
+            <Image x:Name="seeCatalogueImg" 
+                   Source="pack://application:,,,/Images/3cardsImage.png" 
+                   Stretch="Fill" 
+                   Width="180" 
+                   Height="216" />
+        </Button>
+
+        <Button x:Name="viewFriendAndBlockListBtn" 
+                HorizontalAlignment="Center" 
+                Margin="0,361,0,0" 
+                VerticalAlignment="Top" 
+                Click="ViewFriendAndBlockList" 
+                Height="42" 
+                Width="46">
+            <Image x:Name="friendAndBlockListImg" 
+                   Source="pack://application:,,,/Images/FriendsAndBlockIcon.png" 
+                   Stretch="Fill" 
+                   Width="42" 
+                   Height="40" />
+        </Button>
     </Grid>
 </Page>

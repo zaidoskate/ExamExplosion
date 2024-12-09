@@ -1,4 +1,5 @@
-﻿using ExamExplosion.ExamExplotionService;
+﻿using ExamExplosion.DataValidations;
+using ExamExplosion.ExamExplotionService;
 using ExamExplosion.Helpers;
 using ExamExplosion.Models;
 using log4net;
@@ -25,16 +26,16 @@ namespace ExamExplosion
     /// </summary>
     public partial class Lobby : Page
     {
-        private LobbyManager lobbyManager = null;
+        private readonly LobbyManager lobbyManager = null;
         private string lobbyCode;
-        private int maxPlayers;
-        private int timePerTurn;
-        private int maxHP;
+        private readonly int maxPlayers;
+        private readonly int timePerTurn;
+        private readonly int maxHP;
         private string hostGamertag;
-        private Dictionary<string, bool> playerReadyStatus = new Dictionary<string, bool>();
-        private List<Label> labelsGamertags = new List<Label>();
-        private List<Image> imagePlayers = new List<Image>();
-        private ILog log;
+        private readonly Dictionary<string, bool> playerReadyStatus = new Dictionary<string, bool>();
+        private readonly List<Label> labelsGamertags = new List<Label>();
+        private readonly List<Image> imagePlayers = new List<Image>();
+        private readonly ILog log;
         public Lobby(int maxPlayers, int timePerTurn, int maxHP, string owner)
         {
             log = LogManager.GetLogger(typeof(App));
@@ -57,7 +58,7 @@ namespace ExamExplosion
                 parentWindow.Closing += OnClosing;
             }
             InitializeLobbyManager(); 
-            lobbyCodelbl.Content = lobbyCode;
+            lobbyCodeLbl.Content = lobbyCode;
             this.KeyDown += Lobby_KeyDown;
             this.Focusable = true;
             this.Focus();
@@ -73,7 +74,7 @@ namespace ExamExplosion
                 parentWindow.Closing += OnClosing;
             }
             this.lobbyCode = lobbyCode;
-            this.lobbyCodelbl.Content = lobbyCode;
+            this.lobbyCodeLbl.Content = lobbyCode;
             InitializeLobbyManager();
             try
             {
@@ -81,18 +82,21 @@ namespace ExamExplosion
             }
             catch (FaultException faultException)
             {
-                new AlertModal("Error", "Se produjo un error en el servidor").ShowDialog();
-                throw faultException;
+                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblFaultException).ShowDialog();
+                log.Error("Error del servidor (FaultException)", faultException);
+                NavigateStartPage();
             }
             catch (CommunicationException communicationException)
             {
-                new AlertModal("Error de comunicación", "No se pudo conectar con el servidor.").ShowDialog();
-                throw communicationException;
+                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblCommunicationException).ShowDialog();
+                log.Fatal($"{communicationException.StackTrace}", communicationException);
+                NavigateStartPage();
             }
             catch (TimeoutException timeoutException)
             {
-                new AlertModal("Tiempo de espera", "La conexión con el servidor ha expirado.").ShowDialog();
-                throw timeoutException;
+                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblTimeoutException).ShowDialog();
+                log.Warn("Timeout al intentar conectar con el servidor", timeoutException);
+                NavigateStartPage();
             }
             this.KeyDown += Lobby_KeyDown;
             this.Focusable = true;
@@ -108,18 +112,21 @@ namespace ExamExplosion
             }
             catch (FaultException faultException)
             {
-                new AlertModal("Error", "Se produjo un error en el servidor").ShowDialog();
+                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblFaultException).ShowDialog();
                 log.Error("Error del servidor (FaultException)", faultException);
+                NavigateStartPage();
             }
             catch (CommunicationException communicationException)
             {
-                new AlertModal("Error de comunicación", "No se pudo conectar con el servidor.").ShowDialog();
+                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblCommunicationException).ShowDialog();
                 log.Fatal($"{communicationException.StackTrace}", communicationException);
+                NavigateStartPage();
             }
             catch (TimeoutException timeoutException)
             {
-                new AlertModal("Tiempo de espera", "La conexión con el servidor ha expirado.").ShowDialog();
+                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblTimeoutException).ShowDialog();
                 log.Warn("Timeout al intentar conectar con el servidor", timeoutException);
+                NavigateStartPage();
             }
         }
 
@@ -159,18 +166,21 @@ namespace ExamExplosion
             }
             catch (FaultException faultException)
             {
-                new AlertModal("Error", "Se produjo un error en el servidor").ShowDialog();
+                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblFaultException).ShowDialog();
                 log.Error("Error del servidor (FaultException)", faultException);
+                NavigateStartPage();
             }
             catch (CommunicationException communicationException)
             {
-                new AlertModal("Error de comunicación", "No se pudo conectar con el servidor.").ShowDialog();
+                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblCommunicationException).ShowDialog();
                 log.Warn("Problema de comunicación con el servidor", communicationException);
+                NavigateStartPage();
             }
             catch (TimeoutException timeoutException)
             {
-                new AlertModal("Tiempo de espera", "La conexión con el servidor ha expirado.").ShowDialog();
+                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblTimeoutException).ShowDialog();
                 log.Warn("Timeout al intentar conectar con el servidor", timeoutException);
+                NavigateStartPage();
             }
         }
 
@@ -190,9 +200,7 @@ namespace ExamExplosion
                     HorizontalAlignment = HorizontalAlignment.Left,
                     VerticalAlignment = VerticalAlignment.Top
                 };
-
                 chatStackPanel.Children.Add(messageBlock);
-
             });
         }
 
@@ -218,23 +226,34 @@ namespace ExamExplosion
             try
             {
                 string message = GetTextBoxMessage();
+                TextValidator.ValidateNotBlanks(message);
+                TextValidator.ValidateChatFormat(message);
                 lobbyManager.SendMessage(lobbyCode, message, SessionManager.CurrentSession.gamertag);
+                ClearTextBox();
+            }
+            catch (DataValidationException)
+            {
+                /* There's no need to log or manipulate this exception, and not even notify the user about it because it just validates that not necessary spaces or chars are being entered
+                   inside a message */
                 ClearTextBox();
             }
             catch (FaultException faultException)
             {
-                new AlertModal("Error", "Se produjo un error en el servidor").ShowDialog();
+                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblFaultException).ShowDialog();
                 log.Error("Error del servidor (FaultException)", faultException);
+                NavigateStartPage();
             }
             catch (CommunicationException communicationException)
             {
-                new AlertModal("Error de comunicación", "No se pudo conectar con el servidor.").ShowDialog();
+                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblCommunicationException).ShowDialog();
                 log.Warn("Problema de comunicación con el servidor", communicationException);
+                NavigateStartPage();
             }
             catch (TimeoutException timeoutException)
             {
-                new AlertModal("Tiempo de espera", "La conexión con el servidor ha expirado.").ShowDialog();
+                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblTimeoutException).ShowDialog();
                 log.Warn("Timeout al intentar conectar con el servidor", timeoutException);
+                NavigateStartPage();
             }
         }
         private void StartButton_Click(object sender, RoutedEventArgs e)
@@ -260,18 +279,21 @@ namespace ExamExplosion
                         }
                         catch (FaultException faultException)
                         {
-                            new AlertModal("Error", "Se produjo un error en el servidor").ShowDialog();
+                            new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblFaultException).ShowDialog();
                             log.Error("Error del servidor (FaultException)", faultException);
+                            NavigateStartPage();
                         }
                         catch (CommunicationException communicationException)
                         {
-                            new AlertModal("Error de comunicación", "No se pudo conectar con el servidor.").ShowDialog();
+                            new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblCommunicationException).ShowDialog();
                             log.Warn("Problema de comunicación con el servidor", communicationException);
+                            NavigateStartPage();
                         }
                         catch (TimeoutException timeoutException)
                         {
-                            new AlertModal("Tiempo de espera", "La conexión con el servidor ha expirado.").ShowDialog();
+                            new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblTimeoutException).ShowDialog();
                             log.Warn("Timeout al intentar conectar con el servidor", timeoutException);
+                            NavigateStartPage();
                         }
                     }
                 }
@@ -291,18 +313,21 @@ namespace ExamExplosion
             }
             catch (FaultException faultException)
             {
-                new AlertModal("Error", "Se produjo un error en el servidor").ShowDialog();
+                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblFaultException).ShowDialog();
                 log.Error("Error del servidor (FaultException)", faultException);
+                NavigateStartPage();
             }
             catch (CommunicationException communicationException)
             {
-                new AlertModal("Error de comunicación", "No se pudo conectar con el servidor.").ShowDialog();
+                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblCommunicationException).ShowDialog();
                 log.Warn("Problema de comunicación con el servidor", communicationException);
+                NavigateStartPage();
             }
             catch (TimeoutException timeoutException)
             {
-                new AlertModal("Tiempo de espera", "La conexión con el servidor ha expirado.").ShowDialog();
+                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblTimeoutException).ShowDialog();
                 log.Warn("Timeout al intentar conectar con el servidor", timeoutException);
+                NavigateStartPage();
             }
         }
 
@@ -348,18 +373,21 @@ namespace ExamExplosion
             }
             catch (FaultException faultException)
             {
-                new AlertModal("Error", "Se produjo un error en el servidor").ShowDialog();
+                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblFaultException).ShowDialog();
                 log.Error("Error del servidor (FaultException)", faultException);
+                NavigateStartPage();
             }
             catch (CommunicationException communicationException)
             {
-                new AlertModal("Error de comunicación", "No se pudo conectar con el servidor.").ShowDialog();
+                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblCommunicationException).ShowDialog();
                 log.Warn("Problema de comunicación con el servidor", communicationException);
+                NavigateStartPage();
             }
             catch (TimeoutException timeoutException)
             {
-                new AlertModal("Tiempo de espera", "La conexión con el servidor ha expirado.").ShowDialog();
+                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblTimeoutException).ShowDialog();
                 log.Warn("Timeout al intentar conectar con el servidor", timeoutException);
+                NavigateStartPage();
             }
             finally
             {
@@ -391,6 +419,14 @@ namespace ExamExplosion
             else
             {
                 SessionManager.CurrentSession.isLobbyOwner = false;
+            }
+        }
+
+        private void NavigateStartPage()
+        {
+            if (this.NavigationService != null)
+            {
+                this.NavigationService.Navigate(new StartPage());
             }
         }
     }

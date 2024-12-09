@@ -25,11 +25,11 @@ namespace ExamExplosion
     /// </summary>
     public partial class Komalli : Page
     {
-        Dictionary<string, bool> purchasedAccessories = new Dictionary<string, bool>();
-        Dictionary<int, int> accessoriesPrice = new Dictionary<int, int>();
+        readonly Dictionary<string, bool> purchasedAccessories = new Dictionary<string, bool>();
+        readonly Dictionary<int, int> accessoriesPrice = new Dictionary<int, int>();
         int accessoryIdSelected = 0;
         int points = 0;
-        private ILog log;
+        private readonly ILog log;
 
         public Komalli()
         {
@@ -47,10 +47,10 @@ namespace ExamExplosion
             accessoriesPrice.Add(4, 100);
             accessoriesPrice.Add(2, 300);
             accessoriesPrice.Add(3, 500);
-            purchasedAccessories.Add("radioBtnNormalPackage", false);
-            purchasedAccessories.Add("radioBtnHatPackage", false);
-            purchasedAccessories.Add("radioBtnGraduatedPackage", false);
-            purchasedAccessories.Add("radioBtnCapPackage", false);
+            purchasedAccessories.Add("normalPackageRadioBtn", false);
+            purchasedAccessories.Add("hatPackageRadioBtn", false);
+            purchasedAccessories.Add("graduatedPackageRadioBtn", false);
+            purchasedAccessories.Add("capPackageRadioBtn", false);
 
             var idsPurchasedAccessories = PurchasedAccessoryManager.GetPurchasedAccessoriesByPlayer(playerId);
             foreach (var idPurchasedAccessory in idsPurchasedAccessories)
@@ -58,16 +58,18 @@ namespace ExamExplosion
                 switch (idPurchasedAccessory)
                 {
                     case 1:
-                        purchasedAccessories["radioBtnNormalPackage"] = true;
+                        purchasedAccessories["normalPackageRadioBtn"] = true;
                         break;
                     case 2:
-                        purchasedAccessories["radioBtnHatPackage"] = true;
+                        purchasedAccessories["hatPackageRadioBtn"] = true;
                         break;
                     case 3:
-                        purchasedAccessories["radioBtnGraduatedPackage"] = true;
+                        purchasedAccessories["graduatedPackageRadioBtn"] = true;
                         break;
                     case 4:
-                        purchasedAccessories["radioBtnCapPackage"] = true;
+                        purchasedAccessories["capPackageRadioBtn"] = true;
+                        break;
+                    default:
                         break;
                 }
             }
@@ -80,44 +82,49 @@ namespace ExamExplosion
             }
             catch (FaultException faultException)
             {
-                new AlertModal("Error", "Se produjo un error en el servidor").ShowDialog();
+                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblFaultException).ShowDialog();
                 log.Error("Error del servidor (FaultException)", faultException);
+                NavigateStartPage();
             }
             catch (CommunicationException communicationException)
             {
-                new AlertModal("Error de comunicación", "No se pudo conectar con el servidor.").ShowDialog();
+                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblCommunicationException).ShowDialog();
                 log.Warn("Problema de comunicación con el servidor", communicationException);
+                NavigateStartPage();
             }
             catch (TimeoutException timeoutException)
             {
-                new AlertModal("Tiempo de espera", "La conexión con el servidor ha expirado.").ShowDialog();
+                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblTimeoutException).ShowDialog();
                 log.Warn("Timeout al intentar conectar con el servidor", timeoutException);
+                NavigateStartPage();
             }
             switch (accessoryIdSelected)
             {
                 case 1:
-                    radioBtnNormalPackage.IsChecked = true;
+                    normalPackageRadioBtn.IsChecked = true;
                     break;
                 case 2:
-                    radioBtnHatPackage.IsChecked = true;
+                    hatPackageRadioBtn.IsChecked = true;
                     break;
                 case 3:
-                    radioBtnGraduatedPackage.IsChecked = true;
+                    graduatedPackageRadioBtn.IsChecked = true;
                     break;
                 case 4:
-                    radioBtnCapPackage.IsChecked = true;
+                    capPackageRadioBtn.IsChecked = true;
+                    break;
+                default:
                     break;
             }
         }
 
-        private void GoHome(object sender, RoutedEventArgs e)
+        private void NavigateHomePage(object sender, RoutedEventArgs e)
         {
             if (this.NavigationService != null)
             {
                 this.NavigationService.Navigate(new HomePage());
             }
         }
-        private void BuyPackage(object sender, RoutedEventArgs e)
+        private void BuyPackageBtn_Click(object sender, RoutedEventArgs e)
         {
             PurchasedAccessory purchasedAccessory = new PurchasedAccessory();
             purchasedAccessory.playerId = SessionManager.CurrentSession.accountId;
@@ -125,31 +132,34 @@ namespace ExamExplosion
             purchasedAccessory.inUse = false;
             if (points < accessoriesPrice[accessoryIdSelected])
             {
-                new AlertModal("Puntos insuficientes", "Necesitas ganar mas partidas para poder comprarlo.").ShowDialog();
+                new AlertModal(ExamExplosion.Properties.Resources.komalliLblInsuficientPointsTitle, ExamExplosion.Properties.Resources.komalliLblInsuficientPoints).ShowDialog();
             }
             else
             {
                 try
                 {
                     PurchasedAccessoryManager.PurchaseAccessory(purchasedAccessory);
-                    new AlertModal("Accesorio comprado", "Ahora puedes utilizar este paquete de cartas para visualizarlas en tu juego.").ShowDialog();
+                    new AlertModal(ExamExplosion.Properties.Resources.komalliLblPackPurchasedTitle, ExamExplosion.Properties.Resources.komalliLblPackPurchased).ShowDialog();
                     UpdatePurchasedAccessories(accessoryIdSelected);
                     UpdatePoints();
                 }
                 catch (FaultException faultException)
                 {
-                    new AlertModal("Error", "Se produjo un error en el servidor").ShowDialog();
+                    new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblFaultException).ShowDialog();
                     log.Error("Error del servidor (FaultException)", faultException);
+                    NavigateStartPage();
                 }
                 catch (CommunicationException communicationException)
                 {
-                    new AlertModal("Error de comunicación", "No se pudo conectar con el servidor.").ShowDialog();
+                    new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblCommunicationException).ShowDialog();
                     log.Warn("Problema de comunicación con el servidor", communicationException);
+                    NavigateStartPage();
                 }
                 catch (TimeoutException timeoutException)
                 {
-                    new AlertModal("Tiempo de espera", "La conexión con el servidor ha expirado.").ShowDialog();
+                    new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblTimeoutException).ShowDialog();
                     log.Warn("Timeout al intentar conectar con el servidor", timeoutException);
+                    NavigateStartPage();
                 }
                 
             }
@@ -160,47 +170,52 @@ namespace ExamExplosion
             try
             {
                 points = PlayerManager.GetPointsByPlayerId(playerId);
-                lblPoints.Content = points;
+                pointsLbl.Content = points;
             }
             catch (FaultException faultException)
             {
-                new AlertModal("Error", "Se produjo un error en el servidor").ShowDialog();
+                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblFaultException).ShowDialog();
                 log.Error("Error del servidor (FaultException)", faultException);
+                NavigateStartPage();
             }
             catch (CommunicationException communicationException)
             {
-                new AlertModal("Error de comunicación", "No se pudo conectar con el servidor.").ShowDialog();
+                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblCommunicationException).ShowDialog();
                 log.Warn("Problema de comunicación con el servidor", communicationException);
+                NavigateStartPage();
             }
             catch (TimeoutException timeoutException)
             {
-                new AlertModal("Tiempo de espera", "La conexión con el servidor ha expirado.").ShowDialog();
+                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblTimeoutException).ShowDialog();
                 log.Warn("Timeout al intentar conectar con el servidor", timeoutException);
+                NavigateStartPage();
             }
         }
 
         private void UpdatePurchasedAccessories(int accessoryIdSelected)
         {
-            btnBuyAccessory.IsEnabled = false;
-            btnUseAccessory.IsEnabled = true;
+            buyAccessoryBtn.IsEnabled = false;
+            useAccessoryBtn.IsEnabled = true;
             switch (accessoryIdSelected)
             {
                 case 1:
-                    purchasedAccessories["radioBtnNormalPackage"] = true;
+                    purchasedAccessories["normalPackageRadioBtn"] = true;
                     break;
                 case 2:
-                    purchasedAccessories["radioBtnHatPackage"] = true;
+                    purchasedAccessories["hatPackageRadioBtn"] = true;
                     break;
                 case 3:
-                    purchasedAccessories["radioBtnGraduatedPackage"] = true;
+                    purchasedAccessories["graduatedPackageRadioBtn"] = true;
                     break;
                 case 4:
-                    purchasedAccessories["radioBtnCapPackage"] = true;
+                    purchasedAccessories["capPackageRadioBtn"] = true;
+                    break;
+                default:
                     break;
             }
         }
 
-        private void UsePackage(object sender, RoutedEventArgs e)
+        private void UsePackageBtn_Click(object sender, RoutedEventArgs e)
         {
             PurchasedAccessory purchasedAccessory = new PurchasedAccessory();
             purchasedAccessory.playerId = SessionManager.CurrentSession.accountId;
@@ -209,25 +224,28 @@ namespace ExamExplosion
             try
             {
                 PurchasedAccessoryManager.UseAccessory(purchasedAccessory);
-                new AlertModal("Accesorio en uso", "Ahora puedes visualizar las cartas con el estilo adquirido.").ShowDialog();
+                new AlertModal(ExamExplosion.Properties.Resources.komalliLblAccessoryInUseTitle, ExamExplosion.Properties.Resources.komalliLblAccessoryInUse).ShowDialog();
             }
             catch (FaultException faultException)
             {
-                new AlertModal("Error", "Se produjo un error en el servidor").ShowDialog();
+                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblFaultException).ShowDialog();
                 log.Error("Error del servidor (FaultException)", faultException);
+                NavigateStartPage();
             }
             catch (CommunicationException communicationException)
             {
-                new AlertModal("Error de comunicación", "No se pudo conectar con el servidor.").ShowDialog();
+                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblCommunicationException).ShowDialog();
                 log.Warn("Problema de comunicación con el servidor", communicationException);
+                NavigateStartPage();
             }
             catch (TimeoutException timeoutException)
             {
-                new AlertModal("Tiempo de espera", "La conexión con el servidor ha expirado.").ShowDialog();
+                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblTimeoutException).ShowDialog();
                 log.Warn("Timeout al intentar conectar con el servidor", timeoutException);
+                NavigateStartPage();
             }
         }
-        private void PackageSelected(object sender, RoutedEventArgs e)
+        private void PackageSelectedBtn_Click(object sender, RoutedEventArgs e)
         {
             RadioButton radioButton = sender as RadioButton;
             if (radioButton != null)
@@ -235,34 +253,42 @@ namespace ExamExplosion
                 string nombre = radioButton.Name;
                 if (purchasedAccessories[nombre] == true)
                 {
-                    btnBuyAccessory.IsEnabled = false;
-                    btnUseAccessory.IsEnabled = true;  
+                    buyAccessoryBtn.IsEnabled = false;
+                    useAccessoryBtn.IsEnabled = true;  
                 }
                 else
                 {
-                    btnBuyAccessory.IsEnabled = true;
-                    btnUseAccessory.IsEnabled = false;
+                    buyAccessoryBtn.IsEnabled = true;
+                    useAccessoryBtn.IsEnabled = false;
                 }
                 switch(nombre)
                 {
-                    case "radioBtnNormalPackage":
+                    case "normalPackageRadioBtn":
                         accessoryIdSelected = 1;
                         break;
 
-                    case "radioBtnHatPackage":
+                    case "hatPackageRadioBtn":
                         accessoryIdSelected = 2;
                         break;
 
-                    case "radioBtnGraduatedPackage":
+                    case "graduatedPackageRadioBtn":
                         accessoryIdSelected = 3;
                         break;
 
-                    case "radioBtnCapPackage":
+                    case "capPackageRadioBtn":
                         accessoryIdSelected = 4;
+                        break;
+                    default:
                         break;
                 }
             }
         }
-
+        private void NavigateStartPage()
+        {
+            if (this.NavigationService != null)
+            {
+                this.NavigationService.Navigate(new StartPage());
+            }
+        }
     }
 }

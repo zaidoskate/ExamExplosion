@@ -22,8 +22,8 @@ namespace ExamExplosion
         public AlertModal(string title, string message)
         {
             InitializeComponent();
-            lblTitle.Content = title;
-            lblErrorMessage.Text = message; 
+            titleLbl.Content = title;
+            errorMessageTxtBox.Text = message; 
         }
 
         private void AcceptMessage(object sender, RoutedEventArgs e)

@@ -11,7 +11,7 @@ namespace XUnitTest.CallbackImplementation
     {
         private InstanceContext context;
         private ExamExplotionService.LobbyManagerClientBase proxy;
-        public required string MessageReceived { get; set; }
+        public string MessageReceived { get; set; }
         public bool PlayerStatus {  get; set; }
         private string gamertag;
         private string gameCode;

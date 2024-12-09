@@ -3,12 +3,13 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
+using ExamExplosion.Properties;
 
 namespace ExamExplosion
 {
     public partial class Catalogue : Page
     {
-        private string[] imageSources = new string[]
+        private readonly string[] imageSources = new string[]
         {
             "pack://application:,,,/CardsPackages/NormalPackage/Please.png",
             "pack://application:,,,/CardsPackages/NormalPackage/examBomb.png",
@@ -27,36 +28,36 @@ namespace ExamExplosion
 
         private string[] titles = new string[]
         {
-            "Paro",
-            "Repite",
-            "Excentar",
-            "Deja el equipo",
-            "Profe A",
-            "Profe M",
-            "Profe O",
-            "Profe S",
-            "Profe R",
-            "Reinscripcion",
-            "Revolver",
-            "Tomar de abajo",
-            "Ver el futuro",
+            ExamExplosion.Properties.Resources.globalLblFavorCard,
+            ExamExplosion.Properties.Resources.globalLblExamBombCard,
+            ExamExplosion.Properties.Resources.globalLblExemptCard,
+            ExamExplosion.Properties.Resources.globalLblLeftTeamCard,
+            ExamExplosion.Properties.Resources.globalLblTeacherACard,
+            ExamExplosion.Properties.Resources.globalLblTeacherMCard,
+            ExamExplosion.Properties.Resources.globalLblTeacherOCard,
+            ExamExplosion.Properties.Resources.globalLblTeacherSCard,
+            ExamExplosion.Properties.Resources.globalLblTeacherRCard,
+            ExamExplosion.Properties.Resources.globalReRegistrationCard,
+            ExamExplosion.Properties.Resources.globalLblShuffleCard,
+            ExamExplosion.Properties.Resources.globalLblTakeBelowCard,
+            ExamExplosion.Properties.Resources.globalLblViewFutureCard,
         };
 
         private string[] descriptions = new string[]
         {
-            "Te da una carta el jugador de tu eleccion.",
-            "Has perdido una vida a menos de que puedas reinscribirte.",
-            "Termina tu turno sin tomar una carta.",
-            "Se le pasa tu turno a la siguiente persona.",
-            "Junta dos cartas del mismo profe y te debe dar una carta un jugador",
-            "Junta dos cartas del mismo profe y te debe dar una carta un jugador",
-            "Junta dos cartas del mismo profe y te debe dar una carta un jugador",
-            "Junta dos cartas del mismo profe y te debe dar una carta un jugador",
-            "Junta dos cartas del mismo profe y te debe dar una carta un jugador",
-            "Te recuperas de un Repite, no pierdes tu vida",
-            "Revuelves las 3 cartas del tope de las cartas",
-            "Tomas una carta de abajo del stack",
-            "Puedes ver las 3 proximas cartas del Stack sin revolver."
+            ExamExplosion.Properties.Resources.catalogueLblFavorDescription,
+            ExamExplosion.Properties.Resources.catalogueLblExamBombDescription,
+            ExamExplosion.Properties.Resources.catalogueLblExemptDescription,
+            ExamExplosion.Properties.Resources.catalogueLblLeftTeamDescription,
+            ExamExplosion.Properties.Resources.catalogueLblTeacherDescription,
+            ExamExplosion.Properties.Resources.catalogueLblTeacherDescription,
+            ExamExplosion.Properties.Resources.catalogueLblTeacherDescription,
+            ExamExplosion.Properties.Resources.catalogueLblTeacherDescription,
+            ExamExplosion.Properties.Resources.catalogueLblTeacherDescription,
+            ExamExplosion.Properties.Resources.catalogueLblReRegistrationDescription,
+            ExamExplosion.Properties.Resources.catalogueLblShuffleDescription,
+            ExamExplosion.Properties.Resources.catalogueLblTakeBelowDescription,
+            ExamExplosion.Properties.Resources.catalogueLblViewFutureDescription
         };
 
         private int currentIndex = 0;
@@ -68,13 +69,13 @@ namespace ExamExplosion
             this.KeyDown += OnKeyDown;
         }
 
-        private void ShowLeftCard(object sender, RoutedEventArgs e)
+        private void ShowLeftCardBtn_Click(object sender, RoutedEventArgs e)
         {
             currentIndex--;
             UpdateCard();
         }
 
-        private void ShowRightCard(object sender, RoutedEventArgs e)
+        private void ShowRightCardBtn_Click(object sender, RoutedEventArgs e)
         {
             currentIndex++;
             UpdateCard();
@@ -82,27 +83,27 @@ namespace ExamExplosion
 
         private void UpdateCard()
         {
-            imgCard.Source = new BitmapImage(new Uri(imageSources[currentIndex], UriKind.Absolute));
-            lblTitleCard.Content = titles[currentIndex];
-            txtBlockDescription.Text = descriptions[currentIndex];
+            cardImg.Source = new BitmapImage(new Uri(imageSources[currentIndex], UriKind.Absolute));
+            titleCardLbl.Content = titles[currentIndex];
+            descriptionTxtBlock.Text = descriptions[currentIndex];
 
-            btnShowLeftCard.IsEnabled = currentIndex > 0;
-            btnShowRightCard.IsEnabled = currentIndex < imageSources.Length - 1;
+            showLeftCardBtn.IsEnabled = currentIndex > 0;
+            showRightCardBtn.IsEnabled = currentIndex < imageSources.Length - 1;
         }
 
         private void OnKeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Left && btnShowLeftCard.IsEnabled)
+            if (e.Key == Key.Left && showLeftCardBtn.IsEnabled)
             {
-                ShowLeftCard(sender, e);
+                ShowLeftCardBtn_Click(sender, e);
             }
-            else if (e.Key == Key.Right && btnShowRightCard.IsEnabled)
+            else if (e.Key == Key.Right && showRightCardBtn.IsEnabled)
             {
-                ShowRightCard(sender, e);
+                ShowRightCardBtn_Click(sender, e);
             }
         }
 
-        private void GoHome(object sender, RoutedEventArgs e)
+        private void NavigateHomePage(object sender, RoutedEventArgs e)
         {
             if (this.NavigationService != null)
             {

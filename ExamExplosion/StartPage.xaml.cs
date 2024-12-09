@@ -24,7 +24,7 @@ namespace ExamExplosion
         public StartPage()
         {
             InitializeComponent();
-            buttonPlay.Focus();
+            playBtn.Focus();
             log = LogManager.GetLogger(typeof(App));
         }
 
