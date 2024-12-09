@@ -2,6 +2,7 @@
 using ExamExplosion.Models;
 using System;
 using System.ServiceModel;
+using System.Windows.Documents;
 
 namespace ExamExplosion.Helpers
 {
@@ -242,6 +243,29 @@ namespace ExamExplosion.Helpers
                 using (var proxy = new ExamExplotionService.AuthenticationManagerClient())
                 {
                     return proxy.DeactivateAccount(gamertag);
+                }
+            }
+            catch (FaultException faultException)
+            {
+                throw faultException;
+            }
+            catch (CommunicationException communicationException)
+            {
+                throw communicationException;
+            }
+            catch (TimeoutException timeoutException)
+            {
+                throw timeoutException;
+            }
+        }
+
+        public string GetAccountGamertagById(int id)
+        {
+            try
+            {
+                using (var proxy = new ExamExplotionService.AuthenticationManagerClient())
+                {
+                    return proxy.GetAccountGamertagById(id);
                 }
             }
             catch (FaultException faultException)

@@ -100,5 +100,34 @@ namespace ExamExplosion.Helpers
                 throw timeoutException;
             }
         }
+
+        public static int GetPlayerIdByGamertag(string gamertag)
+        {
+            int playerId = -1;
+            try
+            {
+                using (var proxy = new ExamExplotionService.PlayerManagerClient())
+                {
+                    var player = proxy.GetPlayerByGamertag(gamertag);
+                    if(player != null)
+                    {
+                        return player.UserId;
+                    }
+                }
+            }
+            catch (FaultException faultException)
+            {
+                throw faultException;
+            }
+            catch (CommunicationException communicationException)
+            {
+                throw communicationException;
+            }
+            catch (TimeoutException timeoutException)
+            {
+                throw timeoutException;
+            }
+            return playerId;
+        }
     }
 }

@@ -272,7 +272,7 @@
                        Width="50" />
             </Button>
             <WrapPanel x:Name="playerDeckWrapPanel" 
-                       Width="640" 
+                       Width="640"
                        Height="131" />
             <Button x:Name="showRightCardBtn" 
                     Height="134" 
