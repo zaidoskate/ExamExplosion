@@ -601,7 +601,7 @@ namespace ExamExplosion
         public void ClearSelectedCards()
         {
             var cardsToRemove = this.selectedCardsWrapPanel.Children.OfType<Image>().ToList();
-
+                                            
             foreach (var card in cardsToRemove)
             {
                 int cardId = (int)card.Tag;
