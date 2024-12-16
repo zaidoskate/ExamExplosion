@@ -219,6 +219,23 @@ namespace ExamExplosion.Helpers
                 return false;
             }
             gameResources.DrawTopCard();
+            boardPage.UpdateGameDeckCount(gameResources.GameDeck.Count);
+            try
+            {
+                proxy.NotifyDrawCard(gameCode, gamertag, true);
+            }
+            catch (FaultException faultException)
+            {
+                throw faultException;
+            }
+            catch (CommunicationException communicationException)
+            {
+                throw communicationException;
+            }
+            catch (TimeoutException timeoutException)
+            {
+                throw timeoutException;
+            }
             if (gameResources.HasBomb)
             {
                 boardPage.DisplayNotification(ExamExplosion.Properties.Resources.boardLblReregistrationNeeded);
@@ -227,28 +244,10 @@ namespace ExamExplosion.Helpers
             }
             else
             {
-                boardPage.UpdateGameDeckCount(gameResources.GameDeck.Count);
-                try
-                {
-                    proxy.NotifyDrawCard(gameCode, gamertag, true);
-                }
-                catch (FaultException faultException)
-                {
-                    throw faultException;
-                }
-                catch (CommunicationException communicationException)
-                {
-                    throw communicationException;
-                }
-                catch (TimeoutException timeoutException)
-                {
-                    throw timeoutException;
-                }
                 boardPage.UpdatePlayerDeck(gameResources.PlayerCards, gameResources.CurrentIndex);
                 this.NotifyEndTurn(gameCode, gamertag);
                 return true;
             }
-            
         }
 
         public void DrawBottomCard(string gameCode, string gamertag)
@@ -274,8 +273,16 @@ namespace ExamExplosion.Helpers
                 {
                     throw timeoutException;
                 }
-                boardPage.UpdatePlayerDeck(gameResources.PlayerCards, gameResources.CurrentIndex);
-                this.NotifyEndTurn(gameCode, gamertag);
+                if (gameResources.HasBomb)
+                {
+                    boardPage.DisplayNotification(ExamExplosion.Properties.Resources.boardLblReregistrationNeeded);
+                    boardPage.DisplayExamBomb();
+                }
+                else
+                {
+                    boardPage.UpdatePlayerDeck(gameResources.PlayerCards, gameResources.CurrentIndex);
+                    this.NotifyEndTurn(gameCode, gamertag);
+                }
             }
         }
 
@@ -448,30 +455,55 @@ namespace ExamExplosion.Helpers
             }
             if (selectedCards.Count > 0)
             {
-                try
+                if((gameResources.HasBomb && selectedCards[0] == "reRegistration") || !gameResources.HasBomb)
                 {
-                    proxy.NotifyCardOnBoard(gameCode, selectedCards[0]);
+                    try
+                    {
+                        proxy.NotifyCardOnBoard(gameCode, selectedCards[0]);
+                    }
+                    catch (FaultException faultException)
+                    {
+                        throw faultException;
+                    }
+                    catch (CommunicationException communicationException)
+                    {
+                        throw communicationException;
+                    }
+                    catch (TimeoutException timeoutException)
+                    {
+                        throw timeoutException;
+                    }
+                    boardPage.ClearSelectedCards();
+                    if (gameResources.HasBomb)
+                    {
+                        gameResources.HasBomb = false;
+                        NotifyEndTurn(gameCode, SessionManager.CurrentSession.gamertag);
+                    }
                 }
-                catch (FaultException faultException)
-                {
-                    throw faultException;
-                }
-                catch (CommunicationException communicationException)
-                {
-                    throw communicationException;
-                }
-                catch (TimeoutException timeoutException)
-                {
-                    throw timeoutException;
-                }
-                boardPage.ClearSelectedCards();
             }
+            
         }
 
         public void SendDoubleTurn(string gameCode, string gamertag)
         {
-            proxy.SendDoubleTurn(gameCode, gamertag);
-            proxy.NotifyMessage(gameCode, SessionManager.CurrentSession.gamertag, gamertag, ExamExplosion.Properties.Resources.boardLblDoubleTurn);
+            try{
+                proxy.SendDoubleTurn(gameCode, gamertag);
+                proxy.NotifyMessage(gameCode, SessionManager.CurrentSession.gamertag, gamertag, ExamExplosion.Properties.Resources.boardLblDoubleTurn);
+                proxy.NotifyEndTurn(gameCode, SessionManager.CurrentSession.gamertag);
+            }
+            catch (FaultException faultException)
+            {
+                throw faultException;
+            }
+            catch (CommunicationException communicationException)
+            {
+                throw communicationException;
+            }
+            catch (TimeoutException timeoutException)
+            {
+                throw timeoutException;
+            }
+            
         }
 
         public void NotifyCardRequested(string gameCode, string playerRequesting)
@@ -599,8 +631,25 @@ namespace ExamExplosion.Helpers
         public List<int> GetPlayersByGameCode(int gameId)
         {
             List<int> playersId = new List<int>();
-            playersId = proxy.GetGamePlayers(gameId).ToList();
-            return playersId;
+            List<int> accountsId = new List<int>();
+            try
+            {
+                playersId = proxy.GetGamePlayers(gameId).ToList();
+                accountsId = proxy.GetAccountsIdByPlayerId(playersId.ToArray()).ToList();
+            }
+            catch (FaultException faultException)
+            {
+                throw faultException;
+            }
+            catch (CommunicationException communicationException)
+            {
+                throw communicationException;
+            }
+            catch (TimeoutException timeoutException)
+            {
+                throw timeoutException;
+            }
+            return accountsId;
         }
 
         public List<int> GetPlayersId(List<string> gamertags)

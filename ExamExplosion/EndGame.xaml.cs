@@ -303,7 +303,14 @@ namespace ExamExplosion
         {
             if (this.NavigationService != null)
             {
-                this.NavigationService.Navigate(new HomePage());
+                if(SessionManager.CurrentSession.isGuest)
+                {
+                    this.NavigationService.Navigate(new StartPage());
+                }
+                else
+                {
+                    this.NavigationService.Navigate(new HomePage());
+                }
                 var window = Window.GetWindow(this);
                 if (window != null)
                 {
