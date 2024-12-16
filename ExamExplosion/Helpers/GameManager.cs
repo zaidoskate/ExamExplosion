@@ -662,12 +662,6 @@ namespace ExamExplosion.Helpers
             }
             return playerIds;
         }
-
-        public void AddPlayer(int playerId, int gameId)
-        {
-            
-        }
-
         public void AddPlayersToGame(List<string> playerGamertags, string gameCode)
         {
             try
@@ -686,6 +680,10 @@ namespace ExamExplosion.Helpers
             {
                 throw timeoutException;
             }
+        }
+        public void CloseConnection()
+        {
+            proxy.Close();
         }
     }
 }

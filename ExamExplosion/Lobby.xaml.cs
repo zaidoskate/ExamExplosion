@@ -369,6 +369,7 @@ namespace ExamExplosion
                             .Where(img => img.Visibility == Visibility.Visible)
                             .All(img => img.Source != null && img.Source.ToString() != "pack://application:,,,/Images/NoReadyImage.png");
 
+            lobbyManager.CloseConnection();
             if (allPlayersReady)
             {
                 if (this.NavigationService != null)
@@ -457,6 +458,7 @@ namespace ExamExplosion
         {
             if (this.NavigationService != null)
             {
+                lobbyManager.CloseConnection();
                 this.NavigationService.Navigate(new StartPage());
             }
         }

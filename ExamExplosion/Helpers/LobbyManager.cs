@@ -279,5 +279,11 @@ namespace ExamExplosion.Helpers
                 lobbyPage.UpdateHost();
             });
         }
+
+        public void CloseConnection()
+        {
+            proxy.Close();
+            proxy = null;
+        }
     }
 }

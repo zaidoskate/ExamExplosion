@@ -634,6 +634,7 @@ namespace ExamExplosion
 
         public void GoEndGame(string gameCode, string winnerGamertag)
         {
+            gameManager.CloseConnection();
             if (this.NavigationService != null)
             {
                 this.NavigationService.Navigate(new EndGame(gameCode, winnerGamertag));
@@ -648,6 +649,7 @@ namespace ExamExplosion
         }
         private void NavigateStartPage()
         {
+            gameManager.CloseConnection();
             if (this.NavigationService != null)
             {
                 this.NavigationService.Navigate(new StartPage());
