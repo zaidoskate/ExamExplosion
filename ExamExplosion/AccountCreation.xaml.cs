@@ -207,6 +207,7 @@ namespace ExamExplosion
             { 
                 TextValidator.ValidateNotBlanks(gamertag);
                 TextValidator.ValidateGamertagFormat(gamertag);
+                TextValidator.ValidateGamertagNotGuest(gamertag);
                 TextValidator.ValidateGamertagFirstLetter(gamertag);
                 gamertagErrorMessageLbl.Content = "";
                 gamertagTxtBox.BorderBrush = Brushes.Black;

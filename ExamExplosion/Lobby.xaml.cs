@@ -307,28 +307,59 @@ namespace ExamExplosion
 
         private void SynchronizeClients()
         {
-            try
+            if (CheckAllPlayersReady())
             {
-                lobbyManager.PlayGame(lobbyCode);
+                try
+                {
+                    lobbyManager.PlayGame(lobbyCode);
+                }
+                catch (FaultException faultException)
+                {
+                    new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblFaultException).ShowDialog();
+                    log.Error("Error del servidor (FaultException)", faultException);
+                    NavigateStartPage();
+                }
+                catch (CommunicationException communicationException)
+                {
+                    new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblCommunicationException).ShowDialog();
+                    log.Warn("Problema de comunicación con el servidor", communicationException);
+                    NavigateStartPage();
+                }
+                catch (TimeoutException timeoutException)
+                {
+                    new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblTimeoutException).ShowDialog();
+                    log.Warn("Timeout al intentar conectar con el servidor", timeoutException);
+                    NavigateStartPage();
+                }
             }
-            catch (FaultException faultException)
+            else
             {
-                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblFaultException).ShowDialog();
-                log.Error("Error del servidor (FaultException)", faultException);
-                NavigateStartPage();
+                new AlertModal(ExamExplosion.Properties.Resources.lobbyLblWait, ExamExplosion.Properties.Resources.lobbyLblPlayersArentReady).ShowDialog();
             }
-            catch (CommunicationException communicationException)
+        }
+
+        private bool CheckAllPlayersReady()
+        {
+            var players = new (Label Label, Image Image)[]
             {
-                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblCommunicationException).ShowDialog();
-                log.Warn("Problema de comunicación con el servidor", communicationException);
-                NavigateStartPage();
-            }
-            catch (TimeoutException timeoutException)
+                (player1Lbl, player1Img),
+                (player2Lbl, player2Img),
+                (player3Lbl, player3Img),
+                (player4Lbl, player4Img),
+            };
+
+            string readyImagePath = "pack://application:,,,/Images/ReadyImage.png";
+            foreach (var player in players)
             {
-                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblTimeoutException).ShowDialog();
-                log.Warn("Timeout al intentar conectar con el servidor", timeoutException);
-                NavigateStartPage();
+                if(player.Label.Visibility == Visibility.Visible && !string.IsNullOrEmpty(player.Label.Content?.ToString()))
+                {
+                    if (!(player.Image.Source is BitmapImage source) || source.UriSource.ToString() != readyImagePath)
+                    {
+                        return false;
+                    }
+                }
             }
+            return true;
         }
 
         public void NavigateToBoard()

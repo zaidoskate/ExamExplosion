@@ -41,11 +41,11 @@ namespace ExamExplosion
         {
             if (SessionManager.CurrentSession.gamertag.Equals(winnerGamertag))
             {
-                gameResultLbl.Content = "Ganaste";
+                gameResultLbl.Content = ExamExplosion.Properties.Resources.endGameLblYouWin;
             }
             else
             {
-                gameResultLbl.Content = "Perdiste";
+                gameResultLbl.Content = ExamExplosion.Properties.Resources.endGameLblYouLose;
             }
 
             winnerGamertagLbl.Content = winnerGamertag;
@@ -57,7 +57,7 @@ namespace ExamExplosion
                 string gamertag = playersGamertags.ElementAtOrDefault(0) ?? string.Empty;
                 player1lbl.Content = gamertag;
                 player1lbl.Visibility = Visibility.Visible;
-                if (!gamertag.StartsWith("GUEST") || gamertag == SessionManager.CurrentSession.gamertag)
+                if (!gamertag.StartsWith("GUEST") && !gamertag.Equals(SessionManager.CurrentSession.gamertag))
                 {
                     AddFriendPlayer1.Visibility = Visibility.Visible;
                     ReportPlayer1.Visibility = Visibility.Visible;
@@ -69,7 +69,7 @@ namespace ExamExplosion
                 string gamertag = playersGamertags.ElementAtOrDefault(1) ?? string.Empty;
                 player2lbl.Content = gamertag;
                 player2lbl.Visibility = Visibility.Visible;
-                if (!gamertag.StartsWith("GUEST") || gamertag == SessionManager.CurrentSession.gamertag)
+                if (!gamertag.StartsWith("GUEST") && !gamertag.Equals(SessionManager.CurrentSession.gamertag))
                 {
                     AddFriendPlayer2.Visibility = Visibility.Visible;
                     ReportPlayer2.Visibility = Visibility.Visible;
@@ -81,7 +81,7 @@ namespace ExamExplosion
                 string gamertag = playersGamertags.ElementAtOrDefault(2) ?? string.Empty;
                 player3lbl.Content = gamertag;
                 player3lbl.Visibility = Visibility.Visible;
-                if (!gamertag.StartsWith("GUEST") || gamertag == SessionManager.CurrentSession.gamertag)
+                if (!gamertag.StartsWith("GUEST") && !gamertag.Equals(SessionManager.CurrentSession.gamertag))
                 {
                     AddFriendPlayer3.Visibility = Visibility.Visible;
                     ReportPlayer3.Visibility = Visibility.Visible;
@@ -93,7 +93,7 @@ namespace ExamExplosion
                 string gamertag = playersGamertags.ElementAtOrDefault(3) ?? string.Empty;
                 player4lbl.Content = gamertag;
                 player4lbl.Visibility = Visibility.Visible;
-                if (!gamertag.StartsWith("GUEST") || gamertag == SessionManager.CurrentSession.gamertag)
+                if (!gamertag.StartsWith("GUEST") && !gamertag.Equals(SessionManager.CurrentSession.gamertag))
                 {
                     AddFriendPlayer4.Visibility = Visibility.Visible;
                     ReportPlayer4.Visibility = Visibility.Visible;

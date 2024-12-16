@@ -128,12 +128,11 @@
         </Button>
 
         <Button x:Name="goSettingsBtn" 
-                HorizontalAlignment="Left" 
-                Margin="684,24,0,0" 
+                HorizontalAlignment="Right" 
                 VerticalAlignment="Top" 
                 Cursor="Hand" 
                 Click="NavigateSettingsPage">
-            <Grid Height="108">
+            <Grid Height="108" Width="150">
                 <Image x:Name="goSettingsImg" 
                        Source="pack://application:,,,/Images/Settings.png" 
                        Stretch="Fill" 
@@ -143,32 +142,33 @@
                        Content="{x:Static p:Resources.globalLblSettings}" 
                        FontFamily="pack://application:,,,/Fonts/#VT323" 
                        FontSize="24" 
-                       HorizontalAlignment="Right" 
-                       VerticalAlignment="Top" 
-                       Height="53" 
-                       Margin="-15,65,0,0" />
+                       HorizontalAlignment="Center" 
+                       VerticalAlignment="Bottom" 
+                       Height="35" 
+                       Margin="0,65,0,0"/>
             </Grid>
         </Button>
 
         <Button x:Name="logOutBtn" 
-                HorizontalAlignment="Left" 
-                Margin="691,235,0,0" 
-                VerticalAlignment="Top" 
+                HorizontalAlignment="Right" 
+                VerticalAlignment="Bottom" 
                 Cursor="Hand" 
-                Click="LogOut">
-            <Grid>
+                Click="LogOut"
+                Margin="0,0,20,70"
+                Height="120">
+            <Grid Height="99">
                 <Image x:Name="logOutImg" 
                        Source="pack://application:,,,/Images/LogOut.png" 
                        Stretch="Fill" 
                        Width="80" 
-                       Height="80" />
+                       Height="80"
+                       VerticalAlignment="Top"/>
                 <Label x:Name="logOutLbl" 
                        Content="{x:Static p:Resources.homeLblLogout}" 
                        FontFamily="pack://application:,,,/Fonts/#VT323" 
                        FontSize="24" 
-                       HorizontalAlignment="Left" 
-                       VerticalAlignment="Top" 
-                       Margin="0,70,0,0" />
+                       HorizontalAlignment="Center" 
+                       VerticalAlignment="Bottom" />
             </Grid>
         </Button>
 
@@ -206,16 +206,16 @@
 
         <Button x:Name="viewFriendAndBlockListBtn" 
                 HorizontalAlignment="Center" 
-                Margin="0,361,0,0" 
                 VerticalAlignment="Top" 
-                Click="ViewFriendAndBlockList" 
-                Height="42" 
-                Width="46">
+                Click="ViewFriendAndBlockList"
+                Cursor="Hand"
+                Height="53" 
+                Width="56" Margin="0,333,0,0">
             <Image x:Name="friendAndBlockListImg" 
                    Source="pack://application:,,,/Images/FriendsAndBlockIcon.png" 
                    Stretch="Fill" 
-                   Width="42" 
-                   Height="40" />
+                   Width="56" 
+                   Height="53" />
         </Button>
     </Grid>
 </Page>
