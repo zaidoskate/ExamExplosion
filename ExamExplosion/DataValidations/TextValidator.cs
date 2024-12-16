@@ -38,6 +38,16 @@ namespace ExamExplosion.DataValidations
                 throw new DataValidationException(Resources.accountCreationLblInvalidGamertag);
             }
         }
+
+        public static void ValidateGamertagNotGuest(string text)
+        {
+            string textToValidate = text.ToUpper();
+            bool result = textToValidate.StartsWith("GUEST");
+            if (result)
+            {
+                throw new DataValidationException(Resources.accountCreationLblGamertagNotGuest);
+            }
+        }
         public static void ValidateGamertagFirstLetter(string text)
         {
             string pattern = @"^\d";

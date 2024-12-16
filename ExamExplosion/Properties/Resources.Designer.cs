@@ -133,6 +133,15 @@ namespace ExamExplosion.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Your gamertag must not start with Guest.
+        /// </summary>
+        public static string accountCreationLblGamertagNotGuest {
+            get {
+                return ResourceManager.GetString("accountCreationLblGamertagNotGuest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid email.
         /// </summary>
         public static string accountCreationLblInvalidEmail {
@@ -241,6 +250,15 @@ namespace ExamExplosion.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Has lost.
+        /// </summary>
+        public static string boardLblAnotherPlayerLost {
+            get {
+                return ResourceManager.GetString("boardLblAnotherPlayerLost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You obtained.
         /// </summary>
         public static string boardLblCardObtained {
@@ -255,6 +273,33 @@ namespace ExamExplosion.Properties {
         public static string boardLblCardRequested {
             get {
                 return ResourceManager.GetString("boardLblCardRequested", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your next turn will be double.
+        /// </summary>
+        public static string boardLblDoubleTurn {
+            get {
+                return ResourceManager.GetString("boardLblDoubleTurn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You&apos;ve lost.
+        /// </summary>
+        public static string boardLblPlayerLost {
+            get {
+                return ResourceManager.GetString("boardLblPlayerLost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use a re registration to win against exam bomb card or you&apos;ll lose a hit point.
+        /// </summary>
+        public static string boardLblReregistrationNeeded {
+            get {
+                return ResourceManager.GetString("boardLblReregistrationNeeded", resourceCulture);
             }
         }
         
@@ -412,6 +457,15 @@ namespace ExamExplosion.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This player can not be your friend because it&apos;s blocked.
+        /// </summary>
+        public static string endGameLblCouldNotBeFriends {
+            get {
+                return ResourceManager.GetString("endGameLblCouldNotBeFriends", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You added this player as a friend.
         /// </summary>
         public static string endGameLblPlayerAdded {
@@ -462,6 +516,24 @@ namespace ExamExplosion.Properties {
         public static string endGameLblReportTitle {
             get {
                 return ResourceManager.GetString("endGameLblReportTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Defeat.
+        /// </summary>
+        public static string endGameLblYouLose {
+            get {
+                return ResourceManager.GetString("endGameLblYouLose", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ganaste.
+        /// </summary>
+        public static string endGameLblYouWin {
+            get {
+                return ResourceManager.GetString("endGameLblYouWin", resourceCulture);
             }
         }
         
@@ -1065,6 +1137,24 @@ namespace ExamExplosion.Properties {
         public static string lobbyLblPlayers {
             get {
                 return ResourceManager.GetString("lobbyLblPlayers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All players must be ready to start.
+        /// </summary>
+        public static string lobbyLblPlayersArentReady {
+            get {
+                return ResourceManager.GetString("lobbyLblPlayersArentReady", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wait.
+        /// </summary>
+        public static string lobbyLblWait {
+            get {
+                return ResourceManager.GetString("lobbyLblWait", resourceCulture);
             }
         }
         

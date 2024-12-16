@@ -26,7 +26,7 @@
     <Page.Background>
         <ImageBrush ImageSource="pack://application:,,,/Images/Landscape1.jpeg" Stretch="UniformToFill" />
     </Page.Background>
-    
+
     <Grid>
         <Image Source="pack://application:,,,/Images/Exam.png" 
                Width="200" 
@@ -34,20 +34,20 @@
                RenderTransformOrigin="1.118,1.155" 
                Margin="50,0,0,0" />
         <Image Source="pack://application:,,,/Images/BackCard.png" 
-               Width="150" 
+               Width="96" 
                HorizontalAlignment="Right" 
                RenderTransformOrigin="1.118,1.155" 
-               Margin="0,-25,112,175" />
+               Margin="0,-5,97,296" />
         <Image Source="/Images/BackCard.png" 
-               Width="150" 
+               Width="97" 
                HorizontalAlignment="Right" 
                RenderTransformOrigin="1.118,1.155" 
-               Margin="0,22,57,128" />
+               Margin="0,20,62,271" />
         <Image Source="/Images/BackCard.png" 
-               Width="150" 
+               Width="96" 
                HorizontalAlignment="Right" 
                RenderTransformOrigin="1.118,1.155" 
-               Margin="0,78,0,72" />
+               Margin="0,50,26,241" />
         <Grid>
             <Label x:Name="gameResultLbl"
                    Content="" 
@@ -72,14 +72,15 @@
                    HorizontalContentAlignment="Center" 
                    FontSize="60" 
                    FontFamily="pack://application:,,,/Fonts/#VT323" />
-            <Label Visibility="Hidden" x:Name="player1lbl" 
+            <Label Visibility="Visible" x:Name="player1lbl" 
                    Content="" 
                    HorizontalAlignment="Left" 
                    Margin="270,184,0,0" 
                    VerticalAlignment="Top" 
                    HorizontalContentAlignment="Center" 
                    FontSize="40" 
-                   FontFamily="pack://application:,,,/Fonts/#VT323" />
+                   FontFamily="pack://application:,,,/Fonts/#VT323" 
+                   MaxWidth="180" />
             <Label Visibility="Hidden" x:Name="player2lbl" 
                    Content="" 
                    HorizontalAlignment="Left" 
@@ -87,7 +88,8 @@
                    VerticalAlignment="Top" 
                    HorizontalContentAlignment="Center" 
                    FontSize="40" 
-                   FontFamily="pack://application:,,,/Fonts/#VT323" />
+                   FontFamily="pack://application:,,,/Fonts/#VT323"
+                   MaxWidth="180"/>
             <Label Visibility="Hidden" x:Name="player3lbl" 
                    Content="" 
                    HorizontalAlignment="Left" 
@@ -95,7 +97,8 @@
                    VerticalAlignment="Top" 
                    HorizontalContentAlignment="Center" 
                    FontSize="40" 
-                   FontFamily="pack://application:,,,/Fonts/#VT323" />
+                   FontFamily="pack://application:,,,/Fonts/#VT323"
+                   MaxWidth="180"/>
             <Label Visibility="Hidden" x:Name="player4lbl" 
                    Content="" 
                    HorizontalAlignment="Left" 
@@ -103,14 +106,15 @@
                    VerticalAlignment="Top" 
                    HorizontalContentAlignment="Center" 
                    FontSize="40" 
-                   FontFamily="pack://application:,,,/Fonts/#VT323" />
+                   FontFamily="pack://application:,,,/Fonts/#VT323"
+                   MaxWidth="180"/>
             <Button Visibility="Hidden"  Width="60"  x:Name="AddFriendPlayer1"
                     Height="60" 
                     Background="Transparent" 
                     BorderBrush="Transparent" 
                     VerticalAlignment="Center" 
                     HorizontalAlignment="Center" 
-                    Margin="63,0,0,20"
+                    Margin="170,0,0,20"
                     Cursor="Hand"
                     Click="AddFriend">
                 <Image Source="/Images/AddFriendImage.png" Width="50" />
@@ -121,7 +125,7 @@
                     BorderBrush="Transparent" 
                     VerticalAlignment="Center" 
                     HorizontalAlignment="Center" 
-                    Margin="63,90,0,0"
+                    Margin="169,90,0,0"
                     Cursor="Hand"
                     Click="AddFriend">
                 <Image Source="/Images/AddFriendImage.png" Width="50" />
@@ -132,7 +136,7 @@
                     BorderBrush="Transparent" 
                     VerticalAlignment="Center" 
                     HorizontalAlignment="Center" 
-                    Margin="63,200,0,0"
+                    Margin="170,200,0,0"
                     Cursor="Hand"
                     Click="AddFriend">
                 <Image Source="/Images/AddFriendImage.png" Width="50" />
@@ -143,7 +147,7 @@
                     BorderBrush="Transparent" 
                     VerticalAlignment="Center" 
                     HorizontalAlignment="Center" 
-                    Margin="63,320,0,0"
+                    Margin="170,320,0,0"
                     Cursor="Hand"
                     Click="AddFriend">
                 <Image Source="/Images/AddFriendImage.png" Width="50" />
@@ -155,7 +159,7 @@
                     BorderBrush="Transparent" 
                     VerticalAlignment="Center" 
                     HorizontalAlignment="Center" 
-                    Margin="180,0,0,20"
+                    Margin="290,0,0,20"
                     Cursor="Hand"
                     Click="ReportPlayer">
                 <Image Source="/Images/ReportImage.png" Width="50" />
@@ -167,7 +171,7 @@
                     BorderBrush="Transparent" 
                     VerticalAlignment="Center" 
                     HorizontalAlignment="Center" 
-                    Margin="180,90,0,0"
+                    Margin="290,90,0,0"
                     Cursor="Hand"
                     Click="ReportPlayer">
                 <Image Source="/Images/ReportImage.png" Width="50" />
@@ -179,7 +183,7 @@
                     BorderBrush="Transparent" 
                     VerticalAlignment="Center" 
                     HorizontalAlignment="Center" 
-                    Margin="180,200,0,0"
+                    Margin="291,200,0,0"
                     Cursor="Hand"
                     Click="ReportPlayer">
                 <Image Source="/Images/ReportImage.png" Width="50" />
@@ -191,7 +195,7 @@
                     BorderBrush="Transparent" 
                     VerticalAlignment="Center" 
                     HorizontalAlignment="Center" 
-                    Margin="180,320,0,0"
+                    Margin="290,320,0,0"
                     Cursor="Hand"
                     Click="ReportPlayer">
                 <Image Source="/Images/ReportImage.png" Width="50" />
@@ -201,12 +205,12 @@
                 Height="60" 
                 Background="Transparent" 
                 BorderBrush="Transparent" 
-                VerticalAlignment="Center" 
-                HorizontalAlignment="Center" 
-                Margin="294,0,0,20"
+                VerticalAlignment="Top" 
+                HorizontalAlignment="Left" 
+                Margin="570,185,0,0"
                 Cursor="Hand"
                     Click="BlockPlayer">
-                <Image Source="/Images/Block.png" Width="50" />
+                <Image Source="/Images/Block.png" Width="50" RenderTransformOrigin="0.82,0.517" />
             </Button>
             <Button Visibility="Hidden"  Width="60" x:Name="BlockPlayer2"
                 Height="60" 
@@ -214,7 +218,7 @@
                 BorderBrush="Transparent" 
                 VerticalAlignment="Center" 
                 HorizontalAlignment="Center" 
-                Margin="294,90,0,0"
+                Margin="400,90,0,0"
                 Cursor="Hand"
                     Click="BlockPlayer">
                 <Image Source="/Images/Block.png" Width="50" />
@@ -225,7 +229,7 @@
                 BorderBrush="Transparent" 
                 VerticalAlignment="Center" 
                 HorizontalAlignment="Center" 
-                Margin="294,200,0,0"
+                Margin="400,200,0,0"
                 Cursor="Hand"
                     Click="BlockPlayer">
                 <Image Source="/Images/Block.png" Width="50" />
@@ -236,7 +240,7 @@
                 BorderBrush="Transparent" 
                 VerticalAlignment="Center" 
                 HorizontalAlignment="Center" 
-                Margin="294,320,0,0"
+                Margin="400,320,0,0"
                 Cursor="Hand"
                     Click="BlockPlayer">
                 <Image Source="/Images/Block.png" Width="50" />
@@ -246,9 +250,9 @@
                 Height="100" 
                 Background="Transparent" 
                 BorderBrush="Transparent" 
-                VerticalAlignment="Center" 
+                VerticalAlignment="Top" 
                 HorizontalAlignment="Right" 
-                Margin="0,320,20,0" 
+                Margin="0,311,22,0" 
                 Cursor="Hand" 
                 Click="LeaveGame">
             <Grid>

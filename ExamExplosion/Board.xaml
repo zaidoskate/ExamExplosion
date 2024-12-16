@@ -7,8 +7,11 @@
       mc:Ignorable="d"
       xmlns:p="clr-namespace:ExamExplosion.Properties"
       d:DesignHeight="720" d:DesignWidth="1200"
-      Title="ExamExplosion"
-      Background="#FFFFF2CC">
+      Title="ExamExplosion">
+
+    <Page.Background>
+        <ImageBrush ImageSource="pack://application:,,,/Images/GameBoard.jpeg" Stretch="UniformToFill" />
+    </Page.Background>
 
     <Page.Resources>
             <Style TargetType="Button">
@@ -53,8 +56,7 @@
     </Page.Resources>
 
     <Grid>
-        <Grid Width="750" VerticalAlignment="Top">
-            <Image Source="pack://application:,,,/Images/Header.png" />
+        <Grid Width="750" VerticalAlignment="Top" Margin="0,30,0,0">
             <Label Content="{x:Static p:Resources.gameTurn}"
                    HorizontalAlignment="Left"
                    VerticalAlignment="Center"

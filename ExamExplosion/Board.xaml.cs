@@ -588,13 +588,13 @@ namespace ExamExplosion
 
         public void ShowCardRequested(string playerRequesting)
         {
-            string message = $"Se le ha otorgado una de tus cartas a {playerRequesting}";
+            string message = playerRequesting + " " + ExamExplosion.Properties.Resources.boardLblCardRequested;
             DisplayNotification(message);
         }
 
         public void ShowCardObtained(string cardName)
         {
-            string message = $"Has obtenido una carta: {cardName}";
+            string message = ExamExplosion.Properties.Resources.boardLblCardObtained + " " + cardName;
             DisplayNotification(message);
         }
 
@@ -602,9 +602,15 @@ namespace ExamExplosion
         {
             var cardsToRemove = this.selectedCardsWrapPanel.Children.OfType<Image>().ToList();
                                             
-            foreach (var card in cardsToRemove)
+            var card = cardsToRemove.First();
+
+            int cardId = (int)card.Tag;
+            selectedCardsWrapPanel.Children.Remove(card);
+            gameManager.RemoveCardFromPlayerHand(cardId);
+            if (cardsToRemove.Count > 1)
             {
-                int cardId = (int)card.Tag;
+                card = cardsToRemove.ElementAt(1);
+                cardId = (int)card.Tag;
                 selectedCardsWrapPanel.Children.Remove(card);
                 gameManager.RemoveCardFromPlayerHand(cardId);
             }

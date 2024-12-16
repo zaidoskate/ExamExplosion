@@ -221,7 +221,7 @@ namespace ExamExplosion.Helpers
             gameResources.DrawTopCard();
             if (gameResources.HasBomb)
             {
-                boardPage.DisplayNotification("Utiliza una reinscripcion para ganar al repite o perderas una vida.");
+                boardPage.DisplayNotification(ExamExplosion.Properties.Resources.boardLblReregistrationNeeded);
                 boardPage.DisplayExamBomb();
                 return false;
             }
@@ -438,7 +438,7 @@ namespace ExamExplosion.Helpers
                     }
                 }
             }
-            else
+            else if(selectedCards.Count == 2)
             {
                 List<string> teacherCards = new List<string> { "profeA", "profeM", "profeO", "profeR", "profeS" };
                 if (selectedCards.Count == 2 && selectedCards[0] == selectedCards[1] && teacherCards.Contains(selectedCards[0]))
@@ -446,29 +446,32 @@ namespace ExamExplosion.Helpers
                     boardPage.StartPlayerSelection(gameCode);
                 }
             }
-            try
+            if (selectedCards.Count > 0)
             {
-                proxy.NotifyCardOnBoard(gameCode, selectedCards[0]);
+                try
+                {
+                    proxy.NotifyCardOnBoard(gameCode, selectedCards[0]);
+                }
+                catch (FaultException faultException)
+                {
+                    throw faultException;
+                }
+                catch (CommunicationException communicationException)
+                {
+                    throw communicationException;
+                }
+                catch (TimeoutException timeoutException)
+                {
+                    throw timeoutException;
+                }
+                boardPage.ClearSelectedCards();
             }
-            catch (FaultException faultException)
-            {
-                throw faultException;
-            }
-            catch (CommunicationException communicationException)
-            {
-                throw communicationException;
-            }
-            catch (TimeoutException timeoutException)
-            {
-                throw timeoutException;
-            }
-            boardPage.ClearSelectedCards();
         }
 
         public void SendDoubleTurn(string gameCode, string gamertag)
         {
             proxy.SendDoubleTurn(gameCode, gamertag);
-            proxy.NotifyMessage(gameCode, SessionManager.CurrentSession.gamertag, gamertag, "Tu proximo turno sera doble");
+            proxy.NotifyMessage(gameCode, SessionManager.CurrentSession.gamertag, gamertag, ExamExplosion.Properties.Resources.boardLblDoubleTurn);
         }
 
         public void NotifyCardRequested(string gameCode, string playerRequesting)
@@ -548,8 +551,8 @@ namespace ExamExplosion.Helpers
                 else
                 {
                     boardPage.DeletePlayerDeck();
-                    boardPage.DisplayNotification("Has perdido");
-                    proxy.NotifyMessage(gameCode, gamertag , "all", $"{gamertag} ha perdido.");
+                    boardPage.DisplayNotification(ExamExplosion.Properties.Resources.boardLblPlayerLost);
+                    proxy.NotifyMessage(gameCode, gamertag , "all", gamertag + " " + ExamExplosion.Properties.Resources.boardLblAnotherPlayerLost);
                     proxy.RemovePlayerByGame(gameCode, gamertag);
                     lostGame = true;
                 }

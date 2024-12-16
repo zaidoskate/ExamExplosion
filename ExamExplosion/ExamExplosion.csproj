@@ -352,6 +352,7 @@
     <Resource Include="Images\block.png" />
     <Resource Include="Images\openBlock.png" />
     <Resource Include="Images\BackgroundCards.jpeg" />
+    <Resource Include="Images\GameBoard.jpeg" />
     <Content Include="log4net.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
