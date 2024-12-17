@@ -338,10 +338,21 @@
     <None Include="Connected Services\ExamExplotionService\ExamExplosion.ExamExplotionService.PlayerManagement.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\ExamExplotionService\item.disco" />
     <None Include="Connected Services\ExamExplotionService\configuration91.svcinfo" />
     <None Include="Connected Services\ExamExplotionService\configuration.svcinfo" />
     <None Include="Connected Services\ExamExplotionService\item41.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ExamExplotionService\item42.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ExamExplotionService\item43.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ExamExplotionService\item44.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ExamExplotionService\item45.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\ExamExplotionService\Reference.svcmap">
@@ -353,25 +364,14 @@
     <Resource Include="Images\openBlock.png" />
     <Resource Include="Images\BackgroundCards.jpeg" />
     <Resource Include="Images\GameBoard.jpeg" />
+    <None Include="Connected Services\ExamExplotionService\item1.disco" />
     <Content Include="log4net.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="Connected Services\ExamExplotionService\item.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\ExamExplotionService\item1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\ExamExplotionService\item2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\ExamExplotionService\item3.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Connected Services\ExamExplotionService\item4.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ExamExplotionService\ServiceImplementation.wsdl" />
+    <None Include="Connected Services\ExamExplotionService\ServiceImplementation1.wsdl" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

@@ -455,7 +455,7 @@ namespace ExamExplosion.Helpers
             }
             if (selectedCards.Count > 0)
             {
-                if((gameResources.HasBomb && selectedCards[0] == "reRegistration") || !gameResources.HasBomb)
+                if((gameResources.HasBomb && selectedCards[0] == "reRegistration") || (!gameResources.HasBomb && selectedCards[0] != "reRegistration"))
                 {
                     try
                     {
@@ -683,7 +683,7 @@ namespace ExamExplosion.Helpers
         }
         public void CloseConnection()
         {
-            proxy.Close();
+            //proxy.Close();
         }
     }
 }
