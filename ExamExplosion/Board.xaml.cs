@@ -269,6 +269,7 @@ namespace ExamExplosion
             {
                 GameManager gameManager = new GameManager(this);
                 GameManagement game = gameManager.GetCurrentGameDetails(gameCode);
+                gameManager.AddHitPoints(game.Lives);
                 this.hitPoints = game.Lives;
                 this.timePerTurn = game.TimePerTurn;
                 this.gameCode = game.InvitationCode;

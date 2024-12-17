@@ -17,7 +17,7 @@ namespace ExamExplosion.Helpers
     public class GameManager : IGameManagerCallback
     {
         private readonly ExamExplotionService.GameManagerClient proxy = null;
-        private readonly GameResourcesManager gameResources = null;
+        private GameResourcesManager gameResources = null;
 
         private readonly Board boardPage = null;
 
@@ -455,7 +455,7 @@ namespace ExamExplosion.Helpers
             }
             if (selectedCards.Count > 0)
             {
-                if((gameResources.HasBomb && selectedCards[0] == "reRegistration") || !gameResources.HasBomb)
+                if((gameResources.HasBomb && selectedCards[0] == "reRegistration") || (!gameResources.HasBomb && selectedCards[0] != "reRegistration"))
                 {
                     try
                     {
@@ -584,11 +584,42 @@ namespace ExamExplosion.Helpers
                 {
                     boardPage.DeletePlayerDeck();
                     boardPage.DisplayNotification(ExamExplosion.Properties.Resources.boardLblPlayerLost);
-                    proxy.NotifyMessage(gameCode, gamertag , "all", gamertag + " " + ExamExplosion.Properties.Resources.boardLblAnotherPlayerLost);
-                    proxy.RemovePlayerByGame(gameCode, gamertag);
+                    try
+                    {
+                        proxy.NotifyMessage(gameCode, gamertag, "all", gamertag + " " + ExamExplosion.Properties.Resources.boardLblAnotherPlayerLost);
+                        proxy.RemovePlayerByGame(gameCode, gamertag);
+                    }
+                    catch (FaultException faultException)
+                    {
+                        throw faultException;
+                    }
+                    catch (CommunicationException communicationException)
+                    {
+                        throw communicationException;
+                    }
+                    catch (TimeoutException timeoutException)
+                    {
+                        throw timeoutException;
+                    }
+
                     lostGame = true;
                 }
-                proxy.NotifyEndTurn(gameCode, gamertag);
+                try
+                {
+                    proxy.NotifyEndTurn(gameCode, gamertag);
+                }
+                catch (FaultException faultException)
+                {
+                    throw faultException;
+                }
+                catch (CommunicationException communicationException)
+                {
+                    throw communicationException;
+                }
+                catch (TimeoutException timeoutException)
+                {
+                    throw timeoutException;
+                }
             }
 
             return lostGame;
@@ -683,7 +714,12 @@ namespace ExamExplosion.Helpers
         }
         public void CloseConnection()
         {
-            proxy.Close();
+            //proxy.Close();
+        }
+
+        public void AddHitPoints(int lives)
+        {
+            gameResources.Hp = lives;
         }
     }
 }

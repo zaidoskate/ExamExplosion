@@ -326,6 +326,11 @@
     <Resource Include="Images\leftArrow.png" />
     <Resource Include="Images\rightArrow.png" />
     <Resource Include="Images\Landscape1.jpeg" />
+    <Resource Include="Images\FriendsAndBlockIcon.png" />
+    <Resource Include="Images\block.png" />
+    <Resource Include="Images\openBlock.png" />
+    <Resource Include="Images\BackgroundCards.jpeg" />
+    <Resource Include="Images\GameBoard.jpeg" />
     <None Include="Connected Services\ExamExplotionService\ExamExplosion.ExamExplotionService.AccessoryManagement.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -338,40 +343,32 @@
     <None Include="Connected Services\ExamExplotionService\ExamExplosion.ExamExplotionService.PlayerManagement.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\ExamExplotionService\item.disco" />
     <None Include="Connected Services\ExamExplotionService\configuration91.svcinfo" />
     <None Include="Connected Services\ExamExplotionService\configuration.svcinfo" />
-    <None Include="Connected Services\ExamExplotionService\item41.xsd">
+    <None Include="Connected Services\ExamExplotionService\item5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ExamExplotionService\item51.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ExamExplotionService\item52.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ExamExplotionService\item53.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ExamExplotionService\item54.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\ExamExplotionService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <Resource Include="Images\FriendsAndBlockIcon.png" />
-    <Resource Include="Images\block.png" />
-    <Resource Include="Images\openBlock.png" />
-    <Resource Include="Images\BackgroundCards.jpeg" />
-    <Resource Include="Images\GameBoard.jpeg" />
+    <None Include="Connected Services\ExamExplotionService\item1.disco" />
     <Content Include="log4net.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="Connected Services\ExamExplotionService\item.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\ExamExplotionService\item1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\ExamExplotionService\item2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\ExamExplotionService\item3.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\ExamExplotionService\item4.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\ExamExplotionService\ServiceImplementation.wsdl" />
+    <None Include="Connected Services\ExamExplotionService\ServiceImplementation1.wsdl" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

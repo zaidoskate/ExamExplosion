@@ -282,8 +282,8 @@ namespace ExamExplosion.Helpers
 
         public void CloseConnection()
         {
-            proxy.Close();
-            proxy = null;
+            //proxy.Close();
+            //proxy = null;
         }
     }
 }
