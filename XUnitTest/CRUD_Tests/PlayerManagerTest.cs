@@ -10,29 +10,24 @@ namespace XUnitTest.CRUD_Tests
     public class PlayerManagerTest
     {
         private static ExamExplotionService.PlayerManagerClient proxy = new ExamExplotionService.PlayerManagerClient();
+        private static ExamExplotionService.FriendAndBlockListClient friendProxy = new ExamExplotionService.FriendAndBlockListClient();
 
         [Fact]
         public void TestAddFriendSuccess()
         {
-            //missing
-        }
-
-        [Fact]
-        public void TestAddFriendFail()
-        {
-            //missing
+            ExamExplotionService.FriendManagement friend = new ExamExplotionService.FriendManagement();
+            friend.Player1Id = 33;
+            friend.Player2Id = 34;
+            int result = friendProxy.AddFriend(friend);
+            Assert.True(result > 0);
         }
 
         [Fact]
         public void TestGetWinsSuccess()
         {
-            //missing
-        }
-
-        [Fact]
-        public void TestGetWinsFail()
-        {
-            //missing
+            int playerId = 33;
+            int playerWins = proxy.GetWins(playerId);
+            Assert.Equal(1, playerWins);
         }
 
         [Fact]
