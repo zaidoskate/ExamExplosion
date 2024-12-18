@@ -50,18 +50,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <ManifestCertificateThumbprint>8553FBD20E19D9BCD34BB068D47FC8DDACCDF7B7</ManifestCertificateThumbprint>
-  </PropertyGroup>
-  <PropertyGroup>
-    <ManifestKeyFile>ExamExplosion_TemporaryKey.pfx</ManifestKeyFile>
-  </PropertyGroup>
-  <PropertyGroup>
-    <GenerateManifests>true</GenerateManifests>
-  </PropertyGroup>
-  <PropertyGroup>
-    <SignManifests>true</SignManifests>
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="log4net, Version=3.0.3.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>packages\log4net.3.0.3\lib\net462\log4net.dll</HintPath>
@@ -358,47 +346,30 @@
     </None>
     <None Include="Connected Services\ExamExplotionService\configuration91.svcinfo" />
     <None Include="Connected Services\ExamExplotionService\configuration.svcinfo" />
-    <None Include="Connected Services\ExamExplotionService\item.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\ExamExplotionService\item1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\ExamExplotionService\item2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\ExamExplotionService\item3.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\ExamExplotionService\item4.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Connected Services\ExamExplotionService\item5.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ExamExplotionService\item6.xsd">
+    <None Include="Connected Services\ExamExplotionService\item51.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ExamExplotionService\item7.xsd">
+    <None Include="Connected Services\ExamExplotionService\item52.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ExamExplotionService\item8.xsd">
+    <None Include="Connected Services\ExamExplotionService\item53.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ExamExplotionService\item9.xsd">
+    <None Include="Connected Services\ExamExplotionService\item54.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\ExamExplotionService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Connected Services\ExamExplotionService\item.disco" />
-    <None Include="Connected Services\ExamExplotionService\item2.disco" />
+    <None Include="Connected Services\ExamExplotionService\item1.disco" />
     <Content Include="log4net.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="Connected Services\ExamExplotionService\ServiceImplementation.wsdl" />
-    <None Include="Connected Services\ExamExplotionService\ServiceImplementation2.wsdl" />
+    <None Include="Connected Services\ExamExplotionService\ServiceImplementation1.wsdl" />
     <None Include="ExamExplosion_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -437,7 +408,6 @@
   <ItemGroup>
     <Resource Include="Images\SendMessageImage.png" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Resource Include="Images\3cardsImage.png" />
     <Resource Include="Images\logOut.png" />

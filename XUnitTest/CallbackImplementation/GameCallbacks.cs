@@ -37,7 +37,7 @@ namespace XUnitTest.CallbackImplementation
 
         public void NotifyCardReceived(CardManagement card)
         {
-            NotificationMessage = $"Card received: {card.Name}";
+            NotificationMessage = $"Card received: {card.CardName}";
         }
 
         public void NotifyCardRequested(string gameCode, string playerRequesting)

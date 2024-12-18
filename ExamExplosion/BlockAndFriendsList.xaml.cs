@@ -212,6 +212,40 @@ namespace ExamExplosion
                 }
             }
         }
+
+        private void AddFriendBtn_Click(object sender, EventArgs e)
+        {
+            string gamertagTyped = this.gamertagTxtBox.Text;
+            if (AccountManager.VerifyExistingGamertag(gamertagTyped) == 1)
+            {
+                int playerToAddId = PlayerManager.GetPlayerIdByGamertag(gamertagTyped);
+                if (playerToAddId > 0 && playerToAddId != SessionManager.CurrentSession.userId)
+                {
+                    int friendsAdded = FriendsAndBloquedPlayersManager.AddFriend(SessionManager.CurrentSession.userId, playerToAddId);
+                    if (friendsAdded > 0)
+                    {
+                        UpdateFriends();
+                        new AlertModal(ExamExplosion.Properties.Resources.blockAndFriendsListLblFriendAdded, ExamExplosion.Properties.Resources.blockAndFriendsListLblFriendAddedDescription).ShowDialog();
+                    }
+                    else if(friendsAdded == -2)
+                    {
+                        new AlertModal(ExamExplosion.Properties.Resources.blockAndFriendsListLblAlreadyFriends, ExamExplosion.Properties.Resources.blockAndFriendsListLblAlreadyFriendsDescription).ShowDialog();
+                    }
+                    else
+                    {
+                        new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.blockAndFriendsListLblFriendAddError).ShowDialog();
+                    }
+                }
+                else
+                {
+                    new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.blockAndFriendsListLblUserFoundError).ShowDialog();
+                }
+            }
+            else
+            {
+                new AlertModal(ExamExplosion.Properties.Resources.blockAndFriendsListLblGamertagNotFound, ExamExplosion.Properties.Resources.blockAndFriendsListLblGamertagNotFound).ShowDialog();
+            }
+        }
         private void NavigateStartPage()
         {
             if (this.NavigationService != null)

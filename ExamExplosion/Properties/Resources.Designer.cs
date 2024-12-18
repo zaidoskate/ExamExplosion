@@ -196,6 +196,24 @@ namespace ExamExplosion.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Added.
+        /// </summary>
+        public static string blockAndFriendsListLblAlreadyFriends {
+            get {
+                return ResourceManager.GetString("blockAndFriendsListLblAlreadyFriends", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This player and you are already friends.
+        /// </summary>
+        public static string blockAndFriendsListLblAlreadyFriendsDescription {
+            get {
+                return ResourceManager.GetString("blockAndFriendsListLblAlreadyFriendsDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Blocked players.
         /// </summary>
         public static string blockAndFriendsListLblBlockedUsers {
@@ -223,11 +241,65 @@ namespace ExamExplosion.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Friend added.
+        /// </summary>
+        public static string blockAndFriendsListLblFriendAdded {
+            get {
+                return ResourceManager.GetString("blockAndFriendsListLblFriendAdded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You&apos;ve added this player to your friends.
+        /// </summary>
+        public static string blockAndFriendsListLblFriendAddedDescription {
+            get {
+                return ResourceManager.GetString("blockAndFriendsListLblFriendAddedDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occurred while adding this player to your friends.
+        /// </summary>
+        public static string blockAndFriendsListLblFriendAddError {
+            get {
+                return ResourceManager.GetString("blockAndFriendsListLblFriendAddError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gamertag not found.
+        /// </summary>
+        public static string blockAndFriendsListLblGamertagNotFound {
+            get {
+                return ResourceManager.GetString("blockAndFriendsListLblGamertagNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gamertag does not match any player&apos;s gamertag.
+        /// </summary>
+        public static string blockAndFriendsListLblGamertagNotFoundDescription {
+            get {
+                return ResourceManager.GetString("blockAndFriendsListLblGamertagNotFoundDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Do you want to unblock this player?.
         /// </summary>
         public static string blockAndFriendsListLblQuestion {
             get {
                 return ResourceManager.GetString("blockAndFriendsListLblQuestion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search.
+        /// </summary>
+        public static string blockAndFriendsListLblSearch {
+            get {
+                return ResourceManager.GetString("blockAndFriendsListLblSearch", resourceCulture);
             }
         }
         
@@ -246,6 +318,15 @@ namespace ExamExplosion.Properties {
         public static string blockAndFriendsListLblUnfriendQuestion {
             get {
                 return ResourceManager.GetString("blockAndFriendsListLblUnfriendQuestion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gamertag was not found.
+        /// </summary>
+        public static string blockAndFriendsListLblUserFoundError {
+            get {
+                return ResourceManager.GetString("blockAndFriendsListLblUserFoundError", resourceCulture);
             }
         }
         
@@ -300,6 +381,15 @@ namespace ExamExplosion.Properties {
         public static string boardLblReregistrationNeeded {
             get {
                 return ResourceManager.GetString("boardLblReregistrationNeeded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to has disconnected.
+        /// </summary>
+        public static string boardLblUserDisconnected {
+            get {
+                return ResourceManager.GetString("boardLblUserDisconnected", resourceCulture);
             }
         }
         

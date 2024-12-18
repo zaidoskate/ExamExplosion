@@ -22,6 +22,20 @@
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="BorderBrush" Value="Transparent" />
         </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border CornerRadius="15" 
+                                BorderBrush="Gray" 
+                                BorderThickness="2" 
+                                Background="White">
+                            <ScrollViewer x:Name="PART_ContentHost"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Page.Resources>
 
     <Page.Background>
@@ -139,5 +153,38 @@
                     FontSize="30" />
             </Grid>
         </Button>
+        <Grid>
+            <TextBox x:Name="gamertagTxtBox"
+                     HorizontalAlignment="Left" 
+                     Margin="50,0,0,60" 
+                     TextWrapping="Wrap" 
+                     VerticalAlignment="Bottom" 
+                     Width="150"
+                     Height="25"
+                     MaxLength="20"
+                     FontFamily="pack://application:,,,/Fonts/#VT323"
+                     FontSize="16"/>
+            <Button Width="75" 
+                     Height="45" 
+                     VerticalAlignment="Bottom" 
+                     HorizontalAlignment="Left" 
+                     Margin="220,0,0,48" 
+                     Background="Transparent" 
+                     BorderBrush="Transparent" 
+                     Cursor="Hand"
+                    Click="AddFriendBtn_Click">
+                <Grid>
+                    <Image Source="pack://application:,,,/Images/ButtonGreen.png"
+                           Width="75"/>
+                    <Label x:Name="Createlbl" 
+                           Content="{x:Static p:Resources.blockAndFriendsListLblSearch}" 
+                           HorizontalContentAlignment="Center" 
+                           VerticalContentAlignment="Center" 
+                           FontSize="20" 
+                           FontFamily="pack://application:,,,/Fonts/#VT323" 
+                           Foreground="White"/>
+                </Grid>
+            </Button>
+        </Grid>
     </Grid>
 </Page>

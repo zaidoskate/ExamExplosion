@@ -258,6 +258,11 @@ namespace ExamExplosion
                 log.Warn("Timeout al intentar conectar con el servidor", timeoutException);
                 NavigateStartPage();
             }
+            catch(Exception exception)
+            {
+                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblTimeoutException).ShowDialog();
+                log.Error("Excepcion al mandar un mensaje en el lobby", exception);
+            }
         }
         private void StartButton_Click(object sender, RoutedEventArgs e)
         {
