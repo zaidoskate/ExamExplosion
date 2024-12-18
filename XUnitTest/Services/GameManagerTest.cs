@@ -8,7 +8,7 @@ using ExamExplosion.ExamExplotionService;
 using ExamExplosion.Helpers;
 using ExamExplosion.Models;
 
-namespace XUnitTest
+namespace XUnitTest.Services
 {
     public class GameManagerTest
     {

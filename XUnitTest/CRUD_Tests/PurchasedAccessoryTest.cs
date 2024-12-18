@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace XUnitTest
+namespace XUnitTest.CRUD_Tests
 {
     public class PurchasedAccessoryTest
     {
@@ -16,11 +16,11 @@ namespace XUnitTest
             PurchasedAccessoryManagement purchasedAccessoryManagement = new PurchasedAccessoryManagement
             {
                 AccesoryId = 1,
-                PlayerId = 22,
+                PlayerId = 33,
                 InUse = true
             };
             bool accessoryInUse = false;
-            using (var proxy = new ExamExplotionService.AccessoryManagerClient())
+            using (var proxy = new AccessoryManagerClient())
             {
                 accessoryInUse = proxy.SetAccessoryInUse(purchasedAccessoryManagement);
             }
@@ -32,11 +32,11 @@ namespace XUnitTest
             PurchasedAccessoryManagement purchasedAccessoryManagement = new PurchasedAccessoryManagement
             {
                 AccesoryId = 1,
-                PlayerId = 16,
+                PlayerId = 33,
                 InUse = false
             };
             bool accessoryPurchased = false;
-            using (var proxy = new ExamExplotionService.AccessoryManagerClient())
+            using (var proxy = new AccessoryManagerClient())
             {
                 accessoryPurchased = proxy.PurchaseAccessory(purchasedAccessoryManagement);
             }
@@ -46,21 +46,13 @@ namespace XUnitTest
         public void GetAccessoryInUse()
         {
             int currentAccessoryId = -1;
-            using (var proxy = new ExamExplotionService.AccessoryManagerClient())
+            using (var proxy = new AccessoryManagerClient())
             {
-                AccessoryManagement purchasedAccessory = proxy.GetAccessoryInUse(17);
+                AccessoryManagement purchasedAccessory = proxy.GetAccessoryInUse(33);
                 currentAccessoryId = purchasedAccessory.AccessoryId;
             }
             int expectedAccessoryId = 1;
             Assert.Equal(expectedAccessoryId, currentAccessoryId);
-        }
-        public static List<int> GetPurchasedAccessoriesByPlayer(int playerId)
-        {
-            using (var proxy = new ExamExplotionService.AccessoryManagerClient())
-            {
-                var purchasedAccessories = proxy.GetPurchasedAccessories(playerId);
-                return purchasedAccessories.ToList();
-            }
         }
     }
 }

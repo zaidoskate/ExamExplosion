@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using XUnitTest.CallbackImplementation;
 
-namespace XUnitTest
+namespace XUnitTest.CRUD_Tests
 {
     public class LobbyManagerTest
     {

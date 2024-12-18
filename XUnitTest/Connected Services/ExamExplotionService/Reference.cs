@@ -466,6 +466,80 @@ namespace ExamExplotionService
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="FriendManagement", Namespace="http://schemas.datacontract.org/2004/07/ServerService")]
+    public partial class FriendManagement : object
+    {
+        
+        private int Player1IdField;
+        
+        private int Player2IdField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Player1Id
+        {
+            get
+            {
+                return this.Player1IdField;
+            }
+            set
+            {
+                this.Player1IdField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Player2Id
+        {
+            get
+            {
+                return this.Player2IdField;
+            }
+            set
+            {
+                this.Player2IdField = value;
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="BlockListManagement", Namespace="http://schemas.datacontract.org/2004/07/ServerService")]
+    public partial class BlockListManagement : object
+    {
+        
+        private int BlockedPlayerIdField;
+        
+        private int PlayerIdField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int BlockedPlayerId
+        {
+            get
+            {
+                return this.BlockedPlayerIdField;
+            }
+            set
+            {
+                this.BlockedPlayerIdField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int PlayerId
+        {
+            get
+            {
+                return this.PlayerIdField;
+            }
+            set
+            {
+                this.PlayerIdField = value;
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ExamExplotionService.ILobbyManager", CallbackContract=typeof(ExamExplotionService.ILobbyManagerCallback))]
     public interface ILobbyManager
@@ -532,6 +606,9 @@ namespace ExamExplotionService
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobbyManager/StartGame")]
         void StartGame(System.Collections.Generic.Dictionary<string, bool> lobbyPlayers);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobbyManager/UpdateHost")]
+        void UpdateHost();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
@@ -716,28 +793,28 @@ namespace ExamExplotionService
     {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthenticationManager/Login", ReplyAction="http://tempuri.org/IAuthenticationManager/LoginResponse")]
-        bool Login(ExamExplotionService.AccountManagement account);
+        int Login(ExamExplotionService.AccountManagement account);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthenticationManager/Login", ReplyAction="http://tempuri.org/IAuthenticationManager/LoginResponse")]
-        System.Threading.Tasks.Task<bool> LoginAsync(ExamExplotionService.AccountManagement account);
+        System.Threading.Tasks.Task<int> LoginAsync(ExamExplotionService.AccountManagement account);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthenticationManager/VerifyExistingGamertag", ReplyAction="http://tempuri.org/IAuthenticationManager/VerifyExistingGamertagResponse")]
+        int VerifyExistingGamertag(string gamertag);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthenticationManager/VerifyExistingGamertag", ReplyAction="http://tempuri.org/IAuthenticationManager/VerifyExistingGamertagResponse")]
+        System.Threading.Tasks.Task<int> VerifyExistingGamertagAsync(string gamertag);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthenticationManager/VerifyExistingEmail", ReplyAction="http://tempuri.org/IAuthenticationManager/VerifyExistingEmailResponse")]
+        int VerifyExistingEmail(string email);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthenticationManager/VerifyExistingEmail", ReplyAction="http://tempuri.org/IAuthenticationManager/VerifyExistingEmailResponse")]
+        System.Threading.Tasks.Task<int> VerifyExistingEmailAsync(string email);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthenticationManager/AddAccount", ReplyAction="http://tempuri.org/IAuthenticationManager/AddAccountResponse")]
         bool AddAccount(ExamExplotionService.AccountManagement account);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthenticationManager/AddAccount", ReplyAction="http://tempuri.org/IAuthenticationManager/AddAccountResponse")]
         System.Threading.Tasks.Task<bool> AddAccountAsync(ExamExplotionService.AccountManagement account);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthenticationManager/VerifyExistingGamertag", ReplyAction="http://tempuri.org/IAuthenticationManager/VerifyExistingGamertagResponse")]
-        bool VerifyExistingGamertag(string gamertag);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthenticationManager/VerifyExistingGamertag", ReplyAction="http://tempuri.org/IAuthenticationManager/VerifyExistingGamertagResponse")]
-        System.Threading.Tasks.Task<bool> VerifyExistingGamertagAsync(string gamertag);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthenticationManager/VerifyExistingEmail", ReplyAction="http://tempuri.org/IAuthenticationManager/VerifyExistingEmailResponse")]
-        bool VerifyExistingEmail(string email);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthenticationManager/VerifyExistingEmail", ReplyAction="http://tempuri.org/IAuthenticationManager/VerifyExistingEmailResponse")]
-        System.Threading.Tasks.Task<bool> VerifyExistingEmailAsync(string email);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthenticationManager/UpdatePassword", ReplyAction="http://tempuri.org/IAuthenticationManager/UpdatePasswordResponse")]
         bool UpdatePassword(ExamExplotionService.AccountManagement account);
@@ -756,6 +833,12 @@ namespace ExamExplotionService
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthenticationManager/DeactivateAccount", ReplyAction="http://tempuri.org/IAuthenticationManager/DeactivateAccountResponse")]
         System.Threading.Tasks.Task<bool> DeactivateAccountAsync(string gamertag);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthenticationManager/GetAccountGamertagById", ReplyAction="http://tempuri.org/IAuthenticationManager/GetAccountGamertagByIdResponse")]
+        string GetAccountGamertagById(int accountId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthenticationManager/GetAccountGamertagById", ReplyAction="http://tempuri.org/IAuthenticationManager/GetAccountGamertagByIdResponse")]
+        System.Threading.Tasks.Task<string> GetAccountGamertagByIdAsync(int accountId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
@@ -808,14 +891,34 @@ namespace ExamExplotionService
         {
         }
         
-        public bool Login(ExamExplotionService.AccountManagement account)
+        public int Login(ExamExplotionService.AccountManagement account)
         {
             return base.Channel.Login(account);
         }
         
-        public System.Threading.Tasks.Task<bool> LoginAsync(ExamExplotionService.AccountManagement account)
+        public System.Threading.Tasks.Task<int> LoginAsync(ExamExplotionService.AccountManagement account)
         {
             return base.Channel.LoginAsync(account);
+        }
+        
+        public int VerifyExistingGamertag(string gamertag)
+        {
+            return base.Channel.VerifyExistingGamertag(gamertag);
+        }
+        
+        public System.Threading.Tasks.Task<int> VerifyExistingGamertagAsync(string gamertag)
+        {
+            return base.Channel.VerifyExistingGamertagAsync(gamertag);
+        }
+        
+        public int VerifyExistingEmail(string email)
+        {
+            return base.Channel.VerifyExistingEmail(email);
+        }
+        
+        public System.Threading.Tasks.Task<int> VerifyExistingEmailAsync(string email)
+        {
+            return base.Channel.VerifyExistingEmailAsync(email);
         }
         
         public bool AddAccount(ExamExplotionService.AccountManagement account)
@@ -826,26 +929,6 @@ namespace ExamExplotionService
         public System.Threading.Tasks.Task<bool> AddAccountAsync(ExamExplotionService.AccountManagement account)
         {
             return base.Channel.AddAccountAsync(account);
-        }
-        
-        public bool VerifyExistingGamertag(string gamertag)
-        {
-            return base.Channel.VerifyExistingGamertag(gamertag);
-        }
-        
-        public System.Threading.Tasks.Task<bool> VerifyExistingGamertagAsync(string gamertag)
-        {
-            return base.Channel.VerifyExistingGamertagAsync(gamertag);
-        }
-        
-        public bool VerifyExistingEmail(string email)
-        {
-            return base.Channel.VerifyExistingEmail(email);
-        }
-        
-        public System.Threading.Tasks.Task<bool> VerifyExistingEmailAsync(string email)
-        {
-            return base.Channel.VerifyExistingEmailAsync(email);
         }
         
         public bool UpdatePassword(ExamExplotionService.AccountManagement account)
@@ -876,6 +959,16 @@ namespace ExamExplotionService
         public System.Threading.Tasks.Task<bool> DeactivateAccountAsync(string gamertag)
         {
             return base.Channel.DeactivateAccountAsync(gamertag);
+        }
+        
+        public string GetAccountGamertagById(int accountId)
+        {
+            return base.Channel.GetAccountGamertagById(accountId);
+        }
+        
+        public System.Threading.Tasks.Task<string> GetAccountGamertagByIdAsync(int accountId)
+        {
+            return base.Channel.GetAccountGamertagByIdAsync(accountId);
         }
         
         public virtual System.Threading.Tasks.Task OpenAsync()
@@ -941,12 +1034,6 @@ namespace ExamExplotionService
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameManager/InitializeDeck")]
         System.Threading.Tasks.Task InitializeDeckAsync(string gameCode, int playerCount, string gamertag);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameManager/EndGame", ReplyAction="http://tempuri.org/IGameManager/EndGameResponse")]
-        bool EndGame(string gameCode, int winnerPlayerId);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameManager/EndGame", ReplyAction="http://tempuri.org/IGameManager/EndGameResponse")]
-        System.Threading.Tasks.Task<bool> EndGameAsync(string gameCode, int winnerPlayerId);
-        
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameManager/NotifyEndTurn")]
         void NotifyEndTurn(string gameCode, string currentGamertag);
         
@@ -1006,6 +1093,54 @@ namespace ExamExplotionService
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameManager/SendCardToPlayer")]
         System.Threading.Tasks.Task SendCardToPlayerAsync(string gameCode, string playerRequesting, ExamExplotionService.CardManagement cardToSend);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameManager/NotifyMessage")]
+        void NotifyMessage(string gameCode, string gamertagOrigin, string gamertagDestination, string message);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameManager/NotifyMessage")]
+        System.Threading.Tasks.Task NotifyMessageAsync(string gameCode, string gamertagOrigin, string gamertagDestination, string message);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameManager/RemovePlayerByGame")]
+        void RemovePlayerByGame(string gameCode, string gamertag);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameManager/RemovePlayerByGame")]
+        System.Threading.Tasks.Task RemovePlayerByGameAsync(string gameCode, string gamertag);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameManager/SendExamBomb")]
+        void SendExamBomb(string gameCode, int gameDeckCount);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameManager/SendExamBomb")]
+        System.Threading.Tasks.Task SendExamBombAsync(string gameCode, int gameDeckCount);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameManager/SendDoubleTurn")]
+        void SendDoubleTurn(string gameCode, string gamertag);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameManager/SendDoubleTurn")]
+        System.Threading.Tasks.Task SendDoubleTurnAsync(string gameCode, string gamertag);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameManager/AddPlayersToGame")]
+        void AddPlayersToGame(string[] playerGamertags, string gameCode);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameManager/AddPlayersToGame")]
+        System.Threading.Tasks.Task AddPlayersToGameAsync(string[] playerGamertags, string gameCode);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameManager/GetGamePlayers", ReplyAction="http://tempuri.org/IGameManager/GetGamePlayersResponse")]
+        int[] GetGamePlayers(int gameId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameManager/GetGamePlayers", ReplyAction="http://tempuri.org/IGameManager/GetGamePlayersResponse")]
+        System.Threading.Tasks.Task<int[]> GetGamePlayersAsync(int gameId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameManager/GetAccountsIdByPlayerId", ReplyAction="http://tempuri.org/IGameManager/GetAccountsIdByPlayerIdResponse")]
+        int[] GetAccountsIdByPlayerId(int[] playersId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameManager/GetAccountsIdByPlayerId", ReplyAction="http://tempuri.org/IGameManager/GetAccountsIdByPlayerIdResponse")]
+        System.Threading.Tasks.Task<int[]> GetAccountsIdByPlayerIdAsync(int[] playersId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameManager/GetGameId", ReplyAction="http://tempuri.org/IGameManager/GetGameIdResponse")]
+        int GetGameId(string gameCode);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameManager/GetGameId", ReplyAction="http://tempuri.org/IGameManager/GetGameIdResponse")]
+        System.Threading.Tasks.Task<int> GetGameIdAsync(string gameCode);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
@@ -1035,6 +1170,15 @@ namespace ExamExplotionService
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameManager/NotifyCardReceived")]
         void NotifyCardReceived(ExamExplotionService.CardManagement card);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameManager/ReciveNotification")]
+        void ReciveNotification(string message);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameManager/EndTheGame")]
+        void EndTheGame(string gameCode, string winnerGamertag);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameManager/ReciveAndAddExamBomb")]
+        void ReciveAndAddExamBomb(int index);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
@@ -1105,16 +1249,6 @@ namespace ExamExplotionService
         public System.Threading.Tasks.Task InitializeDeckAsync(string gameCode, int playerCount, string gamertag)
         {
             return base.Channel.InitializeDeckAsync(gameCode, playerCount, gamertag);
-        }
-        
-        public bool EndGame(string gameCode, int winnerPlayerId)
-        {
-            return base.Channel.EndGame(gameCode, winnerPlayerId);
-        }
-        
-        public System.Threading.Tasks.Task<bool> EndGameAsync(string gameCode, int winnerPlayerId)
-        {
-            return base.Channel.EndGameAsync(gameCode, winnerPlayerId);
         }
         
         public void NotifyEndTurn(string gameCode, string currentGamertag)
@@ -1217,6 +1351,86 @@ namespace ExamExplotionService
             return base.Channel.SendCardToPlayerAsync(gameCode, playerRequesting, cardToSend);
         }
         
+        public void NotifyMessage(string gameCode, string gamertagOrigin, string gamertagDestination, string message)
+        {
+            base.Channel.NotifyMessage(gameCode, gamertagOrigin, gamertagDestination, message);
+        }
+        
+        public System.Threading.Tasks.Task NotifyMessageAsync(string gameCode, string gamertagOrigin, string gamertagDestination, string message)
+        {
+            return base.Channel.NotifyMessageAsync(gameCode, gamertagOrigin, gamertagDestination, message);
+        }
+        
+        public void RemovePlayerByGame(string gameCode, string gamertag)
+        {
+            base.Channel.RemovePlayerByGame(gameCode, gamertag);
+        }
+        
+        public System.Threading.Tasks.Task RemovePlayerByGameAsync(string gameCode, string gamertag)
+        {
+            return base.Channel.RemovePlayerByGameAsync(gameCode, gamertag);
+        }
+        
+        public void SendExamBomb(string gameCode, int gameDeckCount)
+        {
+            base.Channel.SendExamBomb(gameCode, gameDeckCount);
+        }
+        
+        public System.Threading.Tasks.Task SendExamBombAsync(string gameCode, int gameDeckCount)
+        {
+            return base.Channel.SendExamBombAsync(gameCode, gameDeckCount);
+        }
+        
+        public void SendDoubleTurn(string gameCode, string gamertag)
+        {
+            base.Channel.SendDoubleTurn(gameCode, gamertag);
+        }
+        
+        public System.Threading.Tasks.Task SendDoubleTurnAsync(string gameCode, string gamertag)
+        {
+            return base.Channel.SendDoubleTurnAsync(gameCode, gamertag);
+        }
+        
+        public void AddPlayersToGame(string[] playerGamertags, string gameCode)
+        {
+            base.Channel.AddPlayersToGame(playerGamertags, gameCode);
+        }
+        
+        public System.Threading.Tasks.Task AddPlayersToGameAsync(string[] playerGamertags, string gameCode)
+        {
+            return base.Channel.AddPlayersToGameAsync(playerGamertags, gameCode);
+        }
+        
+        public int[] GetGamePlayers(int gameId)
+        {
+            return base.Channel.GetGamePlayers(gameId);
+        }
+        
+        public System.Threading.Tasks.Task<int[]> GetGamePlayersAsync(int gameId)
+        {
+            return base.Channel.GetGamePlayersAsync(gameId);
+        }
+        
+        public int[] GetAccountsIdByPlayerId(int[] playersId)
+        {
+            return base.Channel.GetAccountsIdByPlayerId(playersId);
+        }
+        
+        public System.Threading.Tasks.Task<int[]> GetAccountsIdByPlayerIdAsync(int[] playersId)
+        {
+            return base.Channel.GetAccountsIdByPlayerIdAsync(playersId);
+        }
+        
+        public int GetGameId(string gameCode)
+        {
+            return base.Channel.GetGameId(gameCode);
+        }
+        
+        public System.Threading.Tasks.Task<int> GetGameIdAsync(string gameCode)
+        {
+            return base.Channel.GetGameIdAsync(gameCode);
+        }
+        
         public virtual System.Threading.Tasks.Task OpenAsync()
         {
             return System.Threading.Tasks.Task.Factory.FromAsync(((System.ServiceModel.ICommunicationObject)(this)).BeginOpen(null, null), new System.Action<System.IAsyncResult>(((System.ServiceModel.ICommunicationObject)(this)).EndOpen));
@@ -1280,6 +1494,12 @@ namespace ExamExplotionService
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerManager/UpdateScore", ReplyAction="http://tempuri.org/IPlayerManager/UpdateScoreResponse")]
         System.Threading.Tasks.Task<bool> UpdateScoreAsync(int userId, int newScore);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerManager/AddWin", ReplyAction="http://tempuri.org/IPlayerManager/AddWinResponse")]
+        bool AddWin(int userId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerManager/AddWin", ReplyAction="http://tempuri.org/IPlayerManager/AddWinResponse")]
+        System.Threading.Tasks.Task<bool> AddWinAsync(int userId);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerManager/GetWins", ReplyAction="http://tempuri.org/IPlayerManager/GetWinsResponse")]
         int GetWins(int playerId);
         
@@ -1291,12 +1511,6 @@ namespace ExamExplotionService
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerManager/GetPoints", ReplyAction="http://tempuri.org/IPlayerManager/GetPointsResponse")]
         System.Threading.Tasks.Task<int> GetPointsAsync(int playerId);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerManager/AddFriend", ReplyAction="http://tempuri.org/IPlayerManager/AddFriendResponse")]
-        bool AddFriend(int playerId, int friendId);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerManager/AddFriend", ReplyAction="http://tempuri.org/IPlayerManager/AddFriendResponse")]
-        System.Threading.Tasks.Task<bool> AddFriendAsync(int playerId, int friendId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerManager/AddGuest", ReplyAction="http://tempuri.org/IPlayerManager/AddGuestResponse")]
         ExamExplotionService.GuestManagement AddGuest();
@@ -1393,6 +1607,16 @@ namespace ExamExplotionService
             return base.Channel.UpdateScoreAsync(userId, newScore);
         }
         
+        public bool AddWin(int userId)
+        {
+            return base.Channel.AddWin(userId);
+        }
+        
+        public System.Threading.Tasks.Task<bool> AddWinAsync(int userId)
+        {
+            return base.Channel.AddWinAsync(userId);
+        }
+        
         public int GetWins(int playerId)
         {
             return base.Channel.GetWins(playerId);
@@ -1411,16 +1635,6 @@ namespace ExamExplotionService
         public System.Threading.Tasks.Task<int> GetPointsAsync(int playerId)
         {
             return base.Channel.GetPointsAsync(playerId);
-        }
-        
-        public bool AddFriend(int playerId, int friendId)
-        {
-            return base.Channel.AddFriend(playerId, friendId);
-        }
-        
-        public System.Threading.Tasks.Task<bool> AddFriendAsync(int playerId, int friendId)
-        {
-            return base.Channel.AddFriendAsync(playerId, friendId);
         }
         
         public ExamExplotionService.GuestManagement AddGuest()
@@ -1809,6 +2023,204 @@ namespace ExamExplotionService
         }
     }
     
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ExamExplotionService.IFriendAndBlockList")]
+    public interface IFriendAndBlockList
+    {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendAndBlockList/AddFriend", ReplyAction="http://tempuri.org/IFriendAndBlockList/AddFriendResponse")]
+        int AddFriend(ExamExplotionService.FriendManagement friend);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendAndBlockList/AddFriend", ReplyAction="http://tempuri.org/IFriendAndBlockList/AddFriendResponse")]
+        System.Threading.Tasks.Task<int> AddFriendAsync(ExamExplotionService.FriendManagement friend);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendAndBlockList/RemoveFriend", ReplyAction="http://tempuri.org/IFriendAndBlockList/RemoveFriendResponse")]
+        bool RemoveFriend(ExamExplotionService.FriendManagement friend);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendAndBlockList/RemoveFriend", ReplyAction="http://tempuri.org/IFriendAndBlockList/RemoveFriendResponse")]
+        System.Threading.Tasks.Task<bool> RemoveFriendAsync(ExamExplotionService.FriendManagement friend);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendAndBlockList/GetFriendsGamertags", ReplyAction="http://tempuri.org/IFriendAndBlockList/GetFriendsGamertagsResponse")]
+        System.Collections.Generic.Dictionary<int, string> GetFriendsGamertags(int playerId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendAndBlockList/GetFriendsGamertags", ReplyAction="http://tempuri.org/IFriendAndBlockList/GetFriendsGamertagsResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<int, string>> GetFriendsGamertagsAsync(int playerId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendAndBlockList/AddBlock", ReplyAction="http://tempuri.org/IFriendAndBlockList/AddBlockResponse")]
+        int AddBlock(ExamExplotionService.BlockListManagement blockList);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendAndBlockList/AddBlock", ReplyAction="http://tempuri.org/IFriendAndBlockList/AddBlockResponse")]
+        System.Threading.Tasks.Task<int> AddBlockAsync(ExamExplotionService.BlockListManagement blockList);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendAndBlockList/RemoveBlock", ReplyAction="http://tempuri.org/IFriendAndBlockList/RemoveBlockResponse")]
+        bool RemoveBlock(ExamExplotionService.BlockListManagement blockList);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendAndBlockList/RemoveBlock", ReplyAction="http://tempuri.org/IFriendAndBlockList/RemoveBlockResponse")]
+        System.Threading.Tasks.Task<bool> RemoveBlockAsync(ExamExplotionService.BlockListManagement blockList);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendAndBlockList/GetBlockedGamertags", ReplyAction="http://tempuri.org/IFriendAndBlockList/GetBlockedGamertagsResponse")]
+        System.Collections.Generic.Dictionary<int, string> GetBlockedGamertags(int playerId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendAndBlockList/GetBlockedGamertags", ReplyAction="http://tempuri.org/IFriendAndBlockList/GetBlockedGamertagsResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<int, string>> GetBlockedGamertagsAsync(int playerId);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    public interface IFriendAndBlockListChannel : ExamExplotionService.IFriendAndBlockList, System.ServiceModel.IClientChannel
+    {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    public partial class FriendAndBlockListClient : System.ServiceModel.ClientBase<ExamExplotionService.IFriendAndBlockList>, ExamExplotionService.IFriendAndBlockList
+    {
+        
+        /// <summary>
+        /// Implemente este método parcial para configurar el punto de conexión de servicio.
+        /// </summary>
+        /// <param name="serviceEndpoint">El punto de conexión para configurar</param>
+        /// <param name="clientCredentials">Credenciales de cliente</param>
+        static partial void ConfigureEndpoint(System.ServiceModel.Description.ServiceEndpoint serviceEndpoint, System.ServiceModel.Description.ClientCredentials clientCredentials);
+        
+        public FriendAndBlockListClient() : 
+                base(FriendAndBlockListClient.GetDefaultBinding(), FriendAndBlockListClient.GetDefaultEndpointAddress())
+        {
+            this.Endpoint.Name = EndpointConfiguration.NetTcpBinding_IFriendAndBlockList.ToString();
+            ConfigureEndpoint(this.Endpoint, this.ClientCredentials);
+        }
+        
+        public FriendAndBlockListClient(EndpointConfiguration endpointConfiguration) : 
+                base(FriendAndBlockListClient.GetBindingForEndpoint(endpointConfiguration), FriendAndBlockListClient.GetEndpointAddress(endpointConfiguration))
+        {
+            this.Endpoint.Name = endpointConfiguration.ToString();
+            ConfigureEndpoint(this.Endpoint, this.ClientCredentials);
+        }
+        
+        public FriendAndBlockListClient(EndpointConfiguration endpointConfiguration, string remoteAddress) : 
+                base(FriendAndBlockListClient.GetBindingForEndpoint(endpointConfiguration), new System.ServiceModel.EndpointAddress(remoteAddress))
+        {
+            this.Endpoint.Name = endpointConfiguration.ToString();
+            ConfigureEndpoint(this.Endpoint, this.ClientCredentials);
+        }
+        
+        public FriendAndBlockListClient(EndpointConfiguration endpointConfiguration, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(FriendAndBlockListClient.GetBindingForEndpoint(endpointConfiguration), remoteAddress)
+        {
+            this.Endpoint.Name = endpointConfiguration.ToString();
+            ConfigureEndpoint(this.Endpoint, this.ClientCredentials);
+        }
+        
+        public FriendAndBlockListClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(binding, remoteAddress)
+        {
+        }
+        
+        public int AddFriend(ExamExplotionService.FriendManagement friend)
+        {
+            return base.Channel.AddFriend(friend);
+        }
+        
+        public System.Threading.Tasks.Task<int> AddFriendAsync(ExamExplotionService.FriendManagement friend)
+        {
+            return base.Channel.AddFriendAsync(friend);
+        }
+        
+        public bool RemoveFriend(ExamExplotionService.FriendManagement friend)
+        {
+            return base.Channel.RemoveFriend(friend);
+        }
+        
+        public System.Threading.Tasks.Task<bool> RemoveFriendAsync(ExamExplotionService.FriendManagement friend)
+        {
+            return base.Channel.RemoveFriendAsync(friend);
+        }
+        
+        public System.Collections.Generic.Dictionary<int, string> GetFriendsGamertags(int playerId)
+        {
+            return base.Channel.GetFriendsGamertags(playerId);
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<int, string>> GetFriendsGamertagsAsync(int playerId)
+        {
+            return base.Channel.GetFriendsGamertagsAsync(playerId);
+        }
+        
+        public int AddBlock(ExamExplotionService.BlockListManagement blockList)
+        {
+            return base.Channel.AddBlock(blockList);
+        }
+        
+        public System.Threading.Tasks.Task<int> AddBlockAsync(ExamExplotionService.BlockListManagement blockList)
+        {
+            return base.Channel.AddBlockAsync(blockList);
+        }
+        
+        public bool RemoveBlock(ExamExplotionService.BlockListManagement blockList)
+        {
+            return base.Channel.RemoveBlock(blockList);
+        }
+        
+        public System.Threading.Tasks.Task<bool> RemoveBlockAsync(ExamExplotionService.BlockListManagement blockList)
+        {
+            return base.Channel.RemoveBlockAsync(blockList);
+        }
+        
+        public System.Collections.Generic.Dictionary<int, string> GetBlockedGamertags(int playerId)
+        {
+            return base.Channel.GetBlockedGamertags(playerId);
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<int, string>> GetBlockedGamertagsAsync(int playerId)
+        {
+            return base.Channel.GetBlockedGamertagsAsync(playerId);
+        }
+        
+        public virtual System.Threading.Tasks.Task OpenAsync()
+        {
+            return System.Threading.Tasks.Task.Factory.FromAsync(((System.ServiceModel.ICommunicationObject)(this)).BeginOpen(null, null), new System.Action<System.IAsyncResult>(((System.ServiceModel.ICommunicationObject)(this)).EndOpen));
+        }
+        
+        private static System.ServiceModel.Channels.Binding GetBindingForEndpoint(EndpointConfiguration endpointConfiguration)
+        {
+            if ((endpointConfiguration == EndpointConfiguration.NetTcpBinding_IFriendAndBlockList))
+            {
+                System.ServiceModel.NetTcpBinding result = new System.ServiceModel.NetTcpBinding();
+                result.MaxBufferSize = int.MaxValue;
+                result.ReaderQuotas = System.Xml.XmlDictionaryReaderQuotas.Max;
+                result.MaxReceivedMessageSize = int.MaxValue;
+                result.Security.Mode = System.ServiceModel.SecurityMode.None;
+                result.ReliableSession.Enabled = true;
+                return result;
+            }
+            throw new System.InvalidOperationException(string.Format("No se pudo encontrar un punto de conexión con el nombre \"{0}\".", endpointConfiguration));
+        }
+        
+        private static System.ServiceModel.EndpointAddress GetEndpointAddress(EndpointConfiguration endpointConfiguration)
+        {
+            if ((endpointConfiguration == EndpointConfiguration.NetTcpBinding_IFriendAndBlockList))
+            {
+                return new System.ServiceModel.EndpointAddress("net.tcp://localhost:8081/FriendAndBlockListManager");
+            }
+            throw new System.InvalidOperationException(string.Format("No se pudo encontrar un punto de conexión con el nombre \"{0}\".", endpointConfiguration));
+        }
+        
+        private static System.ServiceModel.Channels.Binding GetDefaultBinding()
+        {
+            return FriendAndBlockListClient.GetBindingForEndpoint(EndpointConfiguration.NetTcpBinding_IFriendAndBlockList);
+        }
+        
+        private static System.ServiceModel.EndpointAddress GetDefaultEndpointAddress()
+        {
+            return FriendAndBlockListClient.GetEndpointAddress(EndpointConfiguration.NetTcpBinding_IFriendAndBlockList);
+        }
+        
+        public enum EndpointConfiguration
+        {
+            
+            NetTcpBinding_IFriendAndBlockList,
+        }
+    }
+    
     public class ReceiveMessageReceivedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
     {
         
@@ -2046,6 +2458,78 @@ namespace ExamExplotionService
         }
     }
     
+    public class ReciveNotificationReceivedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
+    {
+        
+        private object[] results;
+        
+        public ReciveNotificationReceivedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState)
+        {
+            this.results = results;
+        }
+        
+        public string message
+        {
+            get
+            {
+                base.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    public class EndTheGameReceivedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
+    {
+        
+        private object[] results;
+        
+        public EndTheGameReceivedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState)
+        {
+            this.results = results;
+        }
+        
+        public string gameCode
+        {
+            get
+            {
+                base.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+        
+        public string winnerGamertag
+        {
+            get
+            {
+                base.RaiseExceptionIfNecessary();
+                return ((string)(this.results[1]));
+            }
+        }
+    }
+    
+    public class ReciveAndAddExamBombReceivedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
+    {
+        
+        private object[] results;
+        
+        public ReciveAndAddExamBombReceivedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState)
+        {
+            this.results = results;
+        }
+        
+        public int index
+        {
+            get
+            {
+                base.RaiseExceptionIfNecessary();
+                return ((int)(this.results[0]));
+            }
+        }
+    }
+    
     public partial class GameManagerClient : GameManagerClientBase
     {
         
@@ -2097,6 +2581,12 @@ namespace ExamExplotionService
         public event System.EventHandler<NotifyCardRequestedReceivedEventArgs> NotifyCardRequestedReceived;
         
         public event System.EventHandler<NotifyCardReceivedReceivedEventArgs> NotifyCardReceivedReceived;
+        
+        public event System.EventHandler<ReciveNotificationReceivedEventArgs> ReciveNotificationReceived;
+        
+        public event System.EventHandler<EndTheGameReceivedEventArgs> EndTheGameReceived;
+        
+        public event System.EventHandler<ReciveAndAddExamBombReceivedEventArgs> ReciveAndAddExamBombReceived;
         
         private void OnUpdateCurrentTurnReceived(object state)
         {
@@ -2170,6 +2660,33 @@ namespace ExamExplotionService
             }
         }
         
+        private void OnReciveNotificationReceived(object state)
+        {
+            if ((this.ReciveNotificationReceived != null))
+            {
+                object[] results = ((object[])(state));
+                this.ReciveNotificationReceived(this, new ReciveNotificationReceivedEventArgs(results, null, false, null));
+            }
+        }
+        
+        private void OnEndTheGameReceived(object state)
+        {
+            if ((this.EndTheGameReceived != null))
+            {
+                object[] results = ((object[])(state));
+                this.EndTheGameReceived(this, new EndTheGameReceivedEventArgs(results, null, false, null));
+            }
+        }
+        
+        private void OnReciveAndAddExamBombReceived(object state)
+        {
+            if ((this.ReciveAndAddExamBombReceived != null))
+            {
+                object[] results = ((object[])(state));
+                this.ReciveAndAddExamBombReceived(this, new ReciveAndAddExamBombReceivedEventArgs(results, null, false, null));
+            }
+        }
+        
         private class GameManagerClientCallback : object, IGameManagerCallback
         {
             
@@ -2227,6 +2744,25 @@ namespace ExamExplotionService
             {
                 this.proxy.OnNotifyCardReceivedReceived(new object[] {
                             card});
+            }
+            
+            public void ReciveNotification(string message)
+            {
+                this.proxy.OnReciveNotificationReceived(new object[] {
+                            message});
+            }
+            
+            public void EndTheGame(string gameCode, string winnerGamertag)
+            {
+                this.proxy.OnEndTheGameReceived(new object[] {
+                            gameCode,
+                            winnerGamertag});
+            }
+            
+            public void ReciveAndAddExamBomb(int index)
+            {
+                this.proxy.OnReciveAndAddExamBombReceived(new object[] {
+                            index});
             }
         }
     }

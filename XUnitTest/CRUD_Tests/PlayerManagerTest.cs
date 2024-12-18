@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace XUnitTest
+namespace XUnitTest.CRUD_Tests
 {
     public class PlayerManagerTest
     {
