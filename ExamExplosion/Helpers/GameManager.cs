@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -724,7 +725,44 @@ namespace ExamExplosion.Helpers
         }
         public void CloseConnection()
         {
-            //proxy.Close();
+            try
+            {
+                proxy.Close();
+            }
+            catch (FaultException faultException)
+            {
+                throw faultException;
+            }
+            catch (CommunicationException communicationException)
+            {
+                throw communicationException;
+            }
+            catch (TimeoutException timeoutException)
+            {
+                throw timeoutException;
+            }
+        }
+
+        public void DisconnectGame(string gameCode, string gamertag)
+        {
+            try
+            {
+                proxy.NotifyMessage(gameCode, gamertag, "all",$"{gamertag} {ExamExplosion.Properties.Resources.boardLblUserDisconnected}");
+                Thread.Sleep(5000);
+                proxy.DisconnectGame(gameCode, gamertag);
+            }
+            catch (FaultException faultException)
+            {
+                throw faultException;
+            }
+            catch (CommunicationException communicationException)
+            {
+                throw communicationException;
+            }
+            catch (TimeoutException timeoutException)
+            {
+                throw timeoutException;
+            }
         }
     }
 }

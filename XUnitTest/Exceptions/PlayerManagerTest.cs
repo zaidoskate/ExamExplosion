@@ -11,7 +11,7 @@ namespace XUnitTest.Exceptions
         private static ExamExplotionService.FriendAndBlockListClient friendProxy = new ExamExplotionService.FriendAndBlockListClient();
 
         [Fact]
-        public void TestAddFriendThrowsCommunicationException()
+        public void TestAddFriendThrowsCommunicationObjectFaultedException()
         {
             ExamExplotionService.FriendManagement friend = new ExamExplotionService.FriendManagement
             {
@@ -19,19 +19,19 @@ namespace XUnitTest.Exceptions
                 Player2Id = 34
             };
 
-            Assert.Throws<CommunicationException>(() => friendProxy.AddFriend(friend));
+            Assert.Throws<CommunicationObjectFaultedException>(() => friendProxy.AddFriend(friend));
         }
 
         [Fact]
-        public void TestGetWinsThrowsCommunicationException()
+        public void TestGetWinsThrowsCommunicationObjectFaultedException()
         {
             int playerId = 33;
 
-            Assert.Throws<CommunicationException>(() => proxy.GetWins(playerId));
+            Assert.Throws<CommunicationObjectFaultedException>(() => proxy.GetWins(playerId));
         }
 
         [Fact]
-        public void TestRegisterPlayerThrowsCommunicationException()
+        public void TestRegisterPlayerThrowsCommunicationObjectFaultedException()
         {
             ExamExplotionService.PlayerManagement playerToRegister = new ExamExplotionService.PlayerManagement
             {
@@ -39,33 +39,33 @@ namespace XUnitTest.Exceptions
                 AccountId = 1
             };
 
-            Assert.Throws<CommunicationException>(() => proxy.RegisterPlayer(playerToRegister));
+            Assert.Throws<CommunicationObjectFaultedException>(() => proxy.RegisterPlayer(playerToRegister));
         }
 
         [Fact]
-        public void TestRegisterPlayerFailThrowsCommunicationException()
+        public void TestRegisterPlayerFailThrowsCommunicationObjectFaultedException()
         {
             ExamExplotionService.PlayerManagement playerToRegister = new ExamExplotionService.PlayerManagement();
 
-            Assert.Throws<CommunicationException>(() => proxy.RegisterPlayer(playerToRegister));
+            Assert.Throws<CommunicationObjectFaultedException>(() => proxy.RegisterPlayer(playerToRegister));
         }
 
         [Fact]
-        public void TestUpdateScoreThrowsCommunicationException()
+        public void TestUpdateScoreThrowsCommunicationObjectFaultedException()
         {
             int userId = 1;
             int newScore = 10;
 
-            Assert.Throws<CommunicationException>(() => proxy.UpdateScore(userId, newScore));
+            Assert.Throws<CommunicationObjectFaultedException>(() => proxy.UpdateScore(userId, newScore));
         }
 
         [Fact]
-        public void TestUpdateScoreFailThrowsCommunicationException()
+        public void TestUpdateScoreFailThrowsCommunicationObjectFaultedException()
         {
             int userId = -1;
             int newScore = -10;
 
-            Assert.Throws<CommunicationException>(() => proxy.UpdateScore(userId, newScore));
+            Assert.Throws<CommunicationObjectFaultedException>(() => proxy.UpdateScore(userId, newScore));
         }
     }
 }
