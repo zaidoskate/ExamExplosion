@@ -290,7 +290,7 @@ namespace ExamExplosion.Helpers
         {
             try
             {
-                proxy.PlayGame(lobbyCode);
+                bool canPlayGame = proxy.PlayGame(lobbyCode);
             }
             catch (FaultException faultException)
             {

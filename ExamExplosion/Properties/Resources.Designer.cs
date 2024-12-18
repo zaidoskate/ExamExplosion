@@ -500,7 +500,79 @@ namespace ExamExplosion.Properties {
                 return ResourceManager.GetString("endgameLblPlayerObtainingError", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   Busca una cadena traducida similar a An error occurred while saving game results, please let us know!.
+        /// </summary>
+        public static string blockAndFriendsListLblGamertagNotFound {
+            get {
+                return ResourceManager.GetString("blockAndFriendsListLblGamertagNotFound", resourceCulture);
+            }
+        }
         
+        /// <summary>
+        ///   Busca una cadena traducida similar a An error occurred while saving game results, please let us know!.
+        /// </summary>
+        public static string blockAndFriendsListLblUserFoundError {
+            get {
+                return ResourceManager.GetString("blockAndFriendsListLblUserFoundError", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Busca una cadena traducida similar a An error occurred while saving game results, please let us know!.
+        /// </summary>
+        public static string blockAndFriendsListLblFriendAddError{
+            get {
+                return ResourceManager.GetString("blockAndFriendsListLblFriendAddError", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Busca una cadena traducida similar a An error occurred while saving game results, please let us know!.
+        /// </summary>
+        public static string blockAndFriendsListLblFriendAddedDescription {
+            get {
+                return ResourceManager.GetString("blockAndFriendsListLblFriendAddedDescription", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Busca una cadena traducida similar a An error occurred while saving game results, please let us know!.
+        /// </summary>
+        public static string blockAndFriendsListLblFriendAdded{
+            get {
+                return ResourceManager.GetString("blockAndFriendsListLblFriendAdded", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Busca una cadena traducida similar a An error occurred while saving game results, please let us know!.
+        /// </summary>
+        public static string blockAndFriendsListLblAlreadyFriends{
+            get {
+                return ResourceManager.GetString("blockAndFriendsListLblAlreadyFriends", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Busca una cadena traducida similar a An error occurred while saving game results, please let us know!.
+        /// </summary>
+        public static string blockAndFriendsListLblAlreadyFriendsDescription{
+            get {
+                return ResourceManager.GetString("blockAndFriendsListLblAlreadyFriendsDescription", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Busca una cadena traducida similar a An error occurred while saving game results, please let us know!.
+        /// </summary>
+        public static string blockAndFriendsListLblSearch{
+            get {
+                return ResourceManager.GetString("blockAndFriendsListLblSearch", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Busca una cadena traducida similar a You reported this player.
         /// </summary>

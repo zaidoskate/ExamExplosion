@@ -43,6 +43,7 @@ namespace ExamExplosion
         private readonly ILog log;
         private string defaultPackage;
         private Dictionary<string, string> cardsNames;
+        private bool isConnected = false;
 
 
         public Board(List<Label> playerGamertags, string gameCode, string hostGamertag)
@@ -55,15 +56,17 @@ namespace ExamExplosion
             this.remainingTime = timePerTurn;
             StartTurnTimer();
             this.hostGamertag = hostGamertag;
-            InitializeBoard(playerGamertags, gameCode);
-            orderedGamertags = playerGamertags.Select(label => label.Content.ToString()).ToList();
-            log = LogManager.GetLogger(typeof(App));
-            InitializeGameResources(gameCode, orderedGamertags);
-            AddPlayersToGame(orderedGamertags, gameCode);
-            var parentWindow = (MainWindow)Application.Current.MainWindow;
-            if (parentWindow != null)
+            if (InitializeBoard(playerGamertags, gameCode))
             {
-                parentWindow.Closing += OnClosing;
+                orderedGamertags = playerGamertags.Select(label => label.Content.ToString()).ToList();
+                log = LogManager.GetLogger(typeof(App));
+                InitializeGameResources(gameCode, orderedGamertags);
+                AddPlayersToGame(orderedGamertags, gameCode);
+                var parentWindow = (MainWindow)Application.Current.MainWindow;
+                if (parentWindow != null)
+                {
+                    parentWindow.Closing += OnClosing;
+                }
             }
         }
         private void OnClosing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -222,6 +225,11 @@ namespace ExamExplosion
             }
             else
             {
+                if (!isConnected)
+                {
+                    gameManager.DisconnectGame(gameCode, SessionManager.CurrentSession.gamertag);
+                    NavigateStartPage();
+                }
                 turnTimer.Stop();
                 if (SessionManager.CurrentSession.gamertag == this.currentTurnLbl.Content.ToString())
                 {
@@ -245,7 +253,7 @@ namespace ExamExplosion
             UpdateTimerLabel();
         }
 
-        private void InitializeBoard(List<Label> playerGamertags, string gameCode)
+        private bool InitializeBoard(List<Label> playerGamertags, string gameCode)
         {
             InitializeListComponents();
             for (int i = 0; i < playerGamertags.Count; i++)
@@ -270,14 +278,17 @@ namespace ExamExplosion
                 }
             }
             InitializeGameDetails(gameCode);
-            ConnectToGame();
+            this.isConnected = ConnectToGame();
+            return this.isConnected;
         }
 
-        private void ConnectToGame()
+        private bool ConnectToGame()
         {
+            bool isConnected = false;
             try
             {
-                gameManager.ConnectGame(gameCode, SessionManager.CurrentSession.gamertag);
+                isConnected = gameManager.ConnectGame(gameCode, SessionManager.CurrentSession.gamertag);
+                
             }
             catch (FaultException faultException)
             {
@@ -297,6 +308,7 @@ namespace ExamExplosion
                 log.Warn("Timeout al intentar conectar con el servidor", timeoutException);
                 NavigateStartPage();
             }
+            return isConnected;
         }
         private void InitializeGameDetails(string gameCode)
         {
