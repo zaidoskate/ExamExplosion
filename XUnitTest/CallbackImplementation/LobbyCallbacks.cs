@@ -42,6 +42,7 @@ namespace XUnitTest.CallbackImplementation
             MessageReceived = message;
         }
 
+
         public void Repaint(Dictionary<string, bool> playerStatus)
         {
             PlayerStatus = playerStatus[gamertag];
@@ -55,6 +56,11 @@ namespace XUnitTest.CallbackImplementation
         public void StartGame(Dictionary<string, bool> lobbyPlayers)
         {
             PlayerStatus = lobbyPlayers[gamertag];
+        }
+
+        public void UpdateHost()
+        {
+
         }
     }
 }
