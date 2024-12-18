@@ -76,6 +76,10 @@ namespace ExamExplosion
             {
                 leaderboardToShow = friendsLeaderboard;
             }
+            if (!leaderboardToShow.Any())
+            {
+                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.leaderboardLblObtainingError).ShowDialog();
+            }
             leaderboardItemsCtrl.ItemsSource = leaderboardToShow;
         }
 

@@ -45,18 +45,34 @@ namespace ExamExplosion
 
         private void NavigateKomalliPage(object sender, RoutedEventArgs e)
         {
-            if (this.NavigationService != null)
+            int playerId = SessionManager.CurrentSession.userId;
+            var idsPurchasedAccessories = PurchasedAccessoryManager.GetPurchasedAccessoriesByPlayer(playerId);
+            if (idsPurchasedAccessories.Any())
             {
-                this.NavigationService.Navigate(new Komalli());
+                if (this.NavigationService != null)
+                {
+                    this.NavigationService.Navigate(new Komalli());
+                }
+            }
+            else
+            {
+                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.komalliLblLoadingPackagesError).ShowDialog();
             }
         }
 
         private void NavigateLeaderboardPage(object sender, RoutedEventArgs e)
         {
-
-            if (this.NavigationService != null)
+            var leaderboard = PlayerManager.GetGlobalLeaderboard();
+            if (leaderboard.Any())
             {
-                this.NavigationService.Navigate(new Leaderboard());
+                if (this.NavigationService != null)
+                {
+                    this.NavigationService.Navigate(new Leaderboard());
+                }
+            }
+            else
+            {
+                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.leaderboardLblObtainingError).ShowDialog();
             }
         }
 

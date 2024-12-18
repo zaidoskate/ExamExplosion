@@ -484,6 +484,15 @@ namespace ExamExplosion.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An error occurred while saving game results, please let us know!.
+        /// </summary>
+        public static string endgameLblPlayerObtainingError {
+            get {
+                return ResourceManager.GetString("endgameLblPlayerObtainingError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You reported this player.
         /// </summary>
         public static string endGameLblPlayerReported {
@@ -1060,6 +1069,15 @@ namespace ExamExplosion.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An error occurred while opening Komalli, please contact us!.
+        /// </summary>
+        public static string komalliLblLoadingPackagesError {
+            get {
+                return ResourceManager.GetString("komalliLblLoadingPackagesError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Now you can use it to see cards like this in your games.
         /// </summary>
         public static string komalliLblPackPurchased {
@@ -1083,6 +1101,15 @@ namespace ExamExplosion.Properties {
         public static string komalliLblPoints {
             get {
                 return ResourceManager.GetString("komalliLblPoints", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occurred while obtaining the leaderboard.
+        /// </summary>
+        public static string leaderboardLblObtainingError {
+            get {
+                return ResourceManager.GetString("leaderboardLblObtainingError", resourceCulture);
             }
         }
         
@@ -1236,6 +1263,24 @@ namespace ExamExplosion.Properties {
         public static string settingsLblCurrentPasswordWrongTitle {
             get {
                 return ResourceManager.GetString("settingsLblCurrentPasswordWrongTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Missing fields.
+        /// </summary>
+        public static string settingsLblMissingFields {
+            get {
+                return ResourceManager.GetString("settingsLblMissingFields", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Correct the fields that are necessary.
+        /// </summary>
+        public static string settingsLblMissingFieldsDescription {
+            get {
+                return ResourceManager.GetString("settingsLblMissingFieldsDescription", resourceCulture);
             }
         }
         

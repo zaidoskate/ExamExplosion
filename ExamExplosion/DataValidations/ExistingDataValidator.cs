@@ -10,7 +10,7 @@ namespace ExamExplosion.DataValidations
 {
     public static class ExistingDataValidator
     {
-        public static bool ValidateExistingGamertag(string gamertag)
+        public static int ValidateExistingGamertag(string gamertag)
         {
             try
             {
@@ -29,7 +29,7 @@ namespace ExamExplosion.DataValidations
                 throw timeoutException;
             }
         }
-        public static bool ValidateExistingEmail(string email)
+        public static int ValidateExistingEmail(string email)
         {
             try
             {

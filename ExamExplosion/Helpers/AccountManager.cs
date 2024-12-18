@@ -127,7 +127,7 @@ namespace ExamExplosion.Helpers
         /// </summary>
         /// <param name="email">Correo electrónico a verificar.</param>
         /// <returns>Verdadero si el correo ya existe, falso en caso contrario.</returns>
-        public static bool VerifyExistingEmail(string email)
+        public static int VerifyExistingEmail(string email)
         {
             try
             {
@@ -155,7 +155,7 @@ namespace ExamExplosion.Helpers
         /// </summary>
         /// <param name="gamertag">Gamertag a verificar.</param>
         /// <returns>Verdadero si el gamertag ya existe, falso en caso contrario.</returns>
-        public static bool VerifyExistingGamertag(string gamertag)
+        public static int VerifyExistingGamertag(string gamertag)
         {
             try
             {

@@ -39,7 +39,8 @@
             Margin="658,22,0,0"
             VerticalAlignment="Top"
             FontFamily="pack://application:,,,/Fonts/#VT323"
-            FontSize="28" />
+            FontSize="28"
+            Foreground="White"/>
 
         <Image 
             HorizontalAlignment="Center"
@@ -277,7 +278,8 @@
             Margin="98,53,0,0"
             VerticalAlignment="Top"
             FontFamily="pack://application:,,,/Fonts/#VT323"
-            FontSize="18" />
+            FontSize="20"
+            Foreground="White"/>
 
         <Label 
             Content="{x:Static p:Resources.globalLblRepeatPassword}"
@@ -285,7 +287,8 @@
             Margin="505,235,0,0"
             VerticalAlignment="Top"
             FontFamily="pack://application:,,,/Fonts/#VT323"
-            FontSize="18" />
+            FontSize="20"
+            Foreground="White"/>
 
         <Label 
             Content="{x:Static p:Resources.globalLblPassword}"
@@ -293,7 +296,8 @@
             Margin="505,145,0,0"
             VerticalAlignment="Top"
             FontFamily="pack://application:,,,/Fonts/#VT323"
-            FontSize="18" />
+            FontSize="20"
+            Foreground="White"/>
 
         <Label 
             Content="{x:Static p:Resources.globalLblEmail}"
@@ -301,7 +305,8 @@
             Margin="98,235,0,0"
             VerticalAlignment="Top"
             FontFamily="pack://application:,,,/Fonts/#VT323"
-            FontSize="18" />
+            FontSize="20"
+            Foreground="White"/>
 
         <Label 
             Content="{x:Static p:Resources.globalLblLastname}"
@@ -309,7 +314,8 @@
             Margin="98,145,0,0"
             VerticalAlignment="Top"
             FontFamily="pack://application:,,,/Fonts/#VT323"
-            FontSize="18" />
+            FontSize="20"
+            Foreground="White"/>
 
         <Label 
             Content="{x:Static p:Resources.globalLblGamertag}"
@@ -317,8 +323,9 @@
             Margin="505,53,0,0"
             VerticalAlignment="Top"
             FontFamily="pack://application:,,,/Fonts/#VT323"
-            FontSize="18"
-            RenderTransformOrigin="0.53,-1.114" />
+            FontSize="20"
+            RenderTransformOrigin="0.53,-1.114"
+            Foreground="White"/>
 
         <Label 
             x:Name="nameErrorMessageLbl"

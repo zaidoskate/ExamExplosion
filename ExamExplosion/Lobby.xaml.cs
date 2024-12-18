@@ -108,7 +108,10 @@ namespace ExamExplosion
             try
             {
                 lobbyCode = lobbyManager.CreateLobby(game);
-                lobbyManager.ConnectLobby(SessionManager.CurrentSession.gamertag, this.lobbyCode);
+                if(lobbyCode != null)
+                {
+                    lobbyManager.ConnectLobby(SessionManager.CurrentSession.gamertag, this.lobbyCode);
+                }
             }
             catch (FaultException faultException)
             {

@@ -57,7 +57,7 @@
                VerticalContentAlignment="Center" 
                FontSize="40" 
                FontFamily="pack://application:,,,/Fonts/#VT323" 
-               Foreground="Black" 
+               Foreground="White" 
                Margin="49,90,0,0" />
         <Image x:Name="player1Img" 
                Source="pack://application:,,,/Images/NoReadyImage.png" 
@@ -76,7 +76,7 @@
                VerticalContentAlignment="Center" 
                FontSize="40" 
                FontFamily="pack://application:,,,/Fonts/#VT323" 
-               Foreground="Black" 
+               Foreground="White" 
                Margin="50,148,0,0" />
         <Image x:Name="player2Img" 
                Source="pack://application:,,,/Images/NoReadyImage.png" 
@@ -95,7 +95,7 @@
                VerticalContentAlignment="Center" 
                FontSize="40" 
                FontFamily="pack://application:,,,/Fonts/#VT323" 
-               Foreground="Black" 
+               Foreground="White" 
                Margin="50,209,0,0" />
         <Image x:Name="player3Img" 
                Source="pack://application:,,,/Images/NoReadyImage.png" 
@@ -114,7 +114,7 @@
                VerticalContentAlignment="Center" 
                FontSize="40" 
                FontFamily="pack://application:,,,/Fonts/#VT323" 
-               Foreground="Black" 
+               Foreground="White" 
                Margin="50,266,0,0" />
         <Image x:Name="player4Img" 
                Source="pack://application:,,,/Images/NoReadyImage.png" 

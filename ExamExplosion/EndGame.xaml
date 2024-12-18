@@ -65,7 +65,8 @@
                    HorizontalContentAlignment="Center" 
                    FontSize="40" 
                    FontFamily="pack://application:,,,/Fonts/#VT323" />
-            <Label Content="{x:Static p:Resources.globalLblPlayers}" 
+            <Label x:Name="playersLbl"
+                   Content="{x:Static p:Resources.globalLblPlayers}" 
                    HorizontalAlignment="Left" 
                    Margin="293,114,0,0" 
                    VerticalAlignment="Top" 

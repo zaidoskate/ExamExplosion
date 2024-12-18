@@ -51,55 +51,63 @@ namespace ExamExplosion
             winnerGamertagLbl.Content = winnerGamertag;
 
             List<string> playersGamertags = GetPlayersGamertags(gameCode);
+            if (playersGamertags.Any())
+            {
+                if (playersGamertags.Count > 0)
+                {
+                    string gamertag = playersGamertags.ElementAtOrDefault(0) ?? string.Empty;
+                    player1lbl.Content = gamertag;
+                    player1lbl.Visibility = Visibility.Visible;
+                    if (!gamertag.StartsWith("GUEST") && !gamertag.Equals(SessionManager.CurrentSession.gamertag))
+                    {
+                        AddFriendPlayer1.Visibility = Visibility.Visible;
+                        ReportPlayer1.Visibility = Visibility.Visible;
+                        BlockPlayer1.Visibility = Visibility.Visible;
+                    }
+                }
+                if (playersGamertags.Count > 1)
+                {
+                    string gamertag = playersGamertags.ElementAtOrDefault(1) ?? string.Empty;
+                    player2lbl.Content = gamertag;
+                    player2lbl.Visibility = Visibility.Visible;
+                    if (!gamertag.StartsWith("GUEST") && !gamertag.Equals(SessionManager.CurrentSession.gamertag))
+                    {
+                        AddFriendPlayer2.Visibility = Visibility.Visible;
+                        ReportPlayer2.Visibility = Visibility.Visible;
+                        BlockPlayer2.Visibility = Visibility.Visible;
+                    }
+                }
+                if (playersGamertags.Count > 2)
+                {
+                    string gamertag = playersGamertags.ElementAtOrDefault(2) ?? string.Empty;
+                    player3lbl.Content = gamertag;
+                    player3lbl.Visibility = Visibility.Visible;
+                    if (!gamertag.StartsWith("GUEST") && !gamertag.Equals(SessionManager.CurrentSession.gamertag))
+                    {
+                        AddFriendPlayer3.Visibility = Visibility.Visible;
+                        ReportPlayer3.Visibility = Visibility.Visible;
+                        BlockPlayer3.Visibility = Visibility.Visible;
+                    }
+                }
+                if (playersGamertags.Count > 3)
+                {
+                    string gamertag = playersGamertags.ElementAtOrDefault(3) ?? string.Empty;
+                    player4lbl.Content = gamertag;
+                    player4lbl.Visibility = Visibility.Visible;
+                    if (!gamertag.StartsWith("GUEST") && !gamertag.Equals(SessionManager.CurrentSession.gamertag))
+                    {
+                        AddFriendPlayer4.Visibility = Visibility.Visible;
+                        ReportPlayer4.Visibility = Visibility.Visible;
+                        BlockPlayer4.Visibility = Visibility.Visible;
+                    }
+                }
+            }
+            else
+            {
+                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.endgameLblPlayerObtainingError).ShowDialog();
+                this.playersLbl.Visibility = Visibility.Hidden;
+            }
 
-            if (playersGamertags.Count > 0)
-            {
-                string gamertag = playersGamertags.ElementAtOrDefault(0) ?? string.Empty;
-                player1lbl.Content = gamertag;
-                player1lbl.Visibility = Visibility.Visible;
-                if (!gamertag.StartsWith("GUEST") && !gamertag.Equals(SessionManager.CurrentSession.gamertag))
-                {
-                    AddFriendPlayer1.Visibility = Visibility.Visible;
-                    ReportPlayer1.Visibility = Visibility.Visible;
-                    BlockPlayer1.Visibility = Visibility.Visible;
-                }
-            }
-            if (playersGamertags.Count > 1)
-            {
-                string gamertag = playersGamertags.ElementAtOrDefault(1) ?? string.Empty;
-                player2lbl.Content = gamertag;
-                player2lbl.Visibility = Visibility.Visible;
-                if (!gamertag.StartsWith("GUEST") && !gamertag.Equals(SessionManager.CurrentSession.gamertag))
-                {
-                    AddFriendPlayer2.Visibility = Visibility.Visible;
-                    ReportPlayer2.Visibility = Visibility.Visible;
-                    BlockPlayer2.Visibility = Visibility.Visible;
-                }
-            }
-            if (playersGamertags.Count > 2)
-            {
-                string gamertag = playersGamertags.ElementAtOrDefault(2) ?? string.Empty;
-                player3lbl.Content = gamertag;
-                player3lbl.Visibility = Visibility.Visible;
-                if (!gamertag.StartsWith("GUEST") && !gamertag.Equals(SessionManager.CurrentSession.gamertag))
-                {
-                    AddFriendPlayer3.Visibility = Visibility.Visible;
-                    ReportPlayer3.Visibility = Visibility.Visible;
-                    BlockPlayer3.Visibility = Visibility.Visible;
-                }
-            }
-            if (playersGamertags.Count > 3)
-            {
-                string gamertag = playersGamertags.ElementAtOrDefault(3) ?? string.Empty;
-                player4lbl.Content = gamertag;
-                player4lbl.Visibility = Visibility.Visible;
-                if (!gamertag.StartsWith("GUEST") && !gamertag.Equals(SessionManager.CurrentSession.gamertag))
-                {
-                    AddFriendPlayer4.Visibility = Visibility.Visible;
-                    ReportPlayer4.Visibility = Visibility.Visible;
-                    BlockPlayer4.Visibility = Visibility.Visible;
-                }
-            }
         }
 
 

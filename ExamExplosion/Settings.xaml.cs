@@ -153,7 +153,7 @@ namespace ExamExplosion
             }
             if (!_newValidPassword || currentPassword.Length == 0) 
             {
-                new AlertModal("Datos incompletos", "Corrige los campos que sean necesarios").ShowDialog();
+                new AlertModal(ExamExplosion.Properties.Resources.settingsLblMissingFields, ExamExplosion.Properties.Resources.settingsLblMissingFieldsDescription).ShowDialog();
                 return;
             }
             else
@@ -182,15 +182,23 @@ namespace ExamExplosion
                     log.Warn("Timeout al intentar conectar con el servidor", timeoutException);
                     NavigateStartPage();
                 }
-                if (currentValidPassword > 0)
+                if (currentValidPassword != -3)
                 {
-                    UpdateNewPassword();
-                    clearFields();
+                    if (currentValidPassword > 0)
+                    {
+                        UpdateNewPassword();
+                        clearFields();
+                    }
+                    else
+                    {
+                        new AlertModal(ExamExplosion.Properties.Resources.settingsLblCurrentPasswordWrongTitle, ExamExplosion.Properties.Resources.settingsLblCurrentPasswordWrong).ShowDialog();
+                        return;
+                    }
+                    
                 }
                 else
                 {
-                    new AlertModal(ExamExplosion.Properties.Resources.settingsLblCurrentPasswordWrongTitle, ExamExplosion.Properties.Resources.settingsLblCurrentPasswordWrong).ShowDialog();
-                    return;
+                    new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.settingsLblPasswordUpdateError).ShowDialog();
                 }
             }
         }

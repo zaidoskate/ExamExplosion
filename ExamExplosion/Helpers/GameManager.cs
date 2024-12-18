@@ -553,6 +553,10 @@ namespace ExamExplosion.Helpers
         public void RemoveCardFromPlayerHand(int cardId)
         {
             var playerHand = gameResources.PlayerCards;
+            if (cardId >= playerHand.Count)
+            {
+                cardId--;
+            }
             playerHand.RemoveAt(cardId);
             boardPage.UpdatePlayerDeck(gameResources.PlayerCards, gameResources.CurrentIndex);
         }

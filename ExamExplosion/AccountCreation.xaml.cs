@@ -320,27 +320,35 @@ namespace ExamExplosion
             }
             try
             {
-                bool gamertagExists = ExistingDataValidator.ValidateExistingGamertag(gamertag);
-                bool emailExists = ExistingDataValidator.ValidateExistingEmail(email);
+                int gamertagExists = ExistingDataValidator.ValidateExistingGamertag(gamertag);
+                int emailExists = ExistingDataValidator.ValidateExistingEmail(email);
                 string message = null;
-                if(gamertagExists && emailExists )
+                if (gamertagExists != 2 || emailExists != 2)
                 {
-                    message = ExamExplosion.Properties.Resources.accountCreationEmailAndGamertagTaken;
-                }
-                else if(emailExists)
-                {
-                    message = ExamExplosion.Properties.Resources.accountCreationLblLinkedEmail;
-                }
-                else if (gamertagExists)
-                {
-                    message = ExamExplosion.Properties.Resources.accountCreationLblExistingGamertag;
+                    if (gamertagExists == 1 && emailExists == 1)
+                    {
+                        message = ExamExplosion.Properties.Resources.accountCreationEmailAndGamertagTaken;
+                    }
+                    else if(emailExists == 1)
+                    {
+                        message = ExamExplosion.Properties.Resources.accountCreationLblLinkedEmail;
+                    }
+                    else if (gamertagExists == 1)
+                    {
+                        message = ExamExplosion.Properties.Resources.accountCreationLblExistingGamertag;
+                    }
+                    else
+                    {
+                        SendCode();
+                        return;
+                    }
+                    new AlertModal(ExamExplosion.Properties.Resources.accountCreationExistingData, message).ShowDialog();
                 }
                 else
                 {
-                    SendCode();
-                    return;
+                    message = ExamExplosion.Properties.Resources.accountCreationCreationError;
+                    new AlertModal(ExamExplosion.Properties.Resources.globalLblError, message).ShowDialog();
                 }
-                new AlertModal(ExamExplosion.Properties.Resources.accountCreationExistingData, message).ShowDialog();
             }
             catch (FaultException faultException)
             {

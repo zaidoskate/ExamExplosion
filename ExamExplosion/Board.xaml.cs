@@ -191,9 +191,12 @@ namespace ExamExplosion
             else
             {
                 turnTimer.Stop();
-                if (!gameManager.ValidateLostGame(gameCode))
+                if (SessionManager.CurrentSession.gamertag == this.currentTurnLbl.Content.ToString())
                 {
-                    DrawCardBtn_Click(null, null);
+                    if (!gameManager.ValidateLostGame(gameCode))
+                    {
+                        DrawCardBtn_Click(null, null);
+                    }
                 }
             }
         }
@@ -565,26 +568,28 @@ namespace ExamExplosion
         {
             if (selectedPlayer != SessionManager.CurrentSession.gamertag && cardOnBoardImg.Source is BitmapImage bitmapImage)
             {
-                string cardOnBoardImg = bitmapImage.UriSource.ToString();
-                var requestCardRoutes = new List<string>
+                string cardOnBoardFileName = System.IO.Path.GetFileName(bitmapImage.UriSource.ToString());
+                var requestCardFileNames = new List<string>
                 {
-                    "pack://application:,,,/CardsPackages/NormalPackage/please.png",
-                    "pack://application:,,,/CardsPackages/NormalPackage/profeA.png",
-                    "pack://application:,,,/CardsPackages/NormalPackage/profeM.png",
-                    "pack://application:,,,/CardsPackages/NormalPackage/profeO.png",
-                    "pack://application:,,,/CardsPackages/NormalPackage/profeR.png",
-                    "pack://application:,,,/CardsPackages/NormalPackage/profeS.png"
+                    "please.png",
+                    "profeA.png",
+                    "profeM.png",
+                    "profeO.png",
+                    "profeR.png",
+                    "profeS.png"
                 };
-                if (requestCardRoutes.Contains(cardOnBoardImg))
+                if (requestCardFileNames.Contains(cardOnBoardFileName))
                 {
                     gameManager.RequestCard(gameCode, selectedPlayer, SessionManager.CurrentSession.gamertag);
                 }
-                else if (cardOnBoardImg == "pack://application:,,,/CardsPackages/NormalPackage/leftTeam.png")
+                else if (cardOnBoardFileName == "leftTeam.png")
                 {
                     gameManager.SendDoubleTurn(gameCode, selectedPlayer);
                 }
+                ResetPlayerButtonVisibility();
             }
         }
+
 
 
         public void ShowCardRequested(string playerRequesting)

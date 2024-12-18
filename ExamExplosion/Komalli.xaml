@@ -121,18 +121,20 @@
             HorizontalAlignment="Left" 
             VerticalAlignment="Top" 
             FontFamily="pack://application:,,,/Fonts/#VT323" 
-            FontSize="24" 
+            FontSize="28" 
             Height="53" 
             Margin="638,21,0,0" 
-            Width="78"/>
+            Width="78"
+            Foreground="White"/>
         <Label 
             x:Name="pointsLbl" 
             Content="0" 
             HorizontalAlignment="Left" 
             Margin="715,22,0,0" 
             FontFamily="pack://application:,,,/Fonts/#VT323" 
-            FontSize="24" 
-            VerticalAlignment="Top"/>
+            FontSize="28" 
+            VerticalAlignment="Top"
+            Foreground="White"/>
 
         <Image 
             HorizontalAlignment="Left" 
@@ -154,7 +156,8 @@
                     FontSize="20" 
                     FontFamily="pack://application:,,,/Fonts/#VT323" 
                     Content="Normal  &#xD;&#xA;0" 
-                    Margin="0,0,0,69"/>
+                    Margin="0,0,0,69"
+                    Foreground="White"/>
                 <Image 
                     HorizontalAlignment="Center" 
                     Height="110" 
@@ -176,7 +179,8 @@
                     FontSize="20" 
                     FontFamily="pack://application:,,,/Fonts/#VT323" 
                     Content="{x:Static p:Resources.komalliLblCap}" 
-                    Margin="0,0,0,69"/>
+                    Margin="0,0,0,69"
+                    Foreground="White"/>
                 <Image 
                     HorizontalAlignment="Center" 
                     Height="110" 
@@ -218,7 +222,8 @@
                     FontSize="20" 
                     FontFamily="pack://application:,,,/Fonts/#VT323" 
                     Content="{x:Static p:Resources.komalliLblGraduated}" 
-                    Margin="0,0,0,69"/>
+                    Margin="0,0,0,69"
+                    Foreground="White"/>
                 <Image 
                     HorizontalAlignment="Center" 
                     Height="110" 

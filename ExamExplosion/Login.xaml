@@ -167,7 +167,8 @@
                Margin="269,212,0,169" 
                FontFamily="pack://application:,,,/Fonts/#VT323" 
                FontSize="20" 
-               HorizontalAlignment="Left" />
+               HorizontalAlignment="Left"
+               Foreground="White"/>
 
         <Button x:Name="togglePasswordVisibilityBtn" 
                 HorizontalAlignment="Left" 

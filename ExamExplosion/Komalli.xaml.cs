@@ -53,67 +53,74 @@ namespace ExamExplosion
             purchasedAccessories.Add("capPackageRadioBtn", false);
 
             var idsPurchasedAccessories = PurchasedAccessoryManager.GetPurchasedAccessoriesByPlayer(playerId);
-            foreach (var idPurchasedAccessory in idsPurchasedAccessories)
+            if (idsPurchasedAccessories.Any())
             {
-                switch (idPurchasedAccessory)
+                foreach (var idPurchasedAccessory in idsPurchasedAccessories)
+                {
+                    switch (idPurchasedAccessory)
+                    {
+                        case 1:
+                            purchasedAccessories["normalPackageRadioBtn"] = true;
+                            break;
+                        case 2:
+                            purchasedAccessories["hatPackageRadioBtn"] = true;
+                            break;
+                        case 3:
+                            purchasedAccessories["graduatedPackageRadioBtn"] = true;
+                            break;
+                        case 4:
+                            purchasedAccessories["capPackageRadioBtn"] = true;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+
+                Accessory accessory = null;
+                try
+                {
+                    accessory = PurchasedAccessoryManager.GetAccessoryInUse(playerId);
+                    accessoryIdSelected = accessory.accessoryId;
+                }
+                catch (FaultException faultException)
+                {
+                    new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblFaultException).ShowDialog();
+                    log.Error("Error del servidor (FaultException)", faultException);
+                    NavigateStartPage();
+                }
+                catch (CommunicationException communicationException)
+                {
+                    new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblCommunicationException).ShowDialog();
+                    log.Warn("Problema de comunicación con el servidor", communicationException);
+                    NavigateStartPage();
+                }
+                catch (TimeoutException timeoutException)
+                {
+                    new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblTimeoutException).ShowDialog();
+                    log.Warn("Timeout al intentar conectar con el servidor", timeoutException);
+                    NavigateStartPage();
+                }
+                switch (accessoryIdSelected)
                 {
                     case 1:
-                        purchasedAccessories["normalPackageRadioBtn"] = true;
+                        normalPackageRadioBtn.IsChecked = true;
                         break;
                     case 2:
-                        purchasedAccessories["hatPackageRadioBtn"] = true;
+                        hatPackageRadioBtn.IsChecked = true;
                         break;
                     case 3:
-                        purchasedAccessories["graduatedPackageRadioBtn"] = true;
+                        graduatedPackageRadioBtn.IsChecked = true;
                         break;
                     case 4:
-                        purchasedAccessories["capPackageRadioBtn"] = true;
+                        capPackageRadioBtn.IsChecked = true;
                         break;
                     default:
                         break;
                 }
             }
-
-            Accessory accessory = null;
-            try
+            else
             {
-                accessory = PurchasedAccessoryManager.GetAccessoryInUse(playerId);
-                accessoryIdSelected = accessory.accessoryId;
-            }
-            catch (FaultException faultException)
-            {
-                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblFaultException).ShowDialog();
-                log.Error("Error del servidor (FaultException)", faultException);
-                NavigateStartPage();
-            }
-            catch (CommunicationException communicationException)
-            {
-                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblCommunicationException).ShowDialog();
-                log.Warn("Problema de comunicación con el servidor", communicationException);
-                NavigateStartPage();
-            }
-            catch (TimeoutException timeoutException)
-            {
-                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblTimeoutException).ShowDialog();
-                log.Warn("Timeout al intentar conectar con el servidor", timeoutException);
-                NavigateStartPage();
-            }
-            switch (accessoryIdSelected)
-            {
-                case 1:
-                    normalPackageRadioBtn.IsChecked = true;
-                    break;
-                case 2:
-                    hatPackageRadioBtn.IsChecked = true;
-                    break;
-                case 3:
-                    graduatedPackageRadioBtn.IsChecked = true;
-                    break;
-                case 4:
-                    capPackageRadioBtn.IsChecked = true;
-                    break;
-                default:
-                    break;
+                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.komalliLblLoadingPackagesError).ShowDialog();
             }
         }
 

@@ -145,7 +145,8 @@
                        HorizontalAlignment="Center" 
                        VerticalAlignment="Bottom" 
                        Height="35" 
-                       Margin="0,65,0,0"/>
+                       Margin="0,65,0,0"
+                       Foreground="White"/>
             </Grid>
         </Button>
 
@@ -168,7 +169,8 @@
                        FontFamily="pack://application:,,,/Fonts/#VT323" 
                        FontSize="24" 
                        HorizontalAlignment="Center" 
-                       VerticalAlignment="Bottom" />
+                       VerticalAlignment="Bottom"
+                       Foreground="White"/>
             </Grid>
         </Button>
 
@@ -189,7 +191,8 @@
                VerticalAlignment="Top" 
                Margin="23,95,0,0" 
                Width="118" 
-               Height="65" />
+               Height="65"
+               Foreground="White"/>
 
         <Button x:Name="seeCatalogueBtn" 
                 HorizontalAlignment="Left" 

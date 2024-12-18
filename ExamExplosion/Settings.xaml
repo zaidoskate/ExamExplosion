@@ -225,7 +225,8 @@
                Margin="93,138,0,0" 
                VerticalAlignment="Top" 
                Width="194" 
-               Height="42" />
+               Height="42"
+               Foreground="White"/>
 
         <Label x:Name="currentPasswordLbl" 
                Content="{x:Static p:Resources.settingsLblCurrentPassword}" 
@@ -250,7 +251,7 @@
         <TextBlock x:Name="newPasswordMessageTxtBlock" 
                    HorizontalAlignment="Left" 
                    FontFamily="pack://application:,,,/Fonts/#VT323" 
-                   FontSize="14" 
+                   FontSize="12" 
                    Margin="446,230,0,0" 
                    TextWrapping="Wrap" 
                    VerticalAlignment="Top" 

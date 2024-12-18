@@ -115,21 +115,45 @@ namespace ExamExplosion.Helpers
         {
             try
             {
+                if (proxy.State == CommunicationState.Faulted)
+                {
+                    Console.WriteLine("El canal está en estado Faulted. Reconectando...");
+                    ReconnectToServer(gamertag, code);
+                }
+
                 proxy.Connect(gamertag, code);
             }
-            catch (FaultException faultException)
+            catch (Exception ex)
             {
-                throw faultException;
-            }
-            catch (CommunicationException communicationException)
-            {
-                throw communicationException;
-            }
-            catch (TimeoutException timeoutException)
-            {
-                throw timeoutException;
+                Console.WriteLine($"Error al conectar al lobby: {ex.Message}");
+                ReconnectToServer(gamertag, code);
             }
         }
+
+
+
+        private void ReconnectToServer(string gamertag, string lobbyCode)
+        {
+            try
+            {
+                if (proxy != null && proxy.State == CommunicationState.Faulted)
+                {
+                    proxy.Abort();
+                }
+
+                InstanceContext context = new InstanceContext(this);
+                proxy = new ExamExplotionService.LobbyManagerClient(context);
+
+                proxy.Connect(gamertag, lobbyCode);
+                Console.WriteLine("Reconexión exitosa al servidor.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al reconectar: {ex.Message}");
+            }
+        }
+
+
 
         /// <summary>
         /// Envía un mensaje en el lobby.
@@ -141,21 +165,31 @@ namespace ExamExplosion.Helpers
         {
             try
             {
+                if (proxy.State == CommunicationState.Faulted)
+                {
+                    Console.WriteLine("El canal está en estado Faulted. Intentando reconectar...");
+                    ReconnectToServer(gamertag, code);
+                }
+
                 proxy.SendMessage(code, gamertag, message);
             }
             catch (FaultException faultException)
             {
-                throw faultException;
+                Console.WriteLine($"Error de FaultException: {faultException.Message}");
+                ReconnectToServer(gamertag, code);
             }
             catch (CommunicationException communicationException)
             {
-                throw communicationException;
+                Console.WriteLine($"Error de CommunicationException: {communicationException.Message}");
+                ReconnectToServer(gamertag, code);
             }
             catch (TimeoutException timeoutException)
             {
-                throw timeoutException;
+                Console.WriteLine($"Error de TimeoutException: {timeoutException.Message}");
+                ReconnectToServer(gamertag, code);
             }
         }
+
 
         /// <summary>
         /// Recibe un mensaje de otro jugador en el lobby.
