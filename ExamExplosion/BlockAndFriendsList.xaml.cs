@@ -202,6 +202,7 @@ namespace ExamExplosion
                 NavigateStartPage();
             }
 
+            Friends.Clear();
             foreach (var friend in friendsList)
             {
                 string gamertag = friend.Value;
@@ -216,34 +217,55 @@ namespace ExamExplosion
         private void AddFriendBtn_Click(object sender, EventArgs e)
         {
             string gamertagTyped = this.gamertagTxtBox.Text;
-            if (AccountManager.VerifyExistingGamertag(gamertagTyped) == 1)
+            try
             {
-                int playerToAddId = PlayerManager.GetPlayerIdByGamertag(gamertagTyped);
-                if (playerToAddId > 0 && playerToAddId != SessionManager.CurrentSession.userId)
+                if (AccountManager.VerifyExistingGamertag(gamertagTyped) == 1)
                 {
-                    int friendsAdded = FriendsAndBloquedPlayersManager.AddFriend(SessionManager.CurrentSession.userId, playerToAddId);
-                    if (friendsAdded > 0)
+                    int playerToAddId = PlayerManager.GetPlayerIdByGamertag(gamertagTyped);
+                    if (playerToAddId > 0 && playerToAddId != SessionManager.CurrentSession.userId)
                     {
-                        UpdateFriends();
-                        new AlertModal(ExamExplosion.Properties.Resources.blockAndFriendsListLblFriendAdded, ExamExplosion.Properties.Resources.blockAndFriendsListLblFriendAddedDescription).ShowDialog();
-                    }
-                    else if(friendsAdded == -2)
-                    {
-                        new AlertModal(ExamExplosion.Properties.Resources.blockAndFriendsListLblAlreadyFriends, ExamExplosion.Properties.Resources.blockAndFriendsListLblAlreadyFriendsDescription).ShowDialog();
+                        int friendsAdded = FriendsAndBloquedPlayersManager.AddFriend(SessionManager.CurrentSession.userId, playerToAddId);
+                        if (friendsAdded > 0)
+                        {
+                            UpdateFriends();
+                            new AlertModal(ExamExplosion.Properties.Resources.blockAndFriendsListLblFriendAdded, ExamExplosion.Properties.Resources.blockAndFriendsListLblFriendAddedDescription).ShowDialog();
+                        }
+                        else if(friendsAdded == -2)
+                        {
+                            new AlertModal(ExamExplosion.Properties.Resources.blockAndFriendsListLblAlreadyFriends, ExamExplosion.Properties.Resources.blockAndFriendsListLblAlreadyFriendsDescription).ShowDialog();
+                        }
+                        else
+                        {
+                            new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.blockAndFriendsListLblFriendAddError).ShowDialog();
+                        }
                     }
                     else
                     {
-                        new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.blockAndFriendsListLblFriendAddError).ShowDialog();
+                        new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.blockAndFriendsListLblUserFoundError).ShowDialog();
                     }
                 }
                 else
                 {
-                    new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.blockAndFriendsListLblUserFoundError).ShowDialog();
+                    new AlertModal(ExamExplosion.Properties.Resources.blockAndFriendsListLblGamertagNotFound, ExamExplosion.Properties.Resources.blockAndFriendsListLblGamertagNotFound).ShowDialog();
                 }
             }
-            else
+            catch (FaultException faultException)
             {
-                new AlertModal(ExamExplosion.Properties.Resources.blockAndFriendsListLblGamertagNotFound, ExamExplosion.Properties.Resources.blockAndFriendsListLblGamertagNotFound).ShowDialog();
+                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblFaultException).ShowDialog();
+                log.Error("Error del servidor (FaultException)", faultException);
+                NavigateStartPage();
+            }
+            catch (CommunicationException communicationException)
+            {
+                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblCommunicationException).ShowDialog();
+                log.Warn("Problema de comunicación con el servidor", communicationException);
+                NavigateStartPage();
+            }
+            catch (TimeoutException timeoutException)
+            {
+                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblTimeoutException).ShowDialog();
+                log.Warn("Timeout al intentar conectar con el servidor", timeoutException);
+                NavigateStartPage();
             }
         }
         private void NavigateStartPage()

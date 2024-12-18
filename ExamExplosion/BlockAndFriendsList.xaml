@@ -8,7 +8,8 @@
       mc:Ignorable="d"
       d:DesignHeight="450"
       d:DesignWidth="800"
-      Title="BlockAndFriendsList">
+      Title="BlockAndFriendsList"
+      Background="#FFF2CC">
 
     <Page.Resources>
         <Style TargetType="Button">
@@ -37,12 +38,6 @@
             </Setter>
         </Style>
     </Page.Resources>
-
-    <Page.Background>
-        <ImageBrush 
-            ImageSource="pack://application:,,,/Images/Landscape1.jpeg" 
-            Stretch="UniformToFill" />
-    </Page.Background>
 
     <Grid>
         <Grid Margin="65,10,65,125">
@@ -160,10 +155,10 @@
                      TextWrapping="Wrap" 
                      VerticalAlignment="Bottom" 
                      Width="150"
-                     Height="25"
+                     Height="35"
                      MaxLength="20"
                      FontFamily="pack://application:,,,/Fonts/#VT323"
-                     FontSize="16"/>
+                     FontSize="20"/>
             <Button Width="75" 
                      Height="45" 
                      VerticalAlignment="Bottom" 
