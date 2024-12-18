@@ -15,7 +15,6 @@ namespace ExamExplosion.Helpers
         public int Hp {  get; set; }
         public bool HasBomb {  get; set; }
         public GameResourcesManager() { 
-        
         }
 
         public void DrawBottomCard()
@@ -146,6 +145,11 @@ namespace ExamExplosion.Helpers
                 this.HasBomb = false;
             }
             return isBomb;
+        }
+
+        public void AddHp(int lives)
+        {
+            this.Hp = lives;
         }
     }
 }

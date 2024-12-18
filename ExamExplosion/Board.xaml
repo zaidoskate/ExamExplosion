@@ -305,7 +305,9 @@
                Margin="1029,480,0,0"
                FontFamily="pack://application:,,,/Fonts/#VT323"
                FontSize="25" 
-               VerticalAlignment="Top" />
+               VerticalAlignment="Top" 
+                   Foreground="White"
+               />
 
         <Image x:Name="animatedCardImg" 
                Visibility="Collapsed"

@@ -8,6 +8,7 @@ using System.ServiceModel.Channels;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.Animation;
 
 namespace ExamExplosion.Helpers
 {
@@ -48,7 +49,9 @@ namespace ExamExplosion.Helpers
         {
             try
             {
-                return proxy.GetGame(gameCode);
+                GameManagement game = proxy.GetGame(gameCode);
+                this.gameResources.AddHp(game.Lives);
+                return game;
             }
             catch (FaultException faultException)
             {
@@ -95,6 +98,7 @@ namespace ExamExplosion.Helpers
         /// <param name="gamertag">Gamertag del jugador cuyo turno es el actual.</param>
         public void UpdateCurrentTurn(string gamertag)
         {
+            Console.WriteLine(gamertag);
             boardPage.UpdateButtonsVisibility(gamertag);
             Application.Current.Dispatcher.Invoke(() =>
             {
@@ -583,6 +587,8 @@ namespace ExamExplosion.Helpers
                     gameResources.ReduceHp();
                     boardPage.RemoveHp(gameResources.Hp);
                     ReinsertExamBomb(gameCode);
+                    gameResources.HasBomb = false;
+                    lostGame = true;
                 }
                 else
                 {
@@ -719,11 +725,6 @@ namespace ExamExplosion.Helpers
         public void CloseConnection()
         {
             //proxy.Close();
-        }
-
-        public void AddHitPoints(int lives)
-        {
-            gameResources.Hp = lives;
         }
     }
 }

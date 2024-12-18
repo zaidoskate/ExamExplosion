@@ -270,9 +270,7 @@ namespace ExamExplosion
         {
             try
             {
-                GameManager gameManager = new GameManager(this);
                 GameManagement game = gameManager.GetCurrentGameDetails(gameCode);
-                gameManager.AddHitPoints(game.Lives);
                 this.hitPoints = game.Lives;
                 this.timePerTurn = game.TimePerTurn;
                 this.gameCode = game.InvitationCode;
@@ -672,6 +670,7 @@ namespace ExamExplosion
         {
             stackPanelPlayerCards.Opacity = 0;
             stackPanelSelectedCards.Opacity = 0;    
+            stackBtn.IsEnabled = false;
         }
 
         public void RemoveHp(int hp)
