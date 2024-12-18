@@ -12,7 +12,7 @@ namespace XUnitTest.Exceptions
         private static ExamExplotionService.AuthenticationManagerClient proxy = new ExamExplotionService.AuthenticationManagerClient();
 
         [Fact]
-        public void TestAddAccountThrowsCommunicationException()
+        public void TestAddAccountThrowsCommunicationObjectFaultedException()
         {
             ExamExplotionService.AccountManagement account = new ExamExplotionService.AccountManagement
             {
@@ -23,11 +23,11 @@ namespace XUnitTest.Exceptions
                 Password = "password123"
             };
 
-            Assert.Throws<CommunicationException>(() => proxy.AddAccount(account));
+            Assert.Throws<CommunicationObjectFaultedException>(() => proxy.AddAccount(account));
         }
 
         [Fact]
-        public void TestUpdatePasswordThrowsCommunicationException()
+        public void TestUpdatePasswordThrowsCommunicationObjectFaultedException()
         {
             ExamExplotionService.AccountManagement account = new ExamExplotionService.AccountManagement
             {
@@ -37,39 +37,39 @@ namespace XUnitTest.Exceptions
                 Password = "Password123"
             };
 
-            Assert.Throws<CommunicationException>(() => proxy.UpdatePassword(account));
+            Assert.Throws<CommunicationObjectFaultedException>(() => proxy.UpdatePassword(account));
         }
 
         [Fact]
-        public void TestVerifyExistingEmailThrowsCommunicationException()
+        public void TestVerifyExistingEmailThrowsCommunicationObjectFaultedException()
         {
             string emailExisting = "jesustlapahernandez@hotmail.com";
 
-            Assert.Throws<CommunicationException>(() => proxy.VerifyExistingEmail(emailExisting));
+            Assert.Throws<CommunicationObjectFaultedException>(() => proxy.VerifyExistingEmail(emailExisting));
         }
 
         [Fact]
-        public void TestVerifyNonExistingEmailThrowsCommunicationException()
+        public void TestVerifyNonExistingEmailThrowsCommunicationObjectFaultedException()
         {
             string emailExisting = "jesus@hotmail.com";
 
-            Assert.Throws<CommunicationException>(() => proxy.VerifyExistingEmail(emailExisting));
+            Assert.Throws<CommunicationObjectFaultedException>(() => proxy.VerifyExistingEmail(emailExisting));
         }
 
         [Fact]
-        public void TestVerifyExistingGamertagThrowsCommunicationException()
+        public void TestVerifyExistingGamertagThrowsCommunicationObjectFaultedException()
         {
             string gamertagExisting = "Tlapa11";
 
-            Assert.Throws<CommunicationException>(() => proxy.VerifyExistingGamertag(gamertagExisting));
+            Assert.Throws<CommunicationObjectFaultedException>(() => proxy.VerifyExistingGamertag(gamertagExisting));
         }
 
         [Fact]
-        public void TestVerifyNonExistingGamertagThrowsCommunicationException()
+        public void TestVerifyNonExistingGamertagThrowsCommunicationObjectFaultedException()
         {
             string gamertagExisting = "Tlapa";
 
-            Assert.Throws<CommunicationException>(() => proxy.VerifyExistingGamertag(gamertagExisting));
+            Assert.Throws<CommunicationObjectFaultedException>(() => proxy.VerifyExistingGamertag(gamertagExisting));
         }
     }
 }

@@ -44,8 +44,10 @@ namespace ExamExplosion
         private string defaultPackage;
         private Dictionary<string, string> cardsNames;
 
+
         public Board(List<Label> playerGamertags, string gameCode, string hostGamertag)
         {
+            this.gameCode = gameCode;
             InitializeComponent();
             LoadPackageInUse();
             LoadCardNames();
@@ -58,6 +60,36 @@ namespace ExamExplosion
             log = LogManager.GetLogger(typeof(App));
             InitializeGameResources(gameCode, orderedGamertags);
             AddPlayersToGame(orderedGamertags, gameCode);
+            var parentWindow = (MainWindow)Application.Current.MainWindow;
+            if (parentWindow != null)
+            {
+                parentWindow.Closing += OnClosing;
+            }
+        }
+        private void OnClosing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            try
+            {
+                gameManager.DisconnectGame(gameCode, SessionManager.CurrentSession.gamertag);
+            }
+            catch (FaultException faultException)
+            {
+                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblFaultException).ShowDialog();
+                log.Error("Error del servidor (FaultException)", faultException);
+                NavigateStartPage();
+            }
+            catch (CommunicationException communicationException)
+            {
+                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblCommunicationException).ShowDialog();
+                log.Warn("Problema de comunicación con el servidor", communicationException);
+                NavigateStartPage();
+            }
+            catch (TimeoutException timeoutException)
+            {
+                new AlertModal(ExamExplosion.Properties.Resources.globalLblError, ExamExplosion.Properties.Resources.globalLblTimeoutException).ShowDialog();
+                log.Warn("Timeout al intentar conectar con el servidor", timeoutException);
+                NavigateStartPage();
+            }
         }
 
         private void AddPlayersToGame(List<string> playerGamertags, string gameCode)
