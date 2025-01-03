@@ -153,7 +153,8 @@ namespace ExamExplosion
                 try
                 {
                     int playerId2 = playersData[gamertag];
-                    if(FriendsAndBloquedPlayersManager.RemoveFriends(playerId, playerId2)){
+                    if (FriendsAndBloquedPlayersManager.RemoveFriends(playerId, playerId2))
+                    {
                         Friends.Remove(gamertag);
                     }
                     else

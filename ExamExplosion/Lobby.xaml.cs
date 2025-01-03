@@ -67,6 +67,7 @@ namespace ExamExplosion
         public Lobby(string lobbyCode)
         {
             lobbyManager = new LobbyManager(this);
+            log = LogManager.GetLogger(typeof(App));
             InitializeComponent();
             var parentWindow = (MainWindow)Application.Current.MainWindow;
             if (parentWindow != null)
