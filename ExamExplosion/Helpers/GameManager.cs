@@ -764,5 +764,25 @@ namespace ExamExplosion.Helpers
                 throw timeoutException;
             }
         }
+
+        public int GetMissingPlayers(string gameCode, int count)
+        {
+            try
+            {
+                return proxy.GetMissingPlayers(gameCode, count);
+            }
+            catch (FaultException faultException)
+            {
+                throw faultException;
+            }
+            catch (CommunicationException communicationException)
+            {
+                throw communicationException;
+            }
+            catch (TimeoutException timeoutException)
+            {
+                throw timeoutException;
+            }
+        }
     }
 }

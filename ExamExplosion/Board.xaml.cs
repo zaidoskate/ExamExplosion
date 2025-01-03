@@ -177,11 +177,11 @@ namespace ExamExplosion
 
         private void InitializeGameResources(string gameCode, List<string> orderedGamertags)
         {
-            bool isHost = SessionManager.CurrentSession.isLobbyOwner;
             try
             {
                 gameManager.InitializeGame(gameCode, orderedGamertags);
-                if (isHost)
+                int missingPlayers = gameManager.GetMissingPlayers(gameCode, orderedGamertags.Count);
+                if (missingPlayers <= 1)
                 {
                     gameManager.InitializeGameDeck(gameCode, orderedGamertags.Count);
                 }
