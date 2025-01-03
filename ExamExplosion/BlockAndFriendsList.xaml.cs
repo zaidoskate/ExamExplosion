@@ -77,7 +77,9 @@ namespace ExamExplosion
                 try
                 {
                     int bloquedPlayerId = playersData[gamertag];
-                    FriendsAndBloquedPlayersManager.RemoveBlockedPlayer(playerId, bloquedPlayerId);
+                    if(FriendsAndBloquedPlayersManager.RemoveBlockedPlayer(playerId, bloquedPlayerId)){
+                        BlockedPlayers.Remove(gamertag);
+                    }
                 }
                 catch (FaultException faultException)
                 {
@@ -97,7 +99,6 @@ namespace ExamExplosion
                     log.Warn("Timeout al intentar conectar con el servidor", timeoutException);
                     NavigateStartPage();
                 }
-                BlockedPlayers.Remove(gamertag);
             }
         }
 
@@ -127,6 +128,7 @@ namespace ExamExplosion
                 log.Warn("Timeout al intentar conectar con el servidor", timeoutException);
                 NavigateStartPage();
             }
+            BlockedPlayers.Clear();
             foreach (var bloquedPlayer in blockedPlayers)
             {
                 string gamertag = bloquedPlayer.Value;
@@ -151,7 +153,13 @@ namespace ExamExplosion
                 try
                 {
                     int playerId2 = playersData[gamertag];
-                    FriendsAndBloquedPlayersManager.RemoveFriends(playerId, playerId2);
+                    if(FriendsAndBloquedPlayersManager.RemoveFriends(playerId, playerId2)){
+                        Friends.Remove(gamertag);
+                    }
+                    else
+                    {
+                        new AlertModal("No hay conexion", "No se puede eliminar de tus amigos, inténtalo más tarde").ShowDialog();
+                    }
                 }
                 catch (FaultException faultException)
                 {
@@ -172,7 +180,6 @@ namespace ExamExplosion
                     log.Warn("Timeout al intentar conectar con el servidor", timeoutException);
                     NavigateStartPage();
                 }
-                Friends.Remove(gamertag);
             }
         }
         private void UpdateFriends()
