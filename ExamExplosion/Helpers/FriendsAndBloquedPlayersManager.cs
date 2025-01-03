@@ -75,16 +75,17 @@ namespace ExamExplosion.Helpers
                 throw timeoutException;
             }
         }
-        public static void RemoveFriends(int playerId1, int playerId2)
+        public static bool RemoveFriends(int playerId1, int playerId2)
         {
             ExamExplotionService.FriendManagement friendToRemove = new ExamExplotionService.FriendManagement();
             friendToRemove.Player1Id = playerId1;
             friendToRemove.Player2Id = playerId2;
+            bool friendRemoved = false;
             try
             {
                 using (var proxy = new ExamExplotionService.FriendAndBlockListClient())
                 {
-                    proxy.RemoveFriend(friendToRemove);
+                    friendRemoved = proxy.RemoveFriend(friendToRemove);
                 }
             }
             catch (FaultException faultException)
@@ -99,6 +100,7 @@ namespace ExamExplosion.Helpers
             {
                 throw timeoutException;
             }
+            return friendRemoved;
         }
         public static int AddFriend(int playerId1, int playerId2)
         {
